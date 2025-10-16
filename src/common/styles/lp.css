@@ -1,0 +1,68 @@
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.container {
+  @apply !max-w-[1200px] mx-auto px-4;
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+.animate-scroll-reverse {
+  animation: scroll-reverse 30s linear infinite;
+}
+.testimonial-container {
+  position: relative;
+  overflow: hidden;
+}
+.testimonial-container::before,
+.testimonial-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 2;
+}
+.testimonial-container::before {
+  left: 0;
+  background: linear-gradient(to right, white, transparent);
+}
+.testimonial-container::after {
+  right: 0;
+  background: linear-gradient(to left, white, transparent);
+}
+
+.bg-hero {
+  background: url("/bg.jpg");
+  background-repeat: no-repeat;
+  border: 1px solid white;
+  background-size: cover;
+  border-radius: 32px;
+}
+
+
+select {
+  -webkit-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+    background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
+    background-repeat: no-repeat;
+    background-size: 10px 10px;
+    background-position: calc(100% - 16px);
+}

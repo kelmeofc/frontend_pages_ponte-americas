@@ -1,0 +1,119 @@
+.article-header {
+  position: relative;
+}
+
+.article-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: hsl(var(--primary));
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .article-header::after {
+    width: 40px;
+    height: 2px;
+  }
+}
+
+/* Estilos específicos para figuras e legendas */
+.post-content figure {
+  margin: 2rem 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.post-content figcaption {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+  padding-top: 0.5rem;
+}
+
+/* Garantir que imagens não ultrapassem o container */
+.post-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  width: 100% !important;
+  object-fit: cover;
+}
+
+/* Garantir que tabelas sejam responsivas */
+.post-content table {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
+}
+
+.post-content table tbody {
+  display: table;
+  width: 100%;
+}
+
+/* Garantir que vídeos sejam responsivos */
+.post-content iframe,
+.post-content video {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Garantir que elementos não ultrapassem o container */
+.post-content * {
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* Melhorando a aparência das listas */
+.post-content ul li::marker {
+  color: hsl(var(--primary));
+}
+
+.post-content ol {
+  counter-reset: item;
+  list-style-type: none;
+}
+
+.post-content ol li {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.post-content ol li::before {
+  position: absolute;
+  left: 0;
+  content: counter(item) ".";
+  counter-increment: item;
+  color: hsl(var(--primary));
+  font-weight: 600;
+}
+
+/* Destacando citações */
+.post-content blockquote {
+  background-color: hsl(var(--muted) / 0.5);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border-left: 4px solid hsl(var(--primary));
+  font-style: italic;
+  margin: 2rem 0;
+}
+
+/* Estilizando as tabelas */
+.post-content table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.post-content th {
+  background-color: hsl(var(--primary) / 0.1);
+}
+
+.post-content tr:nth-child(even) {
+  background-color: hsl(var(--muted) / 0.5);
+}

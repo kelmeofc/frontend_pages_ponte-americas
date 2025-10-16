@@ -1,0 +1,20 @@
+@import '../common/styles/globals.css';
+@import '../common/styles/hero-animation.css';
+@import '../common/styles/blog.css';
+@import '../common/styles/article.css';
+
+header:has(+ [data-no-header]) {
+    display: none;
+}
+
+body:has(+ [data-snap]) {
+    @apply h-screen overflow-y-auto snap-y snap-mandatory;
+}
+
+[data-no-footer] ~ footer {
+    display: none;
+}
+
+[data-no-bot] ~ .pi-bot {
+    display: none;
+}
