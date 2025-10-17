@@ -14,7 +14,7 @@
 .post-content h4, 
 .post-content h5, 
 .post-content h6 {
-  font-family: var(--font-fahkwang), var(--font-sans);
+  font-family: var(--font-clash-display), var(--font-sans);
   margin-top: 2rem;
   margin-bottom: 1rem;
   line-height: 1.3;

@@ -3,7 +3,7 @@
 import { Container } from "@/components/ui/container"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { PrimaryButton } from "@/components/ui/primary-button"
+import { PrimaryButton } from "@/components/primary-button"
 import { HeroAnimatedImage } from "@/components/sections/hero-animated-image"
 
 
@@ -14,7 +14,7 @@ export function HeroSection() {
 			className="relative bg-[#f7f7f7] overflow-hidden h-[screen] md:h-auto lg:min-h-[640px] xl:min-h-[700px] flex flex-col"
 		>
 			{/* Background Grid Pattern */}
-			<div className="absolute inset-0 bg-grid-pattern opacity-70"></div>
+
 
 			<Container className="flex-1 flex flex-col">
 				<div className="relative pt-24 lg:pt-16 pb-0 flex flex-col items-center flex-1">
@@ -51,10 +51,7 @@ export function HeroSection() {
 							</div>
 						</div>
 
-						{/* Hero Images - Animated */}
-						<div className="relative flex items-end justify-center w-full max-w-[480px] aspect-3/4">
-							<HeroAnimatedImage />
-						</div>
+					
 					</div>
 				</div>
 			</Container>

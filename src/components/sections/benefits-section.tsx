@@ -1,5 +1,5 @@
 import { Container } from "@/components/ui/container"
-import { PrimaryButton } from "@/components/ui/primary-button"
+import { PrimaryButton } from "@/components/primary-button"
 import {
   Target,
   Crown,

@@ -31,7 +31,7 @@ Whenever you need to modify font configuration, reference #file:globals.css #fil
 
 ## Using Fonts
 
-- There are already global styles for h1, h2, h3 to use the Fahkwang font, and for the rest of project to apply Ubuntu at :root.
+- There are already global styles for h1, h2, h3 to use the clashDisplay font, and for the rest of project to apply Rubik at :root.
 - Always prefer to use the fonts defined in the project, unless there is a specific need for a different font.
-- Avoid 'font-['Fahkwang']' or 'font-['Ubuntu']' in Tailwind classes, do not add classes in instances for fonts, the global classes are already defined for h1, h2, h3 and body in #global.css.
+- Avoid 'font-['clashDisplay']' or 'font-['Rubik']' in Tailwind classes, do not add classes in instances for fonts, the global classes are already defined for h1, h2, h3 and body in #global.css.
 - Use TailwindCSS utility classes to apply additional styles such as font weight, size and spacing as needed.

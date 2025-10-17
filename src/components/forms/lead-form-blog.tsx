@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
-import { PrimaryButton } from "@/components/ui/primary-button";
+import { PrimaryButton } from "@/components/primary-button";
 import { useState } from "react";
 import useCreateLead from "@/common/hooks/use-create-lead";
 import { EOriginLead } from "@/types/lead";

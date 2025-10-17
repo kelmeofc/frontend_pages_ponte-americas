@@ -18,8 +18,8 @@
 }
 
 @theme {
-  --font-sans: var(--font-ubuntu);
-  --font-fahkwang: var(--font-fahkwang);
+  --font-sans: var(--font-rubik);
+  --font-clash-display: var(--font-clash-display);
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));

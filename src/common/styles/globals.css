@@ -21,21 +21,21 @@
   }
 }
 
-/* Utility para aplicar a fonte Fahkwang onde necessário (ex.: headings) */
-@utility font-fahkwang {
-  font-family: var(--font-fahkwang), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+/* Utility para aplicar a fonte clash-display onde necessário (ex.: headings) */
+@utility font-clash-display {
+  font-family: var(--font-clash-display), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme {
   /*
-    Fonte base do projeto (Ubuntu) usada por font-sans.
+    Fonte base do projeto (rubik) usada por font-sans.
     Usa a variável injetada pelo next/font no <body> e adiciona fallbacks padrão.
   */
-  --font-sans: var(--font-ubuntu), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
   /*
-    Removido o alias circular de --font-fahkwang para evitar sombra/loop.
-    Para Fahkwang, utilize a variável do next/font diretamente: var(--font-fahkwang)
-    através da utility .font-fahkwang e estilos globais de headings.
+    Removido o alias circular de --font-clash-display para evitar sombra/loop.
+    Para clash-display, utilize a variável do next/font diretamente: var(--font-clash-display)
+    através da utility .font-clash-display e estilos globais de headings.
   */
 
   --color-border: hsl(var(--border));
@@ -119,13 +119,13 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 20 66% 57%;
-    --primary-foreground: 0 97% 100%;
+    --primary: 236 71% 56%;
+    --primary-foreground: 0 98% 100%;
 
-    --primary-gradient-from: 20 66% 57%;
-    --primary-gradient-to: 21 51% 50%;
-    --primary-gradient-hover-from: 20 52% 51%;
-    --primary-gradient-hover-to: 21 51% 44%;
+    --primary-gradient-from: 357 93% 38%;
+    --primary-gradient-to: 236 71% 56%;
+    --primary-gradient-hover-from: 357 100% 30%;
+    --primary-gradient-hover-to: 236 100% 40%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -193,27 +193,27 @@
 
   /* Headings responsivos */
   h1 {
-    @apply font-fahkwang text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] font-bold text-gray-900;
+    @apply font-clash-display text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] font-bold text-gray-900;
   }
 
   h2 {
-    @apply font-fahkwang text-[20px] sm:text-[24px] md:text-[32px] lg:text-[36px] font-bold text-gray-900;
+    @apply font-clash-display text-[20px] sm:text-[24px] md:text-[32px] lg:text-[36px] font-bold text-gray-900;
   }
 
   h3 {
-    @apply font-fahkwang text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] font-bold text-gray-900;
+    @apply font-clash-display text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] font-bold text-gray-900;
   }
 
   h4 {
-    @apply font-fahkwang text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] font-semibold text-gray-900;
+    @apply font-clash-display text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] font-semibold text-gray-900;
   }
 
   h5 {
-    @apply font-fahkwang text-[16px] sm:text-[16px] md:text-[20px] lg:text-[24px] font-semibold text-gray-900;
+    @apply font-clash-display text-[16px] sm:text-[16px] md:text-[20px] lg:text-[24px] font-semibold text-gray-900;
   }
 
   h6 {
-    @apply font-fahkwang text-[14px] sm:text-[16px] md:text-[16px] lg:text-[20px] font-semibold text-gray-900;
+    @apply font-clash-display text-[14px] sm:text-[16px] md:text-[16px] lg:text-[20px] font-semibold text-gray-900;
   }
 
   /* Parágrafos responsivos */
@@ -223,7 +223,7 @@
 }
 
 :root {
-  /* Padrão do projeto: Ubuntu como fonte base (body) via token --font-sans */
+  /* Padrão do projeto: rubik como fonte base (body) via token --font-sans */
   font-family: var(--font-sans);
 
   --foreground-rgb: 26, 34, 56;
@@ -234,7 +234,7 @@
 }
 
   h1, h2, h3  {
-      @apply font-fahkwang;
+      @apply font-clash-display;
   }
 
 .bg-grid-pattern {

@@ -5,7 +5,7 @@ import gsap from "gsap";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { AboutVisagismComparisonSlider } from "@/components/sections/about-visagism-comparison-slider";
-import { PrimaryButton } from "@/components/ui/primary-button";
+import { PrimaryButton } from "@/components/primary-button";
 import { ArrowLeft, ArrowRight, XCircle, CheckCircle } from "lucide-react";
 import { cn } from "@/common/lib/utils";
 import Link from "next/link";

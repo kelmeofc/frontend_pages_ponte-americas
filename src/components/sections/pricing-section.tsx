@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@/components/ui/container";
-import { PrimaryButton } from "@/components/ui/primary-button";
+import { PrimaryButton } from "@/components/primary-button";
 import { UserRound, ScanFace, ChartPie, FileEdit, History } from "lucide-react";
 import { cn } from "@/common/lib/utils";
 import { useState, useEffect } from "react";

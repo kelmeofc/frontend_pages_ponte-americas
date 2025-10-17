@@ -2,7 +2,7 @@
 
 import { useCallback } from "react";
 import { cn } from "@/common/lib/utils";
-import { PrimaryButton } from "@/components/ui/primary-button";
+import { PrimaryButton } from "@/components/primary-button";
 import { useConsent } from "@/common/hooks/use-consent";
 import { useConsentAnalytics } from "@/common/hooks/use-consent-analytics";
 import { ConsentChoice } from "@/common/types/consent";

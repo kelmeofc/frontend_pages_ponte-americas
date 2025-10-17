@@ -44,13 +44,6 @@ export default function Home() {
 			
 			<main>
 				<HeroSection />
-				<WhyVisagismSection />
-				<CarouselSection />
-				<BenefitsSection />
-				<AboutVisagismSection />
-				<SocialProofSection />
-				<BarberTestimonialsSection />
-				<PricingSection />
 				<FAQSection faq={FAQ_DATA} />
 				<CtaSection />
 			</main>

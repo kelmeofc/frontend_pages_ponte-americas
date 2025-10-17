@@ -8,7 +8,7 @@ import {
 } from "../ui/accordion";
 import { Container } from "../ui/container";
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
-import { PrimaryButton } from "../ui/primary-button";
+import { PrimaryButton } from "../primary-button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 

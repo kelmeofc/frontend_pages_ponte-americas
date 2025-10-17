@@ -8,7 +8,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AboutVisagismComparisonSlider } from "@/components/sections/about-visagism-comparison-slider";
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
-import { PrimaryButton } from "@/components/ui/primary-button";
+import { PrimaryButton } from "@/components/primary-button";
 import Link from "next/link";
 
 interface VariantSet {

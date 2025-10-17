@@ -1,6 +1,6 @@
 import type React from "react"
 import "./globals.css"
-import { Ubuntu, Fahkwang } from "next/font/google"
+
 import { ThemeProvider } from "@/app/providers"
 import Footer from "@/components/footer"
 import { Header } from "@/components/header"
@@ -11,17 +11,50 @@ import { Modal } from "@/components/ui/modal/modal"
 import { CookiesModal } from "@/components/cookies-modal"
 import { ConsentScripts } from "@/components/consent-scripts"
 
-const ubuntu = Ubuntu({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-ubuntu",
-  display: "swap",
-})
+import { Rubik } from "next/font/google";
+import localFont from "next/font/local";
 
-const fahkwang = Fahkwang({
+export const clashDisplay = localFont({
+	src: [
+		{
+			path: "../../public/fonts/ClashDisplay-Extralight.woff2",
+			weight: "200",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/ClashDisplay-Light.woff2",
+			weight: "300",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/ClashDisplay-Regular.woff2",
+			weight: "400",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/ClashDisplay-Medium.woff2",
+			weight: "500",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/ClashDisplay-Semibold.woff2",
+			weight: "600",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/ClashDisplay-Bold.woff2",
+			weight: "700",
+			style: "normal",
+		},
+	],
+	variable: "--font-clash-display", // Optional: for use with CSS variables
+	display: "swap", // Recommended for performance
+});
+
+const rubik = Rubik({
   subsets: ["latin"],
   weight: ["300", "400", "500", "700"],
-  variable: "--font-fahkwang",
+  variable: "--font-rubik",
   display: "swap",
 })
 
@@ -72,7 +105,7 @@ export default function RootLayout({
 		<html
 			lang="pt-BR"
 			suppressHydrationWarning
-			className={`${ubuntu.variable} ${fahkwang.variable}`}
+			className={`${rubik.variable} ${clashDisplay.variable}`}
 		>
 			<head>
 				<Script id="ga-consent-default" strategy="beforeInteractive">

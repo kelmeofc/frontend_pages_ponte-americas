@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Globe, Menu, ChevronDown, ArrowRight, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
-import { PrimaryButton } from "@/components/ui/primary-button"
+import { PrimaryButton } from "@/components/primary-button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import type { INavItem } from "@/types/header"
 import { useState, useEffect, useRef } from "react"
@@ -77,10 +77,10 @@ export function Header() {
 		<>
 			{/* Header Principal - Desktop e Mobile */}
 			<header
-				className={`w-screen border-b py-4 fixed top-0 left-0 right-0 z-50 ${
+				className={`w-screen border-b border-gray-800 py-4 fixed top-0 left-0 right-0 z-50 ${
 					isScrolled
-						? "bg-background/80 backdrop-blur-md"
-						: "bg-background/60 backdrop-blur-xs"
+						? "bg-black/80 backdrop-blur-md"
+						: "bg-black/60 backdrop-blur-xs"
 				}`}
 			>
 				<Container>
@@ -93,7 +93,7 @@ export function Header() {
 								onClick={handleLinkClick}
 							>
 								<Image
-									src="/logo.svg"
+									src="/images/svg/logo.svg"
 									alt="Pandami Logo"
 									width={160}
 									height={24}
@@ -119,7 +119,7 @@ export function Header() {
 										<Link
 											href={item.href}
 											data-testid={`menu-${item.title.toLowerCase()}`}
-											className="text-base font-normal text-foreground hover:text-primary flex items-center"
+											className="text-base font-normal text-white hover:text-primary flex items-center"
 											onClick={handleLinkClick}
 										>
 											{item.icon && <item.icon className="h-5 w-5 mr-2" />}

@@ -66,7 +66,7 @@ export default async function ArticleContent({
 			>
 				<header className="mb-6 md:mb-8 article-header pb-4 w-full">
 					<h1
-						className="font-fahkwang text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 break-words"
+						className="font-bold text-gray-900 mb-4 break-words"
 						itemProp="headline"
 					>
 						{post.title.rendered}

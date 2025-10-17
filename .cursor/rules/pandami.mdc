@@ -44,9 +44,9 @@ src/
 - Use `neutral` for gray colors (not `gray`)
 
 ### Font Configuration
-- **Fahkwang** for headings (h1, h2, h3) - globally configured
-- **Ubuntu** for body text - globally configured
-- **Never** use `font-['Fahkwang']` or `font-['Ubuntu']` in Tailwind classes
+- **Clash Display** for headings (h1, h2, h3) - globally configured
+- **Rubik** for body text - globally configured
+- **Never** use `font-['Clash Display']` or `font-['Rubik']` in Tailwind classes
 - Global font classes are already defined in `#file:globals.css`
 
 ## 🧩 Component Development

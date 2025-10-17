@@ -12,21 +12,20 @@ export default function Footer() {
 					<div className="mb-8 md:mb-0 md:w-1/3 text-center md:text-left flex flex-col items-center md:items-start">
 						<div className="flex items-center mb-6">
 							<Image
-								src="/logo.svg"
-								alt="Pandami Logo"
+								src="/images/svg/ponteamericas-logo-title-dark.svg"
+								alt="Ponte Américas Logo"
 								width={50}
 								height={50}
 								className="h-10 w-auto"
 							/>
 						</div>
 						<p className="text-sm text-gray-600 mb-6 max-w-sm">
-							Primeiro surgiu a tesoura, depois nasceu o secador de cabelo e a
-							máquina de corte e agora, mais de 2 décadas depois, temos o
-							próximo grande salto tecnológico para os salões. Nós somos a
-							Pandami!
+							O Ponte Américas não é um simples curso, é um time completo para te ajudar a entender os Estados Unidos evitando os erros que
+							custam MILHARES de dólares para brasileiros que viajam
+							despreparados.
 						</p>
 						<p className="text-xs text-gray-500">
-							© {new Date().getFullYear()} Pandami - Todos os direitos
+							© {new Date().getFullYear()} Ponte Américas - Todos os direitos
 							reservados.
 						</p>
 					</div>
@@ -34,7 +33,7 @@ export default function Footer() {
 					{/* Links de Navegação */}
 					<div className="mb-8 md:mb-0 text-center md:text-left">
 						<h3 className="text-base font-medium mb-4 relative inline-block after:content-[''] after:absolute after:bottom-[-4px] after:left-0 md:after:left-0 after:right-0 md:after:right-auto after:mx-auto md:after:mx-0 after:w-10 after:h-[3px] after:bg-primary after:rounded-full">
-							Pandami
+							Institucional
 						</h3>
 						<ul className="space-y-2 text-sm text-gray-600">
 							<li>
@@ -149,8 +148,8 @@ export default function Footer() {
 				{/* logo title */}
 				<div className="mt-16 text-center">
 					<Image
-						src="/pandami-logo-title-footer.svg"
-						alt="Pandami"
+						src="/images/svg/ponteamericas-logo-title-footer.svg"
+						alt="Ponte Américas"
 						width={1200}
 						height={200}
 						className="w-full h-auto"

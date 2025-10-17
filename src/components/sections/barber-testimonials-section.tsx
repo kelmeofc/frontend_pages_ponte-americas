@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
-import { PrimaryButton } from "@/components/ui/primary-button";
+import { PrimaryButton } from "@/components/primary-button";
 import { ArrowRight } from "lucide-react";
 
 // Interfaces para os componentes
