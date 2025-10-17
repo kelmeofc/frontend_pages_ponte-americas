@@ -7,10 +7,8 @@ import {
   AccordionTrigger,
 } from "../ui/accordion";
 import { Container } from "../ui/container";
-import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 import { PrimaryButton } from "../primary-button";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import Image from "next/image";
 
 export interface FAQ {
   question: string;
@@ -19,103 +17,62 @@ export interface FAQ {
 
 export type FAQArray = readonly FAQ[];
 
-const testimonialAvatars = [
-  {
-    src: "/testimonials/home/ana-paula.jpg",
-    alt: "Ana Paula",
-    initials: "AP",
-  },
-  {
-    src: "/testimonials/home/carlos-men.jpg",
-    alt: "Carlos Mendes",
-    initials: "CM",
-  },
-  {
-    src: "/testimonials/home/jorge-santana.jpg",
-    alt: "Jorge Santana",
-    initials: "JS",
-  },
-  {
-    src: "/testimonials/home/maria-silva.jpg",
-    alt: "Maria Silva",
-    initials: "MS",
-  },
-];
-
 export default function FAQSection({ faq }: { faq: FAQArray }) {
   return (
-		<section id="faq" className="w-full py-10 md:py-16 bg-white">
+		<section id="faq" className="w-full py-16 md:py-20 bg-gray-50">
 			<Container className="px-4 md:px-6">
-				<div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
-					{/* Left column: Title, description, testimonials, CTA */}
-					<div className="w-full lg:w-5/12 xl:w-4/12 order-1 lg:order-1">
-						<div className="lg:sticky lg:top-20">
-							<h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">
-								Perguntas frequentes sobre visagismo com IA
-							</h2>
-							<p className="text-gray-700 mb-6 md:mb-8 ">
-								Tudo que você precisa saber sobre a PandaMi, desde como funciona nossa IA de visagismo até a usabilidade da plataforma.
-							</p>
+				<div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
+					{/* FAQ Section */}
+					<article className="w-full lg:w-2/3">
+						<h2 className="text-3xl md:text-4xl font-bold text-[#290886] uppercase">
+							Perguntas Frequentes
+						</h2>
 
-							{/* Testimonials and CTA - positioned after description on mobile, sticky on desktop */}
-							<div className="flex flex-col gap-4">
-								<div className="flex flex-col gap-2">
-									<div className="flex -space-x-2 justify-start">
-										{testimonialAvatars.map((avatar, i) => (
-											<Avatar
-												key={i}
-												className="border-2 border-white h-8 w-8 md:h-9 md:w-9"
-											>
-												<AvatarImage src={avatar.src} alt={avatar.alt} />
-												<AvatarFallback>{avatar.initials}</AvatarFallback>
-											</Avatar>
-										))}
-									</div>
-									<p className="text-sm text-gray-600 text-left">
-										+2 mil homens e mulheres já descobriram sua melhor versão
-									</p>
-								</div>
-								<div className="flex justify-center lg:justify-start">
-									<Link
-										href="https://app.pandami.com.br/auth/sign-up"
-										className="w-full"
-									>
-										<PrimaryButton
-											size="lg"
-											icon={<ArrowRight className="h-4 w-4" />}
-											className="w-full md:w-auto"
-										>
-											COMEÇAR TESTE DE 7 DIAS
-										</PrimaryButton>
-									</Link>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					{/* Right column: Accordion */}
-					<div className="w-full lg:w-7/12 xl:w-8/12 order-2 lg:order-2">
-						<Accordion type="single" collapsible className="space-y-2">
+						<Accordion type="single" collapsible className="w-full space-y-0">
 							{faq.map((item, index) => (
 								<AccordionItem
 									key={`faq-${index}`}
 									value={`faq-${index}`}
-									className="border-b border-gray-200 overflow-hidden"
+									className="border-b border-gray-400 last:border-b-0"
 								>
-									<AccordionTrigger className="px-2 py-4 hover:no-underline text-left">
-										<span className="text-left font-medium text-sm md:text-base font-sans">
+									<AccordionTrigger className="px-0 py-4 hover:no-underline text-left justify-between">
+										<span className="font-semibold text-base text-gray-800">
 											{item.question}
 										</span>
 									</AccordionTrigger>
-									<AccordionContent className="px-2 pb-4 pt-0">
-										<p className="text-gray-600 text-sm md:text-base">
-											{item.answer}
-										</p>
+									<AccordionContent className="px-0 pb-4 pt-0">
+										<p className="text-gray-600 text-base">{item.answer}</p>
 									</AccordionContent>
 								</AccordionItem>
 							))}
 						</Accordion>
-					</div>
+					</article>
+
+					{/* Warranty Badge Section */}
+					<aside className="w-full lg:w-1/3 flex flex-col items-center text-center gap-6">
+						<div className="relative w-48 h-48">
+							<Image
+								src="/images/warranty-badge.png"
+								alt="7 Dias de Garantia"
+								fill
+								className="object-contain"
+							/>
+						</div>
+
+						<h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[hsl(var(--primary-gradient-from))] to-[hsl(var(--primary-gradient-to))] bg-clip-text text-transparent uppercase">
+							7 DIAS DE GARANTIA
+						</h3>
+
+						<p className="text-gray-800 text-base leading-relaxed">
+							Assinando agora, você terá acesso ao conteúdo completo do Ponte
+							Américas. Se, em 7 dias assistindo às aulas, você não gostar, nós
+							devolvemos todo o seu dinheiro de forma simples e segura.
+						</p>
+
+						<PrimaryButton size="lg" className="">
+							QUERO MUDAR DE VIDA
+						</PrimaryButton>
+					</aside>
 				</div>
 			</Container>
 		</section>

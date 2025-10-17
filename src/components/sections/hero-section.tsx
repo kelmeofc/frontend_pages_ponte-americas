@@ -1,60 +1,53 @@
 "use client"
 
 import { Container } from "@/components/ui/container"
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
 import { PrimaryButton } from "@/components/primary-button"
-import { HeroAnimatedImage } from "@/components/sections/hero-animated-image"
-
+import { HeroTestimonial } from "./hero-testimonial"
+import { HeroVideo } from "./hero-video"
+import { ArrowRight } from "lucide-react"
 
 export function HeroSection() {
   return (
-		<section
-			id="home"
-			className="relative bg-[#f7f7f7] overflow-hidden h-[screen] md:h-auto lg:min-h-[640px] xl:min-h-[700px] flex flex-col"
-		>
-			{/* Background Grid Pattern */}
-
-
-			<Container className="flex-1 flex flex-col">
-				<div className="relative pt-24 lg:pt-16 pb-0 flex flex-col items-center flex-1">
-					{/* Content */}
-					<div className="z-10 flex flex-col lg:flex-row items-center justify-between w-full h-full">
-						<div className="w-full max-w-[800px] flex flex-col gap-4 md:gap-6 px-0 text-center lg:text-left mb-4 lg:mb-0">
-							<h1 className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[48px] text-black leading-tight">
-								A primeira{" "}
-								<span className="text-gradient bg-clip-text text-transparent bg-linear-to-r from-primary to-[#C16C3F]">
-									{" "}
-									<br />
-									IA de Visagismo
-								</span>{" "}
-								<br /> para cabeleireiros
-							</h1>
-
-							<p className="text-gray-600 max-w-[320px] lg:max-w-[450px] text-sm sm:text-base md:text-lg mx-auto lg:mx-0">
-								Nossa inteligência artificial analisa matematicamente cada rosto
-								em 30 segundos e sugere exatamente qual corte e cor vão
-								valorizar. 94% das clientes aprovam na primeira tentativa.
-							</p>
-
-							<div className="flex gap-3 items-center justify-center lg:justify-start mt-2">
-								<Link href="https://app.pandami.com.br/auth/sign-up/">
-									<PrimaryButton
-										icon={<ArrowRight className="h-4 w-4 md:h-5 md:w-5" />}
-										size="lg"
-										className="px-4"
-									>
-										COMEÇAR TESTE DE 7 DIAS
-									</PrimaryButton>
-								</Link>
-							
-							</div>
-						</div>
-
-					
-					</div>
-				</div>
-			</Container>
-		</section>
-	);
+    <section
+      id="home"
+      className="relative min-h-screen bg-gradient-to-r from-[#05060b] to-[#05060b] overflow-hidden"
+    >
+      <Container className="flex flex-col items-center justify-center min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8 gap-2">
+        {/* Testimonial */}
+        <HeroTestimonial />
+        
+        {/* Description */}
+        <p className="text-gray-200 text-sm sm:text-base max-w-3xl leading-relaxed text-center">
+          O Ponte Américas não é um simples curso, é um time completo para te ajudar a entender os Estados Unidos evitando os erros que custam MILHARES de dólares para brasileiros que viajam despreparados.
+        </p>
+        
+        {/* Main Heading */}
+        <h1 className="font-clash-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight text-center mb-8">
+          <span className="bg-gradient-to-r from-[#bb0711] to-[#3f4adf] bg-clip-text text-transparent">
+            A VIRADA DE CHAVE
+          </span>
+          <br className="sm:hidden" />
+          <span className="text-white sm:ml-3">
+            PARA MORAR NOS EUA
+          </span>
+          <br />
+          <span className="text-white">
+            QUE VOCÊ PRECISA ENTENDER AGORA
+          </span>
+        </h1>
+        
+        {/* Video */}
+        <HeroVideo className="w-full max-w-[573px] mb-8" />
+        
+        {/* CTA Button */}
+        <PrimaryButton
+          icon={<ArrowRight className="size-4" />}
+          size="lg"
+          className="bg-gradient-to-r from-[#bb0711] to-[#3f4adf] text-white font-medium px-8 py-4 rounded-lg"
+        >
+          QUERO MUDAR DE VIDA
+        </PrimaryButton>
+      </Container>
+    </section>
+  )
 }

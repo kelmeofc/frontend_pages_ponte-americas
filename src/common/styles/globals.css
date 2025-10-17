@@ -191,6 +191,37 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  /* Estilização da scrollbar - preta e discreta */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    scroll-behavior: smooth;
+  }
+
+  /* Webkit browsers (Chrome, Safari, Edge) */
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
   /* Headings responsivos */
   h1 {
     @apply font-clash-display text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] font-bold text-gray-900;

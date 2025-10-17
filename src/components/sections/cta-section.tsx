@@ -1,62 +1,46 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { Download } from "lucide-react";
 import { PrimaryButton } from "@/components/primary-button";
-import { HeroIcon } from "@/components/svg/hero-icon";
-import { Container } from "../ui/container";
 
 export const CtaSection: React.FC = () => {
 	return (
-		<section id="cta" className="py-20">
-			<Container>
-				{" "}
-				<div className="relative">
-					<div className="px-6 md:px-16 py-8 mt-48 md:mt-0  lg:mt-28 bg-orange-50 rounded-2xl flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-8 md:gap-10 overflow-hidden ">
-						{/* Textos e botão */}
-						<div className="w-full md:w-1/2 lg:max-w-[560px] flex flex-col gap-6 z-10">
-							<div className="flex flex-col gap-3">
-								<h3 className="text-neutral-800 text-2xl md:text-3xl font-bold">
-									Transforme incerteza em precisão científica
-								</h3>
-								<p className="text-neutral-600 text-base font-normal leading-relaxed">
-									Seja o primeiro profissional da sua região com análise de IA.
-									Enquanto concorrentes ainda "chutam" no visagismo, você
-									oferece resultados baseados em ciência.
-								</p>
-							</div>
-							<Link href="https://app.pandami.com.br/auth/sign-up">
-								<PrimaryButton
-									size="lg"
-									icon={<ArrowRight className="h-4 w-4" />}
-									className="w-full md:max-w-72 px-4"
-								>
-									COMEÇAR TESTE DE 7 DIAS
-								</PrimaryButton>
-							</Link>
-						</div>
+		<section id="cta" className="py-20 bg-[#f5f6f8]">
+			<div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-30">
+				<div className="relative flex flex-col lg:flex-row items-end lg:items-center  justify-between gap-8 lg:gap-12">
+					{/* Card principal com gradiente */}
+					<div className="relative w-full h-auto rounded-[20px] border border-[#898989] overflow-hidden bg-gradient-to-br from-[hsl(var(--primary-gradient-from))] via-[#050505] to-[hsl(var(--primary-gradient-to))] flex flex-col justify-center px-8 sm:px-12 lg:px-16 pb-12 sm:pb-16 lg:pb-20 gap-6 lg:gap-8 pt-30 lg:py-20">
+						<h2 className="text-white text-2xl sm:text-3xl lg:text-[40px] font-semibold leading-[1.2] font-clash-display max-w-[712px]">
+							Baixe agora Ebook completo passo a passo para obter o Visto
+							Americano e trabalhar legalmente nos EUA
+						</h2>
 
-						{/* Imagem */}
-						{/* Elementos decorativos */}
-						<div className="relative right-1/2  -mb-20 md:left-auto md:right-10 md:translate-x-0 z-0 opacity-40 md:opacity-70">
-							<div className="w-96 h-64 lg:w-full lg:h-full -rotate-45 md:rotate-0">
-								<HeroIcon className="w-full h-full" />
-							</div>
-						</div>
-						<div className="absolute -top-[200px] md:bottom-[120px] md:left-24 z-20">
-							<Image
-								src="/lp/images/ctasection/ctaSection_womanImage.png"
-								alt="Mulher usando o visagismo Pandami"
-								width={400}
-								height={500}
-								className="w-80 h-auto max-w-96  md:w-96 md:h-128"
-							/>
-						</div>
+						<Link href="/download-ebook">
+							<PrimaryButton
+								size="lg"
+								icon={<Download className="h-5 w-5 lg:h-6 lg:w-6" />}
+								variant="outline"
+								className="border border-white bg-transparent hover:bg-white/10 text-white px-4 py-3 lg:px-6 lg:py-4 rounded-2xl text-base lg:text-xl font-bold w-full sm:w-auto"
+							>
+								Baixar meu ebook agora
+							</PrimaryButton>
+						</Link>
+					</div>
 
-						<div className="absolute left-0 top-0 w-80 h-80 bg-linear-to-br from-orange-400/25 to-white/25 rounded-full blur-[50px] z-0" />
+			
+					<div className="absolute bottom-70 right-0 left-0   mx-auto lg:left-auto lg:bottom-0 lg:right-0 lg:top-1/2 lg:-translate-y-1/2 w-full sm:w-[400px] lg:w-[476px] h-[300px] sm:h-[400px] lg:h-[580px]">
+						<Image
+							src="/images/passaporte-blindado-ebook.png"
+							alt="Ebook Passaporte Blindado - Seus primeiros 7 dias nos EUA"
+							width={476}
+							height={580	}
+							className="w-full h-full object-contain"
+							priority
+						/>
 					</div>
 				</div>
-			</Container>
+			</div>
 		</section>
 	);
 };

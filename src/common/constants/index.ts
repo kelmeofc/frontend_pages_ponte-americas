@@ -12,36 +12,44 @@ export const SITE_CONFIG = {
 
 // Social media links
 export const SOCIAL_LINKS = {
-  instagram: 'https://www.instagram.com/pandami',
-  facebook: 'https://www.facebook.com/pandami',
-  linkedin: 'https://www.linkedin.com/company/pandami',
+  instagram: 'https://www.instagram.com/ponteamericas',
+  facebook: 'https://www.facebook.com/ponteamericas',
+  linkedin: 'https://www.linkedin.com/company/ponteamericas',
 } as const;
 
 // FAQ data
 export const FAQ_DATA = [
   {
-    question: "Funciona no meu tipo de cabelo?",
-    answer: "Sim! Nossa IA foi treinada especialmente para a diversidade brasileira: cabelos lisos, cacheados, crespos, de todas as texturas e etnias. O sistema reconhece as características únicas de cada tipo.",
+    question: "Quais são as formas de pagamento?",
+    answer: "Aceitamos cartão de crédito (Visa, Mastercard, Elo), PIX, boleto bancário e PayPal. O pagamento é processado de forma segura e você recebe a confirmação imediatamente.",
   },
   {
-    question: "É complicado de usar?",
-    answer: "Super simples: tire uma foto, aguarde 30 segundos, receba as sugestões. Não precisa ser expert em tecnologia. Se tiver dúvidas, nosso suporte te ajuda no mesmo dia.",
+    question: "Como vou receber o acesso ao Ponte Américas?",
+    answer: "Após a confirmação do pagamento, você receberá um email com seus dados de acesso à plataforma. O acesso é liberado imediatamente e você pode começar a assistir às aulas em até 5 minutos.",
   },
   {
-    question: "E se o cliente não gostar do resultado?",
-    answer: "Nossa IA tem 94% de aprovação, mas entendemos que gosto é pessoal. Se não gostar das sugestões iniciais, nossos profissionais podem ajustar as recomendações até encontrar a opção ideal.",
+    question: "O conteúdo é ao vivo ou gravado?",
+    answer: "Todo o conteúdo é gravado e disponível 24/7 na plataforma. Você pode assistir no seu ritmo, pausar, voltar e revisar quantas vezes quiser durante o período de acesso.",
   },
   {
-    question: "Preciso baixar algum app?",
-    answer: "Não! Funciona direto no seu celular pelo navegador. Você agenda pelo link que enviamos e usa durante a consulta com o cliente.",
+    question: "Por quanto tempo vou ter acesso?",
+    answer: "Você terá acesso vitalício ao conteúdo do Ponte Américas. Uma vez adquirido, o acesso é seu para sempre, incluindo todas as atualizações e novos conteúdos que forem adicionados.",
   },
   {
-    question: "Como funciona a privacidade?",
-    answer: "Total segurança: fotos são processadas e automaticamente apagadas após a análise. Não compartilhamos dados com terceiros. Privacidade garantida.",
+    question: "Qual é a plataforma de aulas?",
+    answer: "Utilizamos uma plataforma própria e segura, otimizada para streaming de vídeos em alta qualidade. Funciona em qualquer dispositivo: computador, tablet ou celular, com interface intuitiva e fácil navegação.",
   },
   {
-    question: "Posso testar antes de decidir?",
-    answer: "Claro! Teste por 7 dias com risco zero. Se não melhorar seus resultados, cancele sem pegadinhas. Suporte incluído durante todo o teste.",
+    question: "O pagamento é seguro?",
+    answer: "Sim! Utilizamos criptografia SSL e processamento seguro. Seus dados financeiros são protegidos e não armazenamos informações de cartão. O pagamento é processado por empresas certificadas e confiáveis.",
+  },
+  {
+    question: "Moro fora do Brasil. Posso comprar?",
+    answer: "Sim! O Ponte Américas está disponível para brasileiros em qualquer lugar do mundo. O conteúdo é em português e você terá acesso completo, independentemente da sua localização.",
+  },
+  {
+    question: "Já estou nos EUA. O Ponte Américas serve pra mim?",
+    answer: "Perfeitamente! O Ponte Américas foi criado especialmente para brasileiros que estão ou vão para os EUA. O conteúdo aborda especificamente as oportunidades, desafios e estratégias para o mercado americano.",
   },
 ];
 

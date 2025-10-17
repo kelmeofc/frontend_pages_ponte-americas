@@ -1,7 +1,8 @@
-import { Mail, Phone, Clock } from "lucide-react"
+import { Mail, Phone, Clock, Instagram, Facebook, Linkedin } from "lucide-react"
 import { Container } from "./ui/container"
 import Link from "next/link"
 import Image from "next/image"
+import { SOCIAL_LINKS } from "@/common/constants"
 
 export default function Footer() {
   return (
@@ -20,9 +21,7 @@ export default function Footer() {
 							/>
 						</div>
 						<p className="text-sm text-gray-600 mb-6 max-w-sm">
-							O Ponte Américas não é um simples curso, é um time completo para te ajudar a entender os Estados Unidos evitando os erros que
-							custam MILHARES de dólares para brasileiros que viajam
-							despreparados.
+							O Ponte Américas é sua ponte para os Estados Unidos. Um programa completo que te prepara para viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.
 						</p>
 						<p className="text-xs text-gray-500">
 							© {new Date().getFullYear()} Ponte Américas - Todos os direitos
@@ -46,44 +45,52 @@ export default function Footer() {
 							</li>
 							<li>
 								<Link
-									href="/#why"
+									href="/#about"
 									className="hover:text-primary transition-colors"
 								>
-									Por que Visagismo
+									Nosso time
 								</Link>
 							</li>
 							<li>
 								<Link
-									href="/#benefits"
+									href="/#program"
 									className="hover:text-primary transition-colors"
 								>
-									Benefícios
+									O Programa
 								</Link>
 							</li>
 							<li>
 								<Link
-									href="#pricing"
+									href="/#testimonials"
 									className="hover:text-primary transition-colors"
 								>
-									Planos profissionais
+									Depoimentos
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/#pricing"
+									className="hover:text-primary transition-colors"
+								>
+									Planos
 								</Link>
 							</li>
 
 							<li>
 								<Link
-									href="https://app.pandami.com.br/auth/sign-up"
+									href="/#pricing"
 									className="hover:text-primary transition-colors"
 								>
-									Quero me cadastrar
+									Começar Agora
 								</Link>
 							</li>
 
 							<li>
 								<Link
-									href="https://app.pandami.com.br/auth/sign-in"
+									href="/blog"
 									className="hover:text-primary transition-colors"
 								>
-									Acessar painel
+									Blog
 								</Link>
 							</li>
 						</ul>
@@ -114,35 +121,69 @@ export default function Footer() {
 						</ul>
 					</div>
 
-					{/* Informações de Contato */}
+					{/* Informações de Contato e Redes Sociais */}
 					<div className="text-center md:text-left">
 						<h3 className="text-base font-medium mb-4 relative inline-block after:content-[''] after:absolute after:bottom-[-4px] after:left-0 md:after:left-0 after:right-0 md:after:right-auto after:mx-auto md:after:mx-0 after:w-10 after:h-[3px] after:bg-primary after:rounded-full">
-							Atendimento
+							Contato
 						</h3>
-						<ul className="space-y-2 text-sm text-gray-600">
+						<ul className="space-y-2 text-sm text-gray-600 mb-6">
 							<li className="flex items-center gap-2 justify-center md:justify-start">
 								<Mail className="h-4 w-4" />
 								<a
-									href="mailto:suporte@pandami.com.br"
+									href="mailto:contato@ponteamericas.com"
 									className="hover:text-primary transition-colors"
 								>
-									suporte@pandami.com.br
+									contato@ponteamericas.com
 								</a>
 							</li>
 							<li className="flex items-center gap-2 justify-center md:justify-start">
 								<Phone className="h-4 w-4" />
 								<a
-									href="tel:08008789746"
+									href="tel:+5511999999999"
 									className="hover:text-primary transition-colors"
 								>
-									0800 878 9746
+									+55 11 99999-9999
 								</a>
 							</li>
 							<li className="flex items-center gap-2 justify-center md:justify-start">
 								<Clock className="h-4 w-4" />
-								<span>Seg-Sex: 8h às 18h</span>
+								<span>Seg-Sex: 9h às 18h (Brasil)</span>
 							</li>
 						</ul>
+						
+						{/* Redes Sociais */}
+						<div>
+							<h4 className="text-sm font-medium mb-3 text-gray-700">Siga-nos</h4>
+							<div className="flex gap-3 justify-center md:justify-start">
+								<a
+									href={SOCIAL_LINKS.instagram}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center justify-center w-9 h-9 bg-gray-100 hover:bg-primary hover:text-white rounded-full transition-colors"
+									aria-label="Siga-nos no Instagram"
+								>
+									<Instagram className="h-4 w-4" />
+								</a>
+								<a
+									href={SOCIAL_LINKS.facebook}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center justify-center w-9 h-9 bg-gray-100 hover:bg-primary hover:text-white rounded-full transition-colors"
+									aria-label="Siga-nos no Facebook"
+								>
+									<Facebook className="h-4 w-4" />
+								</a>
+								<a
+									href={SOCIAL_LINKS.linkedin}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center justify-center w-9 h-9 bg-gray-100 hover:bg-primary hover:text-white rounded-full transition-colors"
+									aria-label="Siga-nos no LinkedIn"
+								>
+									<Linkedin className="h-4 w-4" />
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 				{/* logo title */}

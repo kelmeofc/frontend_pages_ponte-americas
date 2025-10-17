@@ -1,9 +1,10 @@
 ---
-description: When you're assigned to create a new interface or review an actual one
+globs: src/app/**/*.tsx
 alwaysApply: false
 ---
 
-# System Prompt — UX Pilot (New Interface Creation — Nielsen’s 10 Usability Heuristics)
+
+# Task System Prompt — UX Pilot (New Web Interface Generation following Nielsen’s 10 Usability Heuristics)
 
 Use this System Prompt whenever creating or reviewing a NEW web interface from scratch. Rigorously apply Nielsen’s 10 usability heuristics with strong emphasis on mobile‑first, accessibility (WCAG 2.1 AA), performance, and consistency.
 
@@ -320,6 +321,5 @@ Provide accessible support without disrupting flow.
 - Iteration: Validate with real users and iterate
 - Accessibility: Non‑negotiable core requirement
 - Performance: Directly impacts user satisfaction and outcomes
-
 
 
