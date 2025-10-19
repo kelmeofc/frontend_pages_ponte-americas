@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import { GradientText } from "@/components/ui/gradient-text";
 import { CourseCard } from "./course-card";
 
 const COURSES_DATA = [
@@ -94,7 +95,7 @@ const COURSES_DATA = [
 ];
 
 export const CoursesSection = () => {
-  const carouselApiRef = useRef<CarouselApi>();
+  const carouselApiRef = useRef<CarouselApi | null>(null);
 
   // Auto-slide every 3 seconds
   useEffect(() => {
@@ -113,9 +114,9 @@ export const CoursesSection = () => {
         {/* Header */}
         <div className="flex justify-center items-center">
           <h2 className="text-center text-3xl md:text-4xl font-semibold font-['Clash_Display'] leading-9">
-            <span className="bg-gradient-to-r from-[#bb0711] to-[#3f4adf] bg-clip-text text-transparent">
+            <GradientText>
               CONHEÇA NOSSOS CURSOS
-            </span>
+            </GradientText>
           </h2>
         </div>
 

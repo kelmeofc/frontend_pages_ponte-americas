@@ -2,6 +2,7 @@
 
 import { Container } from "@/components/ui/container"
 import { PrimaryButton } from "@/components/primary-button"
+import { GradientText } from "@/components/ui/gradient-text"
 import { HeroTestimonial } from "./hero-testimonial"
 import { HeroVideo } from "./hero-video"
 import { ArrowRight } from "lucide-react"
@@ -23,9 +24,9 @@ export function HeroSection() {
         
         {/* Main Heading */}
         <h1 className="font-clash-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight text-center mb-8">
-          <span className="bg-gradient-to-r from-[#bb0711] to-[#3f4adf] bg-clip-text text-transparent">
+          <GradientText>
             A VIRADA DE CHAVE
-          </span>
+          </GradientText>
           <br className="sm:hidden" />
           <span className="text-white sm:ml-3">
             PARA MORAR NOS EUA
