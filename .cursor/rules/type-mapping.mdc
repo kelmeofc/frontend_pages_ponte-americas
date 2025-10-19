@@ -1,0 +1,292 @@
+---
+description: Rules for centralized type mapping and redundancy elimination
+alwaysApply: false
+---
+# Type Mapping System - Pandami
+
+## 🎯 Identified Problems
+
+### 1. Duplicated Types
+- `ServiceItem` defined in `@types/IFormStep.ts` and `lib/my-site-form-mapping.ts`
+- `FormField` with similar structures in multiple files
+- Redundant interfaces for validation
+
+### 2. Lack of Centralization
+- Types scattered across different files
+- Inconsistent imports
+- Difficult maintenance
+
+## ✅ Solution: Centralized System
+
+### 1. Centralized Type Structure
+
+```typescript
+// @types/index.ts - Single entry point
+export * from './IFormStep'
+export * from './IUser'
+export * from './IAuthentication'
+export * from './IOrganization'
+export * from './IPayment'
+export * from './IReport'
+export * from './IHairstyle'
+export * from './ICollection'
+export * from './IFile'
+export * from './IPagination'
+export * from './IAdminCheck'
+export * from './IAuthorization'
+export * from './IAxiosResponseError'
+export * from './IHookFormReturn'
+```
+
+### 2. Mapping Rules
+
+#### **NEVER Duplicate Types**
+```typescript
+// ❌ WRONG: Duplicated types
+// @types/IFormStep.ts
+export interface ServiceItem {
+  id: string
+  name: string
+  // ...
+}
+
+// lib/my-site-form-mapping.ts
+export interface ServiceItem {  // ❌ DUPLICATED!
+  id: string
+  name: string
+  // ...
+}
+
+// ✅ CORRECT: Import and reuse
+// lib/my-site-form-mapping.ts
+import { ServiceItem } from '@/@types/IFormStep'
+// Reuse, don't redefine
+```
+
+#### **ALWAYS Use Centralized Imports**
+```typescript
+// ❌ WRONG: Direct imports
+import { ServiceItem } from '@/@types/IFormStep'
+import { User } from '@/@types/IUser'
+import { Payment } from '@/@types/IPayment'
+
+// ✅ CORRECT: Centralized import
+import { ServiceItem, User, Payment } from '@/@types'
+```
+
+### 3. Estrutura de Arquivos de Tipos
+
+```
+src/@types/
+├── index.ts                    # Re-exports centralizados
+├── IFormStep.ts               # Tipos de formulários
+├── IUser.ts                   # Tipos de usuário
+├── IAuthentication.ts        # Tipos de autenticação
+├── IOrganization.ts          # Tipos de organização
+├── IPayment.ts               # Tipos de pagamento
+├── IReport.ts                # Tipos de relatórios
+├── IHairstyle.ts             # Tipos de penteados
+├── ICollection.ts            # Tipos de coleções
+├── IFile.ts                  # Tipos de arquivos
+├── IPagination.ts            # Tipos de paginação
+├── IAdminCheck.ts            # Tipos de verificação admin
+├── IAuthorization.ts         # Tipos de autorização
+├── IAxiosResponseError.ts    # Tipos de erro axios
+└── IHookFormReturn.ts        # Tipos de retorno hook form
+```
+
+### 4. Regras de Nomenclatura
+
+#### **Interfaces**
+- **Padrão**: `I[Nome]` (ex: `IUser`, `IServiceItem`)
+- **Props**: `[Componente]Props` (ex: `ButtonProps`, `FormFieldProps`)
+- **Config**: `[Nome]Config` (ex: `StepConfig`, `FormConfig`)
+
+#### **Types**
+- **Padrão**: `[Nome]Type` (ex: `UserType`, `ServiceType`)
+- **Union**: `[Nome]Status` (ex: `UserStatus`, `PaymentStatus`)
+- **Enum**: `[Nome]Enum` (ex: `UserRoleEnum`, `PaymentMethodEnum`)
+
+### 5. Validação de Tipos
+
+#### **SEMPRE Valide Tipos**
+```typescript
+// ✅ CORRETO: Validação com Zod
+import { z } from 'zod'
+
+export const ServiceItemSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(1).max(100),
+  description: z.string().max(500),
+  price: z.string().regex(/^\d+\.?\d*$/),
+  duration: z.string().regex(/^\d+$/),
+  enabled: z.boolean()
+})
+
+export type ServiceItem = z.infer<typeof ServiceItemSchema>
+```
+
+#### **NUNCA Use `any`**
+```typescript
+// ❌ ERRADO: Uso de any
+interface FormProps {
+  data: any  // ❌ Muito genérico
+  errors: any
+}
+
+// ✅ CORRETO: Tipos específicos
+interface FormProps<T> {
+  data: T
+  errors: FieldErrors<T>
+}
+```
+
+### 6. Documentação de Tipos
+
+#### **SEMPRE Documente Interfaces**
+```typescript
+/**
+ * Representa um item de serviço no sistema
+ * @interface ServiceItem
+ * @property {string} id - Identificador único do serviço
+ * @property {string} name - Nome do serviço
+ * @property {string} description - Descrição detalhada
+ * @property {string} price - Preço em formato string
+ * @property {string} duration - Duração em minutos
+ * @property {boolean} enabled - Se o serviço está ativo
+ */
+export interface ServiceItem {
+  id: string
+  name: string
+  description: string
+  price: string
+  duration: string
+  enabled: boolean
+}
+```
+
+### 7. Migração de Tipos Existentes
+
+#### **Passo 1: Identificar Duplicações**
+```bash
+# Buscar tipos duplicados
+grep -r "interface ServiceItem" src/
+grep -r "interface FormField" src/
+grep -r "interface User" src/
+```
+
+#### **Passo 2: Consolidar em @types/**
+```typescript
+// @types/IFormStep.ts - Versão consolidada
+export interface ServiceItem {
+  id: string
+  name: string
+  description: string
+  price: string
+  priceRange?: {
+    min: string
+    max: string
+  }
+  duration: string
+  enabled: boolean
+}
+
+export interface FormField {
+  name: string
+  label: string
+  type: 'text' | 'email' | 'tel' | 'textarea' | 'select' | 'switch' | 'checkbox'
+  placeholder?: string
+  required?: boolean
+  rows?: number
+  accept?: string
+  options?: Array<{ value: string; label: string }>
+  validation?: {
+    minLength?: number
+    maxLength?: number
+    pattern?: string
+    message?: string
+  }
+}
+```
+
+#### **Passo 3: Atualizar Imports**
+```typescript
+// lib/my-site-form-mapping.ts
+import { ServiceItem, FormField } from '@/@types/IFormStep'
+
+// Remover definições duplicadas
+// export interface ServiceItem { ... } ❌ REMOVER
+// export interface FormField { ... } ❌ REMOVER
+```
+
+### 8. Regras de Import
+
+#### **SEMPRE Use Path Mapping**
+```typescript
+// tsconfig.json
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/types/*": ["./src/@types/*"]
+    }
+  }
+}
+
+// ✅ CORRETO: Import com path mapping
+import { ServiceItem } from '@/@types/IFormStep'
+import { User } from '@/@types/IUser'
+```
+
+#### **NUNCA Use Imports Relativos para Tipos**
+```typescript
+// ❌ ERRADO: Import relativo
+import { ServiceItem } from '../../../@types/IFormStep'
+
+// ✅ CORRETO: Import absoluto
+import { ServiceItem } from '@/@types/IFormStep'
+```
+
+### 9. Verificação de Conformidade
+
+#### **Script de Verificação**
+```bash
+# Verificar tipos duplicados
+npx tsc --noEmit --strict
+
+# Verificar imports não utilizados
+npx eslint --ext .ts,.tsx src/ --fix
+```
+
+#### **Pre-commit Hook**
+```json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "pnpm run type-check && pnpm dlx cypress run --component"
+    }
+  }
+}
+```
+
+## 🚀 Benefícios
+
+### ✅ Manutenibilidade
+- Tipos centralizados em um local
+- Mudanças refletem em todo o projeto
+- Menos duplicação de código
+
+### ✅ Type Safety
+- Tipos fortemente tipados
+- Autocomplete melhorado
+- Menos erros em tempo de execução
+
+### ✅ Performance
+- Imports otimizados
+- Tree shaking mais efetivo
+- Bundle size menor
+
+### ✅ Escalabilidade
+- Fácil adicionar novos tipos
+- Estrutura consistente
+- Onboarding mais rápido

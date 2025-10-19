@@ -96,3 +96,6 @@ export const ANIMATION_CONFIG = {
     easeInOut: 'power2.inOut',
   },
 } as const;
+
+// Export didatic topics
+export { DIDATIC_TOPICS } from './didatic-topics';

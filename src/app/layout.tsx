@@ -10,6 +10,7 @@ import defaultSeo from "@/common/config/default-seo"
 import { Modal } from "@/components/ui/modal/modal"
 import { CookiesModal } from "@/components/cookies-modal"
 import { ConsentScripts } from "@/components/consent-scripts"
+import WhatsAppWidget from "@/components/whatsapp-widget"
 
 import { Rubik } from "next/font/google";
 import localFont from "next/font/local";
@@ -152,6 +153,7 @@ export default function RootLayout({
 					<Footer />
 					<Modal />
 					<CookiesModal />
+					<WhatsAppWidget />
 				</ThemeProvider>
 			</body>
 		</html>

@@ -1,0 +1,345 @@
+---
+description: Guidelines for creating unified components that consolidate multiple variants into a single, reusable component
+alwaysApply: false
+---
+# Unified Components Guidelines
+
+## Overview
+
+Unified components are consolidated components that handle multiple variants or use cases through a single interface, reducing code duplication and improving maintainability. They follow the principle of "one component, multiple behaviors" through props-based configuration.
+
+## When to Create Unified Components
+
+### ✅ **Create Unified Components When:**
+- **Multiple similar components** exist with slight variations
+- **Same business logic** but different UI presentations
+- **Common functionality** across different contexts
+- **Type-based behavior** that can be parameterized
+- **Form components** with multiple input types
+- **Navigation components** with different layouts
+
+### ❌ **Don't Create Unified Components When:**
+- **Completely different functionalities** that don't share logic
+- **Components with distinct business rules**
+- **One-off components** with no reuse potential
+- **Components that would become overly complex** with unification
+
+## Unified Component Architecture
+
+### File Structure Pattern
+
+```
+@/app/_components/[category]/unified-[component-name]/
+├── unified-[component-name].tsx          # Main component (Controller)
+├── unified-[component-name].view.tsx     # View component (optional)
+├── unified-[component-name].model.ts     # Business logic (optional)
+├── unified-[component-name].types.ts     # Type definitions
+└── index.ts                              # Export barrel
+```
+
+### Naming Conventions
+
+- **Component**: `Unified[ComponentName]` (e.g., `UnifiedInput`, `UnifiedHairstyle`)
+- **Files**: `unified-[component-name].tsx`
+- **Types**: `Unified[ComponentName]Props`, `Unified[ComponentName]Type`
+- **Variants**: Use descriptive variant names (e.g., `'text' | 'email' | 'textarea'`)
+
+## Implementation Patterns
+
+### 1. Variant-Based Components
+
+```typescript
+// unified-input.types.ts
+export type InputVariant = 
+  | 'text' 
+  | 'email' 
+  | 'tel' 
+  | 'textarea' 
+  | 'select' 
+  | 'switch' 
+  | 'checkbox'
+  | 'phone'
+  | 'cpf'
+  | 'cnpj'
+  | 'cep'
+  | 'currency'
+  | 'url'
+  | 'linkedin'
+  | 'username'
+  | 'number'
+
+export interface UnifiedInputProps {
+  variant?: InputVariant
+  label?: string
+  required?: boolean
+  error?: string
+  options?: Array<{ value: string; label: string }>
+  rows?: number
+  showError?: boolean
+  onValueChange?: (value: any) => void
+  value?: any
+  className?: string
+  // ... other props
+}
+```
+
+### 2. Type-Based Behavior
+
+```typescript
+// unified-hairstyle.types.ts
+export type HairstyleType = 'simplified' | 'female' | 'male'
+
+export interface UnifiedHairstyleProps {
+  type: HairstyleType
+}
+
+// unified-hairstyle.model.ts
+export function UnifiedHairstyleModel(type: HairstyleType) {
+  // Business logic that adapts based on type
+  const onSubmit = async (data: UnifiedHairstyleForm) => {
+    // Navigation logic based on type
+    if (type === 'simplified') {
+      router.push(`/visagism/${id}/s-photo`)
+    } else if (type === 'female') {
+      router.push(`/visagism/${id}/f-photo`)
+    } else {
+      router.push(`/visagism/${id}/m-photo`)
+    }
+  }
+  
+  return {
+    // ... model methods
+    onSubmit
+  }
+}
+```
+
+### 3. Conditional Rendering Pattern
+
+```typescript
+// unified-input.tsx
+export const UnifiedInput = forwardRef<HTMLInputElement, UnifiedInputProps>(
+  ({ variant = 'text', ...props }, ref) => {
+    const renderInput = () => {
+      switch (variant) {
+        case 'textarea':
+          return <Textarea {...props} ref={ref} />
+        
+        case 'select':
+          return (
+            <Select onValueChange={props.onValueChange}>
+              <SelectTrigger>
+                <SelectValue placeholder={props.placeholder} />
+              </SelectTrigger>
+              <SelectContent>
+                {props.options?.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )
+        
+        case 'switch':
+          return (
+            <div className="flex items-center justify-between">
+              <Label>{props.label}</Label>
+              <Switch 
+                checked={props.value} 
+                onCheckedChange={props.onValueChange} 
+              />
+            </div>
+          )
+        
+        default:
+          return <Input {...props} ref={ref} />
+      }
+    }
+
+    return (
+      <div className="space-y-2">
+        {props.label && variant !== 'switch' && (
+          <Label>{props.label}</Label>
+        )}
+        {renderInput()}
+        {props.showError && props.error && (
+          <p className="text-sm text-red-500">{props.error}</p>
+        )}
+      </div>
+    )
+  }
+)
+```
+
+## Best Practices
+
+### 1. **Single Responsibility with Multiple Behaviors**
+- Each unified component should have one clear purpose
+- Multiple behaviors should be controlled through props
+- You should avaliate if its viable to create a god unified component, if its a molecule or atom it should be a "god component" that do everything, but if its a organism or template or page it shouldn't be a "god component".
+
+### 2. **Type Safety**
+- Use TypeScript unions for variants
+- Create comprehensive prop interfaces
+- Use generic types when appropriate
+
+### 3. **Performance Optimization**
+- Use `useMemo` for expensive computations
+- Use `useCallback` for event handlers
+- Implement proper memoization strategies
+
+### 4. **Accessibility**
+- Maintain consistent ARIA attributes across variants
+- Ensure keyboard navigation works for all variants
+- Provide proper labels and descriptions
+
+### 5. **Testing Strategy**
+- Test each variant individually
+- Test variant switching behavior
+- Test edge cases and error states
+
+## Migration Strategy
+
+### From Multiple Components to Unified
+
+1. **Identify Common Patterns**
+   ```typescript
+   // Before: Multiple components
+   <TextInput />
+   <EmailInput />
+   <PhoneInput />
+   <TextareaInput />
+   
+   // After: Unified component
+   <UnifiedInput variant="text" />
+   <UnifiedInput variant="email" />
+   <UnifiedInput variant="phone" />
+   <UnifiedInput variant="textarea" />
+   ```
+
+2. **Consolidate Props**
+   ```typescript
+   // Extract common props
+   interface CommonInputProps {
+     label?: string
+     error?: string
+     required?: boolean
+     className?: string
+   }
+   
+   // Create variant-specific props
+   interface TextInputProps extends CommonInputProps {
+     type: 'text'
+     placeholder?: string
+   }
+   
+   interface SelectInputProps extends CommonInputProps {
+     type: 'select'
+     options: Array<{ value: string; label: string }>
+   }
+   ```
+
+3. **Implement Gradual Migration**
+   - Start with most similar components
+   - Maintain backward compatibility during transition
+   - Update imports gradually
+   - Remove old components after migration
+
+## Examples in Codebase
+
+### UnifiedInput Component
+- **Location**: `@/app/_components/molecules/unified-input/`
+- **Variants**: text, email, textarea, select, switch, checkbox, phone, cpf, etc.
+- **Features**: Input masking, validation, error handling
+
+### UnifiedHairstyle Component  
+- **Location**: `@/app/_components/pages/(visagism)/unified-hairstyle/`
+- **Types**: simplified, female, male
+- **Features**: Type-based navigation, shared business logic
+
+## Anti-Patterns to Avoid
+
+### ❌ **Over-Unification**
+```typescript
+// BAD: Too many responsibilities
+<UnifiedComponent 
+  type="user-form" 
+  variant="login" 
+  mode="mobile" 
+  theme="dark" 
+  layout="sidebar"
+/>
+```
+
+### ❌ **Complex Conditional Logic**
+```typescript
+// BAD: Hard to maintain
+if (type === 'user' && variant === 'admin' && mode === 'edit') {
+  // Complex nested logic
+}
+```
+
+### ❌ **Props Explosion**
+```typescript
+// BAD: Too many props
+interface UnifiedComponentProps {
+  // 50+ props for different variants
+}
+```
+
+## Documentation Requirements
+
+### Component Documentation
+```typescript
+/**
+ * UnifiedInput - A versatile input component supporting multiple input types
+ * 
+ * @example
+ * // Text input
+ * <UnifiedInput variant="text" label="Name" />
+ * 
+ * // Email input with validation
+ * <UnifiedInput variant="email" label="Email" required error="Invalid email" />
+ * 
+ * // Select dropdown
+ * <UnifiedInput 
+ *   variant="select" 
+ *   label="Country" 
+ *   options={countryOptions} 
+ * />
+ */
+```
+
+### Variant Documentation
+```typescript
+/**
+ * Supported input variants:
+ * - text: Standard text input
+ * - email: Email input with validation
+ * - phone: Phone input with Brazilian formatting
+ * - textarea: Multi-line text input
+ * - select: Dropdown selection
+ * - switch: Toggle switch
+ * - checkbox: Checkbox input
+ */
+```
+
+## Performance Considerations
+
+### 1. **Bundle Size**
+- Use tree-shaking friendly exports
+- Avoid importing unused variants
+- Consider code splitting for large unified components
+
+### 2. **Runtime Performance**
+- Minimize re-renders with proper memoization
+- Use stable references for callbacks
+- Optimize conditional rendering logic
+
+### 3. **Memory Usage**
+- Avoid creating objects in render
+- Use refs for DOM manipulation
+- Clean up event listeners and subscriptions
+
+This guide ensures unified components are created following consistent patterns, maintain type safety, and provide excellent developer experience while reducing code duplication.

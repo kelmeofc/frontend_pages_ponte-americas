@@ -17,7 +17,7 @@ export default async function BlogGrid({ searchParams }: { searchParams?: any })
       <section className="w-full bg-white min-h-screen">
         <Container section={true}>
           <h2 className="text-2xl md:text-3xl font-bold text-center md:mb-12 mb-8">
-            Blog Pandami
+            Blog Ponte Américas
           </h2>
           <p className="text-center">Nenhum artigo encontrado. Por favor, tente novamente mais tarde.</p>
         </Container>
@@ -29,7 +29,7 @@ export default async function BlogGrid({ searchParams }: { searchParams?: any })
     <section className="w-full bg-white">
       <Container section={true}>
         <h2 className="text-2xl md:text-3xl font-bold text-center md:mb-12 mb-8">
-          Blog Pandami
+          Blog Ponte Américas
         </h2>
         <div className="relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

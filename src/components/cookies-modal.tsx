@@ -35,7 +35,7 @@ export function CookiesModal() {
           Preferências de cookies
         </p>
         <p className="text-sm text-neutral-700 leading-relaxed">
-          A Pandami usa cookies, píxeis, tags e tecnologias semelhantes para medir audiência e personalizar sua experiência. Saiba mais sobre como utilizamos seus dados e cookies em nossa{" "}
+          A Ponte Américas usa cookies, píxeis, tags e tecnologias semelhantes para medir audiência e personalizar sua experiência. Saiba mais sobre como utilizamos seus dados e cookies em nossa{" "}
           <a 
             href="/politica-de-privacidade" 
             className="text-primary underline hover:text-primary/80 transition-colors"
@@ -57,13 +57,13 @@ export function CookiesModal() {
             type="button"
             onClick={() => handleChoice("essentials_only")}
             aria-label="Aceitar apenas cookies essenciais"
-            variant="white"
+            variant="outline"
           >
             Apenas essenciais
           </PrimaryButton>
           <PrimaryButton
             type="button"
-            variant="outline"
+            variant="white"
             onClick={() => handleChoice("denied")}
             aria-label="Não aceitar cookies"
           >

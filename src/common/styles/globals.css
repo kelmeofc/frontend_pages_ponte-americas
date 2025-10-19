@@ -445,3 +445,51 @@
     width: 100%;
   }
 }
+
+/* Gradient Border Utilities */
+.gradient-border-image {
+  border: 4px solid transparent;
+  border-image: linear-gradient(to right, #dc2626, #4f46e5) 1;
+  border-image-slice: 1;
+}
+
+.gradient-border-top {
+  border-top: 6px solid transparent;
+  border-image: linear-gradient(to right, #dc2626, #4f46e5) 1;
+  border-image-slice: 1;
+}
+
+/* Gradient Border with Rounded Corners */
+.gradient-border-rounded {
+  position: relative;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(to right, #dc2626, #4f46e5) border-box;
+  border: 6px solid transparent;
+  border-radius: 10px;
+}
+
+.gradient-border-top-rounded {
+  position: relative;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(to right, #dc2626, #4f46e5) border-box;
+  border-top: 6px solid transparent;
+  border-radius: 10px;
+}
+
+/* Alternative approach with pseudo-element */
+.gradient-border-pseudo {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.gradient-border-pseudo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(to right, #dc2626, #4f46e5);
+  border-radius: 10px 10px 0 0;
+}
