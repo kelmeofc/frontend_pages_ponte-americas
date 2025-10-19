@@ -13,7 +13,7 @@ interface IDidaticTopic {
 }
 
 interface IDidaticSectionProps {
-  topics: IDidaticTopic[];
+  topics: readonly IDidaticTopic[];
 }
 
 export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
