@@ -21,6 +21,45 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
   const [isAutoRotationActive, setIsAutoRotationActive] = useState(true);
   const activeTopicData = topics.find(topic => topic.id === activeTopic);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // 🎯 MÉTODO: Parar rotação automática
+  const stopAutoRotation = useCallback(() => {
+    setIsAutoRotationActive(false);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, []);
+
+  // 🔄 MÉTODO: Gerenciar rotação automática
+  const startAutoRotation = useCallback(() => {
+    if (!isAutoRotationActive || topics.length <= 1) return;
+
+    // Limpar interval anterior se existir
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    intervalRef.current = setInterval(() => {
+      setActiveTopic(currentTopic => {
+        const currentIndex = topics.findIndex(topic => topic.id === currentTopic);
+        const nextIndex = (currentIndex + 1) % topics.length;
+        return topics[nextIndex].id;
+      });
+    }, 5000);
+  }, [isAutoRotationActive, topics]);
+
+  // 🎯 MÉTODO: Lidar com mudança manual de tópico
+  const handleManualTopicChange = useCallback((topicId: string) => {
+    stopAutoRotation();
+    setActiveTopic(topicId);
+  }, [stopAutoRotation]);
+
+  // 🎯 MÉTODO: Lidar com interação no vídeo
+  const handleVideoInteraction = useCallback(() => {
+    stopAutoRotation();
+  }, [stopAutoRotation]);
 
   // Center active tab in scroll container (mobile only)
   const centerActiveTab = useCallback(() => {
@@ -42,23 +81,20 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
     });
   }, []);
 
-  // Auto-rotate tabs every 5 seconds (only if auto-rotation is active)
+  // 🚀 EFFECT: Iniciar rotação automática
   useEffect(() => {
-    if (!isAutoRotationActive) return;
+    startAutoRotation();
+    
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [startAutoRotation]);
 
-    const interval = setInterval(() => {
-      const currentIndex = topics.findIndex(topic => topic.id === activeTopic);
-      const nextIndex = (currentIndex + 1) % topics.length;
-      setActiveTopic(topics[nextIndex].id);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [activeTopic, topics, isAutoRotationActive]);
-
-  // Center tab when activeTopic changes (mobile only)
+  // 📱 EFFECT: Centralizar tab no mobile quando tópico mudar
   useEffect(() => {
     const timer = setTimeout(() => {
-      // Only center on mobile/tablet (when overflow is needed)
       if (typeof window !== 'undefined' && window.innerWidth < 1024) {
         centerActiveTab();
       }
@@ -66,17 +102,6 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 
     return () => clearTimeout(timer);
   }, [activeTopic, centerActiveTab]);
-
-  // Handle user interaction - disable auto-rotation
-  const handleUserInteraction = useCallback(() => {
-    setIsAutoRotationActive(false);
-  }, []);
-
-  // Handle tab change with user interaction
-  const handleTabChange = useCallback((topicId: string) => {
-    setIsAutoRotationActive(false);
-    setActiveTopic(topicId);
-  }, []);
 
 
   return (
@@ -95,7 +120,7 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 
           {/* Tabs Grid */}
           <div className="w-full max-w-4xl">
-            <Tabs value={activeTopic} onValueChange={handleTabChange} className="w-full">
+            <Tabs value={activeTopic} onValueChange={handleManualTopicChange} className="w-full">
               {/* Desktop: Grid 2x4 */}
               <div className="hidden lg:block">
                 <TabsList className="grid grid-cols-4 gap-2.5 h-auto p-1 bg-transparent mb-2.5">
@@ -148,9 +173,12 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
                         controls
                         preload="metadata"
                         poster="/placeholder.svg"
-                        onClick={handleUserInteraction}
-                        onPlay={handleUserInteraction}
-                        onLoadStart={handleUserInteraction}
+                        onClick={handleVideoInteraction}
+                        onPlay={handleVideoInteraction}
+                        onPause={handleVideoInteraction}
+                        onSeeking={handleVideoInteraction}
+                        onSeeked={handleVideoInteraction}
+                        onVolumeChange={handleVideoInteraction}
                         playsInline
                         disablePictureInPicture
                       >

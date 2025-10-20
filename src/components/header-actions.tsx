@@ -19,7 +19,7 @@ export function HeaderActions({
     return (
       <div className="space-y-4">
         <Link
-          href="https://app.pandami.com.br/auth/sign-in/"
+          href="/coming-soon"
           onClick={onLinkClick}
           className="block"
         >
@@ -34,7 +34,7 @@ export function HeaderActions({
         </Link>
 
         <Link
-          href="https://app.pandami.com.br/auth/sign-up/"
+          href="/coming-soon"
           onClick={onLinkClick}
           className="block"
         >
@@ -55,7 +55,7 @@ export function HeaderActions({
       <ThemeToggle />
       <HeaderLanguageDropdown variant="desktop" />
       
-      <Link href="https://app.pandami.com.br/auth/sign-in/">
+      <Link href="/coming-soon">
         <PrimaryButton
           icon={<ArrowRight className="h-4 w-4" />}
           size="sm"
@@ -66,7 +66,7 @@ export function HeaderActions({
         </PrimaryButton>
       </Link>
 
-      <Link href="https://app.pandami.com.br/auth/sign-up/">
+      <Link href="/coming-soon">
         <PrimaryButton
           icon={<ArrowRight className="h-4 w-4" />}
           size="sm"

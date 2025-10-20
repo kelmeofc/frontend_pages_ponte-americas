@@ -89,7 +89,7 @@ export function Header() {
 					<div className="flex items-center justify-between w-full">
 						{/* Logo */}
 						<div className="lg:flex-1">
-							<HeaderLogo onClick={handleLinkClick} />
+							<HeaderLogo />
 						</div>
 
 						{/* Nav Items - Apenas Desktop */}
@@ -144,7 +144,7 @@ export function Header() {
 				<div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md">
 					<Container>
 						<div className="flex justify-between items-center py-4 border-b border-gray-800">
-							<HeaderLogo onClick={handleLinkClick} />
+							<HeaderLogo />
 							<HeaderLanguageDropdown variant="mobile" />
 							<button
 								className="p-2 rounded-full hover:bg-gray-800 text-white"

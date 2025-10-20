@@ -1,10 +1,10 @@
 "use server";
 
 import { getPostBySlug } from "@/common/services/posts/get-post-by-slug";
-import { Container } from "../ui/container";
+
 import { notFound } from "next/navigation";
-import { LeadFormBlog } from "../forms/lead-form-blog";
-import { CtaSectionBlog } from "./cta-section-blog";
+
+import { CtaSection } from "./cta-section";
 
 export default async function ArticleContent({
 	postSlug,
@@ -105,7 +105,7 @@ export default async function ArticleContent({
 					/>
 				</div>
 
-				<CtaSectionBlog />
+				<CtaSection />
 			</article>
 		</section>
 	);
