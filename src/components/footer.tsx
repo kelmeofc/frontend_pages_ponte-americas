@@ -45,7 +45,7 @@ export default function Footer() {
 							</li>
 							<li>
 								<Link
-									href="/#about"
+									href="/#about-us"
 									className="hover:text-primary transition-colors"
 								>
 									Nosso time
@@ -53,10 +53,10 @@ export default function Footer() {
 							</li>
 							<li>
 								<Link
-									href="/#program"
+									href="/#courses"
 									className="hover:text-primary transition-colors"
 								>
-									O Programa
+									Cursos
 								</Link>
 							</li>
 							<li>
@@ -67,18 +67,10 @@ export default function Footer() {
 									Depoimentos
 								</Link>
 							</li>
-							<li>
-								<Link
-									href="/#pricing"
-									className="hover:text-primary transition-colors"
-								>
-									Planos
-								</Link>
-							</li>
 
 							<li>
 								<Link
-									href="/#pricing"
+									href="/coming-soon"
 									className="hover:text-primary transition-colors"
 								>
 									Começar Agora

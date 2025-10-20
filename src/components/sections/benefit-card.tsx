@@ -23,7 +23,7 @@ export function BenefitCard({
     )}>
       
       {/* Content Container */}
-      <div className="w-full flex justify-start items-start gap-6 sm:gap-8 mt-8">
+      <div className="w-full flex flex-col md:flex-row justify-center md:justify-start items-start gap-6 sm:gap-8 mt-8">
         {/* Icon Container */}
         <div className="flex-shrink-0 p-2 bg-gradient-to-r from-red-700 to-indigo-600 rounded-full">
           <div className="p-[3px] bg-white rounded-full">

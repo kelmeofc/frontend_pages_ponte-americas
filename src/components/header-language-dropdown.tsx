@@ -26,7 +26,7 @@ export function HeaderLanguageDropdown({
           className="w-full bg-transparent text-white focus:outline-none"
           defaultValue="pt-BR"
         >
-          <option value="pt-BR" className="bg-gray-900">Português</option>
+          <option value="pt-BR" className="bg-gray-900">PT</option>
         </select>
       </div>
     )

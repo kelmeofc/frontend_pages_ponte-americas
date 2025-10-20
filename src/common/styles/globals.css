@@ -222,34 +222,34 @@
     background: transparent;
   }
 
-  /* Headings responsivos */
+  /* Headings responsivos otimizados */
   h1 {
-    @apply font-clash-display text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] font-bold text-gray-900;
+    @apply font-clash-display text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight;
   }
 
   h2 {
-    @apply font-clash-display text-[20px] sm:text-[24px] md:text-[32px] lg:text-[36px] font-bold text-gray-900;
+    @apply font-clash-display text-xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight;
   }
 
   h3 {
-    @apply font-clash-display text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] font-bold text-gray-900;
+    @apply font-clash-display text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight;
   }
 
   h4 {
-    @apply font-clash-display text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] font-semibold text-gray-900;
+    @apply font-clash-display text-base md:text-xl lg:text-2xl font-semibold text-gray-900 leading-tight;
   }
 
   h5 {
-    @apply font-clash-display text-[16px] sm:text-[16px] md:text-[20px] lg:text-[24px] font-semibold text-gray-900;
+    @apply font-clash-display text-sm md:text-lg lg:text-xl font-semibold text-gray-900 leading-tight;
   }
 
   h6 {
-    @apply font-clash-display text-[14px] sm:text-[16px] md:text-[16px] lg:text-[20px] font-semibold text-gray-900;
+    @apply font-clash-display text-xs md:text-base lg:text-lg font-medium text-gray-900 leading-tight;
   }
 
   /* Parágrafos responsivos */
   p {
-    @apply text-[14px] sm:text-[16px] md:text-[16px] lg:text-[18px] leading-[140%] text-gray-700 font-normal;
+    @apply text-sm md:text-base lg:text-lg leading-[140%] text-gray-700 font-normal;
   }
 }
 
@@ -264,9 +264,6 @@
   @apply scroll-smooth
 }
 
-  h1, h2, h3  {
-      @apply font-clash-display;
-  }
 
 .bg-grid-pattern {
   background-image: linear-gradient(
@@ -278,45 +275,7 @@
   background-size: 80px 80px;
 }
 
-.title-1 {
-  @apply text-gray-900 text-3xl sm:text-5xl md:text-7xl font-bold;
-}
 
-.title-2 {
-  @apply text-gray-900 text-2xl sm:text-3xl md:text-5xl font-bold;
-}
-
-.title-3 {
-  @apply text-gray-900 text-xl sm:text-2xl md:text-3xl font-bold;
-}
-
-.title-4 {
-  @apply text-gray-900 text-lg sm:text-xl md:text-2xl font-bold;
-}
-
-.title-5 {
-  @apply text-gray-900 text-base sm:text-lg md:text-xl font-bold;
-}
-
-.text-1 {
-  @apply text-gray-900 text-lg sm:text-xl md:text-2xl font-normal;
-}
-
-.text-2 {
-  @apply text-gray-900 text-base sm:text-lg md:text-xl leading-[140%] font-normal;
-}
-
-.text-3 {
-  @apply text-gray-900 text-sm sm:text-base md:text-lg leading-[140%] font-normal;
-}
-
-.text-4 {
-  @apply text-gray-600 text-sm sm:text-sm md:text-base leading-[140%] font-normal;
-}
-
-.text-5 {
-  @apply text-gray-600 text-xs md:text-sm leading-[140%] font-normal;
-}
 
 /* Estilos globais para o conteúdo de posts/artigos */
 
@@ -328,52 +287,49 @@
   hyphens: auto;
 
   p {
-    @apply text-gray-700 text-base sm:text-lg md:text-xl leading-[140%] font-normal;
+    @apply text-gray-700 text-base md:text-xl leading-[140%] font-normal;
     max-width: 100%;
     overflow-wrap: break-word;
   }
 
-  * + p {
-    @apply mb-[15px] sm:mb-[20px] md:mb-[25px];
-  }
 
   h1 {
-    @apply text-gray-900 text-2xl sm:text-3xl md:text-5xl font-bold mb-[15px] sm:mb-[20px] md:mb-[25px];
+    @apply font-clash-display text-gray-900 text-xl md:text-2xl lg:text-3xl font-bold leading-tight;
     max-width: 100%;
     overflow-wrap: break-word;
     word-break: break-word;
   }
 
   h2 {
-    @apply text-gray-900 text-2xl sm:text-3xl md:text-4xl font-bold mb-[15px] sm:mb-[20px] md:mb-[25px];
+    @apply font-clash-display text-gray-900 text-lg md:text-xl lg:text-2xl font-bold leading-tight;
     max-width: 100%;
     overflow-wrap: break-word;
     word-break: break-word;
   }
 
   h3 {
-    @apply text-gray-900 text-xl sm:text-2xl md:text-3xl font-bold mb-[15px] sm:mb-[20px] md:mb-[25px];
+    @apply font-clash-display text-gray-900 text-base md:text-lg lg:text-xl font-bold leading-tight;
     max-width: 100%;
     overflow-wrap: break-word;
     word-break: break-word;
   }
 
   h4 {
-    @apply text-gray-900 text-lg sm:text-xl md:text-2xl font-bold mb-[15px] sm:mb-[20px] md:mb-[25px];
+    @apply font-clash-display text-gray-900 text-sm md:text-base lg:text-lg font-semibold leading-tight;
     max-width: 100%;
     overflow-wrap: break-word;
     word-break: break-word;
   }
 
   img {
-    @apply rounded-lg w-full mb-[15px] sm:mb-[20px] md:mb-[25px] max-h-[250px] md:max-h-[500px] h-full object-cover;
+    @apply rounded-lg w-full mb-5 md:mb-6 max-h-[250px] md:max-h-[500px] h-full object-cover;
     max-width: 100% !important;
     height: auto !important;
   }
 
   ul,
   ol {
-    @apply list-disc list-inside mb-[15px] sm:mb-[20px] md:mb-[25px] relative md:pl-4 md:before:content-['_'];
+    @apply list-disc list-inside mb-5 md:mb-6 relative md:pl-4 md:before:content-['_'];
     max-width: 100%;
   }
 
@@ -393,7 +349,7 @@
   }
 
   li {
-    @apply text-gray-700 text-base sm:text-lg md:text-xl leading-[140%] font-normal mb-[8px] sm:mb-[10px];
+    @apply text-gray-700 text-base md:text-xl leading-[140%] font-normal mb-2;
     max-width: 100%;
     overflow-wrap: break-word;
   }
@@ -403,14 +359,14 @@
   }
 
   a {
-    @apply text-blue-600 hover:text-blue-700 text-base sm:text-lg md:text-xl leading-[140%] font-normal mb-[15px] sm:mb-[20px] md:mb-[25px] underline transition-colors duration-300;
+    @apply text-blue-600 hover:text-blue-700 text-base md:text-xl leading-[140%] font-normal mb-4 md:mb-6 underline transition-colors duration-300;
     max-width: 100%;
     overflow-wrap: break-word;
     word-break: break-all;
   }
 
   hr {
-    @apply mb-[15px] sm:mb-[20px] md:mb-[25px] border-gray-200;
+    @apply mb-4 md:mb-6 border-gray-200;
     max-width: 100%;
   }
 
@@ -443,5 +399,20 @@
   table tbody {
     display: table;
     width: 100%;
+  }
+}
+
+/* Animação shine otimizada para melhor performance */
+@keyframes shine {
+  0% {
+    transform: translate3d(-100%, 0, 0) skewX(-25deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(200%, 0, 0) skewX(-25deg);
+    opacity: 0;
   }
 }

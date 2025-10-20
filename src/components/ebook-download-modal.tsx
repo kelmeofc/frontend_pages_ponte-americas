@@ -26,30 +26,34 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
 }) => {
   const {
     isLoading,
-    error,
     register,
     handleSubmit,
     errors,
+    isValid,
+    setValue,
     handleFormSubmit,
     handleClose,
+    timer,
   } = useEbookModal(onClose);
+
+  // O Zod já valida todos os campos obrigatórios através do isValid
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="w-[848px] max-w-[95vw] p-0 bg-white rounded-3xl border border-gray-200">
+      <DialogContent className="w-[848px] max-w-[95vw] p-0 bg-white rounded-lg border border-gray-200 max-h-[90vh] overflow-y-auto">
         <DialogHeader className="sr-only">
           <DialogTitle>Baixar Ebook</DialogTitle>
         </DialogHeader>
         
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col justify-center lg:flex-row lg:h-[500px]">
           {/* Lado esquerdo - Imagem do ebook */}
-          <div className="w-full lg:w-96 h-96 lg:h-auto flex-shrink-0">
+          <div className="h-fit w-full lg:w-100 lg:h-full">
             <Image
               src="/images/passaporte-blindado-ebook-mock-image.png"
               alt="Ebook Passaporte Blindado"
-              width={394}
-              height={418}
-              className="w-full h-full object-cover rounded-l-3xl lg:rounded-l-3xl lg:rounded-r-none"
+              width={400}
+              height={400}
+              className="w-full h-full object-cover"
               priority
             />
           </div>
@@ -59,8 +63,10 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
             <div className="text-center lg:text-left">
               <p className="text-neutral-600 text-base font-medium leading-tight">
                 O link de download expira em{' '}
-                <span className="text-red-500 font-semibold">0:35 minutos</span>
-                . Digite seu e-mail abaixo para que possamos enviar também por lá!
+                <span className={`inline-block w-12 text-center font-semibold font-mono ${timer.isExpired ? 'text-red-600' : timer.timeLeft <= 60 ? 'text-red-500' : 'text-red-500'}`}>
+                  {timer.formattedTime}
+                </span>
+                {' '}minutos. Digite seu e-mail abaixo para que possamos enviar também por lá!
               </p>
             </div>
 
@@ -70,7 +76,7 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
                 placeholder="Nome completo"
                 register={register}
                 errors={errors}
-                disabled={isLoading}
+                disabled={isLoading || timer.isExpired}
               />
               <FormField
                 name="email"
@@ -78,37 +84,33 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
                 type="email"
                 register={register}
                 errors={errors}
-                disabled={isLoading}
+                disabled={isLoading || timer.isExpired}
               />
               <InternationalPhoneField
                 name="phone"
                 placeholder="Telefone"
                 register={register}
                 errors={errors}
-                disabled={isLoading}
+                setValue={setValue}
+                disabled={isLoading || timer.isExpired}
                 initialCountry="br"
               />
 
-              {error && (
-                <div className="text-red-500 text-sm text-center">
-                  {error}
-                </div>
-              )}
 
               <PrimaryButton
                 type="submit"
                 size="lg"
-                className="w-full h-12 px-8 py-4 bg-gradient-to-r from-red-700 to-indigo-600 rounded-lg text-white font-medium uppercase"
-                disabled={isLoading}
+                className="w-full h-12 px-8 py-4 bg-gradient-to-r from-red-700 to-indigo-600 rounded-lg text-white font-medium uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isLoading || timer.isExpired || !isValid}
                 icon={<ArrowRight className="w-5 h-5" />}
                 iconPosition="right"
               >
-                {isLoading ? 'Enviando...' : 'Baixar agora'}
+                {timer.isExpired ? 'Tempo expirado' : isLoading ? 'Enviando...' : 'Baixar agora'}
               </PrimaryButton>
             </form>
 
             <div className="text-center lg:text-left">
-              <p className="text-neutral-600 text-base font-medium leading-tight">
+              <p className="text-neutral-600 text-base leading-tight">
                 Ao clicar em "Baixar Agora" você concorda com a nossa{' '}
                 <span className="text-blue-700 cursor-pointer hover:underline">
                   política de privacidade

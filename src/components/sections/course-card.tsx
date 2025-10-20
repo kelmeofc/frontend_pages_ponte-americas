@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { PrimaryButton } from "@/components/primary-button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, User } from "lucide-react";
 
 interface ICourseCard {
   title: string;
@@ -11,6 +11,7 @@ interface ICourseCard {
   features: string[];
   ctaText: string;
   image?: string;
+  name: string; // Nome do professor
   className?: string;
 }
 
@@ -23,6 +24,7 @@ export const CourseCard = ({
   features,
   ctaText,
   image = "/placeholder.svg",
+  name,
   className = ""
 }: ICourseCard) => {
   return (
@@ -51,6 +53,10 @@ export const CourseCard = ({
         {/* Title */}
         <div className="mb-3">
           <h3 className="font-clash-display text-lg font-semibold text-white mb-2">{title}</h3>
+          <div className="flex flex-row w-full items-center gap-2">
+            <User className="size-3 text-white/70" />
+            <p className="text-sm text-white/70 font-medium">{name}</p>
+          </div>
         </div>
 
         {/* Features */}

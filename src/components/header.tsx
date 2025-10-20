@@ -16,7 +16,7 @@ const navItems: INavItem[] = [
 	},
 	{
 		title: "Cursos",
-		href: "/#pricing",
+		href: "/#courses",
 	},
 	{
 		title: "Nosso time",

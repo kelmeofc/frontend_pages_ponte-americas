@@ -99,3 +99,6 @@ export const ANIMATION_CONFIG = {
 
 // Export didatic topics
 export { DIDATIC_TOPICS } from './didatic-topics';
+
+// Export courses data
+export { COURSES_DATA, type ICourse } from './courses';

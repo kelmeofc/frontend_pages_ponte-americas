@@ -1,11 +1,21 @@
 import { z } from 'zod';
 
 export const ebookLeadSchema = z.object({
-  name: z.string().min(3, 'Nome deve ter no mínimo 3 caracteres'),
-  email: z.string().email('E-mail inválido'),
+  name: z.string()
+    .min(3, 'Nome deve ter no mínimo 3 caracteres')
+    .max(100, 'Nome deve ter no máximo 100 caracteres')
+    .trim(),
+  email: z.string()
+    .email('E-mail inválido')
+    .max(255, 'E-mail deve ter no máximo 255 caracteres')
+    .toLowerCase()
+    .trim(),
   phone: z.string()
     .min(1, 'Telefone é obrigatório')
-    .regex(/^\+[1-9]\d{1,14}$/, 'Formato internacional inválido (ex: +5511999999999)'),
+    .refine((phone) => {
+      const numbers = phone.replace(/\D/g, '');
+      return numbers.length === 13 && numbers.startsWith('55'); // +55 + 11 dígitos
+    }, 'Telefone deve ter 11 dígitos (DDD + 9 dígitos)'),
   source: z.string().optional(),
   route: z.string().optional(),
   country: z.string().optional(),

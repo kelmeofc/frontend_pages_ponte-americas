@@ -25,10 +25,10 @@ export function HeroSection() {
 				</p>
 
 				{/* Main Heading */}
-				<h1 className="font-clash-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight text-center mb-8">
+				<h1 className="font-clash-display  font-semibold leading-tight text-center mb-8">
 					<GradientText>A VIRADA DE CHAVE</GradientText>
 					<br className="sm:hidden" />
-					<span className="text-white sm:ml-3">PARA MORAR NOS EUA</span>
+					<span className="text-white ml-3">PARA MORAR NOS EUA</span>
 					<br />
 					<span className="text-white">QUE VOCÊ PRECISA ENTENDER AGORA</span>
 				</h1>
