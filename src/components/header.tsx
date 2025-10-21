@@ -39,6 +39,8 @@ export function Header() {
 
 	// Controlar efeito de scroll
 	useEffect(() => {
+		if (typeof window === 'undefined') return;
+		
 		const handleScroll = () => setIsScrolled(window.scrollY > 10);
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);

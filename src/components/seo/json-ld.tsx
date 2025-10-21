@@ -64,14 +64,14 @@ export const OrganizationJsonLd = () => {
   const organizationData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PandaMi",
-    "description": "Visagismo com IA ",
-    "url": process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br",
-    "logo": `${process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br"}/logo.svg`,
+    "name": "Ponte Américas",
+    "description": "Programa completo para brasileiros nos Estados Unidos",
+    "url": process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
+    "logo": `${process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com"}/images/svg/logo.svg`,
     "sameAs": [
-      "https://www.instagram.com/pandami",
-      "https://www.facebook.com/pandami",
-      "https://www.linkedin.com/company/pandami"
+      "https://www.instagram.com/ponteamericas",
+      "https://www.facebook.com/ponteamericas",
+      "https://www.linkedin.com/company/ponteamericas"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
@@ -92,11 +92,11 @@ export const ProductJsonLd = () => {
   const productData = {
 		"@context": "https://schema.org",
 		"@type": "SoftwareApplication",
-		name: "PandaMi | Visagismo com IA",
+		name: "Ponte Américas | Programa de Imigração para os EUA",
 		description:
-			"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste grátis por 7 dias!",
-		url: process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br",
-		applicationCategory: "BeautyApplication",
+			"O Ponte Américas é sua ponte para os Estados Unidos. Um programa completo que te prepara para viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.",
+		url: process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
+		applicationCategory: "EducationalApplication",
 		operatingSystem: "Web Browser",
 		offers: {
 			"@type": "Offer",
@@ -145,7 +145,7 @@ export const ReviewJsonLd = () => {
   const reviewData = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "PandaMi - Visagismo com IA",
+    "name": "Ponte Américas - Programa de Imigração para os EUA",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.8",

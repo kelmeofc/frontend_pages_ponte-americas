@@ -4,46 +4,55 @@ import { JsonLd } from "./json-ld";
 
 export const ArticleJsonLd = () => {
   const articleData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Visagismo com IA: Descubra sua melhor versão",
-    "description": "Descubra como a inteligência artificial está revolucionando o visagismo. Análise personalizada em 30 segundos, sugestões para todos os tipos de cabelo brasileiro.",
-    "image": [
-      `${process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br"}/lp/images/hero/hero-main.png`,
-      `${process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br"}/lp/images/about-visagism/about-visagism-1.png`
-    ],
-    "author": {
-      "@type": "Organization",
-      "name": "PandaMi",
-      "url": process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "PandaMi",
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br"}/logo.svg`
-      }
-    },
-    "datePublished": "2024-01-01",
-    "dateModified": new Date().toISOString().split('T')[0],
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br"
-    },
-    "keywords": [
-      "visagismo",
-      "inteligência artificial",
-      "análise de cabelo",
-      "beleza",
-      "diversidade brasileira",
-      "IA para cabelo",
-      "sugestões personalizadas"
-    ],
-    "articleSection": "Beleza e Estilo",
-    "wordCount": 1500,
-    "inLanguage": "pt-BR"
-  };
+		"@context": "https://schema.org",
+		"@type": "Article",
+		headline: "Ponte Américas: Seu Guia Completo para Viver nos Estados Unidos",
+		description:
+			"O Ponte Américas vai te ensinar tudo sobre como viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares..",
+		image: [
+			`${
+				process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com"
+			}/images/video-placeholder-1.png`,
+			`${
+				process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com"
+			}/images/about-us-section/image-card-1.png`,
+		],
+		author: {
+			"@type": "Organization",
+			name: "Ponte Américas",
+			url: process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
+		},
+		publisher: {
+			"@type": "Organization",
+			name: "Ponte Américas",
+			logo: {
+				"@type": "ImageObject",
+				url: `${
+					process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com"
+				}/images/svg/logo.svg`,
+			},
+		},
+		datePublished: "2025-01-01",
+		dateModified: "2025-01-01",
+		mainEntityOfPage: {
+			"@type": "WebPage",
+			"@id": process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
+		},
+		keywords: [
+			"ponte américas",
+			"imigração EUA",
+			"viver nos Estados Unidos",
+			"trabalhar nos EUA",
+			"brasileiros nos EUA",
+			"green card",
+			"visto americano",
+			"programa de imigração",
+			"consultoria imigração",
+		],
+		articleSection: "Imigração e Educação",
+		wordCount: 2000,
+		inLanguage: "pt-BR",
+	};
 
   return <JsonLd data={articleData} id="article-json-ld" />;
 };
@@ -54,14 +63,14 @@ export const LocalBusinessJsonLd = () => {
 		"@context": "https://schema.org",
 		"@type": "LocalBusiness",
 		"@id": `${
-			process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br"
+			process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com"
 		}/#business`,
-		name: "PandaMi",
+		name: "Ponte Américas",
 		description:
-			"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste grátis por 7 dias!",
-		url: process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br",
+			"O Ponte Américas vai te ensinar tudo sobre como viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.",
+		url: process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
 		telephone: "+55-11-99999-9999",
-		email: "contato@pandami.com.br",
+		email: "contato@ponteamericas.com",
 		address: {
 			"@type": "PostalAddress",
 			addressCountry: "BR",
@@ -106,34 +115,34 @@ export const WebSiteJsonLd = () => {
   const webSiteData = {
 		"@context": "https://schema.org",
 		"@type": "Website",
-		name: "PandaMi",
-		alternateName: "PandaMi Visagismo",
-		url: process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br",
+		name: "Ponte Américas",
+		alternateName: "Ponte Américas",
+		url: process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
 		description:
-			"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste grátis por 7 dias!",
+			"O Ponte Américas vai te ensinar tudo sobre como viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.",
 		inLanguage: "pt-BR",
-		copyrightYear: new Date().getFullYear(),
+		copyrightYear: 2025,
 		copyrightHolder: {
 			"@type": "Organization",
-			name: "PandaMi",
+			name: "Ponte Américas",
 		},
 		potentialAction: {
 			"@type": "SearchAction",
 			target: {
 				"@type": "EntryPoint",
 				urlTemplate: `${
-					process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br"
+					process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com"
 				}/search?q={search_term_string}`,
 			},
 			"query-input": "required name=search_term_string",
 		},
 		publisher: {
 			"@type": "Organization",
-			name: "PandaMi",
+			name: "Ponte Américas",
 			logo: {
 				"@type": "ImageObject",
 				url: `${
-					process.env.NEXT_PUBLIC_SITE_URL || "https://pandami.com.br"
+					process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com"
 				}/logo.svg`,
 			},
 		},

@@ -26,7 +26,7 @@ import { FAQ_DATA, SITE_CONFIG, DIDATIC_TOPICS } from "@/common/constants";
 export default function Home() {
 	const breadcrumbItems = [
 		{ name: "Início", url: SITE_CONFIG.url },
-		{ name: "Visagismo com IA", url: `${SITE_CONFIG.url}/#visagismo` }
+		{ name: "Programa Ponte Américas", url: `${SITE_CONFIG.url}/#programa` }
 	];
 
 	// Dados dos tópicos didáticos importados das constantes

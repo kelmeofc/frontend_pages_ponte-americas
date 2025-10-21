@@ -4,9 +4,9 @@
 
 // Site configuration
 export const SITE_CONFIG = {
-  name: 'PandaMi',
-  description: 'Visagismo com IA',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://pandami.com.br',
+  name: 'Ponte Américas',
+  description: 'Sua ponte para os Estados Unidos - Programa completo para brasileiros',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://ponteamericas.com',
   logo: '/logo.svg',
 } as const;
 
@@ -74,9 +74,9 @@ export const PRICING_CONFIG = {
 
 // SEO configuration
 export const SEO_CONFIG = {
-  defaultTitle: 'Visagismo com IA | Descubra sua melhor versão | PandaMi',
-  defaultDescription: 'Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste grátis por 7 dias!',
-  keywords: 'visagismo com IA, Pandami, IA Pandami',
+  defaultTitle: 'Ponte Américas | Sua ponte para os Estados Unidos',
+  defaultDescription: 'O Ponte Américas é sua ponte para os Estados Unidos. Um programa completo que te prepara para viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.',
+  keywords: 'ponte américas, imigração EUA, viver nos Estados Unidos, trabalhar nos EUA, brasileiros nos EUA, green card, visto americano',
   locale: 'pt_BR',
 } as const;
 

@@ -21,7 +21,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Primeiros passos",
 		],
 		ctaText: "SAIBA MAIS",
-		image: "/placeholder.svg",
+		image: "/images/video-placeholder-1.png",
 		name: "Cauã Cunha",
 	},
 	{
@@ -36,7 +36,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Suporte especializado",
 		],
 		ctaText: "COMPRAR AGORA",
-		image: "/placeholder.svg",
+		image: "/images/video-placeholder-1.png",
 		name: "Dr. Roberto Mendes",
 	},
 	{
@@ -51,7 +51,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Dicas de negociação",
 		],
 		ctaText: "COMPRAR AGORA",
-		image: "/placeholder.svg",
+		image: "/images/video-placeholder-1.png",
 		name: "Maria Fernanda Costa",
 	},
 	{
@@ -66,7 +66,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Abertura de empresa",
 		],
 		ctaText: "COMPRAR AGORA",
-		image: "/placeholder.svg",
+		image: "/images/video-placeholder-1.png",
 		name: "Cauã Cunha",
 	},
 	{
@@ -81,7 +81,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Bolsas de estudo",
 		],
 		ctaText: "COMPRAR AGORA",
-		image: "/placeholder.svg",
+		image: "/images/video-placeholder-1.png",
 		name: "Profa. Juliana Oliveira",
 	},
 	{
@@ -92,7 +92,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 		installments: "com 10% de desconto no PIX",
 		features: ["Planos de saúde", "Emergências médicas", "Medicamentos"],
 		ctaText: "COMPRAR AGORA",
-		image: "/placeholder.svg",
+		image: "/images/video-placeholder-1.png",
 		name: "Dr. Fernando Lima",
 	},
 	{
@@ -107,7 +107,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Transporte público",
 		],
 		ctaText: "COMPRAR AGORA",
-		image: "/placeholder.svg",
+		image: "/images/video-placeholder-1.png",
 		name: "João Pedro Almeida",
 	},
 	{
@@ -118,7 +118,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 		installments: "com 10% de desconto no PIX",
 		features: ["Conta bancária", "Declaração de imposto", "Investimentos"],
 		ctaText: "COMPRAR AGORA",
-		image: "/placeholder.svg",
+		image: "/images/video-placeholder-1.png",
 		name: "Luciana Rodrigues",
 	},
 ];

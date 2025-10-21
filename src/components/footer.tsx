@@ -24,7 +24,7 @@ export default function Footer() {
 							O Ponte Américas é sua ponte para os Estados Unidos. Um programa completo que te prepara para viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.
 						</p>
 						<p className="text-xs text-gray-500">
-							© {new Date().getFullYear()} Ponte Américas - Todos os direitos
+							© 2025 Ponte Américas - Todos os direitos
 							reservados.
 						</p>
 					</div>

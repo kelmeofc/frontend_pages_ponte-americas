@@ -31,6 +31,7 @@ export function PandaVideoPlayer({
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(muted)
   const [showMutedIndicator, setShowMutedIndicator] = useState(muted)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -63,29 +64,63 @@ export function PandaVideoPlayer({
     }
   }, [onPlay, onPause, onEnded])
 
-  const handleUnmute = () => {
-    const video = videoRef.current
-    if (!video) return
-
-    video.muted = false
-    setIsMuted(false)
-    setShowMutedIndicator(false)
-    
-    if (!isPlaying) {
-      video.play()
+  // Detecta mudanças no estado de fullscreen
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const isCurrentlyFullscreen = !!(
+        document.fullscreenElement ||
+        (document as any).webkitFullscreenElement ||
+        (document as any).mozFullScreenElement ||
+        (document as any).msFullscreenElement
+      )
+      setIsFullscreen(isCurrentlyFullscreen)
     }
-  }
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange)
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange)
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange)
+    document.addEventListener('MSFullscreenChange', handleFullscreenChange)
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange)
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange)
+      document.removeEventListener('mozfullscreenchange', handleFullscreenChange)
+      document.removeEventListener('MSFullscreenChange', handleFullscreenChange)
+    }
+  }, [])
+
 
   const handleVideoClick = () => {
     const video = videoRef.current
     if (!video) return
 
-    if (isMuted && showMutedIndicator) {
-      handleUnmute()
-    } else if (isPlaying) {
-      video.pause()
-    } else {
-      video.play()
+    // Sempre reinicia o vídeo e ativa o som
+    video.currentTime = 0
+    video.muted = false
+    setIsMuted(false)
+    setShowMutedIndicator(false)
+    video.play()
+
+    // Entra em tela cheia após reiniciar
+    requestFullscreen(video)
+  }
+
+  const requestFullscreen = (element: HTMLVideoElement) => {
+    try {
+      if (element.requestFullscreen) {
+        element.requestFullscreen()
+      } else if ((element as any).webkitRequestFullscreen) {
+        // Safari
+        (element as any).webkitRequestFullscreen()
+      } else if ((element as any).mozRequestFullScreen) {
+        // Firefox
+        (element as any).mozRequestFullScreen()
+      } else if ((element as any).msRequestFullscreen) {
+        // IE/Edge
+        (element as any).msRequestFullscreen()
+      }
+    } catch (error) {
+      console.warn('Fullscreen não suportado:', error)
     }
   }
 
@@ -95,7 +130,10 @@ export function PandaVideoPlayer({
         ref={videoRef}
         src={src}
         poster={poster}
-        className="w-full h-full object-cover cursor-pointer"
+        className="w-full h-full cursor-pointer video-player"
+        style={{
+          objectFit: isFullscreen ? 'contain' : 'cover'
+        }}
         autoPlay={autoPlay}
         loop={loop}
         muted={isMuted}
@@ -106,10 +144,10 @@ export function PandaVideoPlayer({
       />
 
       {/* Muted Indicator - Clone do Panda Video */}
-      {showMutedIndicator && (
+      {(showMutedIndicator || !isPlaying) && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/20">
            <button
-             onClick={handleUnmute}
+             onClick={handleVideoClick}
              className="panda-muted-indicator-impact-wrapper panda-muted-indicator-item animate-pulse hover:scale-105 transition-transform duration-300 flex flex-col items-center px-6 py-4 bg-black/60 rounded-2xl backdrop-blur-sm border border-white/20 group/button"
            >
             {/* Texto Superior */}
@@ -267,16 +305,6 @@ export function PandaVideoPlayer({
         </div>
       )}
 
-      {/* Play/Pause Overlay (quando não mutado) */}
-      {!showMutedIndicator && !isPlaying && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
-          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:bg-white group-hover:scale-110 transition-all duration-300 shadow-lg">
-            <svg className="w-8 h-8 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

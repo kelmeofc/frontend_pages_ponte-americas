@@ -5,12 +5,8 @@ import Link from "next/link";
 import { Play } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PrimaryButton } from "@/components/primary-button";
-
-interface IDidaticTopic {
-  id: string;
-  label: string;
-  videoUrl: string;
-}
+import { PandaVideoPlayer } from "@/components/ui/panda-video-player";
+import { IDidaticTopic } from "@/common/constants/didatic-topics";
 
 interface IDidaticSectionProps {
   topics: readonly IDidaticTopic[];
@@ -165,30 +161,22 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
               {/* Video Content */}
               <div className="mt-8 space-y-8">
                 <div className="flex flex-col items-center">
-                  <div className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden bg-black">
+                  <div className="w-full max-w-4xl">
                     {activeTopicData?.videoUrl ? (
-                      <video
+                      <PandaVideoPlayer
                         key={activeTopicData.id}
-                        className="w-full h-full object-cover"
-                        controls
-                        preload="metadata"
-                        poster="/placeholder.svg"
-                        onClick={handleVideoInteraction}
+                        src={activeTopicData.videoUrl}
+                        poster={activeTopicData.placeholder}
+                        className="w-full"
+                        autoPlay={false}
+                        muted={true}
+                        controls={true}
                         onPlay={handleVideoInteraction}
                         onPause={handleVideoInteraction}
-                        onSeeking={handleVideoInteraction}
-                        onSeeked={handleVideoInteraction}
-                        onVolumeChange={handleVideoInteraction}
-                        playsInline
-                        disablePictureInPicture
-                      >
-                        <source src={activeTopicData.videoUrl} type="video/mp4" />
-                        <p className="text-white text-center p-4">
-                          Seu navegador não suporta o elemento de vídeo.
-                        </p>
-                      </video>
+                        onEnded={handleVideoInteraction}
+                      />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full aspect-video rounded-2xl bg-black flex items-center justify-center">
                         <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                           <Play className="w-6 h-6 text-white" />
                         </div>

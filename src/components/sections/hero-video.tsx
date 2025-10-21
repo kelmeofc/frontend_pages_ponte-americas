@@ -14,12 +14,13 @@ export function HeroVideo({ className, onPlay, onPause, onEnded }: HeroVideoProp
   return (
     <div className="flex flex-col items-center">
       <PandaVideoPlayer
-        src="/videos/hero-demo.mp4"
+        src="/videos/placeholder.mp4"
         poster="/images/video-placeholder-1.png"
         className={cn("max-w-4xl", className)}
-        autoPlay={false}
+        autoPlay={true}
         muted={true}
-        controls={true}
+        controls={false}
+      
         onPlay={onPlay}
         onPause={onPause}
         onEnded={onEnded}
