@@ -1,9 +1,7 @@
 'use server'
 
-import { PrismaClient } from '@/generated/prisma';
+import { prisma } from '@/common/lib/prisma';
 import { ICreateLead } from '@/types/lead';
-
-const prisma = new PrismaClient();
 
 export async function createLeadAction(leadData: ICreateLead) {
   try {
@@ -28,7 +26,5 @@ export async function createLeadAction(leadData: ICreateLead) {
   } catch (error) {
     console.error('Erro ao criar lead:', error);
     return { success: false, error: 'Erro ao salvar lead' };
-  } finally {
-    await prisma.$disconnect();
   }
 }
