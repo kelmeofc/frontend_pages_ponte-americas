@@ -47,7 +47,7 @@ const ConsentScripts = memo(() => {
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             // Define o consentimento como verdadeiro já que este script só é carregado com consentimento explícito
             c[a]("consent", true);
-          })(window, document, "clarity", "script", "tctj766hfq");
+          })(window, document, "clarity", "script", "ttnlk8l8dt");
         `}
 			</Script>
 

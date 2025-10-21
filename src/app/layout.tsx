@@ -127,7 +127,7 @@ export default function RootLayout({
 				</Script>
 				{/* GA sempre carregado para pings essenciais (consent negado por padrão) */}
 				<Script
-					src="https://www.googletagmanager.com/gtag/js?id=G-FPJQ0WXH4J"
+					src="https://www.googletagmanager.com/gtag/js?id=G-TGLSCTDKDL"
 					strategy="afterInteractive"
 				/>
 				<Script id="ga-init" strategy="afterInteractive">
@@ -135,7 +135,7 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);} 
               gtag('js', new Date());
-              gtag('config', 'G-FPJQ0WXH4J');
+              gtag('config', 'G-TGLSCTDKDL');
             `}
 				</Script>
 				{/* Scripts dependentes de consentimento */}
