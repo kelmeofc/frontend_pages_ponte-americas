@@ -69,7 +69,7 @@ export const LocalBusinessJsonLd = () => {
 		description:
 			"O Ponte Américas vai te ensinar tudo sobre como viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.",
 		url: process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
-		telephone: "+55-11-99999-9999",
+		telephone: "+1-321-429-6742",
 		email: "contato@ponteamericas.com",
 		address: {
 			"@type": "PostalAddress",

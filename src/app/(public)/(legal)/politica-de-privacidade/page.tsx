@@ -23,7 +23,7 @@ export default function Page() {
                     <a href="#seguranca-dos-dados" className="text-primary hover:underline">7. Segurança dos Dados</a>
                     <a href="#retencao-e-exclusao-de-dados" className="text-primary hover:underline">8. Retenção e Exclusão de Dados</a>
                     <a href="#direitos-dos-titulares" className="text-primary hover:underline">9. Direitos dos Titulares</a>
-                    <a href="#uso-de-inteligencia-artificial" className="text-primary hover:underline">10. Uso de Inteligência Artificial</a>
+                    <a href="#conteudo-educacional" className="text-primary hover:underline">10. Conteúdo Educacional</a>
                     <a href="#dados-de-menores" className="text-primary hover:underline">11. Dados de Menores</a>
                     <a href="#cookies-e-tecnologias" className="text-primary hover:underline">12. Cookies e Tecnologias</a>
                     <a href="#comunicacoes" className="text-primary hover:underline">13. Comunicações</a>
@@ -39,141 +39,151 @@ export default function Page() {
 
             <section id="introducao">
                 <h2 className="text-2xl font-bold mb-4">1. INTRODUÇÃO</h2>
-                <p className="mb-4">A <strong>PandaHan</strong> (CNPJ: 60.348.853/0001-40), com sede em Florianópolis, Santa Catarina ("nós", "nosso" ou "Empresa"), opera o aplicativo web <strong>Pandami</strong> (o "Serviço"), uma plataforma inovadora de gestão e visagismo para barbearias que utiliza inteligência artificial para personalização de cortes de cabelo.</p>
+                <p className="mb-4">O <strong>Ponte Américas</strong> ("nós", "nosso" ou "Programa"), um programa educacional abrangente baseado nos Estados Unidos, é dedicado a orientar brasileiros em sua jornada para viver, trabalhar e prosperar nos Estados Unidos.</p>
                 <p className="mb-4">Esta Política de Privacidade informa sobre nossas práticas de coleta, uso, armazenamento e proteção de dados pessoais, em conformidade com:</p>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
                     <li>Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018) do Brasil</li>
                     <li>Regulamento Geral sobre a Proteção de Dados (GDPR - UE 2016/679)</li>
                     <li>Marco Civil da Internet (Lei nº 12.965/2014)</li>
+                    <li>Leis americanas aplicáveis de proteção de dados</li>
                 </ul>
-                <p className="mb-4"><strong>IMPORTANTE:</strong> Nosso Serviço está em fase Beta/MVP, com melhorias contínuas sendo implementadas, incluindo recursos de segurança e privacidade.</p>
+                <p className="mb-4"><strong>IMPORTANTE:</strong> Nosso programa está em constante evolução, com melhorias contínuas sendo implementadas, incluindo recursos de segurança e privacidade.</p>
             </section>
 
             <section id="definicoes-importantes">
                 <h2 className="text-2xl font-bold mb-4">2. DEFINIÇÕES IMPORTANTES</h2>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                    <li><strong>"Visagismo"</strong>: Técnica de análise facial para harmonização estética de cortes</li>
-                    <li><strong>"Dados Biométricos"</strong>: Fotografias faciais usadas para análise e simulação</li>
-                    <li><strong>"IA"</strong>: Inteligência Artificial que processa imagens e gera recomendações</li>
-                    <li><strong>"Manipulação de Imagem"</strong>: Tecnologia Flux Azure para simular cortes</li>
-                    <li><strong>"Titular"</strong>: Pessoa natural a quem se referem os dados (cliente final)</li>
-                    <li><strong>"Controlador"</strong>: PandaHan e/ou barbearia que decide sobre o tratamento</li>
-                    <li><strong>"Operador"</strong>: Barbeiro que realiza o tratamento dos dados</li>
+                    <li><strong>"Programa Educacional"</strong>: Conjunto de cursos, materiais e orientações sobre imigração para os EUA</li>
+                    <li><strong>"Participante"</strong>: Pessoa inscrita no programa educacional</li>
+                    <li><strong>"Conteúdo Educacional"</strong>: Materiais didáticos, vídeos, PDFs, webinars e orientações</li>
+                    <li><strong>"Plataforma"</strong>: Site e ambiente virtual de aprendizagem do Ponte Américas</li>
+                    <li><strong>"Titular"</strong>: Pessoa natural a quem se referem os dados pessoais</li>
+                    <li><strong>"Dados Pessoais"</strong>: Informações relacionadas a pessoa natural identificada ou identificável</li>
+                    <li><strong>"Mentoria"</strong>: Orientação personalizada sobre processos de imigração</li>
+                    <li><strong>"Comunidade"</strong>: Ambiente de interação entre participantes do programa</li>
                 </ul>
             </section>
 
             <section id="dados-que-coletamos">
                 <h2 className="text-2xl font-bold mb-4">3. DADOS QUE COLETAMOS</h2>
 
-                <h3 className="text-xl font-semibold mb-3">3.1 Dados dos Estabelecimentos (Barbearias)</h3>
-                <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Razão social e nome fantasia</li>
-                    <li>CNPJ/CPF do responsável</li>
-                    <li>Endereço comercial completo</li>
-                    <li>Telefone e email corporativo</li>
-                    <li>Dados bancários para pagamento da assinatura</li>
-                    <li>Plano contratado e histórico de pagamentos</li>
-                </ul>
-
-                <h3 className="text-xl font-semibold mb-3">3.2 Dados dos Profissionais (Barbeiros)</h3>
+                <h3 className="text-xl font-semibold mb-3">3.1 Dados de Cadastro e Identificação</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
                     <li>Nome completo</li>
-                    <li>CPF (quando aplicável)</li>
-                    <li>Email e telefone celular</li>
-                    <li>Credenciais de acesso (senha criptografada com hash)</li>
-                    <li>Logs de acesso e atividades</li>
-                    <li>Histórico de atendimentos realizados</li>
+                    <li>CPF (quando aplicável para brasileiros)</li>
+                    <li>Data de nascimento</li>
+                    <li>Endereço de email</li>
+                    <li>Número de telefone/WhatsApp</li>
+                    <li>Endereço residencial atual</li>
+                    <li>Nacionalidade e documentos de identificação</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3">3.3 Dados dos Clientes Finais</h3>
-
-                <h4 className="text-lg font-medium mb-2">Dados Básicos (Obrigatórios)</h4>
+                <h3 className="text-xl font-semibold mb-3">3.2 Dados de Perfil Educacional</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Nome completo</li>
-                    <li>Telefone celular (WhatsApp)</li>
-                    <li>Email (opcional)</li>
+                    <li>Nível de escolaridade</li>
+                    <li>Área de formação e experiência profissional</li>
+                    <li>Proficiência em inglês</li>
+                    <li>Objetivos de imigração (trabalho, estudo, investimento)</li>
+                    <li>Situação familiar e dependentes</li>
+                    <li>Experiência prévia com processos de imigração</li>
                 </ul>
 
-                <h4 className="text-lg font-medium mb-2">Dados de Atendimento</h4>
+                <h3 className="text-xl font-semibold mb-3">3.3 Dados de Utilização da Plataforma</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li><strong>Notas Personalizadas</strong>: Preferências pessoais (ex: "gosta de futebol", "cliente sério")</li>
-                    <li><strong>Histórico de Visitas</strong>: Datas, tipos de corte (1º, 2º, 3º corte, etc.)</li>
-                    <li><strong>Evolução do Corte</strong>: Anotações sobre mudanças e adaptações</li>
+                    <li>Progresso nos cursos e módulos</li>
+                    <li>Tempo de estudo e frequência de acesso</li>
+                    <li>Materiais baixados e visualizados</li>
+                    <li>Participação em webinars e eventos</li>
+                    <li>Interações na comunidade (posts, comentários)</li>
+                    <li>Avaliações e feedback sobre o conteúdo</li>
                 </ul>
 
-                <h4 className="text-lg font-medium mb-2">Dados de Visagismo (Opção 1 - Formulário Completo)</h4>
+                <h3 className="text-xl font-semibold mb-3">3.4 Dados de Mentoria e Orientação</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Respostas ao questionário de visagismo (múltipla escolha)</li>
-                    <li>Formato do rosto identificado</li>
-                    <li>Tipo de cabelo e características</li>
-                    <li>Preferências estéticas</li>
-                    <li>Estilo de vida e profissão</li>
+                    <li>Questionários de perfil para mentoria</li>
+                    <li>Situação específica de imigração</li>
+                    <li>Documentos compartilhados (quando autorizado)</li>
+                    <li>Anotações de sessões de mentoria</li>
+                    <li>Planos de ação personalizados</li>
                 </ul>
 
-                <h4 className="text-lg font-medium mb-2">Dados de Atendimento Simplificado (Opção 2 - Sem Visagismo)</h4>
+                <h3 className="text-xl font-semibold mb-3">3.5 Dados de Pagamento e Financeiros</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Descrição do corte desejado (texto livre do barbeiro)</li>
-                    <li>Preferências diretas do cliente</li>
+                    <li>Informações de cartão de crédito (tokenizadas)</li>
+                    <li>Histórico de transações e pagamentos</li>
+                    <li>Plano contratado e renovações</li>
+                    <li>Dados para emissão de recibos e notas fiscais</li>
                 </ul>
 
-                <h4 className="text-lg font-medium mb-2">Dados Biométricos Sensíveis</h4>
+                <h3 className="text-xl font-semibold mb-3">3.6 Dados Técnicos e de Navegação</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                    <li><strong>Fotografias Faciais</strong>: Imagem original do cliente</li>
-                    <li><strong>Imagens Processadas</strong>: Simulações geradas por IA</li>
-                    <li><strong>Metadados</strong>: Data, hora, dispositivo usado para captura</li>
+                    <li>Endereço IP e localização geográfica</li>
+                    <li>Tipo de dispositivo e sistema operacional</li>
+                    <li>Navegador utilizado e suas configurações</li>
+                    <li>Páginas visitadas e tempo de permanência</li>
+                    <li>Cookies e identificadores únicos</li>
+                    <li>Logs de acesso e atividades na plataforma</li>
                 </ul>
             </section>
 
             <section id="bases-legais-e-finalidades">
                 <h2 className="text-2xl font-bold mb-4">4. BASES LEGAIS E FINALIDADES</h2>
 
-                <h3 className="text-xl font-semibold mb-3">4.1 Consentimento (Art. 7º, I e Art. 11º, I da LGPD)</h3>
-                <p className="mb-2"><strong>Dados:</strong> Fotografias faciais e dados biométricos</p>
-                <p className="mb-2"><strong>Finalidade:</strong> Análise de visagismo e geração de simulações</p>
-                <p className="mb-4"><strong>Como obtemos:</strong> Termo de consentimento específico no primeiro atendimento</p>
+                <h3 className="text-xl font-semibold mb-3">4.1 Consentimento (Art. 7º, I da LGPD)</h3>
+                <p className="mb-2"><strong>Dados:</strong> Informações sensíveis, participação na comunidade, dados opcionais</p>
+                <p className="mb-2"><strong>Finalidade:</strong> Personalização da experiência educacional e interação social</p>
+                <p className="mb-4"><strong>Como obtemos:</strong> Termo de consentimento específico no cadastro e durante o uso</p>
 
                 <h3 className="text-xl font-semibold mb-3">4.2 Execução de Contrato (Art. 7º, V da LGPD)</h3>
-                <p className="mb-2"><strong>Dados:</strong> Informações de contato, histórico de atendimentos</p>
-                <p className="mb-4"><strong>Finalidade:</strong> Prestação do serviço de gestão e agendamento</p>
+                <p className="mb-2"><strong>Dados:</strong> Informações de cadastro, progresso nos cursos, dados de pagamento</p>
+                <p className="mb-4"><strong>Finalidade:</strong> Prestação dos serviços educacionais contratados</p>
 
                 <h3 className="text-xl font-semibold mb-3">4.3 Legítimo Interesse (Art. 7º, IX da LGPD)</h3>
-                <p className="mb-2"><strong>Dados:</strong> Notas de preferências, evolução do corte</p>
-                <p className="mb-4"><strong>Finalidade:</strong> Melhorar qualidade do atendimento e fidelização</p>
+                <p className="mb-2"><strong>Dados:</strong> Dados de uso, preferências de aprendizado, feedback</p>
+                <p className="mb-4"><strong>Finalidade:</strong> Melhoria dos serviços educacionais e prevenção de fraudes</p>
 
                 <h3 className="text-xl font-semibold mb-3">4.4 Cumprimento de Obrigação Legal (Art. 7º, II da LGPD)</h3>
-                <p className="mb-2"><strong>Dados:</strong> Dados fiscais e financeiros</p>
-                <p className="mb-6"><strong>Finalidade:</strong> Cumprimento de obrigações tributárias</p>
+                <p className="mb-2"><strong>Dados:</strong> Dados fiscais e financeiros, registros de acesso</p>
+                <p className="mb-6"><strong>Finalidade:</strong> Cumprimento de obrigações tributárias e regulamentares</p>
             </section>
 
             <section id="como-usamos-os-dados">
                 <h2 className="text-2xl font-bold mb-4">5. COMO USAMOS OS DADOS</h2>
 
-                <h3 className="text-xl font-semibold mb-3">5.1 Processo de Visagismo com IA</h3>
-                <ol className="list-decimal pl-6 mb-4 space-y-2">
-                    <li><strong>Captura</strong>: Barbeiro fotografa o cliente com celular</li>
-                    <li><strong>Upload</strong>: Foto é enviada ao servidor seguro</li>
-                    <li><strong>Análise</strong>: IA processa respostas do formulário</li>
-                    <li><strong>Geração de Relatório</strong>: Sistema cria recomendações personalizadas</li>
-                    <li><strong>Simulação</strong>: Flux Azure gera imagem com novo corte</li>
-                    <li><strong>Armazenamento</strong>: Dados salvos no perfil do cliente</li>
-                </ol>
+                <h3 className="text-xl font-semibold mb-3">5.1 Prestação dos Serviços Educacionais</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Criar e manter sua conta na plataforma</li>
+                    <li>Fornecer acesso aos cursos e materiais educacionais</li>
+                    <li>Acompanhar seu progresso e desempenho</li>
+                    <li>Personalizar conteúdo baseado em seu perfil</li>
+                    <li>Facilitar participação em webinars e eventos</li>
+                    <li>Conectar com mentores e outros participantes</li>
+                </ul>
 
-                <h3 className="text-xl font-semibold mb-3">5.2 Processo Simplificado (Sem Visagismo)</h3>
-                <ol className="list-decimal pl-6 mb-4 space-y-2">
-                    <li><strong>Consulta</strong>: Barbeiro pergunta preferência diretamente</li>
-                    <li><strong>Registro</strong>: Descrição do corte no sistema</li>
-                    <li><strong>Foto</strong>: Captura da imagem atual</li>
-                    <li><strong>Processamento</strong>: IA converte descrição em simulação</li>
-                    <li><strong>Resultado</strong>: Imagem com corte sugerido</li>
-                </ol>
+                <h3 className="text-xl font-semibold mb-3">5.2 Comunicação e Suporte</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Enviar atualizações sobre o programa</li>
+                    <li>Notificar sobre novos conteúdos disponíveis</li>
+                    <li>Informar sobre mudanças na legislação americana</li>
+                    <li>Fornecer suporte técnico e educacional</li>
+                    <li>Responder dúvidas e solicitações</li>
+                </ul>
 
-                <h3 className="text-xl font-semibold mb-3">5.3 Usos Adicionais</h3>
+                <h3 className="text-xl font-semibold mb-3">5.3 Melhoria e Desenvolvimento</h3>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Analisar padrões de uso para melhorar a plataforma</li>
+                    <li>Desenvolver novos conteúdos educacionais</li>
+                    <li>Personalizar recomendações de estudo</li>
+                    <li>Identificar áreas de interesse dos participantes</li>
+                    <li>Medir eficácia dos materiais educacionais</li>
+                </ul>
+
+                <h3 className="text-xl font-semibold mb-3">5.4 Segurança e Prevenção</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                    <li>Envio de relatórios via WhatsApp/email (com consentimento)</li>
-                    <li>Lembretes de agendamento</li>
-                    <li>Análise de satisfação e melhorias</li>
-                    <li>Treinamento de IA (dados anonimizados)</li>
-                    <li>Suporte técnico e resolução de problemas</li>
+                    <li>Detectar e prevenir fraudes</li>
+                    <li>Proteger a integridade da plataforma</li>
+                    <li>Monitorar atividades suspeitas</li>
+                    <li>Cumprir requisitos legais e regulamentares</li>
                 </ul>
             </section>
 
@@ -182,62 +192,75 @@ export default function Page() {
 
                 <h3 className="text-xl font-semibold mb-3">6.1 Com Quem Compartilhamos</h3>
 
-                <h4 className="text-lg font-medium mb-2">Parceiros Tecnológicos Essenciais</h4>
+                <h4 className="text-lg font-medium mb-2">Prestadores de Serviços Essenciais</h4>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li><strong>Microsoft Azure</strong>: Hospedagem e processamento de IA</li>
-                    <li><strong>Flux</strong>: Manipulação de imagens</li>
-                    <li><strong>Processador de Pagamentos</strong>: Stripe Brasil</li>
-                    <li><strong>WhatsApp Business API</strong>: Envio de mensagens (quando autorizado)</li>
+                    <li><strong>Hospedagem</strong>: Provedores de nuvem para armazenamento seguro</li>
+                    <li><strong>Pagamentos</strong>: Processadores de pagamento (Stripe, PayPal)</li>
+                    <li><strong>Comunicação</strong>: Serviços de email e WhatsApp Business</li>
+                    <li><strong>Analytics</strong>: Ferramentas de análise para melhoria do serviço</li>
                 </ul>
 
-                <h4 className="text-lg font-medium mb-2">Dentro da Plataforma</h4>
+                <h4 className="text-lg font-medium mb-2">Mentores e Especialistas</h4>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li><strong>Entre Barbeiros do Mesmo Estabelecimento</strong>: Para continuidade do atendimento</li>
-                    <li><strong>Do Barbeiro para o Cliente</strong>: Relatórios e simulações</li>
+                    <li>Informações necessárias para orientação personalizada</li>
+                    <li>Dados compartilhados apenas com consentimento específico</li>
+                    <li>Acordos de confidencialidade com todos os mentores</li>
+                </ul>
+
+                <h4 className="text-lg font-medium mb-2">Comunidade do Programa</h4>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li>Informações de perfil público escolhidas por você</li>
+                    <li>Conteúdo compartilhado voluntariamente em fóruns</li>
+                    <li>Progresso e conquistas (se habilitado)</li>
                 </ul>
 
                 <h3 className="text-xl font-semibold mb-3">6.2 Não Compartilhamos</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
                     <li>Nunca vendemos dados pessoais</li>
-                    <li>Não compartilhamos com empresas de marketing</li>
-                    <li>Não criamos perfis para publicidade</li>
+                    <li>Não compartilhamos com empresas de marketing externas</li>
+                    <li>Não criamos perfis para publicidade direcionada</li>
+                    <li>Não compartilhamos dados sensíveis sem consentimento explícito</li>
                 </ul>
 
                 <h3 className="text-xl font-semibold mb-3">6.3 Transferência Internacional</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                    <li>Dados podem ser processados em servidores Microsoft Azure globais</li>
-                    <li>Garantimos cláusulas contratuais padrão para proteção</li>
-                    <li>Conformidade com requisitos LGPD/GDPR para transferências</li>
+                    <li>Dados podem ser processados nos EUA e outros países</li>
+                    <li>Garantimos adequado nível de proteção</li>
+                    <li>Cláusulas contratuais padrão para transferências</li>
+                    <li>Conformidade com LGPD/GDPR para transferências internacionais</li>
                 </ul>
             </section>
 
             <section id="seguranca-dos-dados">
                 <h2 className="text-2xl font-bold mb-4">7. SEGURANÇA DOS DADOS</h2>
 
-                <h3 className="text-xl font-semibold mb-3">7.1 Medidas Técnicas (Fase MVP/Beta)</h3>
+                <h3 className="text-xl font-semibold mb-3">7.1 Medidas Técnicas</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
                     <li><strong>Criptografia TLS 1.3</strong> para dados em trânsito</li>
                     <li><strong>Criptografia AES-256</strong> para dados em repouso</li>
-                    <li><strong>Autenticação</strong> com hash bcrypt para senhas</li>
-                    <li><strong>Firewall</strong> e proteção contra DDoS</li>
-                    <li><strong>Backups</strong> diários automatizados</li>
-                    <li><strong>Logs de auditoria</strong> para rastreamento</li>
+                    <li><strong>Autenticação multifator</strong> disponível</li>
+                    <li><strong>Hashing seguro</strong> para senhas (bcrypt)</li>
+                    <li><strong>Firewall</strong> e proteção DDoS</li>
+                    <li><strong>Backups</strong> regulares e seguros</li>
+                    <li><strong>Monitoramento</strong> 24/7 de segurança</li>
                 </ul>
 
                 <h3 className="text-xl font-semibold mb-3">7.2 Medidas Organizacionais</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Acesso restrito por perfis (barbeiro acessa só seus clientes)</li>
-                    <li>Treinamento de colaboradores</li>
+                    <li>Controle de acesso baseado em funções</li>
+                    <li>Treinamento regular de equipe em segurança</li>
                     <li>Acordos de confidencialidade</li>
-                    <li>Política de senha forte obrigatória</li>
-                    <li>Revisão periódica de acessos</li>
+                    <li>Políticas rigorosas de senhas</li>
+                    <li>Auditoria regular de acessos</li>
+                    <li>Plano de resposta a incidentes</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3">7.3 Limitações da Fase Beta</h3>
+                <h3 className="text-xl font-semibold mb-3">7.3 Proteção Contínua</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                    <li>Sistema em aperfeiçoamento contínuo</li>
-                    <li>Possíveis ajustes de segurança durante desenvolvimento</li>
-                    <li>Monitoramento ativo para identificar melhorias</li>
+                    <li>Atualizações regulares de segurança</li>
+                    <li>Testes de penetração periódicos</li>
+                    <li>Monitoramento proativo de ameaças</li>
+                    <li>Revisões de segurança com fornecedores</li>
                 </ul>
             </section>
 
@@ -256,19 +279,19 @@ export default function Page() {
                         </thead>
                         <tbody>
                             <tr>
-                                <td className="border border-gray-300 px-4 py-2">Dados básicos do cliente</td>
-                                <td className="border border-gray-300 px-4 py-2">Enquanto assinatura ativa</td>
+                                <td className="border border-gray-300 px-4 py-2">Dados de cadastro</td>
+                                <td className="border border-gray-300 px-4 py-2">Durante participação ativa</td>
                                 <td className="border border-gray-300 px-4 py-2">2 anos</td>
                             </tr>
                             <tr>
-                                <td className="border border-gray-300 px-4 py-2">Fotografias/Simulações</td>
-                                <td className="border border-gray-300 px-4 py-2">Enquanto assinatura ativa</td>
-                                <td className="border border-gray-300 px-4 py-2">60 dias</td>
+                                <td className="border border-gray-300 px-4 py-2">Progresso educacional</td>
+                                <td className="border border-gray-300 px-4 py-2">Durante participação ativa</td>
+                                <td className="border border-gray-300 px-4 py-2">3 anos</td>
                             </tr>
                             <tr>
-                                <td className="border border-gray-300 px-4 py-2">Histórico de cortes</td>
-                                <td className="border border-gray-300 px-4 py-2">Enquanto assinatura ativa</td>
-                                <td className="border border-gray-300 px-4 py-2">2 anos</td>
+                                <td className="border border-gray-300 px-4 py-2">Dados de mentoria</td>
+                                <td className="border border-gray-300 px-4 py-2">Durante participação ativa</td>
+                                <td className="border border-gray-300 px-4 py-2">1 ano</td>
                             </tr>
                             <tr>
                                 <td className="border border-gray-300 px-4 py-2">Dados financeiros</td>
@@ -280,15 +303,21 @@ export default function Page() {
                                 <td className="border border-gray-300 px-4 py-2">6 meses</td>
                                 <td className="border border-gray-300 px-4 py-2">Exclusão automática</td>
                             </tr>
+                            <tr>
+                                <td className="border border-gray-300 px-4 py-2">Conteúdo da comunidade</td>
+                                <td className="border border-gray-300 px-4 py-2">Durante participação ativa</td>
+                                <td className="border border-gray-300 px-4 py-2">30 dias</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <h3 className="text-xl font-semibold mb-3">8.2 Exclusão por Solicitação</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                    <li>Cliente pode solicitar exclusão imediata de fotos</li>
-                    <li>Prazo de atendimento: até 15 dias</li>
-                    <li>Dados obrigatórios por lei mantidos conforme prazo legal</li>
+                    <li>Você pode solicitar exclusão de dados a qualquer momento</li>
+                    <li>Prazo de atendimento: até 15 dias úteis</li>
+                    <li>Dados exigidos por lei mantidos conforme prazo legal</li>
+                    <li>Dados anonimizados podem ser mantidos para estatísticas</li>
                 </ul>
             </section>
 
@@ -299,69 +328,64 @@ export default function Page() {
                 <p className="mb-3">Você tem direito a:</p>
                 <ol className="list-decimal pl-6 mb-4 space-y-2">
                     <li><strong>Confirmação e Acesso</strong>: Saber se tratamos seus dados e acessá-los</li>
-                    <li><strong>Correção</strong>: Corrigir dados incompletos ou desatualizados</li>
-                    <li><strong>Anonimização/Bloqueio/Eliminação</strong>: De dados desnecessários</li>
-                    <li><strong>Portabilidade</strong>: Receber seus dados em formato estruturado (JSON/CSV)</li>
-                    <li><strong>Informação</strong>: Saber com quem compartilhamos seus dados</li>
+                    <li><strong>Correção</strong>: Corrigir dados incompletos, inexatos ou desatualizados</li>
+                    <li><strong>Anonimização/Bloqueio/Eliminação</strong>: De dados desnecessários ou excessivos</li>
+                    <li><strong>Portabilidade</strong>: Receber seus dados em formato estruturado</li>
+                    <li><strong>Informação</strong>: Sobre compartilhamento de dados com terceiros</li>
                     <li><strong>Revogação</strong>: Retirar consentimento a qualquer momento</li>
                     <li><strong>Oposição</strong>: Opor-se a tratamentos específicos</li>
-                    <li><strong>Revisão</strong>: De decisões automatizadas da IA</li>
+                    <li><strong>Revisão</strong>: De decisões automatizadas</li>
                 </ol>
 
                 <h3 className="text-xl font-semibold mb-3">9.2 Como Exercer Seus Direitos</h3>
-                <p className="mb-2"><strong>Via App:</strong></p>
-                <p className="mb-2">Menu &gt; Configurações &gt; Privacidade &gt; Meus Dados</p>
+                <p className="mb-2"><strong>Via Plataforma:</strong></p>
+                <p className="mb-2">Configurações → Privacidade → Meus Dados</p>
                 <p className="mb-2"><strong>Por Email:</strong></p>
-                <p className="mb-2">privacidade@pandami.com.br</p>
-                <p className="mb-2"><strong>Resposta em até:</strong></p>
+                <p className="mb-2">privacidade@ponteamericas.com</p>
+                <p className="mb-2"><strong>WhatsApp:</strong></p>
+                <p className="mb-2">+1 321 429-6742</p>
+                <p className="mb-2"><strong>Prazo de Resposta:</strong></p>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>15 dias (LGPD)</li>
+                    <li>15 dias úteis (LGPD)</li>
                     <li>30 dias (GDPR)</li>
+                    <li>Podendo ser prorrogado por mais 15 dias</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3">9.3 Sem Prejuízo do Serviço</h3>
+                <h3 className="text-xl font-semibold mb-3">9.3 Garantias</h3>
                 <p className="mb-3">Exercer seus direitos nunca resultará em:</p>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
                     <li>Cobrança de taxas (primeira solicitação gratuita)</li>
-                    <li>Discriminação ou prejuízo no atendimento</li>
-                    <li>Cancelamento não solicitado</li>
+                    <li>Discriminação ou tratamento diferenciado</li>
+                    <li>Cancelamento não solicitado do programa</li>
+                    <li>Perda de acesso a conteúdos já pagos</li>
                 </ul>
             </section>
 
-            <section id="uso-de-inteligencia-artificial">
-                <h2 className="text-2xl font-bold mb-4">10. USO DE INTELIGÊNCIA ARTIFICIAL</h2>
+            <section id="conteudo-educacional">
+                <h2 className="text-2xl font-bold mb-4">10. CONTEÚDO EDUCACIONAL</h2>
 
-                <h3 className="text-xl font-semibold mb-3">10.1 Como a IA Processa Seus Dados</h3>
-                <p className="mb-2"><strong>Análise Facial:</strong></p>
+                <h3 className="text-xl font-semibold mb-3">10.1 Personalização do Conteúdo</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Identifica formato do rosto</li>
-                    <li>Detecta características (não identifica pessoa)</li>
-                    <li>Sugere cortes harmônicos</li>
-                    <li>Não faz reconhecimento facial para identificação</li>
+                    <li>Utilizamos dados de perfil para personalizar recomendações</li>
+                    <li>Análise de progresso para sugerir próximos passos</li>
+                    <li>Adaptação do conteúdo baseada em objetivos de imigração</li>
+                    <li>Recomendações baseadas em seu nível de conhecimento</li>
                 </ul>
 
-                <p className="mb-2"><strong>Geração de Simulações:</strong></p>
+                <h3 className="text-xl font-semibold mb-3">10.2 Dados de Aprendizado</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Usa Flux Azure para manipular apenas área do cabelo</li>
-                    <li>Mantém características faciais originais</li>
-                    <li>Não altera outras partes da imagem</li>
-                    <li>Processamento em tempo real, sem armazenamento intermediário</li>
+                    <li>Tempo gasto em cada módulo</li>
+                    <li>Materiais mais acessados</li>
+                    <li>Padrões de estudo e preferências</li>
+                    <li>Avaliações e feedback sobre conteúdo</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3">10.2 Transparência Algorítmica</h3>
-                <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>IA faz sugestões, decisão final é sempre humana</li>
-                    <li>Barbeiro pode ignorar ou adaptar sugestões</li>
-                    <li>Cliente pode recusar uso de IA a qualquer momento</li>
-                    <li>Explicamos a lógica das recomendações no relatório</li>
-                </ul>
-
-                <h3 className="text-xl font-semibold mb-3">10.3 Limitações e Avisos</h3>
+                <h3 className="text-xl font-semibold mb-3">10.3 Melhoria Contínua</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                    <li>Simulações são aproximações artísticas</li>
-                    <li>Resultado real pode variar</li>
-                    <li>IA em constante aprendizado e melhoria</li>
-                    <li>Feedback ajuda a melhorar precisão</li>
+                    <li>Dados agregados e anonimizados para melhoria do programa</li>
+                    <li>Identificação de lacunas no conteúdo educacional</li>
+                    <li>Desenvolvimento de novos materiais baseados em necessidades</li>
+                    <li>Otimização da experiência de aprendizado</li>
                 </ul>
             </section>
 
@@ -370,16 +394,18 @@ export default function Page() {
 
                 <h3 className="text-xl font-semibold mb-3">11.1 Política para Menores</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li><strong>Menores de 16 anos</strong>: Necessário consentimento dos pais/responsáveis</li>
-                    <li><strong>16 a 18 anos</strong>: Consentimento do menor + ciência dos pais</li>
-                    <li><strong>Identificação</strong>: Barbeiro deve perguntar idade quando aplicável</li>
+                    <li><strong>Menores de 16 anos</strong>: Consentimento expresso dos pais/responsáveis obrigatório</li>
+                    <li><strong>16 a 18 anos</strong>: Consentimento do menor com ciência dos pais/responsáveis</li>
+                    <li><strong>Verificação</strong>: Processo de verificação de idade no cadastro</li>
+                    <li><strong>Acompanhamento</strong>: Participação dos responsáveis quando necessário</li>
                 </ul>
 
                 <h3 className="text-xl font-semibold mb-3">11.2 Proteção Especial</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                    <li>Fotos de menores com segurança reforçada</li>
-                    <li>Não usamos dados de menores para treinamento de IA</li>
+                    <li>Dados de menores processados com cuidado redobrado</li>
+                    <li>Não utilizamos dados de menores para marketing</li>
                     <li>Exclusão imediata mediante solicitação dos responsáveis</li>
+                    <li>Moderação adicional em interações na comunidade</li>
                 </ul>
             </section>
 
@@ -388,22 +414,25 @@ export default function Page() {
 
                 <h3 className="text-xl font-semibold mb-3">12.1 Cookies Essenciais (Obrigatórios)</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li><strong>Sessão</strong>: Mantém login ativo</li>
-                    <li><strong>Segurança</strong>: Previne ataques CSRF</li>
-                    <li><strong>Preferências</strong>: Idioma, tema escuro/claro</li>
+                    <li><strong>Autenticação</strong>: Manter sessão de login ativa</li>
+                    <li><strong>Segurança</strong>: Prevenção de ataques CSRF</li>
+                    <li><strong>Funcionalidade</strong>: Preferências de idioma e tema</li>
+                    <li><strong>Progresso</strong>: Salvar posição em cursos e módulos</li>
                 </ul>
 
                 <h3 className="text-xl font-semibold mb-3">12.2 Cookies Analíticos (Opcionais)</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li><strong>Google Analytics</strong>: Entender uso da plataforma</li>
-                    <li><strong>Hotjar</strong>: Melhorar experiência do usuário</li>
+                    <li><strong>Google Analytics</strong>: Análise de uso da plataforma</li>
+                    <li><strong>Hotjar</strong>: Melhoria da experiência do usuário</li>
+                    <li><strong>Estatísticas</strong>: Métricas de engajamento educacional</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3">12.3 Gerenciamento</h3>
+                <h3 className="text-xl font-semibold mb-3">12.3 Gerenciamento de Cookies</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                    <li>Banner de cookies na primeira visita</li>
-                    <li>Configurações &gt; Privacidade &gt; Cookies</li>
-                    <li>Respeito ao sinal "Do Not Track"</li>
+                    <li>Banner de consentimento na primeira visita</li>
+                    <li>Central de privacidade para gerenciar preferências</li>
+                    <li>Opção de aceitar, recusar ou personalizar</li>
+                    <li>Respeito ao sinal "Do Not Track" do navegador</li>
                 </ul>
             </section>
 
@@ -411,33 +440,38 @@ export default function Page() {
                 <h2 className="text-2xl font-bold mb-4">13. COMUNICAÇÕES</h2>
 
                 <h3 className="text-xl font-semibold mb-3">13.1 Tipos de Comunicação</h3>
-                <p className="mb-2"><strong>Transacionais (Sempre Enviadas):</strong></p>
+                <p className="mb-2"><strong>Comunicações Transacionais (Sempre Enviadas):</strong></p>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Confirmações de agendamento</li>
-                    <li>Relatórios solicitados</li>
-                    <li>Alertas de segurança</li>
-                    <li>Mudanças nos termos</li>
+                    <li>Confirmações de inscrição e pagamento</li>
+                    <li>Notificações sobre novos conteúdos</li>
+                    <li>Alertas sobre mudanças na legislação</li>
+                    <li>Lembretes de webinars e eventos</li>
+                    <li>Comunicações de segurança e privacidade</li>
+                    <li>Alterações nos termos de uso</li>
                 </ul>
 
-                <p className="mb-2"><strong>Marketing (Requer Opt-in):</strong></p>
+                <p className="mb-2"><strong>Comunicações de Marketing (Requer Consentimento):</strong></p>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Promoções da barbearia</li>
-                    <li>Novidades da plataforma</li>
-                    <li>Dicas de cuidados</li>
+                    <li>Newsletter educacional</li>
+                    <li>Promoções e ofertas especiais</li>
+                    <li>Conteúdo exclusivo e dicas</li>
+                    <li>Convites para eventos especiais</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3">13.2 Canais</h3>
+                <h3 className="text-xl font-semibold mb-3">13.2 Canais de Comunicação</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>WhatsApp (principal)</li>
-                    <li>Email (secundário)</li>
-                    <li>Notificações no app</li>
+                    <li><strong>Email</strong>: Canal principal para comunicações</li>
+                    <li><strong>WhatsApp</strong>: Comunicações importantes e suporte</li>
+                    <li><strong>Plataforma</strong>: Notificações internas</li>
+                    <li><strong>SMS</strong>: Apenas para verificações de segurança</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3">13.3 Descadastro</h3>
+                <h3 className="text-xl font-semibold mb-3">13.3 Gestão de Preferências</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                    <li>Link em todas mensagens de marketing</li>
-                    <li>Responder "SAIR" no WhatsApp</li>
-                    <li>Configurações do app</li>
+                    <li>Link de descadastro em todas as comunicações</li>
+                    <li>Central de preferências na plataforma</li>
+                    <li>Resposta "SAIR" via WhatsApp</li>
+                    <li>Granularidade nas preferências por tipo de conteúdo</li>
                 </ul>
             </section>
 
@@ -445,44 +479,65 @@ export default function Page() {
                 <h2 className="text-2xl font-bold mb-4">14. INCIDENTES DE SEGURANÇA</h2>
 
                 <h3 className="text-xl font-semibold mb-3">14.1 Nosso Compromisso</h3>
-                <p className="mb-3">Em caso de incidente que possa causar risco:</p>
+                <p className="mb-3">Em caso de incidente de segurança que possa afetar seus dados:</p>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li><strong>Notificação em 72 horas</strong> aos afetados</li>
-                    <li><strong>Comunicação à ANPD</strong> quando aplicável</li>
-                    <li><strong>Medidas imediatas</strong> de contenção</li>
-                    <li><strong>Relatório transparente</strong> sobre o ocorrido</li>
+                    <li><strong>Detecção</strong>: Monitoramento 24/7 para identificação rápida</li>
+                    <li><strong>Contenção</strong>: Medidas imediatas para limitar o impacto</li>
+                    <li><strong>Avaliação</strong>: Análise completa do escopo e riscos</li>
+                    <li><strong>Notificação</strong>: Comunicação aos afetados em até 72 horas</li>
+                    <li><strong>Correção</strong>: Implementação de medidas corretivas</li>
+                    <li><strong>Transparência</strong>: Relatório detalhado sobre o ocorrido</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3">14.2 Seu Papel</h3>
+                <h3 className="text-xl font-semibold mb-3">14.2 Sua Responsabilidade</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
-                    <li>Manter senha segura e secreta</li>
-                    <li>Notificar comportamentos suspeitos</li>
-                    <li>Manter app atualizado</li>
+                    <li>Manter credenciais de acesso seguras</li>
+                    <li>Usar senhas fortes e únicas</li>
+                    <li>Não compartilhar dados de acesso</li>
+                    <li>Reportar atividades suspeitas imediatamente</li>
+                    <li>Manter navegador e dispositivos atualizados</li>
                 </ul>
             </section>
 
             <section id="encarregado-de-protecao-de-dados">
                 <h2 className="text-2xl font-bold mb-4">15. ENCARREGADO DE PROTEÇÃO DE DADOS (DPO)</h2>
                 <p className="mb-2"><strong>Nome:</strong> Encarregado de Proteção de Dados</p>
-                <p className="mb-2"><strong>Email:</strong> dpo@pandami.com.br</p>
-                <p className="mb-2"><strong>Telefone:</strong> (48) 99999-9999</p>
-                <p className="mb-6"><strong>Horário:</strong> Segunda a Sexta, 9h às 18h (Horário de Brasília)</p>
+                <p className="mb-2"><strong>Email:</strong> dpo@ponteamericas.com</p>
+                <p className="mb-2"><strong>WhatsApp:</strong> +1 321 429-6742</p>
+                <p className="mb-4"><strong>Horário de Atendimento:</strong> Segunda a Sexta, 9h às 18h (Horário de Brasília)</p>
+                
+                <h3 className="text-xl font-semibold mb-3">15.1 Responsabilidades do DPO</h3>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                    <li>Orientar sobre cumprimento da LGPD e GDPR</li>
+                    <li>Atuar como canal de comunicação com titulares</li>
+                    <li>Receber comunicações da autoridade nacional</li>
+                    <li>Orientar colaboradores sobre práticas de proteção de dados</li>
+                </ul>
             </section>
 
             <section id="autoridades-de-controle">
                 <h2 className="text-2xl font-bold mb-4">16. AUTORIDADES DE CONTROLE</h2>
-                <p className="mb-3">Caso não esteja satisfeito com nossa resposta:</p>
+                <p className="mb-3">Se não estiver satisfeito com nossa resposta, você pode contatar:</p>
+                
                 <p className="mb-2"><strong>Brasil:</strong></p>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Autoridade Nacional de Proteção de Dados (ANPD)</li>
+                    <li><strong>ANPD</strong> - Autoridade Nacional de Proteção de Dados</li>
                     <li>Site: www.gov.br/anpd</li>
                     <li>Email: encarregado@anpd.gov.br</li>
+                    <li>Ouvidoria: (61) 2025-3460</li>
                 </ul>
 
-                <p className="mb-2"><strong>União Europeia:</strong></p>
+                <p className="mb-2"><strong>Estados Unidos:</strong></p>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                    <li><strong>FTC</strong> - Federal Trade Commission</li>
+                    <li>Site: www.ftc.gov</li>
+                    <li>Consumer Sentinel: reportfraud.ftc.gov</li>
+                </ul>
+
+                <p className="mb-2"><strong>União Europeia (se aplicável):</strong></p>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
                     <li>Autoridade de proteção de dados do país do titular</li>
-                    <li>Lista: edpb.europa.eu</li>
+                    <li>Lista completa: edpb.europa.eu</li>
                 </ul>
             </section>
 
@@ -491,26 +546,28 @@ export default function Page() {
 
                 <h3 className="text-xl font-semibold mb-3">17.1 Quando Alteramos</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Mudanças na legislação</li>
-                    <li>Novos recursos no app</li>
-                    <li>Melhorias de segurança</li>
-                    <li>Feedback dos usuários</li>
+                    <li>Mudanças na legislação aplicável</li>
+                    <li>Novos recursos ou serviços na plataforma</li>
+                    <li>Melhorias nas práticas de segurança</li>
+                    <li>Feedback dos participantes</li>
+                    <li>Alterações em parceiros e fornecedores</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold mb-3">17.2 Como Avisamos</h3>
+                <h3 className="text-xl font-semibold mb-3">17.2 Como Comunicamos</h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li><strong>Mudanças menores</strong>: Atualização silenciosa</li>
-                    <li><strong>Mudanças significativas</strong>: 30 dias de aviso prévio</li>
-                    <li><strong>Canal de aviso</strong>: Email + banner no app</li>
+                    <li><strong>Alterações menores</strong>: Notificação na plataforma</li>
+                    <li><strong>Alterações significativas</strong>: Email com 30 dias de antecedência</li>
+                    <li><strong>Alterações substanciais</strong>: Novo consentimento pode ser solicitado</li>
                 </ul>
 
                 <h3 className="text-xl font-semibold mb-3">17.3 Histórico de Versões</h3>
-                <p className="mb-6">Disponível em: pandami.com.br/privacidade/historico</p>
+                <p className="mb-6">Mantemos histórico de todas as versões desta política em: ponteamericas.com/privacidade/historico</p>
             </section>
 
             <section id="lei-aplicavel-e-foro">
                 <h2 className="text-2xl font-bold mb-4">18. LEI APLICÁVEL E FORO</h2>
-                <p className="mb-6">Esta Política é regida pelas leis brasileiras. Fica eleito o foro da comarca de Florianópolis, Santa Catarina, para dirimir questões, com renúncia a qualquer outro.</p>
+                <p className="mb-4">Esta Política de Privacidade é regida pelas leis brasileiras, especificamente pela LGPD, bem como pelas leis americanas aplicáveis quando o processamento ocorrer nos Estados Unidos.</p>
+                <p className="mb-6">Para participantes brasileiros, fica eleito o foro brasileiro competente conforme legislação consumerista. Para demais jurisdições, aplicam-se as leis locais de proteção de dados.</p>
             </section>
 
             <section id="glossario-tecnico">
@@ -518,44 +575,56 @@ export default function Page() {
                 <ul className="list-disc pl-6 mb-6 space-y-2">
                     <li><strong>API</strong>: Interface de Programação de Aplicações</li>
                     <li><strong>Backup</strong>: Cópia de segurança dos dados</li>
+                    <li><strong>Cookie</strong>: Pequeno arquivo armazenado no navegador</li>
                     <li><strong>Criptografia</strong>: Codificação para proteger dados</li>
-                    <li><strong>Hash</strong>: Transformação irreversível de senha</li>
-                    <li><strong>MVP</strong>: Produto Mínimo Viável (versão inicial)</li>
-                    <li><strong>TLS</strong>: Protocolo de segurança para internet</li>
+                    <li><strong>Hash</strong>: Transformação irreversível de dados</li>
+                    <li><strong>HTTPS</strong>: Protocolo seguro para navegação</li>
+                    <li><strong>Token</strong>: Identificador único para autenticação</li>
+                    <li><strong>TLS</strong>: Protocolo de segurança para dados em trânsito</li>
+                    <li><strong>Firewall</strong>: Sistema de proteção contra acesso não autorizado</li>
                 </ul>
             </section>
 
             <section id="contato">
                 <h2 className="text-2xl font-bold mb-4">20. CONTATO</h2>
-                <p className="mb-2"><strong>PandaHan</strong></p>
-                <p className="mb-2">CNPJ: 60.348.853/0001-40</p>
-                <p className="mb-4">Endereço: Florianópolis, Santa Catarina, Brasil</p>
+                <p className="mb-2"><strong>Ponte Américas</strong></p>
+                <p className="mb-2">Programa Educacional de Imigração para os Estados Unidos</p>
+                <p className="mb-4">Baseado nos Estados Unidos</p>
 
                 <p className="mb-2"><strong>Canais de Atendimento:</strong></p>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li><strong>Privacidade</strong>: privacidade@pandami.com.br</li>
-                    <li><strong>Suporte</strong>: suporte@pandami.com.br</li>
-                    <li><strong>Comercial</strong>: comercial@pandami.com.br</li>
-                    <li><strong>WhatsApp</strong>: (48) 98879-3250</li>
+                    <li><strong>Privacidade e Proteção de Dados</strong>: privacidade@ponteamericas.com</li>
+                    <li><strong>Suporte Educacional</strong>: suporte@ponteamericas.com</li>
+                    <li><strong>Geral</strong>: contato@ponteamericas.com</li>
+                    <li><strong>WhatsApp</strong>: +1 321 429-6742</li>
                 </ul>
+
+                <p className="mb-2"><strong>Horário de Atendimento:</strong></p>
+                <p className="mb-6">Segunda a Sexta, 9h às 18h (Horário de Brasília)</p>
 
                 <hr className="my-8" />
 
                 <h3 className="text-xl font-semibold mb-3">DECLARAÇÃO DE CONFORMIDADE</h3>
                 <p className="mb-3">Esta Política de Privacidade foi elaborada em conformidade com:</p>
                 <ul className="list-disc pl-6 mb-4 space-y-2">
-                    <li>Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018)</li>
+                    <li>Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018) - Brasil</li>
                     <li>Regulamento Geral sobre a Proteção de Dados (GDPR - UE 2016/679)</li>
-                    <li>Marco Civil da Internet (Lei nº 12.965/2014)</li>
-                    <li>Código de Defesa do Consumidor (Lei nº 8.078/1990)</li>
+                    <li>Marco Civil da Internet (Lei nº 12.965/2014) - Brasil</li>
+                    <li>Código de Defesa do Consumidor (Lei nº 8.078/1990) - Brasil</li>
+                    <li>California Consumer Privacy Act (CCPA) - Estados Unidos</li>
+                    <li>Children's Online Privacy Protection Act (COPPA) - Estados Unidos</li>
                 </ul>
 
-                <p className="mb-2"><strong>Última revisão jurídica:</strong> 19/09/2025 </p>
-                <p className="mb-6"><strong>Próxima revisão programada:</strong> 19/03/2026</p>
+                <p className="mb-2"><strong>Última revisão jurídica:</strong> 21/10/2025</p>
+                <p className="mb-6"><strong>Próxima revisão programada:</strong> 21/04/2026</p>
 
                 <hr className="my-8" />
 
-                <p className="text-sm text-muted-foreground italic">A PandaHan se compromete com a privacidade e proteção dos seus dados. Esta política reflete nosso compromisso com a transparência e conformidade legal.</p>
+                <p className="text-sm text-muted-foreground italic">
+                    O Ponte Américas está comprometido com a privacidade e proteção de seus dados pessoais. 
+                    Esta política reflete nosso compromisso com a transparência, segurança e conformidade legal 
+                    no tratamento de dados pessoais de nossos participantes.
+                </p>
             </section>
         </LegalLayout>
     );

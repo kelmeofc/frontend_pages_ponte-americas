@@ -88,7 +88,7 @@ export const useEbookModal = (onClose: () => void) => {
         reset();
         downloadEbook();
       } else {
-        toast.error(`Erro ao salvar. Tente novamente.'}`);
+        toast.error(`Erro ao salvar. Tente novamente.`);
       }
     } catch (err) {
       toast.error('Erro inesperado. Verifique sua conexão e tente novamente.');

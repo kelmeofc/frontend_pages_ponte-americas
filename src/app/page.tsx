@@ -56,7 +56,7 @@ export default function Home() {
 			{/* WhatsApp Widget */}
 			<WhatsAppWidget
 				message="Olá! Gostaria de saber mais sobre o Ponte Américas e como posso começar minha jornada nos Estados Unidos."
-				phoneNumber="5511999999999"
+				phoneNumber="13214296742"
 				position="bottom-right"
 				size="md"
 				showPulse={true}

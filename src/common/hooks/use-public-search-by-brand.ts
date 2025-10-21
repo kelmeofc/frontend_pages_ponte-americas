@@ -44,7 +44,7 @@ export default function usePublicSearchByBrand() {
                 brand: data.brand,
                 email: data.email,
                 name: data.name,
-                phone_number: '99999999999',
+                phone_number: '13214296742',
                 origin: EOriginLead.seo_tool,
                 origin_font: 'pagina-busca-inpi',
                 description: 'Lead coletado no formulário da ferramenta de busca no INPI',

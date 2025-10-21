@@ -2,9 +2,9 @@ import { FileText, Shield } from "lucide-react";
 import { LegalPageConfig } from "@/types/legal-metadata";
 
 // Constantes compartilhadas
-const LAST_UPDATED = "19 de setembro de 2025";
-const BASE_URL = "https://pandami.com.br";
-const COMMON_KEYWORDS = ["pandami", "barbearia", "visagismo"];
+const LAST_UPDATED = "21 de outubro de 2025";
+const BASE_URL = "https://ponteamericas.com";
+const COMMON_KEYWORDS = ["ponte américas", "imigração EUA", "viver nos Estados Unidos"];
 
 // Função auxiliar para criar metadados
 const createMetadata = (
@@ -13,7 +13,7 @@ const createMetadata = (
   keywords: string[],
   path: string
 ) => ({
-  title: `${title} | Pandami`,
+  title: `${title} | Ponte Américas`,
   description,
   keywords: [...COMMON_KEYWORDS, ...keywords],
   lastUpdated: LAST_UPDATED,
@@ -24,18 +24,18 @@ const createMetadata = (
 export const legalPagesConfig: Record<string, LegalPageConfig> = {
   "termos-de-uso": {
     title: "Termos de Uso",
-    description: "Termos e condições de uso da plataforma Pandami. Sistema de gestão de clientes para barbearias com análise de visagismo assistida por IA.",
+    description: "Termos e condições de uso do programa educacional Ponte Américas. Seu guia completo para viver, trabalhar e prosperar nos Estados Unidos.",
     lastUpdated: LAST_UPDATED,
     icon: "FileText",
     metadata: createMetadata(
-      "Termos de Uso - Sistema de Gestão para Barbearias",
-      "Termos e condições de uso da plataforma Pandami. Sistema de gestão de clientes para barbearias com análise de visagismo assistida por Inteligência Artificial.",
+      "Termos de Uso - Programa Educacional de Imigração",
+      "Termos e condições de uso do programa educacional Ponte Américas. Seu guia completo para viver, trabalhar e prosperar nos Estados Unidos.",
       [
         "termos de uso",
-        "inteligência artificial",
-        "gestão de clientes",
-        "sistema de barbearia",
-        "análise facial",
+        "programa educacional",
+        "imigração",
+        "curso online",
+        "Estados Unidos",
         "LGPD"
       ],
       "termos-de-uso"
@@ -43,19 +43,19 @@ export const legalPagesConfig: Record<string, LegalPageConfig> = {
   },
   "politica-de-privacidade": {
     title: "Política de Privacidade",
-    description: "Esta política descreve como coletamos, usamos, armazenamos e protegemos suas informações pessoais na plataforma Pandami de acordo com a LGPD.",
+    description: "Esta política descreve como coletamos, usamos, armazenamos e protegemos suas informações pessoais no programa Ponte Américas de acordo com a LGPD.",
     lastUpdated: LAST_UPDATED,
     icon: "Shield",
     metadata: createMetadata(
       "Política de Privacidade - Proteção de Dados LGPD",
-      "Política de privacidade da Pandami em conformidade com a LGPD. Saiba como coletamos, usamos e protegemos dados pessoais e biométricos em nosso sistema de gestão para barbearias.",
+      "Política de privacidade do Ponte Américas em conformidade com a LGPD. Saiba como coletamos, usamos e protegemos dados pessoais em nosso programa educacional.",
       [
         "política de privacidade",
         "LGPD",
         "proteção de dados",
         "privacidade",
         "dados pessoais",
-        "dados biométricos",
+        "programa educacional",
         "GDPR",
         "compliance"
       ],

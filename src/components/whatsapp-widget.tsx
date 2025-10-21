@@ -16,7 +16,7 @@ interface WhatsAppWidgetProps {
 
 export default function WhatsAppWidget({
   message = "Oi, acabei de ver o site de vocês! Gostaria de saber mais sobre o curso",
-  phoneNumber = "5511999999999", // Número padrão do Brasil
+  phoneNumber = "13214296742", // Número padrão dos EUA
   position = "bottom-right",
   size = "md",
   showPulse = true,
