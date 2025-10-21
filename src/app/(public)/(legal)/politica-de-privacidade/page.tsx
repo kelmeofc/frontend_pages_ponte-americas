@@ -1,4 +1,4 @@
-import LegalLayout from "@/common/layouts/legal-layout"
+import LegalLayout from "@/components/layouts/legal-layout"
 import { useLegalMetadata } from "@/common/hooks/use-legal-metadata";
 import { legalPagesConfig } from "@/common/config/legal-pages";
 
