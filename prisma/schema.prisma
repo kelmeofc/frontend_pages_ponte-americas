@@ -14,22 +14,6 @@ datasource db {
   url  	    = env("DATABASE_URL")
 }
 
-model EbookLead {
-  id           Int      @id @default(autoincrement())
-  name         String
-  email        String
-  phone        String
-  source       String   // "ebook-cta-section"
-  route        String   // rota atual da página
-  country      String?  // país detectado por IP
-  city         String?  // cidade detectada por IP
-  userAgent    String?  @map("user_agent") // user agent completo
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
-
-  @@map("ebook_leads")
-}
-
 model Lead {
   id                 Int      @id @default(autoincrement())
   name               String
