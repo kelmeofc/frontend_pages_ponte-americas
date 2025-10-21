@@ -22,18 +22,3 @@ export interface ICreateLead {
     user_agent?: string;
     route?: string;
 }
-
-// export interface ILead {
-//     id: number;
-//     name: string;
-//     email: string;
-//     phone_number: string;
-//     brand: string;
-//     description: string;
-//     company_size: ECompanySize;
-//     company_segment: string;
-//     company_on_market: string;
-//     website?: string;
-//     create_at: string;
-//     updated_at: string;
-// }

@@ -1,17 +1,15 @@
 import { useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { usePathname } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { ebookLeadSchema, type EbookLeadFormData } from '@/common/schemas/ebook-lead.schema';
 import { createLeadAction } from '@/common/actions/create-lead-action';
+import { captureLeadMetadata } from '@/common/lib/lead-utils';
 import { EOriginLead } from '@/types/lead';
 import { useCountdownTimer } from './use-countdown-timer';
 
 export const useEbookModal = (onClose: () => void) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const pathname = usePathname();
 
   // Timer de 3 minutos e 30 segundos
   const timer = useCountdownTimer({
@@ -32,21 +30,7 @@ export const useEbookModal = (onClose: () => void) => {
     }
   });
 
-  const { register, handleSubmit, formState: { errors, isValid }, reset, setValue, watch } = form;
-
-  // Função para obter geolocalização
-  const getLocationData = useCallback(async () => {
-    try {
-      const response = await fetch('https://ipapi.co/json/');
-      const data = await response.json();
-      return {
-        country: data.country_name || '',
-        city: data.city || ''
-      };
-    } catch {
-      return { country: '', city: '' };
-    }
-  }, []);
+  const { register, handleSubmit, formState: { errors, isValid }, reset, setValue } = form;
 
   // Função para iniciar download
   const downloadEbook = useCallback(() => {
@@ -62,27 +46,18 @@ export const useEbookModal = (onClose: () => void) => {
     setIsLoading(true);
 
     try {
-      const [locationData] = await Promise.all([
-        getLocationData(),
-        // Adicionar delay mínimo para melhor UX
-        new Promise(resolve => setTimeout(resolve, 500))
-      ]);
-
-      // O número já vem no formato internacional do componente React
-      const internationalPhone = data.phone;
+      // Captura metadados automaticamente (com timeout de 3s)
+      const metadata = await captureLeadMetadata();
 
       const leadData = {
         name: data.name,
         email: data.email,
-        phone_number: internationalPhone,
+        phone_number: data.phone,
         brand: 'Ebook Passaporte Blindado',
         description: `Lead interessado no ebook. Fonte: ${data.source || 'ebook-cta-section'}`,
         origin: EOriginLead.page,
         origin_font: data.source || 'ebook-cta-section',
-        route: pathname,
-        country: locationData.country,
-        city: locationData.city,
-        user_agent: navigator.userAgent,
+        ...metadata, // Injeta todos os metadados capturados
       };
 
       const result = await createLeadAction(leadData);
@@ -101,7 +76,7 @@ export const useEbookModal = (onClose: () => void) => {
     } finally {
       setIsLoading(false);
     }
-  }, [getLocationData, downloadEbook, pathname, onClose, reset]);
+  }, [downloadEbook, onClose, reset]);
 
   const handleClose = useCallback(() => {
     if (!isLoading) {

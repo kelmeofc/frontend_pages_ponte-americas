@@ -1,30 +1,29 @@
 /**
- * Utilitário para capturar dados automaticamente para leads
+ * Utilitário consolidado para capturar metadados de leads
  */
 
-export interface ILeadMetadata {
-  ip_address?: string;
-  country?: string;
-  city?: string;
-  user_agent?: string;
-  route?: string;
-}
+import { ICreateLead } from '@/types/lead';
+
+type LeadMetadata = Pick<ICreateLead, 'ip_address' | 'country' | 'city' | 'user_agent' | 'route'>;
 
 /**
- * Captura metadados automaticamente para leads
+ * Captura todos os metadados disponíveis (browser + geolocalização)
+ * Usa fallback gracioso - nunca falha, apenas retorna dados parciais
  */
-export async function captureLeadMetadata(): Promise<ILeadMetadata> {
-  const metadata: ILeadMetadata = {};
+export async function captureLeadMetadata(): Promise<LeadMetadata> {
+  const metadata: LeadMetadata = {};
 
-  // Captura user agent
+  // Captura dados do browser (síncrono)
   if (typeof window !== 'undefined') {
     metadata.user_agent = navigator.userAgent;
     metadata.route = window.location.pathname;
   }
 
-  // Captura IP e localização via API pública
+  // Captura IP e localização (assíncrono, com fallback)
   try {
-    const response = await fetch('https://ipapi.co/json/');
+    const response = await fetch('https://ipapi.co/json/', { 
+      signal: AbortSignal.timeout(3000) // timeout de 3s
+    });
     if (response.ok) {
       const data = await response.json();
       metadata.ip_address = data.ip;
@@ -32,22 +31,24 @@ export async function captureLeadMetadata(): Promise<ILeadMetadata> {
       metadata.city = data.city;
     }
   } catch (error) {
-    console.warn('Não foi possível capturar dados de localização:', error);
+    // Falha silenciosa - metadados de localização são opcionais
+    console.warn('Geolocalização indisponível:', error);
   }
 
   return metadata;
 }
 
 /**
- * Captura metadados de forma síncrona (sem IP)
+ * Captura apenas metadados do browser (síncrono, sem API externa)
+ * Útil quando velocidade é prioridade ou quando geolocalização não é necessária
  */
-export function captureBasicMetadata(): Pick<ILeadMetadata, 'user_agent' | 'route'> {
-  const metadata: Pick<ILeadMetadata, 'user_agent' | 'route'> = {};
-
-  if (typeof window !== 'undefined') {
-    metadata.user_agent = navigator.userAgent;
-    metadata.route = window.location.pathname;
+export function captureBasicMetadata(): Pick<LeadMetadata, 'user_agent' | 'route'> {
+  if (typeof window === 'undefined') {
+    return {};
   }
 
-  return metadata;
+  return {
+    user_agent: navigator.userAgent,
+    route: window.location.pathname,
+  };
 }
