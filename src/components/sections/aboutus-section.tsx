@@ -10,13 +10,13 @@ export function AboutusSection() {
 					{/* Left Column - Text Content */}
 					<div className="w-full lg:w-[627px] flex flex-col justify-start items-start gap-6">
 						<div className="w-full flex flex-col justify-start items-start gap-4">
-							<h2 className="w-full text-3xl lg:text-4xl font-semibold font-['Clash_Display'] uppercase leading-tight">
+							<h2 className="w-full text-3xl lg:text-4xl font-semibold font-clash-display uppercase leading-tight">
 								<GradientText>
 									o time que vai te guiar <br className="sm:hidden" />{" "}
 									durante toda a jornada
 								</GradientText>
 							</h2>
-							<div className="w-full text-gray-800 text-lg lg:text-xl font-normal font-['Rubik'] leading-relaxed">
+							<div className="w-full text-gray-800 text-lg lg:text-xl font-normal font-sans leading-relaxed">
 								<p className="mb-4">
 									O sonho americano vira um pesadelo que custa milhares de
 									dólares quando você vem na raça e na coragem. Nossa família
@@ -41,7 +41,7 @@ export function AboutusSection() {
 						<PrimaryButton
 							variant="default"
 							size="lg"
-							className="bg-gradient-to-r from-red-700 to-indigo-600 text-white font-medium font-['Rubik'] uppercase"
+							className="bg-gradient-to-r from-red-700 to-indigo-600 text-white font-medium font-sans uppercase"
 						>
 							quero mudar de vida
 						</PrimaryButton>
@@ -56,7 +56,7 @@ export function AboutusSection() {
 								alt="Bandeira americana"
 								width={320}
 								height={484}
-								className="h-[484px] lg:w-80 lg:h-64 md:w-120 md:h-[484px] lg:h-[484px] rounded-lg object-cover object-top"
+								className="h-[484px] lg:w-80 md:w-120 md:h-[484px] lg:h-[484px] rounded-lg object-cover object-top"
 								priority
 							/>
 						</div>

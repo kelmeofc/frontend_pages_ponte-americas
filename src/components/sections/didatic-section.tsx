@@ -111,10 +111,10 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 			<div className="flex flex-col items-center gap-8">
 				{/* Header */}
 				<div className="text-center space-y-4 px-2">
-					<h2 className="text-white text-3xl md:text-4xl font-semibold font-['Clash_Display'] leading-tight">
+					<h2 className="text-white text-3xl md:text-4xl font-semibold font-clash-display leading-tight">
 						NOSSA DIDÁTICA DESCOMPLICADA
 					</h2>
-					<p className="text-white text-lg md:text-xl font-normal font-['Rubik'] leading-relaxed">
+					<p className="text-white text-lg md:text-xl font-normal font-sans leading-relaxed">
 						Selecione um tópico e conheça algumas das nossas aulas:
 					</p>
 				</div>
@@ -133,7 +133,7 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 									<TabsTrigger
 										key={topic.id}
 										value={topic.id}
-										className="px-4 py-3 rounded-full text-xs font-medium font-['Rubik'] uppercase transition-all duration-200 data-[state=active]:bg-indigo-600 data-[state=active]:text-white data-[state=inactive]:bg-gray-200 data-[state=inactive]:text-indigo-600 hover:bg-indigo-100"
+										className="px-4 py-3 rounded-full text-xs font-medium font-sans uppercase transition-all duration-200 data-[state=active]:bg-indigo-600 data-[state=active]:text-white data-[state=inactive]:bg-gray-200 data-[state=inactive]:text-indigo-600 hover:bg-indigo-100"
 									>
 										{topic.label}
 									</TabsTrigger>
@@ -144,7 +144,7 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 									<TabsTrigger
 										key={topic.id}
 										value={topic.id}
-										className="px-4 py-3 rounded-full text-xs font-medium font-['Rubik'] uppercase transition-all duration-200 data-[state=active]:bg-indigo-600 data-[state=active]:text-white data-[state=inactive]:bg-gray-200 data-[state=inactive]:text-indigo-600 hover:bg-indigo-100"
+										className="px-4 py-3 rounded-full text-xs font-medium font-sans uppercase transition-all duration-200 data-[state=active]:bg-indigo-600 data-[state=active]:text-white data-[state=inactive]:bg-gray-200 data-[state=inactive]:text-indigo-600 hover:bg-indigo-100"
 									>
 										{topic.label}
 									</TabsTrigger>
@@ -162,7 +162,7 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 									<TabsTrigger
 										key={topic.id}
 										value={topic.id}
-										className="flex-shrink-0 px-4 py-3 rounded-full text-xs font-medium font-['Rubik'] uppercase transition-all duration-200 data-[state=active]:bg-indigo-600 data-[state=active]:text-white data-[state=inactive]:bg-gray-200 data-[state=inactive]:text-indigo-600 hover:bg-indigo-100 whitespace-nowrap"
+										className="flex-shrink-0 px-4 py-3 rounded-full text-xs font-medium font-sans uppercase transition-all duration-200 data-[state=active]:bg-indigo-600 data-[state=active]:text-white data-[state=inactive]:bg-gray-200 data-[state=inactive]:text-indigo-600 hover:bg-indigo-100 whitespace-nowrap"
 									>
 										{topic.label}
 									</TabsTrigger>
@@ -196,7 +196,7 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 									)}
 								</div>
 
-								<p className="text-white text-xl font-normal font-['Rubik'] leading-relaxed mt-8">
+								<p className="text-white text-xl font-normal font-sans leading-relaxed mt-8">
 									E muito mais...
 								</p>
 							</div>

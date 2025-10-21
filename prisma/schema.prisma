@@ -37,9 +37,6 @@ model Lead {
   phoneNumber        String?  @map("phone_number")
   brand              String
   description        String
-  companySize        Int?     @map("company_size") // enum value
-  companySegment     String?  @map("company_segment")
-  companyOnMarket    String?  @map("company_on_market")
   website            String?
   origin             Int      // enum value
   originFont         String?  @map("origin_font")

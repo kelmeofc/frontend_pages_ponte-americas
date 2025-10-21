@@ -32,8 +32,8 @@ export const CoursesSection = () => {
     <section id="courses" className="w-full  py-20 bg-white">
       <div className="flex flex-col justify-center items-center gap-8">
         {/* Header */}
-        <div className="flex justify-center items-center">
-          <h2 className="text-center text-3xl md:text-4xl font-semibold font-['Clash_Display'] leading-9">
+        <div className="px-4 flex justify-center items-center">
+          <h2 className="text-center text-3xl md:text-4xl font-semibold font-clash-display leading-9">
             <GradientText>
               CONHEÇA NOSSOS CURSOS
             </GradientText>
@@ -45,9 +45,9 @@ export const CoursesSection = () => {
           <Carousel
             opts={{
               align: "center",
-              loop: true,
+              loop: false,
               slidesToScroll: 1,
-              containScroll: "keepSnaps",
+              containScroll: "trimSnaps",
             }}
             setApi={(api) => {
               carouselApiRef.current = api;
