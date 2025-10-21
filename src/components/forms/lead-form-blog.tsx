@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { PrimaryButton } from "@/components/primary-button";
-import { useState } from "react";
 import useCreateLead from "@/common/hooks/use-create-lead";
 import { EOriginLead } from "@/types/lead";
 import { FormField } from "@/components/forms/form-field";
@@ -40,7 +39,7 @@ export function LeadFormBlog({ articleUri }: { articleUri: string }) {
     })
 
     const onSubmit = async (data: FormValues) => {
-        execCreateLead({
+        const success = await execCreateLead({
             data: {
                 brand: 'Lead do Blog',
                 name: data.name,
@@ -51,13 +50,15 @@ export function LeadFormBlog({ articleUri }: { articleUri: string }) {
             }
         });
 
-        reset({
-            name: "",
-            email: "",
-            phone: "",
-        }, {
-            keepDefaultValues: false
-        });
+        if (success) {
+            reset({
+                name: "",
+                email: "",
+                phone: "",
+            }, {
+                keepDefaultValues: false
+            });
+        }
     }
 
     return (

@@ -4,7 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { ebookLeadSchema, type EbookLeadFormData } from '@/common/schemas/ebook-lead.schema';
-import { createEbookLeadAction } from '@/common/actions/create-ebook-lead-action';
+import { createLeadAction } from '@/common/actions/create-lead-action';
+import { EOriginLead } from '@/types/lead';
 import { useCountdownTimer } from './use-countdown-timer';
 
 export const useEbookModal = (onClose: () => void) => {
@@ -71,16 +72,20 @@ export const useEbookModal = (onClose: () => void) => {
       const internationalPhone = data.phone;
 
       const leadData = {
-        ...data,
-        phone: internationalPhone,
-        source: 'ebook-cta-section',
+        name: data.name,
+        email: data.email,
+        phone_number: internationalPhone,
+        brand: 'Ebook Passaporte Blindado',
+        description: `Lead interessado no ebook. Fonte: ${data.source || 'ebook-cta-section'}`,
+        origin: EOriginLead.page,
+        origin_font: data.source || 'ebook-cta-section',
         route: pathname,
         country: locationData.country,
         city: locationData.city,
-        userAgent: navigator.userAgent,
+        user_agent: navigator.userAgent,
       };
 
-      const result = await createEbookLeadAction(leadData);
+      const result = await createLeadAction(leadData);
 
       if (result.success) {
         toast.success('Download iniciado.');

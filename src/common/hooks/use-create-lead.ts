@@ -1,7 +1,8 @@
 import { ICreateLead } from "@/types/lead"
 import { useState } from "react";
 import toast from "react-hot-toast";
-import createLeadAction from "../actions/create-lead-action";
+import { createLeadAction } from "../actions/create-lead-action";
+import { captureLeadMetadata, captureBasicMetadata } from "@/common/lib/lead-utils";
 
 // Add this import for modal state management
 import { useModal } from "@/components/ui/modal/use-modal";
@@ -15,9 +16,27 @@ export default function useCreateLead() {
         try {
             setLoading(true);
 
-            const result = await createLeadAction(data);
+            // Captura metadados automaticamente
+            const basicMetadata = captureBasicMetadata();
+            let fullMetadata = { ...basicMetadata };
 
-            if (result) {
+            // Tenta capturar IP e localização (pode falhar sem quebrar o fluxo)
+            try {
+                const locationMetadata = await captureLeadMetadata();
+                fullMetadata = { ...fullMetadata, ...locationMetadata };
+            } catch (error) {
+                console.warn('Não foi possível capturar dados de localização:', error);
+            }
+
+            // Combina dados do formulário com metadados capturados
+            const enrichedData: ICreateLead = {
+                ...data,
+                ...fullMetadata
+            };
+
+            const result = await createLeadAction(enrichedData);
+
+            if (result.success) {
                 if (show_modal) {
                     // Show success as modal
                     openModal({

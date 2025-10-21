@@ -1,14 +1,18 @@
 import { ICreateLead } from "@/types/lead";
-import api from "@/common/config/api";
+import { createLeadAction } from "@/common/actions/create-lead-action";
 
 export async function createLead(lead: ICreateLead) {
     try {
-        const response = await api.post<{ id: number }>(`/brand/lead`, {
-            ...lead
-        })
-        return true;
+        const result = await createLeadAction(lead);
+        
+        if (result.success) {
+            return true;
+        } else {
+            console.error('Error creating lead:', result.error);
+            return null;
+        }
     } catch (error: any) {
-        console.error('Error creating lead:', error.response?.data || error.message);
+        console.error('Error creating lead:', error.message);
         return null;
     }
 }

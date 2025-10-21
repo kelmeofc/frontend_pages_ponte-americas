@@ -29,3 +29,27 @@ model EbookLead {
 
   @@map("ebook_leads")
 }
+
+model Lead {
+  id                 Int      @id @default(autoincrement())
+  name               String
+  email              String?
+  phoneNumber        String?  @map("phone_number")
+  brand              String
+  description        String
+  companySize        Int?     @map("company_size") // enum value
+  companySegment     String?  @map("company_segment")
+  companyOnMarket    String?  @map("company_on_market")
+  website            String?
+  origin             Int      // enum value
+  originFont         String?  @map("origin_font")
+  ipAddress          String?  @map("ip_address") // IP do usuário
+  country            String?  // país detectado por IP
+  city               String?  // cidade detectada por IP
+  userAgent          String?  @map("user_agent") // user agent completo
+  route              String?  // rota atual da página
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  @@map("leads")
+}

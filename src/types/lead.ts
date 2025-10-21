@@ -25,6 +25,11 @@ export interface ICreateLead {
     website?: string;
     origin: EOriginLead;
     origin_font?: string;
+    ip_address?: string;
+    country?: string;
+    city?: string;
+    user_agent?: string;
+    route?: string;
 }
 
 // export interface ILead {

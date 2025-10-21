@@ -29,7 +29,7 @@ export const CoursesSection = () => {
   }, []);
 
   return (
-    <section id="courses" className="w-full px-7 md:px-28 py-20 bg-white">
+    <section id="courses" className="w-full  py-20 bg-white">
       <div className="flex flex-col justify-center items-center gap-8">
         {/* Header */}
         <div className="flex justify-center items-center">
@@ -44,8 +44,10 @@ export const CoursesSection = () => {
         <div className="w-full max-w-[1440px] relative">
           <Carousel
             opts={{
-              align: "start",
+              align: "center",
               loop: true,
+              slidesToScroll: 1,
+              containScroll: "trimSnaps",
             }}
             setApi={(api) => {
               carouselApiRef.current = api;
@@ -56,7 +58,7 @@ export const CoursesSection = () => {
             <div className="hidden md:block md:absolute md:left-0 md:top-0 w-12 md:w-20 h-full bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
             <div className="hidden md:block md:absolute md:right-0 md:top-0 w-12 md:w-20 h-full bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
             
-            <CarouselContent className="">
+            <CarouselContent className="mx-10">
               {COURSES_DATA.map((course, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                   <CourseCard {...course} />
@@ -65,12 +67,12 @@ export const CoursesSection = () => {
             </CarouselContent>
             
             {/* Custom Navigation Buttons */}
-            <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20">
-              <ArrowLeft className="w-4 h-4" />
+            <CarouselPrevious className="hidden md:flex md:absolute md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20">
+              <ArrowLeft className="size-4" />
             </CarouselPrevious>
             
-            <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20">
-              <ArrowRight className="w-4 h-4" />
+            <CarouselNext className="hidden md:flex md:absolute md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20">
+              <ArrowRight className="size-4" />
             </CarouselNext>
           </Carousel>
         </div>
