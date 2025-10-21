@@ -19,7 +19,7 @@ export function HeroVideo({ className, onPlay, onPause, onEnded }: HeroVideoProp
         className={cn("max-w-4xl", className)}
         autoPlay={true}
         muted={true}
-        controls={false}
+        controls={true}
       
         onPlay={onPlay}
         onPause={onPause}

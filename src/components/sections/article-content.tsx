@@ -104,8 +104,8 @@ export default async function ArticleContent({
 						dangerouslySetInnerHTML={{ __html: transformedContent }}
 					/>
 				</div>
-
-				<CtaSection />
+{/* 	<CtaSection /> */}
+			
 			</article>
 		</section>
 	);

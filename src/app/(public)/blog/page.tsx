@@ -11,9 +11,9 @@ export default async function BlogPage({ searchParams }: any) {
     const resolvedSearchParams = typeof searchParams?.then === 'function' ? await searchParams : searchParams;
     return (
         <>
-            <main className="w-full flex flex-col gap-16 py-16">
+           
                 <BlogGrid searchParams={resolvedSearchParams} />
-            </main>
+       
         </>
     );
 }

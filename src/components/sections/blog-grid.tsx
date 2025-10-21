@@ -14,7 +14,7 @@ export default async function BlogGrid({ searchParams }: { searchParams?: any })
   // Verificação adicional para garantir que data e data.posts existam
   if (!data || !data.posts) {
     return (
-      <section className="w-full bg-black min-h-screen">
+      <section className="w-full pt-20 bg-black min-h-screen">
         <Container section={true}>
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white md:mb-12 mb-8">
             Blog Ponte Américas
@@ -26,7 +26,7 @@ export default async function BlogGrid({ searchParams }: { searchParams?: any })
   }
 
   return (
-    <section className="w-full bg-black">
+    <section className="w-full pt-20 bg-black">
       <Container section={true}>
         <h2 className="text-2xl md:text-3xl font-bold text-center text-white md:mb-12 mb-8">
           Blog Ponte Américas

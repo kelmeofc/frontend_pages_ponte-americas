@@ -53,8 +53,8 @@ export const CoursesSection = () => {
             className="w-full"
           >
             {/* Fade gradients nas laterais */}
-            <div className="absolute left-0 top-0 w-12 md:w-20 h-full bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 w-12 md:w-20 h-full bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+            <div className="hidden md:block md:absolute md:left-0 md:top-0 w-12 md:w-20 h-full bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+            <div className="hidden md:block md:absolute md:right-0 md:top-0 w-12 md:w-20 h-full bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
             
             <CarouselContent className="">
               {COURSES_DATA.map((course, index) => (

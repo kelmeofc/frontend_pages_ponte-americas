@@ -3,47 +3,24 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Input } from "@/components/ui/input";
 import { PrimaryButton } from "@/components/primary-button";
 import { useState } from "react";
 import useCreateLead from "@/common/hooks/use-create-lead";
 import { EOriginLead } from "@/types/lead";
-
-// Função para formatar telefone brasileiro
-const formatPhoneNumber = (value: string): string => {
-    // Remove todos os caracteres não numéricos
-    const numbers = value.replace(/\D/g, '');
-    
-    // Aplica a máscara baseada no tamanho
-    if (numbers.length <= 2) {
-        return numbers;
-    } else if (numbers.length <= 7) {
-        return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
-    } else {
-        return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`;
-    }
-};
+import { FormField } from "@/components/forms/form-field";
+import { InternationalPhoneField } from "@/components/forms/international-phone-field";
+import { ArrowRight } from "lucide-react";
 
 const formSchema = z.object({
-    brand: z.string({
-        required_error: 'Nome do seu salão é obrigatório'
-    }).min(1, "Tamanho mínimo de 1 caractere"),
+    name: z.string({
+        required_error: 'Nome completo é obrigatório'
+    }).min(2, "Nome deve ter pelo menos 2 caracteres"),
+    email: z.string({
+        required_error: 'E-mail é obrigatório'
+    }).email("E-mail inválido"),
     phone: z.string({
         required_error: 'Telefone é obrigatório'
-    })
-        .min(1, "Telefone é obrigatório")
-        .transform((val) => {
-            // Remove caracteres não numéricos para validação
-            const numbers = val.replace(/\D/g, '');
-            if (numbers.length < 10 || numbers.length > 11) {
-                throw new Error("Telefone deve ter 10 ou 11 dígitos");
-            }
-            return numbers; // Retorna apenas números para o backend
-        })
-        .refine((val) => {
-            const numbers = val.replace(/\D/g, '');
-            return numbers.length >= 10 && numbers.length <= 11;
-        }, "Telefone deve ter 10 ou 11 dígitos"),
+    }).min(10, "Telefone deve ter pelo menos 10 dígitos"),
 })
 
 type FormValues = z.infer<typeof formSchema>
@@ -51,95 +28,91 @@ type FormValues = z.infer<typeof formSchema>
 export function LeadFormBlog({ articleUri }: { articleUri: string }) {
     const { execCreateLead } = useCreateLead();
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [brandName, setBrandName] = useState("");
-    const [phoneDisplay, setPhoneDisplay] = useState("");
-
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting },
+        formState: { errors, isSubmitting, isValid },
         reset,
         setValue,
     } = useForm<FormValues>({
         resolver: zodResolver(formSchema),
+        mode: 'onChange'
     })
-
-    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const formatted = formatPhoneNumber(e.target.value);
-        setPhoneDisplay(formatted);
-        setValue('phone', formatted);
-    };
 
     const onSubmit = async (data: FormValues) => {
         execCreateLead({
             data: {
-                brand: data.brand,
-                name: 'Nome não informado',
+                brand: 'Lead do Blog',
+                name: data.name,
                 phone_number: data.phone,
-                description: `Lead interessado em soluções de visagismo por IA para salão de beleza. Artigo: ${articleUri}`,
+                description: `Lead interessado em consultoria de imigração. Artigo: ${articleUri}. Email: ${data.email}`,
                 origin: EOriginLead.seo_archive,
-                origin_font: 'visagismo-form'
+                origin_font: 'blog-form'
             }
         });
 
         reset({
-            brand: "",
+            name: "",
+            email: "",
             phone: "",
         }, {
             keepDefaultValues: false
         });
-        
-        setPhoneDisplay("");
     }
 
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-3xl p-6 border border-[#E5E7EB] border-solid flex flex-col gap-4 mt-10">
-                <h2 className="title-5 text-center">Transforme seu salão com visagismo por IA</h2>
-                <p className="text-center text-sm text-neutral-600 mb-2">Democratize o visagismo e aumente suas vendas com nossa tecnologia</p>
+                <h2 className="title-5 text-center">Realize seus sonhos na América</h2>
+                <p className="text-center text-sm text-neutral-600 mb-2">Preenchendo abaixo o nosso time vai te ajudar a entender tudo sobre como funciona os EUA para você ficar tranquilo. </p>
 
-                <div>
-                    <label htmlFor="brand" className="block text-sm font-medium text-[#374151] mb-2">
-                        Nome do seu salão
-                    </label>
-                    <Input
-                        id="brand"
-                        name="brand"
-                        placeholder="Digite o nome do seu salão"
-                        register={register}
-                        className={errors.brand ? "border-red-500" : ""}
-                    />
-                    {errors.brand && (
-                        <span className="text-red-500 text-sm mt-1">{errors.brand.message}</span>
-                    )}
-                </div>
-
-                <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-[#374151] mb-2">
-                        Telefone do salão
-                    </label>
-                    <Input
-                        id="phone"
-                        name="phone"
-                        placeholder="(00) 00000-0000"
-                        value={phoneDisplay}
-                        onChange={handlePhoneChange}
-                        className={errors.phone ? "border-red-500" : ""}
-                    />
-                    {errors.phone && (
-                        <span className="text-red-500 text-sm mt-1">{errors.phone.message}</span>
-                    )}
-                </div>
+                <FormField
+                    name="name"
+                    placeholder="Nome completo"
+                    register={register}
+                    errors={errors}
+                    disabled={isSubmitting}
+                />
+                
+                <FormField
+                    name="email"
+                    placeholder="E-mail"
+                    type="email"
+                    register={register}
+                    errors={errors}
+                    disabled={isSubmitting}
+                />
+                
+                <InternationalPhoneField
+                    name="phone"
+                    placeholder="Telefone"
+                    register={register}
+                    errors={errors}
+                    setValue={setValue}
+                    disabled={isSubmitting}
+                    initialCountry="br"
+                />
 
                 <PrimaryButton
                     type="submit"
-                    disabled={isSubmitting}
-                    size="default"
-                    className="w-full py-4"
+                    size="lg"
+                    className="w-full h-12 px-8 py-4 bg-gradient-to-r from-red-700 to-indigo-600 rounded-lg text-white font-medium uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={isSubmitting || !isValid}
+                    icon={<ArrowRight className="w-5 h-5" />}
+                    iconPosition="right"
                 >
-                    Quero Pandami no meu salão
+                    {isSubmitting ? 'Enviando...' : 'Tenho interesse'}
                 </PrimaryButton>
+
+                <div className="text-center">
+                    <p className="text-neutral-600 text-sm leading-tight">
+                        Ao clicar em "Tenho interesse" você concorda com a nossa{' '}
+                        <span className="text-blue-700 cursor-pointer hover:underline">
+                            política de privacidade
+                        </span>
+                        .
+                    </p>
+                </div>
             </form>
         </>
     )
