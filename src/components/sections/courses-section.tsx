@@ -47,7 +47,7 @@ export const CoursesSection = () => {
               align: "center",
               loop: true,
               slidesToScroll: 1,
-              containScroll: "trimSnaps",
+              containScroll: "keepSnaps",
             }}
             setApi={(api) => {
               carouselApiRef.current = api;

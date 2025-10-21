@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import api from "../config/api";
 import useCreateLead from "./use-create-lead";
 import { EOriginLead } from "@/types/lead";
-import createLeadAction from "../actions/create-lead-action";
+import { createLeadAction } from "../actions/create-lead-action";
 import { AlertCircle } from "lucide-react";
 
 interface IFormValues {
