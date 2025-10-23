@@ -1,12 +1,18 @@
-import { PrismaClient } from '@/generated/prisma';
+// src/lib/prisma.ts
+import { PrismaClient } from "../../../generated/prisma/client";
+import { PrismaNeon } from "@prisma/adapter-neon";
+import dotenv from "dotenv";
 
-// Padrão singleton recomendado pela documentação oficial do Prisma
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
+dotenv.config();
+const connectionString = `${process.env.DATABASE_URL}`;
 
-export const prisma =
-  globalForPrisma.prisma ||
-  new PrismaClient({
-    log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-  });
+const adapter = new PrismaNeon(
+	{ connectionString },
+	{ schema: "myPostgresSchema" }
+);
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+const prisma = new PrismaClient({ adapter });
+
+console.log((prisma as any)._engineType);
+
+export { prisma };
