@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev --turbopack",
 		"build": "next build",
 		"start": "next start",
 		"cypress": "cypress open",
@@ -85,15 +85,7 @@
 		"tailwindcss": "^4.1.13",
 		"typescript": "^5"
 	},
-	"pnpm": {
-		"allowedBuildScripts": [
-			"@prisma/engines",
-			"prisma"
-		],
-		"onlyBuiltDependencies": [
-			"sharp"
-		]
-	},
+	
 	"overrides": {
 		"@types/react": "19.1.12",
 		"@types/react-dom": "19.1.9"

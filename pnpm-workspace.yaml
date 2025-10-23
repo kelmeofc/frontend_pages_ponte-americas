@@ -1,0 +1,17 @@
+packages:
+  - apps/*
+  - packages/*
+  - ./
+
+onlyBuiltDependencies:
+  - '@prisma/client'
+  - '@prisma/engines'
+  - 'cypress'
+  - 'prisma'
+  - 'sharp'
+  - 'unrs-resolver'
+ignoredBuiltDependencies:
+  - 'fsevents'
+sideEffectsCache: true
+preferFrozenLockfile: true
+linkWorkspacePackages: true
