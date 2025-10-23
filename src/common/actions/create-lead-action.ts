@@ -5,6 +5,12 @@ import { ICreateLead } from '@/types/lead';
 
 export async function createLeadAction(leadData: ICreateLead) {
   try {
+    console.log('[CREATE_LEAD] Iniciando criação de lead:', {
+      name: leadData.name,
+      email: leadData.email,
+      brand: leadData.brand,
+    });
+
     const lead = await prisma.lead.create({
       data: {
         name: leadData.name,
@@ -22,9 +28,24 @@ export async function createLeadAction(leadData: ICreateLead) {
         route: leadData.route,
       }
     });
+
+    console.log('[CREATE_LEAD] Lead criado com sucesso:', lead.id);
     return { success: true, id: lead.id };
   } catch (error) {
-    console.error('Erro ao criar lead:', error);
-    return { success: false, error: 'Erro ao salvar lead' };
+    console.error('[CREATE_LEAD] Erro detalhado ao criar lead:', {
+      error,
+      message: error instanceof Error ? error.message : 'Erro desconhecido',
+      stack: error instanceof Error ? error.stack : undefined,
+      leadData: {
+        name: leadData.name,
+        email: leadData.email,
+        brand: leadData.brand,
+      }
+    });
+    
+    return { 
+      success: false, 
+      error: error instanceof Error ? error.message : 'Erro ao salvar lead' 
+    };
   }
 }
