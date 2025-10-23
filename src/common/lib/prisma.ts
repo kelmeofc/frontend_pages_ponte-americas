@@ -1,18 +1,27 @@
 // src/lib/prisma.ts
-import { PrismaClient } from "../../../generated/prisma/client";
+import { PrismaClient } from "../../../src/generated/prisma/client";
+import { withAccelerate } from "@prisma/extension-accelerate";
 import { PrismaNeon } from "@prisma/adapter-neon";
 import dotenv from "dotenv";
 
 dotenv.config();
 const connectionString = `${process.env.DATABASE_URL}`;
 
-const adapter = new PrismaNeon(
-	{ connectionString },
-	{ schema: "myPostgresSchema" }
-);
+const adapter = new PrismaNeon({ connectionString });
 
-const prisma = new PrismaClient({ adapter });
+// Instantiate the extended Prisma client to infer its type
+const extendedPrisma = new PrismaClient({ adapter }).$extends(withAccelerate());
+type ExtendedPrismaClient = typeof extendedPrisma;
 
-console.log((prisma as any)._engineType);
+// Use globalThis for broader environment compatibility
+const globalForPrisma = globalThis as typeof globalThis & {
+	prisma?: ExtendedPrismaClient;
+};
 
-export { prisma };
+// Named export with global memoization
+export const prisma: ExtendedPrismaClient =
+	globalForPrisma.prisma ?? extendedPrisma;
+
+if (process.env.NODE_ENV !== "production") {
+	globalForPrisma.prisma = prisma;
+}
