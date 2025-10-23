@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "app/**": {
+      "includeFiles": "src/generated/prisma/**"
+    }
+  },
+  "build": {
+    "env": {
+      "PRISMA_GENERATE_DATAPROXY": "false"
+    }
+  }
+}

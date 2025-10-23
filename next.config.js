@@ -1,7 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
   outputFileTracingRoot: __dirname,
+  
+  // Configuração para Prisma na Vercel
+  experimental: {
+    outputFileTracingIncludes: {
+      '/api/**/*': ['./src/generated/prisma/**/*'],
+      '/': ['./src/generated/prisma/**/*'],
+    },
+  },
+  
   images: {
     remotePatterns: [
       {
