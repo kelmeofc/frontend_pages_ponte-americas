@@ -3,7 +3,6 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"prebuild": "pnpm approve-builds @prisma/engines prisma && pnpm dlx prisma generate --generator client",
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
