@@ -1,5 +1,5 @@
 // src/lib/prisma.ts
-import { PrismaClient } from "../../../src/generated/prisma/client";
+import { PrismaClient } from "db";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { PrismaNeon } from "@prisma/adapter-neon";
 import dotenv from "dotenv";

@@ -38,6 +38,7 @@
 		"clsx": "^2.1.1",
 		"cobe": "^0.6.3",
 		"date-fns": "^4.1.0",
+		"db": "link:src\\generated\\prisma\\client",
 		"dotenv": "^17.2.3",
 		"embla-carousel-autoplay": "^8.6.0",
 		"embla-carousel-react": "^8.5.2",
