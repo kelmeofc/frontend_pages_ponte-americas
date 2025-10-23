@@ -3,6 +3,7 @@ import { AboutusSection } from "@/components/sections/aboutus-section";
 import { BenefitsSection } from "@/components/sections/benefits-section";
 import { DidaticSection } from "@/components/sections/didatic-section";
 import { CoursesSection } from "@/components/sections/courses-section";
+import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import FAQSection from "@/components/sections/faq-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import WhatsAppWidget from "@/components/whatsapp-widget";
@@ -49,6 +50,7 @@ export default function Home() {
 				<AboutusSection />
 				<DidaticSection topics={DIDATIC_TOPICS} />
 				<BenefitsSection />
+				<TestimonialsSection />
 				<FAQSection faq={FAQ_DATA} />
 				<CtaSection />
 			</main>
