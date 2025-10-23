@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev --turbopack",
+		"dev": "prisma generate && next dev --turbopack",
 		"build": "prisma generate && next build",
 		"start": "next start",
 		"cypress": "cypress open",
@@ -16,7 +16,8 @@
 		"db:push": "prisma db push",
 		"db:migrate:deploy": "prisma migrate deploy",
 		"db:migrate:reset": "prisma migrate reset",
-		"db:seed": "prisma db seed"
+		"db:seed": "prisma db seed",
+		"postinstall": "prisma generate"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^4.1.3",
