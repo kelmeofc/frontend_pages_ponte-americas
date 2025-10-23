@@ -1,6 +1,6 @@
 "use server";
 
-import { getPostBySlug } from "@/common/services/posts/get-post-by-slug";
+import { getPostBySlug } from "@/common/services/blog-posts/get-post-by-slug";
 
 import { notFound } from "next/navigation";
 
