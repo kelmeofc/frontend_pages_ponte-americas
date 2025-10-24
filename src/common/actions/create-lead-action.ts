@@ -1,6 +1,6 @@
 'use server'
 
-import { prisma } from '@/common/lib/prisma';
+import prisma from '@/common/lib/prisma';
 import { ICreateLead } from '@/types/lead';
 
 export async function createLeadAction(leadData: ICreateLead) {
