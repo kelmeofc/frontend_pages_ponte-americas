@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	// 	outputFileTracingRoot: __dirname,
+	// Define explicitamente a raiz para o outputFileTracing a fim de evitar
+	// avisos sobre múltiplos lockfiles ou caminhos de build em monorepos.
+	outputFileTracingRoot: __dirname,
 
 	// Configuração para Prisma na Vercel
 	// outputFileTracingIncludes: {
