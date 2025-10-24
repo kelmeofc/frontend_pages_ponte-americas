@@ -1,35 +1,33 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider   = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider  = "postgresql"
-   url      = env("DATABASE_URL")
+  url       = env("PRISMA_DATABASE_URL")
+  directUrl = env("DATABASE_URL")
 }
 
 model Lead {
-  id          Int      @id @default(autoincrement())
-  name        String
-  email       String?
-  phoneNumber String?  @map("phone_number")
-  brand       String
-  description String
-  website     String?
-  origin      Int // enum value
-  originFont  String?  @map("origin_font")
-  ipAddress   String?  @map("ip_address") // IP do usuário
-  country     String? // país detectado por IP
-  city        String? // cidade detectada por IP
-  userAgent   String?  @map("user_agent") // user agent completo
-  route       String? // rota atual da página
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  id                Int      @id @default(autoincrement())
+  name              String
+  email             String?
+  phoneNumber       String?  @map("phone_number")
+  brand             String
+  description       String
+  company_size      Int?
+  company_segment   String?
+  company_on_market String?
+  website           String?
+  origin            Int
+  originFont        String?  @map("origin_font")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+  city              String?
+  country           String?
+  ipAddress         String?  @map("ip_address")
+  route             String?
+  userAgent         String?  @map("user_agent")
 
   @@map("leads")
 }
