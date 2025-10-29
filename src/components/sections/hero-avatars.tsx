@@ -9,9 +9,9 @@ interface HeroAvatarsProps {
 
 export function HeroAvatars({ className }: HeroAvatarsProps) {
   const avatars = [
-    "/images/avatars/ana-paula.jpg",
-    "/images/avatars/avatar-2.png", 
-    "/images/avatars/avatar-3.png"
+    "/images/avatars/avatar-1.jpg",
+    "/images/avatars/avatar-2.jpg", 
+    "/images/avatars/avatar-3.jpg"
   ]
 
   return (
