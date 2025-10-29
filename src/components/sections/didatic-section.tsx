@@ -111,10 +111,10 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 			<div className="flex flex-col items-center gap-8">
 				{/* Header */}
 				<div className="text-center space-y-4 px-2">
-					<h2 className="text-white text-3xl md:text-4xl font-semibold font-clash-display leading-tight">
+					<h2 className="text-white font-semibold font-clash-display leading-tight">
 						NOSSA DIDÁTICA DESCOMPLICADA
 					</h2>
-					<p className="text-white text-lg md:text-xl font-normal font-sans leading-relaxed">
+					<p className="text-gray-300 text-lg md:text-xl font-normal font-sans leading-relaxed">
 						Selecione um tópico e conheça algumas das nossas aulas:
 					</p>
 				</div>
@@ -162,7 +162,7 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 									<TabsTrigger
 										key={topic.id}
 										value={topic.id}
-										className="flex-shrink-0 px-4 py-3 rounded-full text-xs font-medium font-sans uppercase transition-all duration-200 data-[state=active]:bg-indigo-600 data-[state=active]:text-white data-[state=inactive]:bg-gray-200 data-[state=inactive]:text-indigo-600 hover:bg-indigo-100 whitespace-nowrap"
+										className="shrink-0 px-4 py-3 rounded-full text-xs font-medium font-sans uppercase transition-all duration-200 data-[state=active]:bg-indigo-600 data-[state=active]:text-white data-[state=inactive]:bg-gray-200 data-[state=inactive]:text-indigo-600 hover:bg-indigo-100 whitespace-nowrap"
 									>
 										{topic.label}
 									</TabsTrigger>
@@ -172,14 +172,14 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 
 						{/* Video Content */}
 						<div className="mt-8 space-y-8">
-							<div className="flex flex-col items-center px-4">
-								<div className="w-full max-w-4xl">
+							<div className="flex flex-col justify-center items-center px-4">
+								
 									{activeTopicData?.videoUrl ? (
 										<PandaVideoPlayer
 											key={activeTopicData.id}
 											src={activeTopicData.videoUrl}
 											poster={activeTopicData.placeholder}
-											className="w-full"
+											className="max-w-[600px]"
 											autoPlay={false}
 											muted={true}
 											controls={true}
@@ -194,7 +194,7 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 											</div>
 										</div>
 									)}
-								</div>
+							
 
 								<p className="text-white text-xl font-normal font-sans leading-relaxed mt-8">
 									E muito mais...

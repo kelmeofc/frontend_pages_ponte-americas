@@ -8,25 +8,17 @@ import {
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
-	type CarouselApi,
 } from "@/components/ui/carousel";
-import { GradientText } from "@/components/ui/gradient-text";
+
+import Autoplay from "embla-carousel-autoplay";
 import { CourseCard } from "./course-card";
 import { COURSES_DATA } from "@/common/constants";
 
 export const CoursesSection = () => {
-	const carouselApiRef = useRef<CarouselApi | null>(null);
+	 const autoplayRef = useRef(
+			Autoplay({ delay: 3000, stopOnInteraction: true })
+		);
 
-	// Auto-slide every 3 seconds
-	useEffect(() => {
-		const interval = setInterval(() => {
-			if (carouselApiRef.current) {
-				carouselApiRef.current.scrollNext();
-			}
-		}, 3000);
-
-		return () => clearInterval(interval);
-	}, []);
 
 	return (
 		<section id="courses" className="w-full  py-20">
@@ -46,9 +38,6 @@ export const CoursesSection = () => {
 							loop: true,
 							slidesToScroll: 1,
 							containScroll: "trimSnaps",
-						}}
-						setApi={(api) => {
-							carouselApiRef.current = api;
 						}}
 						className="w-full"
 					>
