@@ -187,7 +187,7 @@ export function PandaVideoPlayer({
 					<button
 						onClick={handleVideoClick}
 						disabled={isLoading}
-						className="panda-muted-indicator-impact-wrapper panda-muted-indicator-item animate-pulse hover:scale-105 transition-transform duration-300 flex flex-col items-center px-6 py-4 bg-black/60 rounded-2xl backdrop-blur-sm border border-white/20 group/button disabled:opacity-50 disabled:cursor-not-allowed"
+						className="panda-muted-indicator-impact-wrapper panda-muted-indicator-item animate-pulse hover:scale-105 transition-transform duration-300 flex flex-col items-center px-6 py-4 bg-black/60 rounded-2xl backdrop-blur-sm border border-white/20 group/button disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
 					>
 						{/* Texto Superior */}
 						<span className="text-white text-sm font-medium">Clique aqui</span>

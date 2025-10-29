@@ -69,7 +69,7 @@ export default function FAQSection({ faq }: { faq: FAQArray }) {
 							devolvemos todo o seu dinheiro de forma simples e segura.
 						</p>
 
-						<PrimaryButton size="lg" className="">
+						<PrimaryButton size="lg" className="" href="/">
 							QUERO MUDAR DE VIDA
 						</PrimaryButton>
 					</aside>

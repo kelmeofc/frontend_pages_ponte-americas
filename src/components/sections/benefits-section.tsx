@@ -65,7 +65,7 @@ export function BenefitsSection() {
 				{/* CTA Button */}
 				<PrimaryButton
 					size="lg"
-					className="bg-gradient-to-r from-red-700 to-indigo-600 text-white font-medium px-8 py-4 rounded-lg uppercase"
+					className="uppercase"
 				>
 					quero mudar de vida
 				</PrimaryButton>

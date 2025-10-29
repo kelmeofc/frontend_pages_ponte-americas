@@ -11,30 +11,30 @@ export function HeroSection() {
   return (
 		<section
 			id="home"
-			className="relative min-h-screen bg-gradient-to-r from-[#05060b] to-[#05060b] overflow-hidden"
+			className="relative min-h-screen overflow-hidden"
 		>
-			<Container className="flex flex-col items-center justify-center min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8 gap-2">
+			<Container className="flex flex-col items-center justify-center min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 gap-[8px]">
 				{/* Testimonial */}
 				<HeroTestimonial />
 
 				{/* Description */}
-				<p className="text-gray-200 text-sm sm:text-base max-w-3xl leading-relaxed text-center">
-					Não é um simples curso, somos um time completo para te ajudar a
-					entender os Estados Unidos evitando os erros que custam MILHARES de
-					dólares para brasileiros que viajam despreparados.  
-				</p>
 
 				{/* Main Heading */}
-				<h1 className="font-clash-display  font-semibold leading-tight text-center mb-8">
+				<h1 className="font-clash-display  font-semibold leading-tight text-center">
 					<GradientText>A VIRADA DE CHAVE</GradientText>
 					<br className="sm:hidden" />
 					<span className="text-white ml-3">PARA MORAR NOS EUA</span>
 					<br />
 					<span className="text-white">QUE VOCÊ PRECISA ENTENDER AGORA</span>
 				</h1>
+				<p className="text-gray-300 text-sm sm:text-base max-w-3xl leading-relaxed text-center">
+					Não é um simples curso, somos um time completo para te ajudar a
+					entender os Estados Unidos evitando os erros que custam MILHARES de
+					dólares para brasileiros que viajam despreparados.
+				</p>
 
 				{/* Video */}
-				<HeroVideo className="w-full max-w-[573px] mb-8" />
+				<HeroVideo className="w-full max-w-[650px] mb-2" />
 
 				{/* CTA Button */}
 				<PrimaryButton

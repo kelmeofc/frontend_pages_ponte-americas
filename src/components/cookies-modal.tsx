@@ -6,6 +6,7 @@ import { PrimaryButton } from "@/components/primary-button";
 import { useConsent } from "@/common/hooks/use-consent";
 import { useConsentAnalytics } from "@/common/hooks/use-consent-analytics";
 import { ConsentChoice } from "@/common/types/consent";
+import Link from "next/link";
 
 export function CookiesModal() {
   const { shouldShowModal, setConsent } = useConsent();
@@ -36,12 +37,12 @@ export function CookiesModal() {
         </p>
         <p className="text-sm text-neutral-700 leading-relaxed">
           A Ponte Américas usa cookies, píxeis, tags e tecnologias semelhantes para medir audiência e personalizar sua experiência. Saiba mais sobre como utilizamos seus dados e cookies em nossa{" "}
-          <a 
+          <Link 
             href="/politica-de-privacidade" 
             className="text-primary underline hover:text-primary/80 transition-colors"
           >
             Política de Privacidade
-          </a>.
+          </Link>.
           {" "}
           Clique em <strong>Aceitar todos</strong> para permitir todos os cookies, <strong>Apenas essenciais</strong> para limitar ao necessário para o funcionamento do site, ou <strong>Recusar todos</strong> para usar o mínimo possível.
         </p>

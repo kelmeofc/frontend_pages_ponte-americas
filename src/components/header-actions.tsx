@@ -8,12 +8,10 @@ import { HeaderLanguageDropdown } from "./header-language-dropdown"
 
 interface HeaderActionsProps {
   variant?: "desktop" | "mobile"
-  onLinkClick?: () => void
 }
 
 export function HeaderActions({ 
   variant = "desktop", 
-  onLinkClick
 }: HeaderActionsProps) {
   if (variant === "mobile") {
     return (
@@ -48,8 +46,9 @@ export function HeaderActions({
       <ThemeToggle />
       <HeaderLanguageDropdown variant="desktop" />
       
-      <Link href="/coming-soon">
+   
         <PrimaryButton
+          href="/coming-soon"
           icon={<ArrowRight className="h-4 w-4" />}
           size="sm"
           variant="outline"
@@ -57,17 +56,18 @@ export function HeaderActions({
         >
           JÁ SOU ALUNO
         </PrimaryButton>
-      </Link>
+   
 
-      <Link href="/coming-soon">
+   
         <PrimaryButton
           icon={<ArrowRight className="h-4 w-4" />}
           size="sm"
+          href="/coming-soon"
           className="px-3 whitespace-nowrap"
         >
           COMEÇAR AGORA
         </PrimaryButton>
-      </Link>
+  
     </div>
   )
 }

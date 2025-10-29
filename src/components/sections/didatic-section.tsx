@@ -107,7 +107,7 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 	}, [activeTopic, centerActiveTab]);
 
 	return (
-		<section id="didatic" className="w-full py-20 bg-black">
+		<section id="didatic" className="w-full py-20">
 			<div className="flex flex-col items-center gap-8">
 				{/* Header */}
 				<div className="text-center space-y-4 px-2">
@@ -205,9 +205,9 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 				</div>
 
 				{/* CTA Button */}
-				<Link href="#">
-					<PrimaryButton size="lg">QUERO MUDAR DE VIDA</PrimaryButton>
-				</Link>
+		
+					<PrimaryButton size="lg" href="/">QUERO MUDAR DE VIDA</PrimaryButton>
+		
 			</div>
 		</section>
 	);
