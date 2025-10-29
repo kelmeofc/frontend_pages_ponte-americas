@@ -40,7 +40,7 @@ export function HeroSection() {
 				<PrimaryButton
 					icon={<ArrowRight className="size-4" />}
 					size="lg"
-					className="bg-gradient-to-r from-[#bb0711] to-[#3f4adf] text-white font-medium px-8 py-4 rounded-lg"
+					className="bg-linear-to-r from-[#bb0711] to-[#3f4adf] text-white font-medium px-8 py-4 rounded-lg"
 				>
 					QUERO MUDAR DE VIDA
 				</PrimaryButton>

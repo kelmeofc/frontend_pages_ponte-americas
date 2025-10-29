@@ -1,4 +1,5 @@
 import { cn } from "@/common/lib/utils"
+import Link from "next/link"
 import { type ButtonHTMLAttributes, forwardRef, type ReactNode } from "react"
 
 export interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -7,6 +8,7 @@ export interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonEleme
   icon?: ReactNode
   iconPosition?: "left" | "right"
   isShine?: boolean
+  href?: string
 }
 
 // Constantes para melhor manutenibilidade
@@ -50,6 +52,7 @@ const PrimaryButton = forwardRef<HTMLButtonElement, PrimaryButtonProps>(
     iconPosition = "right", 
     isShine = true,
     children, 
+    href,
     ...props 
   }, ref) => {
     // Memoização do ícone para evitar re-renders desnecessários
@@ -70,16 +73,14 @@ const PrimaryButton = forwardRef<HTMLButtonElement, PrimaryButtonProps>(
     );
 
     return (
-      <button
-        ref={ref}
-        className={buttonClasses}
-        {...props}
-      >
-        {iconPosition === "left" && iconElement}
-        {children}
-        {iconPosition === "right" && iconElement}
-      </button>
-    )
+			<Link href={href || "#"}>
+				<button ref={ref} className={buttonClasses} {...props}>
+					{iconPosition === "left" && iconElement}
+					{children}
+					{iconPosition === "right" && iconElement}
+				</button>
+			</Link>
+		);
   }
 )
 

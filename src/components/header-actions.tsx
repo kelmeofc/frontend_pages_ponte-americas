@@ -18,34 +18,27 @@ export function HeaderActions({
   if (variant === "mobile") {
     return (
       <div className="space-y-4">
-        <Link
-          href="/coming-soon"
-          onClick={onLinkClick}
-          className="block"
-        >
+    
           <PrimaryButton 
             className="w-full" 
             variant="outline" 
             size="lg"
             icon={<ArrowRight className="h-5 w-5" />}
+            href="/coming-soon"
           >
             JÁ SOU ALUNO
           </PrimaryButton>
-        </Link>
+        
 
-        <Link
-          href="/coming-soon"
-          onClick={onLinkClick}
-          className="block"
-        >
           <PrimaryButton
             icon={<ArrowRight className="h-5 w-5" />}
             className="w-full"
+            href="/coming-soon"
             size="lg"
           >
             COMEÇAR AGORA
           </PrimaryButton>
-        </Link>
+      
       </div>
     )
   }
