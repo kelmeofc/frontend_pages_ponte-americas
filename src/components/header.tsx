@@ -177,7 +177,7 @@ export function Header() {
 							</nav>
 
 							<div className="mt-10">
-								<HeaderActions variant="mobile" onLinkClick={handleLinkClick} />
+								<HeaderActions variant="mobile" />
 							</div>
 						</div>
 					</Container>
