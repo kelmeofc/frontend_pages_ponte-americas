@@ -13,9 +13,27 @@ export const SITE_CONFIG = {
 // Social media links
 export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/ponteamericas',
-  facebook: 'https://www.facebook.com/ponteamericas',
+  facebook: 'https://www.facebook.com/ponteamericas', 
   linkedin: 'https://www.linkedin.com/company/ponteamericas',
 } as const;
+
+// Contact information used across the site
+export const CONTACT = {
+  email: 'contato@ponteamericas.com',
+  phoneDisplay: '+1 321 429-6742',
+  phoneHref: '+13214296742',
+  hours: 'Seg-Sex: 9h às 18h (Brasil)',
+} as const;
+
+// Navigation links for header/footer
+export const NAV_LINKS = [
+  { label: 'Início', href: '/#home' },
+  { label: 'Nosso time', href: '/#about-us' },
+  { label: 'Cursos', href: '/#courses' },
+  { label: 'Depoimentos', href: '/#testimonials' },
+  { label: 'Começar Agora', href: '/coming-soon' },
+  { label: 'Blog', href: '/blog' },
+] as const;
 
 // FAQ data
 export const FAQ_DATA = [

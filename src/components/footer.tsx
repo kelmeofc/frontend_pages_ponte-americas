@@ -1,11 +1,19 @@
-import { Mail, Phone, Clock, Instagram, Facebook, Linkedin } from "lucide-react"
-import { Container } from "./ui/container"
-import Link from "next/link"
-import Image from "next/image"
-import { SOCIAL_LINKS } from "@/common/constants"
+import {
+	Mail,
+	Phone,
+	Clock,
+	Instagram,
+	Facebook,
+	Linkedin,
+} from "lucide-react";
+import { Container } from "./ui/container";
+import Link from "next/link";
+import Image from "next/image";
+import { SOCIAL_LINKS, CONTACT, NAV_LINKS } from "@/common/constants";
+import CurrentYear from "./current-year.client";
 
 export default function Footer() {
-  return (
+	return (
 		<footer className="py-16 bg-white border-t border-gray-200">
 			<Container>
 				<div className="flex flex-col md:flex-row justify-between items-center md:items-start">
@@ -21,72 +29,30 @@ export default function Footer() {
 							/>
 						</div>
 						<p className="text-sm text-gray-600 mb-6 max-w-sm">
-							O Ponte Américas é sua ponte para os Estados Unidos. Um programa completo que te prepara para viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.
+							O Ponte Américas é um programa completo que te prepara para viver,
+							trabalhar e prosperar nos EUA, evitando os erros que custam
+							milhares de dólares.
 						</p>
-						<p className="text-xs text-gray-500">
-							© 2025 Ponte Américas - Todos os direitos
-							reservados.
-						</p>
+				<p className="text-xs text-gray-500">
+					© <CurrentYear /> Ponte Américas - Todos os direitos reservados.
+				</p>
 					</div>
 
-					{/* Links de Navegação */}
-					<div className="mb-8 md:mb-0 text-center md:text-left">
-						<h3 className="text-base font-medium mb-4 relative inline-block after:content-[''] after:absolute after:bottom-[-4px] after:left-0 md:after:left-0 after:right-0 md:after:right-auto after:mx-auto md:after:mx-0 after:w-10 after:h-[3px] after:bg-primary after:rounded-full">
-							Institucional
-						</h3>
-						<ul className="space-y-2 text-sm text-gray-600">
-							<li>
-								<Link
-									href="/#home"
-									className="hover:text-primary transition-colors"
-								>
-									Início
+				{/* Links de Navegação */}
+				<div className="mb-8 md:mb-0 text-center md:text-left">
+					<h3 className="text-base font-medium mb-4 relative inline-block after:content-[''] after:absolute after:bottom-[-4px] after:left-0 md:after:left-0 after:right-0 md:after:right-auto after:mx-auto md:after:mx-0 after:w-10 after:h-[3px] after:bg-primary after:rounded-full">
+						Institucional
+					</h3>
+					<ul className="space-y-2 text-sm text-gray-600">
+						{NAV_LINKS.map((link) => (
+							<li key={link.href}>
+								<Link href={link.href} className="hover:text-primary transition-colors">
+									{link.label}
 								</Link>
 							</li>
-							<li>
-								<Link
-									href="/#about-us"
-									className="hover:text-primary transition-colors"
-								>
-									Nosso time
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/#courses"
-									className="hover:text-primary transition-colors"
-								>
-									Cursos
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/#testimonials"
-									className="hover:text-primary transition-colors"
-								>
-									Depoimentos
-								</Link>
-							</li>
-
-							<li>
-								<Link
-									href="/coming-soon"
-									className="hover:text-primary transition-colors"
-								>
-									Começar Agora
-								</Link>
-							</li>
-
-							<li>
-								<Link
-									href="/blog"
-									className="hover:text-primary transition-colors"
-								>
-									Blog
-								</Link>
-							</li>
-						</ul>
-					</div>
+						))}
+					</ul>
+				</div>
 
 					{/* Links de Informações */}
 					<div className="mb-8 md:mb-0 text-center md:text-left">
@@ -119,33 +85,29 @@ export default function Footer() {
 							Contato
 						</h3>
 						<ul className="space-y-2 text-sm text-gray-600 mb-6">
-							<li className="flex items-center gap-2 justify-center md:justify-start">
-								<Mail className="h-4 w-4" />
-								<a
-									href="mailto:contato@ponteamericas.com"
-									className="hover:text-primary transition-colors"
-								>
-									contato@ponteamericas.com
-								</a>
-							</li>
-							<li className="flex items-center gap-2 justify-center md:justify-start">
-								<Phone className="h-4 w-4" />
-								<a
-									href="tel:+13214296742"
-									className="hover:text-primary transition-colors"
-								>
-									+1 321 429-6742
-								</a>
-							</li>
-							<li className="flex items-center gap-2 justify-center md:justify-start">
-								<Clock className="h-4 w-4" />
-								<span>Seg-Sex: 9h às 18h (Brasil)</span>
-							</li>
+						<li className="flex items-center gap-2 justify-center md:justify-start">
+							<Mail className="h-4 w-4" />
+							<a href={`mailto:${CONTACT.email}`} className="hover:text-primary transition-colors">
+								{CONTACT.email}
+							</a>
+						</li>
+						<li className="flex items-center gap-2 justify-center md:justify-start">
+							<Phone className="h-4 w-4" />
+							<a href={`tel:${CONTACT.phoneHref}`} className="hover:text-primary transition-colors">
+								{CONTACT.phoneDisplay}
+							</a>
+						</li>
+						<li className="flex items-center gap-2 justify-center md:justify-start">
+							<Clock className="h-4 w-4" />
+							<span>{CONTACT.hours}</span>
+						</li>
 						</ul>
-						
+
 						{/* Redes Sociais */}
 						<div>
-							<h4 className="text-sm font-medium mb-3 text-gray-700">Siga-nos</h4>
+							<h4 className="text-sm font-medium mb-3 text-gray-700">
+								Siga-nos
+							</h4>
 							<div className="flex gap-3 justify-center md:justify-start">
 								<a
 									href={SOCIAL_LINKS.instagram}
@@ -193,4 +155,3 @@ export default function Footer() {
 		</footer>
 	);
 }
-
