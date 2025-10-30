@@ -57,6 +57,7 @@ export const PlatformSection: React.FC = () => {
             <PrimaryButton
               size="lg"
               className="uppercase"
+              href="/lp"
               aria-label="Quero mudar de vida"
             >
               quero mudar de vida

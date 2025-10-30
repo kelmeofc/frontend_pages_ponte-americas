@@ -10,11 +10,14 @@ export default async function BlogGrid({ searchParams }: { searchParams?: any })
   const limit = 9;
 
   const data = await getPosts(currentPage, limit);
-  
+
   // Verificação adicional para garantir que data e data.posts existam
   if (!data || !data.posts) {
     return (
-      <section className="w-full pt-20 bg-black min-h-screen">
+      <section className="w-full pt-20 bg-black  min-h-screen" style={{
+        background:
+          "radial-gradient(37.55% 29.18% at 113.44% 43.98%, #290886 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(54.06% 49.74% at 40.94% 68.84%, rgba(41, 8, 134, 0.20) 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(68.5% 61.39% at 55.21% -19.94%, #290886 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(49.46% 42.97% at -9.9% 105.52%, #B00D23 0%, rgba(0, 0, 0, 0.00) 100%), #05060B",
+      }}>
         <Container section={true}>
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white md:mb-12 mb-8">
             Blog Ponte Américas
@@ -26,7 +29,10 @@ export default async function BlogGrid({ searchParams }: { searchParams?: any })
   }
 
   return (
-    <section className="w-full pt-20 bg-black">
+    <section className="w-full pt-20 bg-black" style={{
+      background:
+        "radial-gradient(37.55% 29.18% at 113.44% 43.98%, #290886 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(54.06% 49.74% at 40.94% 68.84%, rgba(41, 8, 134, 0.20) 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(68.5% 61.39% at 55.21% -19.94%, #290886 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(49.46% 42.97% at -9.9% 105.52%, #B00D23 0%, rgba(0, 0, 0, 0.00) 100%), #05060B",
+    }}>
       <Container section={true}>
         <h2 className="text-2xl md:text-3xl font-bold text-center text-white md:mb-12 mb-8">
           Blog Ponte Américas

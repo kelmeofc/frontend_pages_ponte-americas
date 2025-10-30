@@ -22,7 +22,7 @@ export function HeaderActions({
             variant="outline" 
             size="lg"
             icon={<ArrowRight className="h-5 w-5" />}
-            href="/coming-soon"
+            href="/members"
           >
             JÁ SOU ALUNO
           </PrimaryButton>
@@ -31,7 +31,7 @@ export function HeaderActions({
           <PrimaryButton
             icon={<ArrowRight className="h-5 w-5" />}
             className="w-full"
-            href="/coming-soon"
+            href="/lp"
             size="lg"
           >
             COMEÇAR AGORA
@@ -48,7 +48,7 @@ export function HeaderActions({
       
    
         <PrimaryButton
-          href="/coming-soon"
+          href="/members"
           icon={<ArrowRight className="h-4 w-4" />}
           size="sm"
           variant="outline"
@@ -62,7 +62,7 @@ export function HeaderActions({
         <PrimaryButton
           icon={<ArrowRight className="h-4 w-4" />}
           size="sm"
-          href="/coming-soon"
+          href="/lp"
           className="px-3 whitespace-nowrap"
         >
           COMEÇAR AGORA

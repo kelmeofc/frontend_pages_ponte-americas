@@ -66,6 +66,7 @@ export function BenefitsSection() {
 				<PrimaryButton
 					size="lg"
 					className="uppercase"
+					href="/lp"
 				>
 					quero mudar de vida
 				</PrimaryButton>

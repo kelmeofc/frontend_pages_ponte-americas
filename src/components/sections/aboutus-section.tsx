@@ -41,7 +41,8 @@ export function AboutusSection() {
 						<PrimaryButton
 							variant="default"
 							size="lg"
-							className="bg-gradient-to-r from-red-700 to-indigo-600 text-white font-medium font-sans uppercase"
+							className="uppercase"
+							href="/lp"
 						>
 							quero mudar de vida
 						</PrimaryButton>

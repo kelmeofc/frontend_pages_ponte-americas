@@ -111,7 +111,7 @@ export function TestimonialsSection() {
 				{/* CTA Button */}
 				<PrimaryButton
 					size="lg"
-          href="/"
+          href="/lp"
           className="uppercase"
 				>
 					Quero mudar de vida

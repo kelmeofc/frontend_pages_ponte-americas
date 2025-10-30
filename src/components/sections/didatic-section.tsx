@@ -206,7 +206,7 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 
 				{/* CTA Button */}
 		
-					<PrimaryButton size="lg" href="/">QUERO MUDAR DE VIDA</PrimaryButton>
+					<PrimaryButton size="lg" href="/lp" className="uppercase">QUERO MUDAR DE VIDA</PrimaryButton>
 		
 			</div>
 		</section>
