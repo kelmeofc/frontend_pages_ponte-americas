@@ -5,6 +5,7 @@ import { DidaticSection } from "@/components/sections/didatic-section";
 import { CoursesSection } from "@/components/sections/courses-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { PlatformSection } from "@/components/sections/platform-section";
+import TeamSection from "@/components/sections/team-section";
 import FAQSection from "@/components/sections/faq-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import WhatsAppWidget from "@/components/whatsapp-widget";
@@ -66,6 +67,7 @@ export default function Home() {
 							"radial-gradient(45.87% 45.13% at 115.62% -4.79%, #B00D23 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(58.16% 77.72% at -29.41% 62.58%, #B00D23 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(17.21% 19.98% at 107.36% 43.68%, #290886 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(46.08% 71.01% at 0% 107.07%, #290886 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(35.99% 40.17% at 27.71% -5.08%, #290886 0%, rgba(0, 0, 0, 0.00) 100%), #000",
 					}}
 				>
+					<TeamSection />
 					<DidaticSection topics={DIDATIC_TOPICS} />
 					<TestimonialsSection />
 				</div>
