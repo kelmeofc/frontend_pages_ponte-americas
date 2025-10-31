@@ -1,6 +1,7 @@
 import { HeroSectionLp } from "@/components/lp/sections/hero-section-lp";
 import { JourneySectionLp } from "@/components/lp/sections/journey-section-lp";
 import { IcebreakerSectionLp } from "@/components/lp/sections/icebreaker-section-lp";
+import { PricingSectionLp } from "@/components/lp/sections/pricing-section-lp";
 
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import TeacherSection from "@/components/sections/teacher-section";
@@ -57,7 +58,7 @@ export default function Home() {
         </div>
         <TeacherSection />
         <JourneySectionLp />
-        <IcebreakerSectionLp />
+     
 
         <div
           className="bg-black"
@@ -68,8 +69,10 @@ export default function Home() {
         >
           <TestimonialsSection />
         </div>
+        
+           <IcebreakerSectionLp />
+        <PricingSectionLp />
 
-    
         <FAQSection faq={FAQ_DATA} />
         <CtaSection />
       </main>

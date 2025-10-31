@@ -9,19 +9,19 @@ const ICEBREAKER_DATA = [
     id: "restaurant",
     text: "Escolher o restaurante para jantar na quarta-feira",
     emoji: "🍱",
-    svgPath: "/images/svg/emojis/🍱.svg"
+    svgPath: "/images/svg/emojis/sushi.svg"
   },
   {
     id: "convince-uncle",
     text: "Ensinar ao seu tio que a AMÉRICA é a melhor escolha",
     emoji: "🫨",
-    svgPath: "/images/svg/emojis/🫨.svg"
+    svgPath: "/images/svg/emojis/frightened.svg"
   },
   {
     id: "family-trip",
     text: "Decidir para onde levar a sua família: Disney ou Miami?",
     emoji: "✈️",
-    svgPath: "/images/svg/emojis/✈️.svg"
+    svgPath: "/images/svg/emojis/plane.svg"
   }
 ]
 
@@ -35,8 +35,8 @@ interface IcebreakerCardProps {
 function IcebreakerCard({ text, emoji, svgPath, className }: IcebreakerCardProps) {
   return (
     <div className={cn(
-      "relative h-20 sm:h-24 w-full bg-gradient-to-r from-neutral-200 via-white via-41% to-white",
-      "rounded-2xl border border-red-700",
+      "relative h-20 sm:h-24 w-full bg-linear-to-r from-neutral-200 via-white via-41% to-white",
+      "rounded-2xl border",
       "flex items-center justify-start pl-12 sm:pl-20",
       className
     )}>

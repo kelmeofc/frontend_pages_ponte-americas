@@ -120,3 +120,6 @@ export { DIDATIC_TOPICS } from './didatic-topics';
 
 // Export courses data
 export { COURSES_DATA, type ICourse } from './courses';
+
+// Export pricing data
+export { PRICING_DATA } from './pricing';
