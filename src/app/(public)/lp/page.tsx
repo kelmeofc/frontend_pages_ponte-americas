@@ -1,4 +1,5 @@
 import { HeroSectionLp } from "@/components/lp/sections/hero-section-lp";
+import { JourneySectionLp } from "@/components/lp/sections/journey-section-lp";
 
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import TeacherSection from "@/components/sections/teacher-section";
@@ -53,9 +54,9 @@ export default function Home() {
           <HeroSectionLp />
         
         </div>
-     
-
         <TeacherSection />
+        <JourneySectionLp />
+  
 
         <div
           className="bg-black"

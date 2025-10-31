@@ -8,13 +8,13 @@ import { HeroVideo } from "@/components/sections/hero-video"
 import { ArrowRight } from "lucide-react"
 
 export function HeroSectionLp() {
-  return (
+	return (
 		<section
 			id="home"
 			className="relative min-h-screen overflow-hidden"
 		>
 			<Container className="flex flex-col items-center justify-center min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 gap-2">
-	
+
 
 				{/* Description */}
 
@@ -26,7 +26,7 @@ export function HeroSectionLp() {
 					<br />
 					<span className="text-white">QUE VOCÊ PRECISA ENTENDER AGORA</span>
 				</h1>
-		 
+
 
 				{/* Video */}
 				<HeroVideo className="w-full max-w-[650px] mb-2" />
