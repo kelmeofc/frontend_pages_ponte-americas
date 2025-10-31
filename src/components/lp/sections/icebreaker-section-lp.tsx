@@ -1,0 +1,107 @@
+"use client"
+
+import Image from "next/image"
+import { Container } from "@/components/ui/container"
+import { cn } from "@/common/lib/utils"
+
+const ICEBREAKER_DATA = [
+  {
+    id: "restaurant",
+    text: "Escolher o restaurante para jantar na quarta-feira",
+    emoji: "🍱",
+    svgPath: "/images/svg/emojis/🍱.svg"
+  },
+  {
+    id: "convince-uncle",
+    text: "Ensinar ao seu tio que a AMÉRICA é a melhor escolha",
+    emoji: "🫨",
+    svgPath: "/images/svg/emojis/🫨.svg"
+  },
+  {
+    id: "family-trip",
+    text: "Decidir para onde levar a sua família: Disney ou Miami?",
+    emoji: "✈️",
+    svgPath: "/images/svg/emojis/✈️.svg"
+  }
+]
+
+interface IcebreakerCardProps {
+  text: string
+  emoji: string
+  svgPath: string
+  className?: string
+}
+
+function IcebreakerCard({ text, emoji, svgPath, className }: IcebreakerCardProps) {
+  return (
+    <div className={cn(
+      "relative h-20 sm:h-24 w-full bg-gradient-to-r from-neutral-200 via-white via-41% to-white",
+      "rounded-2xl border border-red-700",
+      "flex items-center justify-start pl-12 sm:pl-20",
+      className
+    )}>
+      {/* Emoji/Icon */}
+      <div className="absolute -left-8 sm:-left-9 top-1/2 -translate-y-1/2 w-16 h-16 sm:w-[72px] sm:h-[72px] z-10">
+        <Image
+          src={svgPath}
+          alt={emoji}
+          width={72}
+          height={72}
+          className="w-full h-full object-contain"
+        />
+      </div>
+
+      {/* Text */}
+      <p className="text-stone-950 text-base sm:text-lg md:text-xl font-normal font-rubik leading-6 pr-4">
+        {text}
+      </p>
+    </div>
+  )
+}
+
+export function IcebreakerSectionLp() {
+  return (
+    <section className="bg-white py-16 md:py-20 overflow-hidden">
+      <Container className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12">
+        {/* Left Content */}
+        <div className="flex flex-col justify-start items-start gap-4 max-w-lg">
+          {/* Icon Container */}
+
+          <Image
+            src="/images/svg/red-check.svg"
+            alt="Check icon"
+            width={64}
+            height={64}
+            className="size-20"
+          />
+
+          {/* Title */}
+          <div className="pb-2">
+            <h2 className="text-gray-800 text-2xl sm:text-3xl md:text-4xl font-semibold font-clash-display leading-tight">
+              QUAIS SERÃO<br />
+              SUAS MAIORES<br />
+              DIFICULDADES<br />
+              APÓS O PROGRAMA?
+            </h2>
+          </div>
+        </div>
+
+        {/* Right Content - Cards */}
+        <div className="w-full lg:w-[700px] flex flex-col gap-2.5">
+          {ICEBREAKER_DATA.map((item, index) => (
+            <IcebreakerCard
+              key={item.id}
+              text={item.text}
+              emoji={item.emoji}
+              svgPath={item.svgPath}
+              className={cn(
+                "transform transition-all duration-300 hover:scale-[1.02]",
+                "hover:shadow-lg hover:border-red-600"
+              )}
+            />
+          ))}
+        </div>
+      </Container>
+    </section>
+  )
+}
