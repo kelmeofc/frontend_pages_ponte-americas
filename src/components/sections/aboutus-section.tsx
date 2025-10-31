@@ -6,15 +6,14 @@ export function AboutusSection() {
   return (
 		<section id="about-us" className="w-full bg-white py-16 lg:py-28">
 			<div className="container mx-auto px-4 lg:px-28">
-				<div className="flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-16">
+				<div className="flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-16 ">
 					{/* Left Column - Text Content */}
-					<div className="w-full lg:w-[627px] flex flex-col justify-start items-start gap-6">
+					<div className="w-full lg:w-[750px] flex flex-col justify-start items-start gap-6">
 						<div className="w-full flex flex-col justify-start items-start gap-4">
-							<h2 className="w-full text-3xl lg:text-4xl font-semibold font-clash-display uppercase leading-tight">
-								<GradientText>
-									o time que vai te guiar <br className="sm:hidden" />{" "}
-									durante toda a jornada
-								</GradientText>
+							<h2 className="w-full font-semibold uppercase">
+						
+									Para quem é o <GradientText>Ponte Américas?</GradientText>
+								
 							</h2>
 							<div className="w-full text-gray-800 text-lg lg:text-xl font-normal font-sans leading-relaxed">
 								<p className="mb-4">
@@ -74,7 +73,7 @@ export function AboutusSection() {
 						</div>
 
 						{/* Bottom Right Image - Beach */}
-						<div className="absolute right-[0px] bottom-[-40px] lg:bottom-[-90px] z-20">
+						<div className="absolute right-0 -bottom-10 lg:bottom-[-90px] z-20">
 							<Image
 								src="/images/about-us-section/image-card-3.png"
 								alt="Praia tropical"

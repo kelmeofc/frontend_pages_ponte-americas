@@ -97,7 +97,7 @@ export function LeadFormBlog({ articleUri }: { articleUri: string }) {
                 <PrimaryButton
                     type="submit"
                     size="lg"
-                    className="w-full h-12 px-8 py-4 bg-gradient-to-r from-red-700 to-indigo-600 rounded-lg text-white font-medium uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full h-12 px-8 py-4 bg-linear-to-r from-red-700 to-indigo-600 rounded-lg text-white font-medium uppercase disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isSubmitting || !isValid}
                     icon={<ArrowRight className="w-5 h-5" />}
                     iconPosition="right"

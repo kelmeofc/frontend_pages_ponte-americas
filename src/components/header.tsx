@@ -15,12 +15,12 @@ const navItems: INavItem[] = [
 		href: "/#home",
 	},
 	{
-		title: "Cursos",
-		href: "/#courses",
+		title: "Programas",
+		href: "/#programs",
 	},
 	{
-		title: "Nosso time",
-		href: "/#about-us",
+		title: "Professores",
+		href: "/#team",
 	},
 	{
 		title: "Depoimentos",
@@ -40,7 +40,7 @@ export function Header() {
 	// Controlar efeito de scroll
 	useEffect(() => {
 		if (typeof window === 'undefined') return;
-		
+
 		const handleScroll = () => setIsScrolled(window.scrollY > 10);
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
@@ -81,11 +81,10 @@ export function Header() {
 		<>
 			{/* Header Principal - Desktop e Mobile */}
 			<header
-				className={`w-screen border-b border-gray-800 py-4 fixed top-0 left-0 right-0 z-50 ${
-					isScrolled
+				className={`w-screen border-b border-gray-800 py-4 fixed top-0 left-0 right-0 z-50 ${isScrolled
 						? "bg-black/80 backdrop-blur-md"
 						: "bg-black/60 backdrop-blur-xs"
-				}`}
+					}`}
 			>
 				<Container>
 					<div className="flex items-center justify-between w-full">
@@ -100,7 +99,7 @@ export function Header() {
 								<div key={item.title}>
 									{item.hasDropdown ? (
 										<button
-											className="flex items-center text-base font-medium text-foreground hover:text-primary"
+											className="flex items-center text-base font-medium text-foreground hover:font-bold"
 											onClick={(e) => handleDropdownToggle(item.title, e)}
 										>
 											{item.icon && <item.icon className="h-5 w-5 mr-2" />}
@@ -111,7 +110,7 @@ export function Header() {
 										<Link
 											href={item.href}
 											data-testid={`menu-${item.title.toLowerCase()}`}
-											className="text-base font-normal text-white hover:text-primary flex items-center"
+											className="text-base font-normal text-white hover:text-gray-200 flex items-center"
 											onClick={handleLinkClick}
 										>
 											{item.icon && <item.icon className="h-5 w-5 mr-2" />}

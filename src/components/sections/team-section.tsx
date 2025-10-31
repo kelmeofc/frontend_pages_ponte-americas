@@ -65,7 +65,7 @@ export const TeamSection = () => {
               <Image src={posterSrc} alt={member.name} fill className="object-cover" />
              
 
-              <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/40 to-black/80" />
+              <div className="absolute inset-0 bg-linear-to-b from-black/0 via-black/40 to-black/80" />
 
               <div className="absolute left-0 right-0 bottom-6 px-4 text-center">
                 <h3 className="text-white text-2xl font-semibold font-clash-display leading-8 drop-shadow-md">

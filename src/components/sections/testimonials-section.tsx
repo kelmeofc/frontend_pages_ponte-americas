@@ -92,7 +92,7 @@ export function TestimonialsSection() {
 									key={testimonial.id}
 									className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5"
 								>
-									<div className="relative w-full aspect-[9/21] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl hover:scale-[0.98] transition-all duration-300">
+									<div className="relative w-full aspect-9/21 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl hover:scale-[0.98] transition-all duration-300">
 										<Image
 											src={testimonial.image}
 											alt={testimonial.alt}

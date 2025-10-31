@@ -229,11 +229,11 @@
 	}
 
 	h2 {
-		@apply font-clash-display text-xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight;
+		@apply font-clash-display text-xl md:text-3xl lg:text-4xl font-semibold text-gray-900 leading-tight;
 	}
 
 	h3 {
-		@apply font-clash-display text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight;
+		@apply font-clash-display text-lg md:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight;
 	}
 
 	h4 {

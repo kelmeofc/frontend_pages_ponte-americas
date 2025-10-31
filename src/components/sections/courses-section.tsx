@@ -21,12 +21,12 @@ export const CoursesSection = () => {
 
 
 	return (
-		<section id="courses" className="w-full  py-20">
+		<section id="programs" className="w-full  py-20">
 			<div className="flex flex-col justify-center items-center gap-8">
 				{/* Header */}
 				<div className="px-4 flex justify-center items-center">
 					<h2 className="text-center text-white text-3xl md:text-4xl font-semibold font-clash-display leading-9">
-						CONHEÇA NOSSOS CURSOS
+						CONHEÇA NOSSOS PROGRAMAS
 					</h2>
 				</div>
 
@@ -54,11 +54,11 @@ export const CoursesSection = () => {
 
 						<div className="absolute top-1/2 -translate-y-1/2 left-4 right-4">
 							{/* Custom Navigation Buttons */}
-							<CarouselPrevious className="hidden md:flex md:absolute md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20">
+							<CarouselPrevious className="hidden md:flex md:absolute md:left-50 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20 opacity-50 hover:opacity-80">
 								<ArrowLeft className="size-4" />
 							</CarouselPrevious>
 
-							<CarouselNext className="hidden md:flex md:absolute md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20">
+							<CarouselNext className="hidden md:flex md:absolute md:right-50 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20 opacity-50 hover:opacity-80">
 								<ArrowRight className="size-4" />
 							</CarouselNext>
 						</div>

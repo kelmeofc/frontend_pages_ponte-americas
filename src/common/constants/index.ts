@@ -13,7 +13,7 @@ export const SITE_CONFIG = {
 // Social media links
 export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/ponteamericas',
-  facebook: 'https://www.facebook.com/ponteamericas', 
+  facebook: 'https://www.facebook.com/ponteamericas',
   linkedin: 'https://www.linkedin.com/company/ponteamericas',
 } as const;
 
@@ -29,9 +29,9 @@ export const CONTACT = {
 export const NAV_LINKS = [
   { label: 'Início', href: '/#home' },
   { label: 'Nosso time', href: '/#about-us' },
-  { label: 'Cursos', href: '/#courses' },
+  { label: 'Programas', href: '/#programs' },
   { label: 'Depoimentos', href: '/#testimonials' },
-  { label: 'Começar Agora', href: '/coming-soon' },
+  { label: 'Começar Agora', href: '/lp' },
   { label: 'Blog', href: '/blog' },
 ] as const;
 
