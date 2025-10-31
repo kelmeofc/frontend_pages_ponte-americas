@@ -61,18 +61,20 @@ export function TeacherSection() {
   return (
     <section id="teacher" className="bg-white py-20 overflow-hidden">
       <Container>
-        <div className="flex flex-col xl:flex-row gap-8 lg:gap-12 justify-between items-center xl:items-start">
+        <div className="flex flex-col xl:flex-row gap-8 lg:gap-12 justify-between items-center ">
           {/* Professor Card */}
-          <div className="flex flex-col w-full xl:min-h-[500px] max-w-[420px] xl:w-[420px] bg-zinc-900 shadow-xl rounded-2xl overflow-hidden gap-0 justify-between">
-            <Image
-              src={TEACHER_PROFILE.image.src}
-              alt={TEACHER_PROFILE.image.alt}
-              width={TEACHER_PROFILE.image.width}
-              height={TEACHER_PROFILE.image.height}
-              quality={85}
-              className="w-full object-cover"
-              priority
-            />
+          <div className="flex flex-col w-full h-auto xl:h-[600px] max-w-[420px] xl:w-[420px] bg-zinc-900 shadow-xl rounded-3xl overflow-hidden">
+            <div className="flex-1 relative">
+              <Image
+                src={TEACHER_PROFILE.image.src}
+                alt={TEACHER_PROFILE.image.alt}
+                width={TEACHER_PROFILE.image.width}
+                height={TEACHER_PROFILE.image.height}
+                quality={85}
+                className="w-full h-full object-cover"
+                priority
+              />
+            </div>
             <div className="flex flex-col gap-5 to-transparent p-6 sm:p-7 w-full">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/70">Mentor</p>
@@ -100,14 +102,14 @@ export function TeacherSection() {
           </div>
 
           {/* Content */}
-          <div className="flex flex-col gap-2 max-w-[44rem] text-center xl:text-left items-center xl:items-start">
+          <div className="flex flex-col gap-2 max-w-xs md:max-w-2xl lg:max-w-[44rem] text-center xl:text-left items-center xl:items-start">
 
             <span className="flex w-fit items-center rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-700">
               Método exclusivo Ponte Américas
             </span>
-            <h2 className="font-semibold uppercase text-zinc-900">
+            <h3 className="font-semibold uppercase text-zinc-900 ">
               Conheça a didática do seu mentor
-            </h2>
+            </h3>
             <p className="text-base sm:text-lg text-zinc-600">
               Ainda está em dúvida? Veja uma amostra das aulas que você desbloqueia ao entrar no Ponte Américas. Cada módulo combina informação prática, estratégia e experiência real para acelerar sua jornada rumo aos Estados Unidos.
             </p>
