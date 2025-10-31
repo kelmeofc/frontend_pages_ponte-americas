@@ -5,6 +5,7 @@ import { PrimaryButton } from "@/components/primary-button"
 import { GradientText } from "@/components/ui/gradient-text"
 
 import { HeroVideo } from "@/components/sections/hero-video"
+import { HeroBenefitsList } from "../hero-benefits-list"
 import { ArrowRight } from "lucide-react"
 
 export function HeroSectionLp() {
@@ -27,6 +28,8 @@ export function HeroSectionLp() {
 					<span className="text-white">QUE VOCÊ PRECISA ENTENDER AGORA</span>
 				</h1>
 
+				{/* Benefits List */}
+				<HeroBenefitsList className="mb-6" />
 
 				{/* Video */}
 				<HeroVideo className="w-full max-w-[650px] mb-2" />

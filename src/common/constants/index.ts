@@ -123,3 +123,6 @@ export { COURSES_DATA, type ICourse } from './courses';
 
 // Export pricing data
 export { PRICING_DATA } from './pricing';
+
+// Export hero benefits
+export { HERO_BENEFITS } from './hero-benefits';
