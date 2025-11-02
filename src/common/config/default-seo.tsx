@@ -10,7 +10,7 @@ export default {
 		url: process.env.NEXT_PUBLIC_SITE_URL,
 		title: "Entenda tudo sobre Estados Unidos | Ponte Américas",
 		description:
-			"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste grátis por 7 dias!",
+			"Um programa completo que te prepara para viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.",
 		siteName: "Ponte Américas",
 		images: [
 			{
@@ -25,7 +25,7 @@ export default {
 		card: "summary_large_image",
 		title: "Ponte Américas | Entenda tudo sobre Estados Unidos",
 		description:	
-			"Descubra sua melhor versão com visagismo inteligente! Análise em 30 segundos, teste grátis por 7 dias!",
+			"Um programa completo que te prepara para viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.",
 		images: [
 			`${process.env.NEXT_PUBLIC_SITE_URL}/lp/images/hero/hero-main.png`,
 		],

@@ -6,9 +6,9 @@ export const ArticleJsonLd = () => {
   const articleData = {
 		"@context": "https://schema.org",
 		"@type": "Article",
-		headline: "Ponte Américas: Seu Guia Completo para Viver nos Estados Unidos",
+		headline: "Ponte Américas: Seu Caminho para o Green Card e Vida nos EUA",
 		description:
-			"O Ponte Américas vai te ensinar tudo sobre como viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares..",
+			"Descubra o método comprovado do Ponte Américas para conseguir seu Green Card, trabalhar legalmente nos EUA e construir uma vida próspera. Mais de 10.000 brasileiros já realizaram o sonho americano conosco.",
 		image: [
 			`${
 				process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com"
@@ -40,14 +40,17 @@ export const ArticleJsonLd = () => {
 		},
 		keywords: [
 			"ponte américas",
-			"imigração EUA",
+			"green card brasileiro",
+			"como conseguir green card",
+			"imigração para EUA",
 			"viver nos Estados Unidos",
-			"trabalhar nos EUA",
+			"trabalhar legalmente nos EUA",
 			"brasileiros nos EUA",
-			"green card",
-			"visto americano",
-			"programa de imigração",
-			"consultoria imigração",
+			"visto EB2-NIW",
+			"visto de investidor E2",
+			"residência permanente EUA",
+			"consultoria imigração EUA",
+			"advogado de imigração",
 		],
 		articleSection: "Imigração e Educação",
 		wordCount: 2000,
@@ -67,7 +70,7 @@ export const LocalBusinessJsonLd = () => {
 		}/#business`,
 		name: "Ponte Américas",
 		description:
-			"O Ponte Américas vai te ensinar tudo sobre como viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.",
+			"Especialistas em imigração para os EUA. Ajudamos brasileiros a conseguir Green Card através dos vistos EB2-NIW, E2 e outros caminhos legais. Mais de 10.000 clientes aprovados.",
 		url: process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
 		telephone: "+1-321-429-6742",
 		email: "contato@ponteamericas.com",
@@ -92,15 +95,33 @@ export const LocalBusinessJsonLd = () => {
 		},
 		hasOfferCatalog: {
 			"@type": "OfferCatalog",
-			name: "Serviços de Visagismo",
+			name: "Serviços de Imigração para EUA",
 			itemListElement: [
 				{
 					"@type": "Offer",
 					itemOffered: {
 						"@type": "Service",
-						name: "Análise de Visagismo com IA",
+						name: "Consultoria para Green Card EB2-NIW",
 						description:
-							"Análise personalizada de cabelo usando inteligência artificial",
+							"Consultoria especializada para obtenção do Green Card através do visto EB2-NIW (National Interest Waiver)",
+					},
+				},
+				{
+					"@type": "Offer",
+					itemOffered: {
+						"@type": "Service",
+						name: "Visto de Investidor E2",
+						description:
+							"Assessoria completa para obtenção do visto E2 através de investimento empresarial nos EUA",
+					},
+				},
+				{
+					"@type": "Offer",
+					itemOffered: {
+						"@type": "Service",
+						name: "Planejamento de Imigração",
+						description:
+							"Análise personalizada do seu perfil e estratégia completa para imigrar legalmente para os Estados Unidos",
 					},
 				},
 			],
@@ -119,7 +140,7 @@ export const WebSiteJsonLd = () => {
 		alternateName: "Ponte Américas",
 		url: process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
 		description:
-			"O Ponte Américas vai te ensinar tudo sobre como viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.",
+			"Realize o sonho americano com o Ponte Américas. Especialistas em Green Card EB2-NIW, visto E2 e imigração para os EUA. Mais de 10.000 brasileiros aprovados. Consultoria gratuita disponível.",
 		inLanguage: "pt-BR",
 		copyrightYear: 2025,
 		copyrightHolder: {

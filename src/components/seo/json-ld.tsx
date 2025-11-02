@@ -94,7 +94,7 @@ export const ProductJsonLd = () => {
 		"@type": "SoftwareApplication",
 		name: "Ponte Américas | Programa de Imigração para os EUA",
 		description:
-			"O Ponte Américas é sua ponte para os Estados Unidos. Um programa completo que te prepara para viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.",
+			"Um programa completo que te prepara para viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.",
 		url: process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
 		applicationCategory: "EducationalApplication",
 		operatingSystem: "Web Browser",
