@@ -16,7 +16,7 @@ import { COURSES_DATA } from "@/common/constants";
 
 export const CoursesSection = () => {
 	 const autoplayRef = useRef(
-			Autoplay({ delay: 3000, stopOnInteraction: true })
+			Autoplay({ delay: 2000, stopOnInteraction: true })
 		);
 
 
@@ -39,7 +39,10 @@ export const CoursesSection = () => {
 							slidesToScroll: 1,
 							containScroll: "trimSnaps",
 						}}
+						plugins={[autoplayRef.current]}
 						className="w-full"
+						onMouseEnter={() => autoplayRef.current.stop()}
+						onMouseLeave={() => autoplayRef.current.play()}
 					>
 						<CarouselContent className="mx-10">
 							{COURSES_DATA.map((course, index) => (
@@ -54,11 +57,11 @@ export const CoursesSection = () => {
 
 						<div className="absolute top-1/2 -translate-y-1/2 left-4 right-4">
 							{/* Custom Navigation Buttons */}
-							<CarouselPrevious className="hidden md:flex md:absolute md:left-50 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20 opacity-50 hover:opacity-80">
+							<CarouselPrevious className="hidden md:flex md:absolute md:left-50 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20 opacity-50 hover:opacity-80 cursor-pointer">
 								<ArrowLeft className="size-4" />
 							</CarouselPrevious>
 
-							<CarouselNext className="hidden md:flex md:absolute md:right-50 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20 opacity-50 hover:opacity-80">
+							<CarouselNext className="hidden md:flex md:absolute md:right-50 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20 opacity-50 hover:opacity-80 cursor-pointer">
 								<ArrowRight className="size-4" />
 							</CarouselNext>
 						</div>

@@ -57,7 +57,7 @@ export const TeamSection = () => {
             return (
               <article
               key={member.id}
-              className="flex-1 h-[420px] md:h-[550px] relative rounded-lg overflow-hidden outline outline-gray-600"
+              className="flex-1 min-h-[420px] h-[420px] md:h-[550px] relative rounded-lg overflow-hidden outline outline-gray-600"
               role="group"
               aria-label={`Card do membro ${member.name}`}
               tabIndex={0}
