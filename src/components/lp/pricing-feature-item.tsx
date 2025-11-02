@@ -21,7 +21,7 @@ export const PricingFeatureItem = ({
     )}>
       <div className="size-4 shrink-0">
         <Image
-          src="/icons/check-badge.svg"
+          src="/images/svg/blue-check.svg"
           alt="Check"
           width={16}
           height={16}

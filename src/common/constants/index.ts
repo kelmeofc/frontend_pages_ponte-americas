@@ -126,3 +126,6 @@ export { PRICING_DATA } from './pricing';
 
 // Export hero benefits
 export { HERO_BENEFITS } from './hero-benefits';
+
+// Export comparison data
+export { COMPARISON_DATA, COMPARISON_HEADERS, type ComparisonItem } from './comparison';

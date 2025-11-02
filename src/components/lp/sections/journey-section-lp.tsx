@@ -105,69 +105,65 @@ function JourneyCard({ step, index }: JourneyCardProps) {
 
 export function JourneySectionLp() {
   return (
-    <section id="journey" className="py-16 md:py-20 lg:py-24 overflow-hidden">
-      <Container>
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-20 items-start">
-          {/* Americas Map - Left Side */}
-          <div className="w-full lg:w-96 xl:w-[420px] shrink-0">
-            <div className="relative w-full aspect-3/4 lg:h-[600px] overflow-hidden">
-              <Image
-                src="/images/svg/americas-map.svg"
-                alt="Mapa das Américas - Jornada Ponte Américas"
-                fill
-                sizes="(max-width: 1024px) 100vw, 420px"
-                className="object-cover"
-                priority
-              />
-           
-            </div>
-          </div>
+		<section id="journey" className="py-16 md:py-20 lg:py-24 overflow-hidden">
+			<Container>
+				<div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-20 items-start">
+					{/* Americas Map - Left Side */}
+					<div className="w-full lg:w-96 xl:w-[420px] shrink-0 sticky">
+						<div className="relative w-full aspect-3/4 lg:h-[600px] overflow-hidden">
+							<Image
+								src="/images/svg/americas-map.svg"
+								alt="Mapa das Américas - Jornada Ponte Américas"
+								fill
+								sizes="(max-width: 1024px) 100vw, 420px"
+								className="object-cover"
+								priority
+							/>
+						</div>
+					</div>
 
-          {/* Journey Steps - Right Side */}
-          <div className="flex-1 space-y-8 lg:space-y-10">
-            {/* Section Header */}
-            <div className="text-center lg:text-left space-y-4">
-              <span className="inline-block px-4 py-2 bg-red-100 text-red-700 text-sm font-semibold uppercase tracking-wide rounded-full">
-                Roadmap completo
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 font-clash-display leading-tight">
-                CADA PASSO DA SUA{" "}
-                <GradientText className=" bg-clip-text text-transparent">
-                  JORNADA
-                </GradientText>
-              </h2>
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl lg:max-w-none">
-                Desde o planejamento até sua completa adaptação nos Estados Unidos,
-                cada módulo foi pensado para acelerar seu processo de imigração.
-              </p>
-            </div>
+					{/* Journey Steps - Right Side */}
+					<div className="flex-1 space-y-8 lg:space-y-10">
+						{/* Section Header */}
+						<div className="text-center lg:text-left space-y-4">
+							<span className="inline-block px-4 py-2 bg-red-100 text-red-700 text-sm font-semibold uppercase tracking-wide rounded-full">
+								Roadmap completo
+							</span>
+							<h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 font-clash-display leading-tight">
+								CADA PASSO DA SUA{" "}
+								<GradientText className=" bg-clip-text text-transparent">
+									JORNADA
+								</GradientText>
+							</h2>
+							<p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl lg:max-w-none">
+								Desde o planejamento até sua completa adaptação nos Estados
+								Unidos, cada módulo foi pensado para acelerar seu processo de
+								imigração.
+							</p>
+						</div>
 
-            {/* Journey Cards */}
-            <div className="space-y-6 md:space-y-8">
-              {JOURNEY_STEPS.map((step, index) => (
-                <JourneyCard
-                  key={step.id}
-                  step={step}
-                  index={index}
-                />
-              ))}
-            </div>
+						{/* Journey Cards */}
+						<div className="space-y-6 md:space-y-8">
+							{JOURNEY_STEPS.map((step, index) => (
+								<JourneyCard key={step.id} step={step} index={index} />
+							))}
+						</div>
 
-            {/* CTA Button */}
-            <div className="flex justify-center lg:justify-start pt-8">
-              <PrimaryButton
-                size="lg"
-                className="uppercase tracking-wide text-base px-8 py-4"
-                href="#cta"
-              >
-                Quero começar minha jornada
-              </PrimaryButton>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
+						{/* CTA Button */}
+						<div className="flex justify-center lg:justify-start pt-8">
+							<PrimaryButton
+								size="lg"
+								className="uppercase tracking-wide text-base px-8 py-4"
+								href="#cta"
+							>
+								Quero começar minha jornada
+							</PrimaryButton>
+						</div>
+					</div>
+				</div>
+			</Container>
+		</section>
+	);
 }
 
 export default JourneySectionLp;

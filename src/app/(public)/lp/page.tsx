@@ -1,6 +1,7 @@
 import { HeroSectionLp } from "@/components/lp/sections/hero-section-lp";
 import { JourneySectionLp } from "@/components/lp/sections/journey-section-lp";
 import { IcebreakerSectionLp } from "@/components/lp/sections/icebreaker-section-lp";
+import { ComparisonSectionLp } from "@/components/lp/sections/comparison-section-lp";
 import { PricingSectionLp } from "@/components/lp/sections/pricing-section-lp";
 
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
@@ -70,7 +71,8 @@ export default function Home() {
           <TestimonialsSection />
         </div>
         
-           <IcebreakerSectionLp />
+        <IcebreakerSectionLp />
+        <ComparisonSectionLp />
         <PricingSectionLp />
 
         <FAQSection faq={FAQ_DATA} />

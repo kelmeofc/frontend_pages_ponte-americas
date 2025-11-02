@@ -18,7 +18,7 @@ export const StarRating = ({ score, reviews, className }: StarRatingProps) => {
         {stars.map((star) => (
           <div key={star} className="relative size-4 overflow-hidden">
             <Image
-              src="/icons/star.svg"
+              src="/images/svg/star.svg"
               alt="Star"
               width={16}
               height={16}
