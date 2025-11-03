@@ -2,9 +2,13 @@
  * Utilitário consolidado para capturar metadados de leads
  */
 
-import { ICreateLead } from '@/types/lead';
-
-type LeadMetadata = Pick<ICreateLead, 'ip_address' | 'country' | 'city' | 'user_agent' | 'route'>;
+interface LeadMetadata {
+  ipAddress?: string;
+  country?: string;
+  city?: string;
+  userAgent?: string;
+  route?: string;
+}
 
 /**
  * Captura todos os metadados disponíveis (browser + geolocalização)
@@ -15,7 +19,7 @@ export async function captureLeadMetadata(): Promise<LeadMetadata> {
 
   // Captura dados do browser (síncrono)
   if (typeof window !== 'undefined') {
-    metadata.user_agent = navigator.userAgent;
+    metadata.userAgent = navigator.userAgent;
     metadata.route = window.location.pathname;
   }
 
@@ -26,7 +30,7 @@ export async function captureLeadMetadata(): Promise<LeadMetadata> {
     });
     if (response.ok) {
       const data = await response.json();
-      metadata.ip_address = data.ip;
+      metadata.ipAddress = data.ip;
       metadata.country = data.country_name;
       metadata.city = data.city;
     }
@@ -42,13 +46,13 @@ export async function captureLeadMetadata(): Promise<LeadMetadata> {
  * Captura apenas metadados do browser (síncrono, sem API externa)
  * Útil quando velocidade é prioridade ou quando geolocalização não é necessária
  */
-export function captureBasicMetadata(): Pick<LeadMetadata, 'user_agent' | 'route'> {
+export function captureBasicMetadata(): Pick<LeadMetadata, 'userAgent' | 'route'> {
   if (typeof window === 'undefined') {
     return {};
   }
 
   return {
-    user_agent: navigator.userAgent,
+    userAgent: navigator.userAgent,
     route: window.location.pathname,
   };
 }

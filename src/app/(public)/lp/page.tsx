@@ -76,7 +76,6 @@ export default function Home() {
         <PricingSectionLp />
 
         <FAQSection faq={FAQ_DATA} />
-        <CtaSection />
       </main>
 
       {/* WhatsApp Widget */}

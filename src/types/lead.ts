@@ -1,151 +1,60 @@
-// Lead Entity Types (simplified - no enrollment functionality)
-// The Lead entity now contains only basic demographic and company information
+// Lead Types - Compatível com o schema do Prisma
 
-export enum SubmissionType {
-  EBOOK_DOWNLOAD = 'EBOOK_DOWNLOAD',
-  ENROLLMENT_ATTEMPT = 'ENROLLMENT_ATTEMPT'
-}
+// Origin enum para compatibilidade com código existente
+export const EOriginLead = {
+  seo_tool: 1,
+  seo_archive: 2,
+  email: 3,
+  facebook_ads: 4,
+  google_ads: 5,
+  page: 6,
+} as const;
 
-export enum EOriginLead {
-    seo_tool = 1,
-    seo_archive = 2,
-    email = 3,
-    facebook_ads = 4,
-    google_ads = 5,
-    page = 6,
-}
+export type EOriginLeadType = typeof EOriginLead[keyof typeof EOriginLead];
 
-// Legacy interface support
-export interface ICreateLead {
-    name: string;
-    email?: string;
-    phone_number?: string;
-    brand: string;
-    description: string;
-    website?: string;
-    origin: EOriginLead;
-    origin_font?: string;
-    ip_address?: string;
-    country?: string;
-    city?: string;
-    user_agent?: string;
-    route?: string;
-}
-
-// New simplified Lead interfaces
-export interface CreateLeadRequest {
-  name: string;
-  email?: string;
-  phoneNumber?: string;
-  brand: string;
-  description: string;
-  company_size?: number;
-  company_segment?: string;
-  company_on_market?: string;
-  website?: string;
-}
-
-export interface LeadResponse {
+// Interface para Lead baseada no schema do Prisma
+export interface Lead {
   id: number;
   name: string;
-  email?: string;
-  phoneNumber?: string;
-  brand: string;
-  description: string;
-  
-  // Company information
-  company_size?: number;
-  company_segment?: string;
-  company_on_market?: string;
-  website?: string;
-  
-  // Timestamps
-  createdAt: string;
-  updatedAt: string;
+  email: string | null;
+  phoneNumber: string | null;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-export interface UpdateLeadRequest {
-  name?: string;
-  email?: string;
-  phoneNumber?: string;
-  brand?: string;
-  description?: string;
-  company_size?: number;
-  company_segment?: string;
-  company_on_market?: string;
-  website?: string;
-}
-
-export interface SubmissionRequest {
-  leadId: number;
-  type: SubmissionType;
-  data: Record<string, any>;
-  
-  // Location and tracking data
-  city?: string;
-  country?: string;
-  ipAddress?: string;
-  route?: string;
-  userAgent?: string;
-  origin: number;
-  originFont?: string;
-  
-  // Additional metadata
-  metadata?: Record<string, any>;
-}
-
-export interface SubmissionResponse {
+// Interface para LeadSubmission baseada no schema do Prisma
+export interface LeadSubmission {
   id: number;
   leadId: number;
-  type: SubmissionType;
+  type: 'EBOOK_DOWNLOAD' | 'ENROLLMENT_ATTEMPT';
   success: boolean;
   data: Record<string, any>;
   metadata: Record<string, any>;
-  
-  // Location and tracking data
-  city?: string;
-  country?: string;
-  ipAddress?: string;
-  route?: string;
-  userAgent?: string;
+  city: string | null;
+  country: string | null;
+  ipAddress: string | null;
+  route: string | null;
+  userAgent: string | null;
   origin: number;
-  originFont?: string;
-  
-  createdAt: string;
+  originFont: string | null;
+  createdAt: Date;
 }
 
-// Form Types for UI Components
-export interface EbookLeadFormData {
+// Legacy interface support - será removida gradualmente
+export interface ICreateLead {
   name: string;
-  email: string;
+  email?: string;
+  phone_number?: string;
   brand: string;
   description: string;
-  company_size?: number;
-  company_segment?: string;
-  company_on_market?: string;
   website?: string;
-}
-
-// Validation Error Types
-export interface LeadValidationError {
-  field: string;
-  message: string;
-  code: string;
-}
-
-export interface LeadErrorResponse {
-  error: string;
-  message: string;
-  validationErrors?: LeadValidationError[];
-}
-
-// API Client Interface
-export interface LeadApiClient {
-  createLead(data: CreateLeadRequest): Promise<LeadResponse>;
-  updateLead(leadId: number, data: UpdateLeadRequest): Promise<LeadResponse>;
-  getLead(leadId: number): Promise<LeadResponse>;
-  createSubmission(data: SubmissionRequest): Promise<SubmissionResponse>;
-  getLeadSubmissions(leadId: number): Promise<SubmissionResponse[]>;
+  origin: EOriginLeadType;
+  origin_font?: string;
+  ip_address?: string;
+  country?: string;
+  city?: string;
+  user_agent?: string;
+  route?: string;
 }
 
 // Validation Helpers

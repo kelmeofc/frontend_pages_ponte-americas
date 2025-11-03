@@ -3,20 +3,18 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
 import { ebookLeadSchema, type EbookLeadFormData } from '@/common/schemas/ebook-lead.schema';
-import { createLeadAction } from '@/common/actions/create-lead-action';
+import { createLeadAction, type CreateLeadData } from '@/common/actions/create-lead-action';
 import { captureLeadMetadata } from '@/common/lib/lead-utils';
-import { EOriginLead } from '@/types/lead';
 import { useCountdownTimer } from './use-countdown-timer';
 
 export const useEbookModal = (onClose: () => void) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  // Timer de 3 minutos e 30 segundos
+  // Timer de 3 minutos e 30 segundos (apenas cosmético)
   const timer = useCountdownTimer({
     initialMinutes: 3.5, // 3:30
     onExpire: () => {
-      // Quando expira, apenas desabilita o formulário
-      // Não precisa de toast ou ação específica
+      // Timer é apenas cosmético - não faz nada quando expira
     }
   });
 
@@ -49,15 +47,25 @@ export const useEbookModal = (onClose: () => void) => {
       // Captura metadados automaticamente (com timeout de 3s)
       const metadata = await captureLeadMetadata();
 
-      const leadData = {
+      const leadData: CreateLeadData = {
         name: data.name,
         email: data.email,
-        phone_number: data.phone,
-        brand: 'Ebook Passaporte Blindado',
-        description: `Lead interessado no ebook. Fonte: ${data.source || 'ebook-cta-section'}`,
-        origin: EOriginLead.page,
-        origin_font: data.source || 'ebook-cta-section',
-        ...metadata, // Injeta todos os metadados capturados
+        phoneNumber: data.phone,
+        type: 'EBOOK_DOWNLOAD',
+        origin: 6, // EOriginLead.page
+        originFont: data.source || 'ebook-cta-section',
+        formData: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          source: data.source || 'ebook-cta-section',
+          brand: 'Ebook Passaporte Blindado',
+        },
+        metadata: {
+          description: `Lead interessado no ebook. Fonte: ${data.source || 'ebook-cta-section'}`,
+          ...metadata, // Injeta todos os metadados capturados
+        },
+        ...metadata, // Spread dos metadados diretos (city, country, etc.)
       };
 
       const result = await createLeadAction(leadData);
@@ -71,8 +79,8 @@ export const useEbookModal = (onClose: () => void) => {
         toast.error(`Erro ao salvar. Tente novamente.`);
       }
     } catch (err) {
+      console.error('[EBOOK_MODAL] Erro inesperado:', err);
       toast.error('Erro inesperado. Verifique sua conexão e tente novamente.');
-      console.error('Erro no formulário:', err);
     } finally {
       setIsLoading(false);
     }

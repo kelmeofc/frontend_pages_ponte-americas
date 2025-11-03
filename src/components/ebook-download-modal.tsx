@@ -24,6 +24,8 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
   isOpen,
   onClose,
 }) => {
+  console.log('[EBOOK_MODAL] Modal renderizado, isOpen:', isOpen);
+  
   const {
     isLoading,
     register,
@@ -76,7 +78,7 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
                 placeholder="Nome completo"
                 register={register}
                 errors={errors}
-                disabled={isLoading || timer.isExpired}
+                disabled={isLoading}
               />
               <FormField
                 name="email"
@@ -84,7 +86,7 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
                 type="email"
                 register={register}
                 errors={errors}
-                disabled={isLoading || timer.isExpired}
+                disabled={isLoading}
               />
               <InternationalPhoneField
                 name="phone"
@@ -92,7 +94,7 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
                 register={register}
                 errors={errors}
                 setValue={setValue}
-                disabled={isLoading || timer.isExpired}
+                disabled={isLoading}
                 initialCountry="br"
               />
 
@@ -100,8 +102,8 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
               <PrimaryButton
                 type="submit"
                 size="lg"
-                className="w-full h-12 px-8 py-4 bg-gradient-to-r from-red-700 to-indigo-600 rounded-lg text-white font-medium uppercase disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={isLoading || timer.isExpired || !isValid}
+                className="w-full h-12 px-8 py-4 bg-linear-to-r from-red-700 to-indigo-600 rounded-lg text-white font-medium uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isLoading || !isValid}
                 icon={<ArrowRight className="w-5 h-5" />}
                 iconPosition="right"
               >

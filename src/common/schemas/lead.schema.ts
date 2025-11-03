@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { SubmissionType } from '@/types/lead';
 
 // Brazilian phone number validation regex
 const brazilianPhoneRegex = /^(\+55|55)?[1-9][0-9]{1}[0-9]{8,9}$/;
@@ -74,7 +73,7 @@ export const updateLeadSchema = z.object({
 // Submission Schema (now includes location and tracking data)
 export const submissionSchema = z.object({
   leadId: z.number().int().positive(),
-  type: z.nativeEnum(SubmissionType),
+  type: z.enum(['EBOOK_DOWNLOAD', 'ENROLLMENT_ATTEMPT']),
   success: z.boolean(),
   data: z.record(z.any()),
   
@@ -138,7 +137,7 @@ export const leadResponseSchema = z.object({
 export const submissionResponseSchema = z.object({
   id: z.number(),
   leadId: z.number(),
-  type: z.nativeEnum(SubmissionType),
+  type: z.enum(['EBOOK_DOWNLOAD', 'ENROLLMENT_ATTEMPT']),
   success: z.boolean(),
   data: z.record(z.any()),
   metadata: z.record(z.any()),

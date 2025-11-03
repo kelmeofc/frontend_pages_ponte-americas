@@ -12,14 +12,13 @@ import { PasswordField } from '@/components/forms/password-field';
 import { InternationalPhoneField } from '@/components/forms/international-phone-field';
 import { PrimaryButton } from '@/components/primary-button';
 import { 
-  enrollmentFormDataSchema, 
-  type EnrollmentFormDataSchema 
-} from '@/common/schemas/enrollment-lead.schema';
-import { useCreateEnrollmentLead } from '@/common/hooks/use-create-enrollment-lead';
+  userEnrollmentFormDataSchema, 
+  type UserEnrollmentFormDataSchema 
+} from '@/common/schemas/user.schema';
+import useCreateUser from '@/common/hooks/use-create-user';
 import { useEnrollmentFlow } from '@/common/hooks/use-enrollment-flow';
 import { PaymentStep } from '@/components/enrollment/payment-step';
-import { createWaitlistEntry } from '@/common/actions/create-waitlist-entry-action';
-import { EnrollmentFormData } from '@/types/enrollment';
+import { CreateUserRequest } from '@/types/user';
 import Link from 'next/link';
 
 
@@ -49,7 +48,7 @@ const paymentSchema = z.object({
   coupon: z.string().optional(),
 });
 
-type IdentificationData = EnrollmentFormData;
+type IdentificationData = UserEnrollmentFormDataSchema;
 type PaymentData = z.infer<typeof paymentSchema>;
 
 interface StepIndicatorProps {
@@ -199,7 +198,7 @@ export default function EnrollPage() {
   const [retryCount, setRetryCount] = useState(0);
   const [lastSubmissionData, setLastSubmissionData] = useState<IdentificationData | null>(null);
   const [waitlistCreated, setWaitlistCreated] = useState(false);
-  const { createEnrollmentLead, isLoading: hookLoading, error: hookError, success: hookSuccess } = useCreateEnrollmentLead();
+  const { execCreateUser, loading: hookLoading } = useCreateUser();
 
   // Sync legacy step with new flow step
   React.useEffect(() => {
@@ -264,26 +263,18 @@ export default function EnrollPage() {
     setIsLoading(false);
   }, []);
 
-  // Efeito para sincronizar feedback com estados do hook
-  React.useEffect(() => {
-    if (hookError && !isLoading && !hookLoading) {
-      setFeedbackMessage({ 
-        type: 'error', 
-        message: hookError 
-      });
-    } else if (hookSuccess && !isLoading && !hookLoading) {
-      setFeedbackMessage({ 
-        type: 'success', 
-        message: 'Dados processados com sucesso!' 
-      });
-    }
-  }, [hookError, hookSuccess, isLoading, hookLoading]);
+  // Não precisamos mais do useEffect para sincronizar feedback
+  // pois o novo hook já gerencia o feedback internamente
 
   // Form para identificação
   const identificationForm = useForm<IdentificationData>({
-    resolver: zodResolver(enrollmentFormDataSchema),
+    resolver: zodResolver(userEnrollmentFormDataSchema),
     mode: 'onChange',
     reValidateMode: 'onChange',
+    defaultValues: {
+      brand: 'ponte-americas',
+      description: 'Enrollment attempt - User registration',
+    }
   });
 
   // Form para pagamento
@@ -303,7 +294,18 @@ export default function EnrollPage() {
     setFeedbackMessage({ type: null, message: '' });
     
     try {
-      const result = await createEnrollmentLead(data);
+      // Adicionar campos obrigatórios para criação de usuário
+      const userData: CreateUserRequest = {
+        ...data,
+        brand: data.brand || 'ponte-americas',
+        description: data.description || 'Enrollment attempt - User registration',
+      };
+
+      const result = await execCreateUser({ 
+        data: userData,
+        successMessage: 'Conta criada com sucesso! Redirecionando para próxima etapa...',
+        showModal: false
+      });
       
       if (result.success) {
         // Sucesso - limpar estados de erro e retry
@@ -556,6 +558,18 @@ export default function EnrollPage() {
               className="space-y-4"
             >
               <div className="space-y-3">
+                {/* Campos hidden obrigatórios */}
+                <input
+                  type="hidden"
+                  {...identificationForm.register('brand')}
+                  value="ponte-americas"
+                />
+                <input
+                  type="hidden"
+                  {...identificationForm.register('description')}
+                  value="Enrollment attempt - User registration"
+                />
+                
                 <FormField
                   name="name"
                   placeholder="Nome completo"
