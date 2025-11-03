@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { ArrowRight, Check, CircleCheck, Shield, Loader2 } from 'lucide-react';
-import Image from 'next/image';
 
 import { FormField } from '@/components/forms/form-field';
 import { PasswordField } from '@/components/forms/password-field';
@@ -17,7 +16,6 @@ import {
 } from '@/common/schemas/user.schema';
 import useCreateUser from '@/common/hooks/use-create-user';
 import { PaymentStep } from '@/components/enrollment/payment-step';
-import { CreateUserRequest } from '@/types/user';
 import Link from 'next/link';
 
 
@@ -56,128 +54,55 @@ interface StepIndicatorProps {
   currentStep: FlowStep;
 }
 
-const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => {
-  return (
-    <div className="w-full max-w-56 inline-flex justify-center items-center gap-1 sm:gap-2">
-      {/* Etapa 1 - Identificação */}
-      <div className="inline-flex flex-col justify-center items-center">
-        <div className="mb-2">
-          {currentStep === 'payment' ? (
-            <div className="w-10 h-10 bg-indigo-600 rounded-full p-2 inline-flex justify-center items-center">
-              <Check className="size-4 text-white" />
-            </div>
-          ) : (
-            <div className="w-10 h-10 bg-white rounded-full shadow-[0px_0px_10px_0px_rgba(79,70,229,1.00)] border-[3px] border-indigo-600 p-2 inline-flex justify-center items-center">
-              <div className="w-full h-full bg-indigo-600 rounded-full" />
-            </div>
-          )}
+const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => (
+  <div className="w-full max-w-56 inline-flex justify-center items-center gap-2">
+    <div className="flex items-center gap-3">
+      <div className="flex flex-col items-center">
+        <div className={`w-10 h-10 rounded-full p-2 flex items-center justify-center ${currentStep === 'payment' ? 'bg-indigo-600 text-white' : 'bg-white shadow border-2 border-indigo-600'}`}>
+          {currentStep === 'payment' ? <Check className="w-4 h-4" /> : <div className="w-full h-full bg-indigo-600 rounded-full" />}
         </div>
-        <div className="text-center text-indigo-600 text-[10px] sm:text-[10.30px] font-normal leading-3 font-rubik">
-          Identificação
-        </div>
+        <div className="text-indigo-600 text-xs mt-1">Identificação</div>
       </div>
 
-      {/* Divisor */}
-      <div className="w-12 sm:w-16 h-0.5 border border-stone-300" />
+      <div className="w-12 h-px bg-stone-300" />
 
-      {/* Etapa 2 - Pagamento */}
-      <div className="inline-flex flex-col justify-start items-center">
-        <div className="mb-2">
-          <div className={`w-10 h-10 bg-white rounded-full shadow-[0px_0px_10px_0px_rgba(79,70,229,1.00)] border-[3px] p-2 inline-flex justify-center items-center ${
-            currentStep === 'payment' ? 'border-indigo-600' : 'border-gray-400'
-          }`}>
-            <div className={`w-full h-full rounded-full ${
-              currentStep === 'payment' ? 'bg-indigo-600' : 'bg-gray-400'
-            }`} />
-          </div>
+      <div className="flex flex-col items-center">
+        <div className={`w-10 h-10 rounded-full p-2 flex items-center justify-center ${currentStep === 'payment' ? 'bg-indigo-600 text-white' : 'bg-white shadow border-2 border-gray-300'}`}>
+          <div className={`w-full h-full rounded-full ${currentStep === 'payment' ? 'bg-indigo-600' : 'bg-gray-400'}`} />
         </div>
-        <div className={`text-center text-[10px] sm:text-xs font-normal leading-3 font-rubik ${
-          currentStep === 'payment' ? 'text-indigo-600' : 'text-gray-500'
-        }`}>
-          Pagamento
-        </div>
+        <div className={`text-xs mt-1 ${currentStep === 'payment' ? 'text-indigo-600' : 'text-gray-500'}`}>Pagamento</div>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 interface ProductCardProps {
   title: string;
-  description: string;
+  description?: string;
   originalPrice: string;
   currentPrice: string;
-  installmentPrice: string;
   discount: string;
-  imageSrc: string;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  title,
-  description,
-  originalPrice,
-  currentPrice,
-  installmentPrice,
-  discount,
-  imageSrc,
-}) => {
-  return (
-    <div className="w-full px-3 sm:px-5 py-4 sm:py-7 bg-white/0 rounded-lg shadow-[0px_0px_4px_0px_rgba(74,184,255,0.60)] outline-[3px] outline-offset-[-3px] outline-blue-500 flex flex-col justify-start items-start gap-3">
-      <div className="self-stretch inline-flex justify-start items-center gap-2">
-        <input 
-          type="checkbox" 
-          className="size-4 rounded-sm border border-neutral-900 shrink-0" 
-          defaultChecked 
-        />
-        <div className="flex-1 inline-flex flex-col justify-start items-start">
-          <div className="text-gray-800 text-xs sm:text-sm font-normal leading-4 wrap-break-word">
-            {title}
-          </div>
-        </div>
+const ProductCard: React.FC<ProductCardProps> = ({ title, description, originalPrice, currentPrice, discount }) => (
+  <div className="w-full p-4 bg-white/0 rounded-lg shadow-sm outline-2 outline-blue-500 flex flex-col gap-3">
+    <label className="flex items-start gap-3">
+      <input type="checkbox" defaultChecked className="size-4 mt-1" />
+      <div className="flex-1">
+        <div className="text-gray-800 text-sm font-medium">{title}</div>
+        {description && <div className="text-zinc-600 text-xs italic mt-1">"{description}"</div>}
       </div>
+    </label>
 
-      {description && (
-        <div className="self-stretch flex flex-col justify-start items-start">
-          <div className="self-stretch text-zinc-600 text-[9px] sm:text-[10.10px] font-normal italic">
-            "{description}"
-          </div>
-        </div>
-      )}
-
-      <div className="self-stretch pl-3 pr-2 py-3 relative bg-zinc-200 rounded-md border-l-[5px] border-emerald-700 inline-flex justify-start items-start">
-        <div className="self-stretch flex justify-start items-start gap-2.5 w-full">
-          <div className="size-10 sm:size-12 relative bg-zinc-500 rounded-sm shrink-0">
-            <div className="w-full h-full bg-linear-to-br from-blue-600 to-purple-600 rounded-sm flex items-center justify-center">
-              <span className="text-white text-xs font-bold">🇺🇸</span>
-            </div>
-          </div>
-          
-          <div className="flex-1 p-1 inline-flex flex-col justify-between items-start min-w-0">
-            <div className="self-stretch flex flex-col justify-start items-start">
-              <div className="text-neutral-400 text-[9px] sm:text-[10.10px] font-normal line-through">
-                {originalPrice}
-              </div>
-            </div>
-            <div className="self-stretch inline-flex justify-start items-center gap-1 flex-wrap">
-              <div className="text-zinc-600 text-[9px] sm:text-[10.10px] font-normal">
-                Por 12x de
-              </div>
-              <div className="text-zinc-600 text-sm sm:text-base font-normal">
-                {currentPrice}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Badge de desconto */}
-        <div className="absolute -top-2 -right-2 bg-emerald-700 rounded-4xl px-2 py-1 flex justify-center items-center">
-          <span className="text-white text-[10px] sm:text-xs font-normal">
-            {discount}
-          </span>
-        </div>
+    <div className="p-3 bg-zinc-200 rounded-md border-l-4 border-emerald-700 flex items-center justify-between">
+      <div>
+        <div className="text-neutral-400 text-xs line-through">{originalPrice}</div>
+        <div className="text-zinc-600 text-sm">{currentPrice}</div>
       </div>
+      <div className="bg-emerald-700 text-white text-xs px-2 py-1 rounded-full">{discount}</div>
     </div>
-  );
-};
+  </div>
+);
 
 export default function EnrollPage() {
   // Step management (inlined - substituindo useEnrollmentFlow)
@@ -516,7 +441,7 @@ export default function EnrollPage() {
           </div>
 
           {/* Título */}
-          <h1 className="text-center text-black text-lg sm:text-xl font-medium font-rubik uppercase leading-6 mb-6 sm:mb-8 px-2">
+          <h1 className="text-center text-black text-lg sm:text-xl font-semibold uppercase leading-6 mb-6 sm:mb-8 px-2">
             Criar sua conta para iniciar sua assinatura
           </h1>
 
@@ -719,18 +644,7 @@ export default function EnrollPage() {
           {flowStep === 'payment' && (
             <div className="space-y-6">
               {/* Botão de voltar - Enhanced with flow management */}
-              <div className="flex justify-start mb-4">
-                <button
-                  type="button"
-                  onClick={previousStep}
-                  className="flex items-center gap-2 text-indigo-600 text-sm font-medium hover:text-indigo-700 transition-colors"
-                  disabled={isLoading}
-                >
-                  <ArrowRight className="w-4 h-4 rotate-180" />
-                  Voltar para identificação
-                </button>
-              </div>
-
+            
               {/* New PaymentStep Component - Simplified version */}
               <div className="mb-6">
                 <PaymentStep
@@ -853,25 +767,24 @@ export default function EnrollPage() {
 
                 {/* Cards de produtos */}
                 <div className="space-y-4">
-                  <ProductCard
-                    title="Garantir acesso à Imersão em Empresa Digital nos EUA"
-                    description="O passo a passo para analisar um FII e montar sua estratégia."
-                    originalPrice="De 12x R$ 29,90"
-                    currentPrice="R$ 9,90"
-                    installmentPrice="Por 12x de"
-                    discount="67% OFF"
-                    imageSrc="/images/svg/emojis/flag-us.svg"
-                  />
-
-                  <ProductCard
-                    title="Garantir acesso à Imersão em Vestibulares e Faculdades nos EUA"
-                    description=""
-                    originalPrice="De 12x R$ 29,90"
-                    currentPrice="R$ 9,90"
-                    installmentPrice="Por 12x de"
-                    discount="67% OFF"
-                    imageSrc="/images/svg/emojis/graduation-cap.svg"
-                  />
+                  {[
+                    {
+                      title: 'Garantir acesso à Imersão em Empresa Digital nos EUA',
+                      description: 'O passo a passo para analisar um FII e montar sua estratégia.',
+                      originalPrice: 'De 12x R$ 29,90',
+                      currentPrice: 'R$ 9,90',
+                      discount: '67% OFF',
+                    },
+                    {
+                      title: 'Garantir acesso à Imersão em Vestibulares e Faculdades nos EUA',
+                      description: '',
+                      originalPrice: 'De 12x R$ 29,90',
+                      currentPrice: 'R$ 9,90',
+                      discount: '67% OFF',
+                    }
+                  ].map((p, idx) => (
+                    <ProductCard key={idx} title={p.title} description={p.description} originalPrice={p.originalPrice} currentPrice={p.currentPrice} discount={p.discount} />
+                  ))}
                 </div>
 
                 {/* Informação de segurança */}

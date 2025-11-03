@@ -17,21 +17,6 @@ export function PaymentStep({ onBack, onNext, isLoading = false, showWaitlist = 
     return (
       <div className="space-y-4">
         <WaitlistMessage />
-        
-        {/* Navigation */}
-        <div className="flex justify-center">
-          {onBack && (
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onBack}
-              disabled={isLoading}
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Voltar para Identificação
-            </Button>
-          )}
-        </div>
       </div>
     );
   }
