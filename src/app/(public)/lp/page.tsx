@@ -5,7 +5,7 @@ import { ComparisonSectionLp } from "@/components/lp/sections/comparison-section
 import { PricingSectionLp } from "@/components/lp/sections/pricing-section-lp";
 
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
-import TeacherSection from "@/components/sections/teacher-section";
+import TeacherSection from "@/components/lp/teacher-section";
 import FAQSection from "@/components/sections/faq-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import WhatsAppWidget from "@/components/whatsapp-widget";

@@ -84,7 +84,8 @@ export const CourseCard = ({
         <PrimaryButton
           icon={<ArrowRight className="size-4" />}
           size="lg"
-          className="w-full bg-gradient-to-r from-[#bb0711] to-[#3f4adf] text-white font-medium"
+          className="w-full text-white font-medium"
+          href="/enroll"
         >
           {ctaText}
         </PrimaryButton>
