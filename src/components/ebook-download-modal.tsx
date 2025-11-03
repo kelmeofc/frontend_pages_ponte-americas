@@ -105,7 +105,7 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
                 icon={<ArrowRight className="w-5 h-5" />}
                 iconPosition="right"
               >
-                {timer.isExpired ? 'Tempo expirado' : isLoading ? 'Enviando...' : 'Baixar agora'}
+                {isLoading ? 'Enviando...' : 'Baixar agora'}
               </PrimaryButton>
             </form>
 

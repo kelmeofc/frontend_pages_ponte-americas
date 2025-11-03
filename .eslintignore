@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+**/*.min.js
+cypress/videos/
+cypress/screenshots/
+.prisma/
+prisma/generated/
+src/generated/

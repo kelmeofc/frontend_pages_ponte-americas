@@ -3,128 +3,58 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("PRISMA_DATABASE_URL")
-  directUrl = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("PRISMA_DATABASE_URL")
+  directUrl         = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Lead {
-  id                Int      @id @default(autoincrement())
-  name              String
-  email             String?
-  phoneNumber       String?  @map("phone_number")
-  brand             String
-  description       String
-  company_size      Int?
-  company_segment   String?
-  company_on_market String?
-  website           String?
-  origin            Int
-  originFont        String?  @map("origin_font")
-  createdAt         DateTime @default(now()) @map("created_at")
-  updatedAt         DateTime @updatedAt @map("updated_at")
-  city              String?
-  country           String?
-  ipAddress         String?  @map("ip_address")
-  route             String?
-  userAgent         String?  @map("user_agent")
+  id          Int     @id @default(autoincrement())
+  name        String  @db.VarChar(100)
+  email       String? @db.VarChar(255)
+  phoneNumber String? @db.VarChar(20) @map("phone_number")
 
-  // New enrollment fields
-  password          String?
-  leadType          LeadType @default(EBOOK) @map("lead_type")
-  enrollmentStatus  EnrollmentStatus? @map("enrollment_status")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   // Relationships
-  submissions       Submission[]
-  stepProgress      StepProgress[]
-  waitlistEntries   WaitlistEntry[]
+  leadSubmissions LeadSubmission[]
 
-  @@index([leadType])
-  @@index([enrollmentStatus])
-  @@index([email, leadType])
+  @@index([email])
+  @@index([createdAt])
   @@map("leads")
 }
 
-model Submission {
-  id        Int            @id @default(autoincrement())
-  leadId    Int            @map("lead_id")
-  type      SubmissionType
-  success   Boolean
-  data      Json           // Form submission data
-  metadata  Json           @default("{}")  // Request metadata
-  createdAt DateTime       @default(now()) @map("created_at")
+model LeadSubmission {
+  id       Int            @id @default(autoincrement())
+  leadId   Int            @map("lead_id")
+  type     LeadSubmissionType
+  success  Boolean
+  data     Json // Form submission data
+  metadata Json           @default("{}") // Request metadata
+
+  // Location and tracking data
+  city       String?  @db.VarChar(100)
+  country    String?  @db.VarChar(100)
+  ipAddress  String?  @db.Inet @map("ip_address")
+  route      String?  @db.VarChar(500)
+  userAgent  String?  @db.Text @map("user_agent")
+  origin     Int
+  originFont String?  @db.VarChar(100) @map("origin_font")
+
+  createdAt DateTime @default(now()) @map("created_at")
 
   // Relationships
-  lead      Lead           @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
   @@index([leadId])
   @@index([type])
+  @@index([origin])
   @@index([createdAt])
-  @@map("submissions")
-}
-
-model StepProgress {
-  id             Int      @id @default(autoincrement())
-  leadId         Int      @map("lead_id")
-  stepNumber     Int      @map("step_number")
-  stepName       String   @map("step_name")
-  completed      Boolean  @default(false)
-  completedAt    DateTime? @map("completed_at")
-  validationData Json?    @map("validation_data")
-  createdAt      DateTime @default(now()) @map("created_at")
-  updatedAt      DateTime @updatedAt @map("updated_at")
-
-  // Relationships
-  lead           Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
-
-  @@unique([leadId, stepNumber], name: "unique_lead_step")
-  @@map("step_progress")
-}
-
-model WaitlistEntry {
-  id                      Int           @id @default(autoincrement())
-  leadId                  Int           @unique @map("lead_id")
-  position                Int?
-  enrollmentAttemptAt     DateTime      @map("enrollment_attempt_at")
-  notificationPreferences Json          @default("{}") @map("notification_preferences")
-  status                  WaitlistStatus @default(ACTIVE)
-  createdAt               DateTime      @default(now()) @map("created_at")
-  updatedAt               DateTime      @updatedAt @map("updated_at")
-
-  // Relationships
-  lead                    Lead          @relation(fields: [leadId], references: [id], onDelete: Cascade)
-
-  @@map("waitlist_entries")
-}
-
-model EnrollmentLead {
-  id                    Int                    @id @default(autoincrement())
-  name                  String
-  email                 String                 @unique
-  phoneNumber           String                 @map("phone_number")
-  password              String
-  stepCompleted         Int                    @default(1) @map("step_completed")
-  enrollmentStatus      EnrollmentStatus       @default(IDENTIFICATION_COMPLETED) @map("enrollment_status")
-  waitlistPosition      Int?                   @map("waitlist_position")
-  
-  // Metadata fields (similar to Lead model)
-  city                  String?
-  country               String?
-  ipAddress             String?                @map("ip_address")
-  route                 String?
-  userAgent             String?                @map("user_agent")
-  originFont            String?                @map("origin_font")
-  
-  createdAt             DateTime               @default(now()) @map("created_at")
-  updatedAt             DateTime               @updatedAt @map("updated_at")
-
-  @@map("enrollment_leads")
-}
-
-enum LeadType {
-  EBOOK
-  ENROLLMENT
+  @@index([type, createdAt])
+  @@index([leadId, type])
+  @@map("lead_submissions")
 }
 
 enum EnrollmentStatus {
@@ -135,14 +65,87 @@ enum EnrollmentStatus {
   ENROLLED
 }
 
-enum SubmissionType {
+enum LeadSubmissionType {
   EBOOK_DOWNLOAD
   ENROLLMENT_ATTEMPT
 }
 
-enum WaitlistStatus {
-  ACTIVE
-  NOTIFIED
-  ENROLLED
-  EXPIRED
+model User {
+  id          Int     @id @default(autoincrement())
+  name        String  @db.VarChar(100)
+  email       String  @unique @db.VarChar(255)
+  phoneNumber String? @db.VarChar(20) @map("phone_number")
+  password    String  @db.VarChar(255)
+
+  // Enrollment specific fields
+  enrollmentStatus EnrollmentStatus @default(IDENTIFICATION_PENDING) @map("enrollment_status")
+
+  // Location and metadata
+  city       String?  @db.VarChar(100)
+  country    String?  @db.VarChar(100)
+  ipAddress  String?  @db.Inet @map("ip_address")
+  route      String?  @db.VarChar(500)
+  userAgent  String?  @db.Text @map("user_agent")
+  origin     Int      @default(6) // EOriginLead.page
+  originFont String?  @db.VarChar(100) @map("origin_font")
+
+  // Timestamps
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  enrolledAt DateTime? @map("enrolled_at")
+
+  // Relationships
+  userSubmissions          UserSubmission[]
+  userRegistrationProgress UserRegistrationProgress[]
+
+  @@index([email])
+  @@index([enrollmentStatus])
+  @@index([createdAt])
+  @@index([enrollmentStatus, createdAt])
+  @@map("users")
 }
+
+model UserSubmission {
+  id        Int                @id @default(autoincrement())
+  userId    Int                @map("user_id")
+  type      UserSubmissionType
+  success   Boolean
+  data      Json // Form submission data
+  metadata  Json               @default("{}") // Request metadata
+  createdAt DateTime           @default(now()) @map("created_at")
+
+  // Relationships
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([type])
+  @@index([createdAt])
+  @@map("user_submissions")
+}
+
+model UserRegistrationProgress {
+  id               Int       @id @default(autoincrement())
+  userId           Int       @map("user_id")
+  registrationStep Int       @map("registration_step")
+  stepName         String    @db.VarChar(100) @map("step_name")
+  completed        Boolean   @default(false)
+  completedAt      DateTime? @map("completed_at")
+  validationData   Json?     @map("validation_data")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  // Relationships
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, registrationStep], name: "unique_user_registration_step")
+  @@index([userId, completed])
+  @@map("user_registration_progress")
+}
+
+enum UserSubmissionType {
+  ENROLLMENT_ATTEMPT
+  PAYMENT_ATTEMPT
+  IDENTIFICATION_SUBMISSION
+}
+
+

@@ -23,7 +23,7 @@ export const PasswordField: React.FC<PasswordFieldProps> = ({
   trigger,
 }) => {
   const error = errors[name];
-  const fieldValue = watch ? watch(name) : '';
+  const fieldValue = watch ? watch(name) || '' : '';
   const hasValue = fieldValue && fieldValue.toString().trim().length > 0;
   
   // Validate in real-time using watch
@@ -38,10 +38,10 @@ export const PasswordField: React.FC<PasswordFieldProps> = ({
   
   // Verificar se senha atende todos os requisitos
   const passwordRequirements = [
-    fieldValue.length >= 8,
-    /[a-z]/.test(fieldValue),
-    /[A-Z]/.test(fieldValue),
-    /\d/.test(fieldValue)
+    (fieldValue || '').length >= 8,
+    /[a-z]/.test(fieldValue || ''),
+    /[A-Z]/.test(fieldValue || ''),
+    /\d/.test(fieldValue || '')
   ];
   
   const allRequirementsMet = passwordRequirements.every(Boolean);

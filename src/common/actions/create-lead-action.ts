@@ -9,6 +9,11 @@ import {
   EnrollmentStatus, 
   SubmissionType 
 } from '@/types/enrollment';
+import type { 
+  LeadType as PrismaLeadType,
+  EnrollmentStatus as PrismaEnrollmentStatus,
+  SubmissionType as PrismaSubmissionType
+} from '@prisma/client';
 
 // Legacy interface support
 export async function createLeadAction(leadData: ICreateLead) {
@@ -19,7 +24,7 @@ export async function createLeadAction(leadData: ICreateLead) {
     brand: leadData.brand,
     description: leadData.description,
     leadType: LeadType.EBOOK,
-    origin: leadData.origin,
+    origin: typeof leadData.origin === 'number' ? leadData.origin : Number(leadData.origin),
     website: leadData.website,
     city: leadData.city,
     country: leadData.country,
@@ -50,7 +55,7 @@ export async function createUnifiedLeadAction(leadData: CreateLeadRequest) {
       existingLead = await prisma.lead.findFirst({
         where: { 
           email: leadData.email,
-          leadType: LeadType.EBOOK
+          leadType: LeadType.EBOOK as PrismaLeadType
         }
       });
     }
@@ -75,9 +80,9 @@ export async function createUnifiedLeadAction(leadData: CreateLeadRequest) {
           password: hashedPassword,
           brand: leadData.brand,
           description: leadData.description,
-          leadType: leadData.leadType,
+          leadType: leadData.leadType as PrismaLeadType,
           enrollmentStatus: leadData.leadType === LeadType.ENROLLMENT ? 
-            EnrollmentStatus.IDENTIFICATION_PENDING : undefined,
+            EnrollmentStatus.IDENTIFICATION_PENDING as PrismaEnrollmentStatus : undefined,
           origin: leadData.origin || 6, // Default to page origin
           website: leadData.website,
           city: leadData.city,
@@ -156,8 +161,8 @@ async function upgradeToEnrollment(leadId: number, enrollmentData: CreateLeadReq
       // Update with enrollment-specific fields
       password: hashedPassword,
       phoneNumber: enrollmentData.phoneNumber || undefined,
-      leadType: LeadType.ENROLLMENT,
-      enrollmentStatus: EnrollmentStatus.IDENTIFICATION_PENDING,
+      leadType: LeadType.ENROLLMENT as PrismaLeadType,
+      enrollmentStatus: EnrollmentStatus.IDENTIFICATION_PENDING as PrismaEnrollmentStatus,
       
       // Update metadata if provided
       city: enrollmentData.city || undefined,
@@ -198,7 +203,7 @@ async function createSubmissionRecord(
   return await prisma.submission.create({
     data: {
       leadId,
-      type: submissionType,
+      type: submissionType as PrismaSubmissionType,
       success,
       data: sanitizedData,
       metadata: {

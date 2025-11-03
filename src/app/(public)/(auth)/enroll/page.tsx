@@ -16,7 +16,11 @@ import {
   type EnrollmentFormDataSchema 
 } from '@/common/schemas/enrollment-lead.schema';
 import { useCreateEnrollmentLead } from '@/common/hooks/use-create-enrollment-lead';
+import { useEnrollmentFlow } from '@/common/hooks/use-enrollment-flow';
+import { PaymentStep } from '@/components/enrollment/payment-step';
+import { createWaitlistEntry } from '@/common/actions/create-waitlist-entry-action';
 import { EnrollmentFormData } from '@/types/enrollment';
+import Link from 'next/link';
 
 
 // Schema de validação para a etapa de pagamento
@@ -176,6 +180,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
 };
 
 export default function EnrollPage() {
+  // Enhanced step management with useEnrollmentFlow hook
+  const {
+    currentStep: flowStep,
+    nextStep,
+    previousStep,
+    markStepCompleted,
+    canAccessStep,
+    isStepCompleted
+  } = useEnrollmentFlow();
+  
+  // Legacy step management for backward compatibility
   const [currentStep, setCurrentStep] = useState(1);
   const [identificationData, setIdentificationData] = useState<IdentificationData | null>(null);
   const [showCoupon, setShowCoupon] = useState(false);
@@ -183,7 +198,71 @@ export default function EnrollPage() {
   const [feedbackMessage, setFeedbackMessage] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
   const [retryCount, setRetryCount] = useState(0);
   const [lastSubmissionData, setLastSubmissionData] = useState<IdentificationData | null>(null);
+  const [waitlistCreated, setWaitlistCreated] = useState(false);
   const { createEnrollmentLead, isLoading: hookLoading, error: hookError, success: hookSuccess } = useCreateEnrollmentLead();
+
+  // Sync legacy step with new flow step
+  React.useEffect(() => {
+    const stepMapping = {
+      identification: 1,
+      payment: 2
+    };
+    setCurrentStep(stepMapping[flowStep] || 1);
+  }, [flowStep]);
+
+  // Create waitlist entry when payment step is accessed
+  React.useEffect(() => {
+    async function handleWaitlistEntry() {
+      if (flowStep === 'payment' && identificationData && !waitlistCreated) {
+        try {
+          // Assume the identificationData contains the lead ID or we can derive it
+          // For now, we'll use a placeholder logic
+          if (identificationData.email) {
+            // In a real scenario, you'd get the leadId from the database
+            // For this implementation, we'll create the waitlist entry
+            // This would need to be enhanced to get the actual lead ID
+            console.log('User accessed payment step - would create waitlist entry');
+            setWaitlistCreated(true);
+            
+            // TODO: Implement actual leadId retrieval and waitlist creation
+            // const result = await createWaitlistEntry({
+            //   leadId: actualLeadId,
+            //   reason: 'Payment step accessed during enrollment capacity limit'
+            // });
+          }
+        } catch (error) {
+          console.error('Error creating waitlist entry:', error);
+        }
+      }
+    }
+
+    handleWaitlistEntry();
+  }, [flowStep, identificationData, waitlistCreated]);
+
+  // Enhanced error handling for the entire enrollment flow
+  const handleFlowError = useCallback((error: any, context: string) => {
+    console.error(`Enrollment flow error in ${context}:`, error);
+    
+    let errorMessage = 'Ocorreu um erro inesperado. Tente novamente.';
+    
+    if (error instanceof Error) {
+      if (error.message.includes('network') || error.message.includes('fetch')) {
+        errorMessage = 'Erro de conexão. Verifique sua internet e tente novamente.';
+      } else if (error.message.includes('timeout')) {
+        errorMessage = 'A requisição demorou muito para responder. Tente novamente.';
+      } else if (error.message.includes('validation')) {
+        errorMessage = 'Dados inválidos. Verifique as informações e tente novamente.';
+      }
+    }
+    
+    setFeedbackMessage({
+      type: 'error',
+      message: errorMessage
+    });
+    
+    // Reset loading states
+    setIsLoading(false);
+  }, []);
 
   // Efeito para sincronizar feedback com estados do hook
   React.useEffect(() => {
@@ -237,7 +316,9 @@ export default function EnrollPage() {
         // Aguardar um momento para mostrar o feedback antes de prosseguir
         setTimeout(() => {
           setIdentificationData(data);
-          setCurrentStep(2);
+          // Mark identification step as completed and move to payment
+          markStepCompleted('identification');
+          nextStep();
           setFeedbackMessage({ type: null, message: '' });
         }, 2000);
       } else {
@@ -613,7 +694,10 @@ export default function EnrollPage() {
                 <p className="text-neutral-600 text-sm sm:text-base font-medium leading-5 mt-4">
                   Ao clicar em "CRIAR CONTA" você concorda com a nossa{' '}
                   <span className="text-blue-700 cursor-pointer hover:underline">
-                    política de privacidade
+                    <Link href="/privacy-policy">
+                      política de privacidade
+                    </Link>
+                  
                   </span>
                   .
                 </p>
@@ -624,17 +708,25 @@ export default function EnrollPage() {
           {/* Etapa 2 - Pagamento */}
           {currentStep === 2 && (
             <div className="space-y-6">
-              {/* Botão de voltar */}
+              {/* Botão de voltar - Enhanced with flow management */}
               <div className="flex justify-start mb-4">
                 <button
                   type="button"
-                  onClick={() => setCurrentStep(1)}
+                  onClick={previousStep}
                   className="flex items-center gap-2 text-indigo-600 text-sm font-medium hover:text-indigo-700 transition-colors"
                   disabled={isLoading}
                 >
                   <ArrowRight className="w-4 h-4 rotate-180" />
                   Voltar para identificação
                 </button>
+              </div>
+
+              {/* New PaymentStep Component - Simplified version */}
+              <div className="mb-6">
+                <PaymentStep
+                  onBack={previousStep}
+                  isLoading={isLoading}
+                />
               </div>
 
               <form onSubmit={paymentForm.handleSubmit(handlePaymentSubmit)} className="space-y-4">
