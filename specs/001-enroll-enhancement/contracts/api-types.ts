@@ -62,7 +62,6 @@ export interface LeadStatusResponse {
   enrollmentStatus?: EnrollmentStatus;
   completedSteps: StepInfo[];
   currentStep?: number;
-  waitlistStatus?: WaitlistInfo;
 }
 
 export interface StepInfo {
@@ -74,7 +73,6 @@ export interface StepInfo {
 
 export interface WaitlistInfo {
   position?: number;
-  status: WaitlistStatus;
   enrollmentAttemptAt: string;
 }
 
@@ -120,12 +118,6 @@ export enum EnrollmentStatus {
   ENROLLED = 'ENROLLED'
 }
 
-export enum WaitlistStatus {
-  ACTIVE = 'ACTIVE',
-  NOTIFIED = 'NOTIFIED',
-  ENROLLED = 'ENROLLED',
-  EXPIRED = 'EXPIRED'
-}
 
 export enum SubmissionType {
   EBOOK_DOWNLOAD = 'EBOOK_DOWNLOAD',

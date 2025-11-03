@@ -19,12 +19,6 @@ export enum SubmissionType {
   ENROLLMENT_ATTEMPT = 'ENROLLMENT_ATTEMPT'
 }
 
-export enum WaitlistStatus {
-  ACTIVE = 'ACTIVE',
-  NOTIFIED = 'NOTIFIED',
-  ENROLLED = 'ENROLLED',
-  EXPIRED = 'EXPIRED'
-}
 
 // Request/Response Types
 export interface CreateLeadRequest {
@@ -104,7 +98,6 @@ export interface WaitlistEntryResponse {
     sms: boolean;
     instagram: boolean;
   };
-  status: WaitlistStatus;
   createdAt: string;
   updatedAt: string;
 }

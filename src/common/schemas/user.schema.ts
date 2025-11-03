@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { EnrollmentStatus, UserSubmissionType, WaitlistStatus } from '@/types/user';
+import { EnrollmentStatus, UserSubmissionType } from '@/types/user';
 
 // Brazilian phone number validation regex
 const brazilianPhoneRegex = /^(\+55|55)?[1-9][0-9]{1}[0-9]{8,9}$/;
@@ -217,7 +217,6 @@ export const userWaitlistEntryResponseSchema = z.object({
     sms: z.boolean(),
     instagram: z.boolean(),
   }),
-  status: z.nativeEnum(WaitlistStatus),
   createdAt: z.string(),
   updatedAt: z.string(),
 });

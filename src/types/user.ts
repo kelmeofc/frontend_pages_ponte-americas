@@ -15,12 +15,6 @@ export enum UserSubmissionType {
   IDENTIFICATION_SUBMISSION = 'IDENTIFICATION_SUBMISSION'
 }
 
-export enum WaitlistStatus {
-  ACTIVE = 'ACTIVE',
-  NOTIFIED = 'NOTIFIED',
-  ENROLLED = 'ENROLLED',
-  EXPIRED = 'EXPIRED'
-}
 
 // Request/Response Types
 export interface CreateUserRequest {
@@ -119,7 +113,6 @@ export interface UserWaitlistEntryResponse {
     sms: boolean;
     instagram: boolean;
   };
-  status: WaitlistStatus;
   createdAt: string;
   updatedAt: string;
 }
