@@ -54,7 +54,7 @@ const PrimaryButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, PrimaryB
     iconPosition = "right", 
     isShine = true,
     children, 
-    href = "/",
+    href = "",
     ...props 
   }, ref) => {
     // Memoização do ícone para evitar re-renders desnecessários

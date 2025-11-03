@@ -1,0 +1,393 @@
+openapi: 3.0.3
+info:
+  title: Enhanced Enrollment System API
+  description: API contracts for unified lead management and enrollment system
+  version: 1.0.0
+  contact:
+    name: Ponte Americas Development Team
+
+servers:
+  - url: http://localhost:3000
+    description: Development server
+  - url: https://ponteamericas.com
+    description: Production server
+
+paths:
+  /api/leads:
+    post:
+      summary: Create or update lead
+      description: Creates new lead or updates existing lead with enrollment data
+      operationId: createLead
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLeadRequest'
+      responses:
+        '200':
+          description: Lead created/updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeadResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/leads/{id}/steps:
+    post:
+      summary: Complete enrollment step
+      description: Marks a specific enrollment step as completed
+      operationId: completeStep
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompleteStepRequest'
+      responses:
+        '200':
+          description: Step completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepProgressResponse'
+        '404':
+          description: Lead not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/leads/{id}/waitlist:
+    post:
+      summary: Add lead to waitlist
+      description: Adds lead to enrollment waitlist when capacity is reached
+      operationId: addToWaitlist
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WaitlistRequest'
+      responses:
+        '200':
+          description: Added to waitlist successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WaitlistResponse'
+
+  /api/leads/{id}/status:
+    get:
+      summary: Get lead enrollment status
+      description: Retrieves current enrollment status and step progression
+      operationId: getLeadStatus
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lead status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeadStatusResponse'
+
+components:
+  schemas:
+    CreateLeadRequest:
+      type: object
+      required:
+        - name
+        - leadType
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Lead's full name
+        email:
+          type: string
+          format: email
+          maxLength: 255
+          description: Lead's email address
+        phoneNumber:
+          type: string
+          pattern: '^(\+55|55)?[1-9][0-9]{1}[0-9]{8,9}$'
+          description: Brazilian phone number format
+        password:
+          type: string
+          minLength: 8
+          description: Password (required for enrollment leads, bcrypt hashed on server)
+        leadType:
+          $ref: '#/components/schemas/LeadType'
+        brand:
+          type: string
+          description: Brand or campaign identifier
+        description:
+          type: string
+          description: Lead context or notes
+        origin:
+          type: integer
+          description: Lead origin identifier
+        originFont:
+          type: string
+          description: Specific source within origin
+        metadata:
+          $ref: '#/components/schemas/LeadMetadata'
+
+    LeadResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        id:
+          type: integer
+          description: Lead ID
+        leadType:
+          $ref: '#/components/schemas/LeadType'
+        enrollmentStatus:
+          $ref: '#/components/schemas/EnrollmentStatus'
+        message:
+          type: string
+          description: Success message
+        nextStep:
+          type: integer
+          description: Next step number in enrollment process
+          nullable: true
+
+    CompleteStepRequest:
+      type: object
+      required:
+        - stepNumber
+        - stepName
+      properties:
+        stepNumber:
+          type: integer
+          minimum: 1
+          description: Step number being completed
+        stepName:
+          type: string
+          description: Human-readable step name
+        validationData:
+          type: object
+          additionalProperties: true
+          description: Step-specific validation or form data
+
+    StepProgressResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        stepNumber:
+          type: integer
+        completed:
+          type: boolean
+        completedAt:
+          type: string
+          format: date-time
+        nextStep:
+          type: integer
+          nullable: true
+          description: Next available step number
+
+    WaitlistRequest:
+      type: object
+      properties:
+        notificationPreferences:
+          $ref: '#/components/schemas/NotificationPreferences'
+
+    WaitlistResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        position:
+          type: integer
+          nullable: true
+          description: Position in waitlist (if available)
+        message:
+          type: string
+          description: Waitlist confirmation message
+
+    LeadStatusResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        leadType:
+          $ref: '#/components/schemas/LeadType'
+        enrollmentStatus:
+          $ref: '#/components/schemas/EnrollmentStatus'
+        completedSteps:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepInfo'
+        currentStep:
+          type: integer
+          nullable: true
+        waitlistStatus:
+          $ref: '#/components/schemas/WaitlistInfo'
+          nullable: true
+
+    StepInfo:
+      type: object
+      properties:
+        stepNumber:
+          type: integer
+        stepName:
+          type: string
+        completed:
+          type: boolean
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+
+    WaitlistInfo:
+      type: object
+      properties:
+        position:
+          type: integer
+          nullable: true
+        status:
+          $ref: '#/components/schemas/WaitlistStatus'
+        enrollmentAttemptAt:
+          type: string
+          format: date-time
+
+    LeadMetadata:
+      type: object
+      properties:
+        ipAddress:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        userAgent:
+          type: string
+        route:
+          type: string
+
+    NotificationPreferences:
+      type: object
+      properties:
+        email:
+          type: boolean
+          default: true
+        sms:
+          type: boolean
+          default: false
+        instagram:
+          type: boolean
+          default: false
+
+    ValidationError:
+      type: object
+      properties:
+        success:
+          type: boolean
+          default: false
+        error:
+          type: string
+          description: General error message
+        fieldErrors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          default: false
+        error:
+          type: string
+          description: Error message
+        code:
+          type: string
+          description: Error code for client handling
+
+    LeadType:
+      type: string
+      enum:
+        - EBOOK
+        - ENROLLMENT
+      description: Type of lead - ebook download or course enrollment
+
+    EnrollmentStatus:
+      type: string
+      enum:
+        - IDENTIFICATION_PENDING
+        - IDENTIFICATION_COMPLETED
+        - PAYMENT_ATTEMPTED
+        - WAITLISTED
+        - ENROLLED
+      description: Current status in enrollment process
+
+    WaitlistStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - NOTIFIED
+        - ENROLLED
+        - EXPIRED
+      description: Status of waitlist entry
+
+security:
+  - ApiKeyAuth: []
+  - CookieAuth: []
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: session-token
+
+tags:
+  - name: Leads
+    description: Lead management operations
+  - name: Enrollment
+    description: Enrollment process operations
+  - name: Waitlist
+    description: Waitlist management operations

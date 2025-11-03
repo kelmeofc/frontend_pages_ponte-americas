@@ -30,5 +30,119 @@ model Lead {
   route             String?
   userAgent         String?  @map("user_agent")
 
+  // New enrollment fields
+  password          String?
+  leadType          LeadType @default(EBOOK) @map("lead_type")
+  enrollmentStatus  EnrollmentStatus? @map("enrollment_status")
+
+  // Relationships
+  submissions       Submission[]
+  stepProgress      StepProgress[]
+  waitlistEntries   WaitlistEntry[]
+
+  @@index([leadType])
+  @@index([enrollmentStatus])
+  @@index([email, leadType])
   @@map("leads")
+}
+
+model Submission {
+  id        Int            @id @default(autoincrement())
+  leadId    Int            @map("lead_id")
+  type      SubmissionType
+  success   Boolean
+  data      Json           // Form submission data
+  metadata  Json           @default("{}")  // Request metadata
+  createdAt DateTime       @default(now()) @map("created_at")
+
+  // Relationships
+  lead      Lead           @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId])
+  @@index([type])
+  @@index([createdAt])
+  @@map("submissions")
+}
+
+model StepProgress {
+  id             Int      @id @default(autoincrement())
+  leadId         Int      @map("lead_id")
+  stepNumber     Int      @map("step_number")
+  stepName       String   @map("step_name")
+  completed      Boolean  @default(false)
+  completedAt    DateTime? @map("completed_at")
+  validationData Json?    @map("validation_data")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  // Relationships
+  lead           Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@unique([leadId, stepNumber], name: "unique_lead_step")
+  @@map("step_progress")
+}
+
+model WaitlistEntry {
+  id                      Int           @id @default(autoincrement())
+  leadId                  Int           @unique @map("lead_id")
+  position                Int?
+  enrollmentAttemptAt     DateTime      @map("enrollment_attempt_at")
+  notificationPreferences Json          @default("{}") @map("notification_preferences")
+  status                  WaitlistStatus @default(ACTIVE)
+  createdAt               DateTime      @default(now()) @map("created_at")
+  updatedAt               DateTime      @updatedAt @map("updated_at")
+
+  // Relationships
+  lead                    Lead          @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@map("waitlist_entries")
+}
+
+model EnrollmentLead {
+  id                    Int                    @id @default(autoincrement())
+  name                  String
+  email                 String                 @unique
+  phoneNumber           String                 @map("phone_number")
+  password              String
+  stepCompleted         Int                    @default(1) @map("step_completed")
+  enrollmentStatus      EnrollmentStatus       @default(IDENTIFICATION_COMPLETED) @map("enrollment_status")
+  waitlistPosition      Int?                   @map("waitlist_position")
+  
+  // Metadata fields (similar to Lead model)
+  city                  String?
+  country               String?
+  ipAddress             String?                @map("ip_address")
+  route                 String?
+  userAgent             String?                @map("user_agent")
+  originFont            String?                @map("origin_font")
+  
+  createdAt             DateTime               @default(now()) @map("created_at")
+  updatedAt             DateTime               @updatedAt @map("updated_at")
+
+  @@map("enrollment_leads")
+}
+
+enum LeadType {
+  EBOOK
+  ENROLLMENT
+}
+
+enum EnrollmentStatus {
+  IDENTIFICATION_PENDING
+  IDENTIFICATION_COMPLETED
+  PAYMENT_ATTEMPTED
+  WAITLISTED
+  ENROLLED
+}
+
+enum SubmissionType {
+  EBOOK_DOWNLOAD
+  ENROLLMENT_ATTEMPT
+}
+
+enum WaitlistStatus {
+  ACTIVE
+  NOTIFIED
+  ENROLLED
+  EXPIRED
 }
