@@ -27,7 +27,7 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  console.log('[EBOOK_MODAL] Modal renderizado, isOpen:', isOpen);
+  // Ebook modal render
   
   const {
     register,
@@ -60,7 +60,6 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
           email: data.email,
           phone: data.phone,
           source: data.source || 'ebook-cta-section',
-          brand: 'Ebook Passaporte Blindado',
         },
         metadata: {
           description: `Lead interessado no ebook. Fonte: ${data.source || 'ebook-cta-section'}`,

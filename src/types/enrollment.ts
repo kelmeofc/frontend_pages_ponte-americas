@@ -32,8 +32,6 @@ export interface CreateLeadRequest {
   email?: string;
   phoneNumber?: string;
   password?: string;
-  brand: string;
-  description: string;
   leadType: LeadType;
   origin?: number;
   company_size?: number;
@@ -55,8 +53,6 @@ export interface LeadResponse {
   name: string;
   email?: string;
   phoneNumber?: string;
-  brand: string;
-  description: string;
   leadType: LeadType;
   enrollmentStatus?: EnrollmentStatus;
   origin: number;

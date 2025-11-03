@@ -17,7 +17,7 @@ export const PricingSectionLp = () => {
         <div className="mb-8 flex flex-col items-center justify-center gap-2">
           <div className="text-center">
 
-            <h3 className="font-clash-display  font-semibold uppercase leading-tight text-white">
+            <h3 className="font-semibold uppercase leading-tight text-white">
               {PRICING_DATA.title.main}
             </h3>
 
@@ -25,7 +25,7 @@ export const PricingSectionLp = () => {
           </div>
           <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:gap-5">
 
-            <h2 className="font-clash-display text-center  font-semibold uppercase leading-tight  ">
+            <h2 className="text-center  font-semibold uppercase leading-tight  ">
               <GradientText>
                 {PRICING_DATA.title.highlight}
               </GradientText>
@@ -34,7 +34,7 @@ export const PricingSectionLp = () => {
 
 
 
-            <h3 className="font-clash-display text-center font-semibold uppercase leading-tight text-white  ">
+            <h3 className="text-center font-semibold uppercase leading-tight text-white  ">
               {PRICING_DATA.title.subtitle}
             </h3>
           </div>

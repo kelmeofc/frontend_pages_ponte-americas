@@ -45,8 +45,6 @@ export interface ICreateLead {
   name: string;
   email?: string;
   phone_number?: string;
-  brand: string;
-  description: string;
   website?: string;
   origin: EOriginLeadType;
   origin_font?: string;

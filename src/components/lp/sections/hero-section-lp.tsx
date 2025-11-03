@@ -38,6 +38,7 @@ export function HeroSectionLp() {
 				<PrimaryButton
 					icon={<ArrowRight className="size-4" />}
 					size="lg"
+					href="/enroll"
 					className="bg-linear-to-r from-[#bb0711] to-[#3f4adf] text-white font-medium px-8 py-4 rounded-lg"
 				>
 					QUERO MUDAR DE VIDA

@@ -3,7 +3,7 @@ import { useLocalStorage } from './use-local-storage';
 export interface LeadData {
   name?: string;
   email?: string;
-  brand: string;
+  // brand removed
 }
 
 export function useLeadCache() {

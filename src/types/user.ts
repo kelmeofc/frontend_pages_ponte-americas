@@ -28,8 +28,7 @@ export interface CreateUserRequest {
   email: string;
   phoneNumber?: string;
   password: string;
-  brand: string;
-  description: string;
+  // brand/description removed
   company_size?: number;
   company_segment?: string;
   company_on_market?: string;
@@ -49,8 +48,6 @@ export interface UserResponse {
   name: string;
   email: string;
   phoneNumber?: string;
-  brand: string;
-  description: string;
   enrollmentStatus: EnrollmentStatus;
   
   // Company information
@@ -143,8 +140,7 @@ export interface UserEnrollmentFormData {
   email: string;
   phoneNumber: string;
   password: string;
-  brand: string;
-  description: string;
+  // brand/description removed
   company_size?: number;
   company_segment?: string;
   company_on_market?: string;

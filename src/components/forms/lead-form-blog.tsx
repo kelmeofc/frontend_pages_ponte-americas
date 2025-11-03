@@ -39,16 +39,18 @@ export function LeadFormBlog({ articleUri }: { articleUri: string }) {
     })
 
     const onSubmit = async (data: FormValues) => {
-        const success = await execCreateLead({
-            data: {
-                brand: 'Lead do Blog',
-                name: data.name,
-                phone_number: data.phone,
+        const payload = {
+            name: data.name,
+            email: data.email,
+            phoneNumber: data.phone,
+            origin: EOriginLead.seo_archive,
+            originFont: 'blog-form',
+            metadata: {
                 description: `Lead interessado em consultoria de imigração. Artigo: ${articleUri}. Email: ${data.email}`,
-                origin: EOriginLead.seo_archive,
-                origin_font: 'blog-form'
             }
-        });
+        } as any;
+
+        const success = await execCreateLead({ data: payload });
 
         if (success) {
             reset({

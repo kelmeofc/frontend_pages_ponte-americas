@@ -24,9 +24,7 @@ export const leadSchema = z.object({
     .regex(brazilianPhoneRegex, 'Telefone deve estar no formato brasileiro válido (ex: 11999999999)')
     .optional(),
   
-  brand: z.string().min(1, 'Marca é obrigatória'),
-  
-  description: z.string().min(1, 'Descrição é obrigatória'),
+  // brand/description removed
   
   // Optional company fields
   company_size: z.number().optional(),
@@ -60,9 +58,7 @@ export const updateLeadSchema = z.object({
     .regex(brazilianPhoneRegex, 'Telefone deve estar no formato brasileiro válido (ex: 11999999999)')
     .optional(),
   
-  brand: z.string().min(1, 'Marca é obrigatória').optional(),
-  
-  description: z.string().min(1, 'Descrição é obrigatória').optional(),
+  // brand/description removed
   
   company_size: z.number().optional(),
   company_segment: z.string().optional(),
@@ -104,9 +100,7 @@ export const ebookLeadFormDataSchema = z.object({
     .toLowerCase()
     .trim(),
   
-  brand: z.string().min(1, 'Marca é obrigatória'),
-  
-  description: z.string().min(1, 'Descrição é obrigatória'),
+  // brand/description removed
   
   company_size: z.number().optional(),
   company_segment: z.string().optional(),
@@ -120,8 +114,7 @@ export const leadResponseSchema = z.object({
   name: z.string(),
   email: z.string().optional(),
   phoneNumber: z.string().optional(),
-  brand: z.string(),
-  description: z.string(),
+  // brand/description removed
   
   // Company information
   company_size: z.number().optional(),
@@ -211,12 +204,7 @@ export const leadValidationMessages = {
   phoneNumber: {
     invalid: 'Telefone deve estar no formato brasileiro (ex: 11999999999)',
   },
-  brand: {
-    required: 'Marca é obrigatória',
-  },
-  description: {
-    required: 'Descrição é obrigatória',
-  },
+  // brand/description validation messages removed
   website: {
     invalid: 'Website deve ser uma URL válida',
   },

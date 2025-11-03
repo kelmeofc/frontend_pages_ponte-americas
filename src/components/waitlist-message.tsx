@@ -10,7 +10,7 @@ interface WaitlistMessageProps {
 
 export function WaitlistMessage({ onClose, className = '' }: WaitlistMessageProps) {
   const handleInstagramClick = () => {
-    // Open Instagram link in new tab
+    // Apenas abre o Instagram — nenhuma submissão registrada
     window.open('https://instagram.com/ponteamericas', '_blank', 'noopener,noreferrer');
   };
 

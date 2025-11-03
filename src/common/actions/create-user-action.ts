@@ -21,11 +21,7 @@ export async function createUserAction(userData: CreateUserRequest) {
   const startTime = Date.now();
   
   try {
-    console.log('[CREATE_USER] Iniciando criação de usuário:', {
-      name: userData.name,
-      email: userData.email,
-      brand: userData.brand,
-    });
+    // Starting user creation
 
     // Check if email already exists
     const existingUser = await prisma.user.findUnique({
@@ -33,7 +29,6 @@ export async function createUserAction(userData: CreateUserRequest) {
     });
 
     if (existingUser) {
-      console.log('[CREATE_USER] Email já existe:', { email: userData.email });
       return {
         success: false,
         error: 'Este email já está sendo usado',
@@ -45,15 +40,13 @@ export async function createUserAction(userData: CreateUserRequest) {
     // Hash password
     const hashedPassword = await bcrypt.hash(userData.password, 12);
 
-    // Create user in database
+    // Create user in database (only fields present in Prisma schema)
     const newUser = await prisma.user.create({
       data: {
         name: userData.name,
         email: userData.email,
         phoneNumber: userData.phoneNumber,
         password: hashedPassword,
-        brand: userData.brand,
-        description: userData.description,
         company_size: userData.company_size,
         company_segment: userData.company_segment,
         company_on_market: userData.company_on_market,
@@ -78,8 +71,6 @@ export async function createUserAction(userData: CreateUserRequest) {
           step: 'user_creation',
           name: userData.name,
           email: userData.email,
-          brand: userData.brand,
-          description: userData.description,
         },
         metadata: {
           processingTimeMs: Date.now() - startTime,
@@ -94,11 +85,7 @@ export async function createUserAction(userData: CreateUserRequest) {
 
     const processingTime = Date.now() - startTime;
 
-    console.log('[CREATE_USER] Usuário criado com sucesso:', {
-      userId: newUser.id,
-      email: newUser.email,
-      processingTimeMs: processingTime,
-    });
+    // User created successfully
 
     return {
       success: true,
@@ -107,8 +94,6 @@ export async function createUserAction(userData: CreateUserRequest) {
         name: newUser.name,
         email: newUser.email,
         phoneNumber: newUser.phoneNumber,
-        brand: newUser.brand,
-        description: newUser.description,
         enrollmentStatus: newUser.enrollmentStatus as EnrollmentStatus,
         company_size: newUser.company_size,
         company_segment: newUser.company_segment,
@@ -136,7 +121,6 @@ export async function createUserAction(userData: CreateUserRequest) {
       userData: {
         name: userData.name,
         email: userData.email,
-        brand: userData.brand,
       },
       processingTimeMs: processingTime,
     });
@@ -154,10 +138,7 @@ export async function updateUserAction(userId: number, userData: UpdateUserReque
   const startTime = Date.now();
   
   try {
-    console.log('[UPDATE_USER] Atualizando usuário:', {
-      userId,
-      fields: Object.keys(userData),
-    });
+    // Updating user
 
     // Check if user exists
     const existingUser = await prisma.user.findUnique({
@@ -186,10 +167,7 @@ export async function updateUserAction(userId: number, userData: UpdateUserReque
 
     const processingTime = Date.now() - startTime;
 
-    console.log('[UPDATE_USER] Usuário atualizado com sucesso:', {
-      userId: updatedUser.id,
-      processingTimeMs: processingTime,
-    });
+    // User updated successfully
 
     return {
       success: true,
@@ -198,8 +176,7 @@ export async function updateUserAction(userId: number, userData: UpdateUserReque
         name: updatedUser.name,
         email: updatedUser.email,
         phoneNumber: updatedUser.phoneNumber,
-        brand: updatedUser.brand,
-        description: updatedUser.description,
+        // brand/description removed
         enrollmentStatus: updatedUser.enrollmentStatus as EnrollmentStatus,
         company_size: updatedUser.company_size,
         company_segment: updatedUser.company_segment,
@@ -241,11 +218,7 @@ export async function completeUserStepAction(userId: number, stepData: CompleteU
   const startTime = Date.now();
   
   try {
-    console.log('[COMPLETE_USER_STEP] Completando passo:', {
-      userId,
-      stepNumber: stepData.stepNumber,
-      stepName: stepData.stepName,
-    });
+    // Completing user step
 
     const result = await prisma.$transaction(async (tx) => {
       // Check if user exists
@@ -315,12 +288,7 @@ export async function completeUserStepAction(userId: number, stepData: CompleteU
 
     const processingTime = Date.now() - startTime;
 
-    console.log('[COMPLETE_USER_STEP] Passo completado com sucesso:', {
-      userId,
-      stepId: result.id,
-      stepNumber: result.stepNumber,
-      processingTimeMs: processingTime,
-    });
+    // Step completed successfully
 
     return {
       success: true,
@@ -364,10 +332,7 @@ export async function createUserWaitlistEntryAction(
   const startTime = Date.now();
   
   try {
-    console.log('[CREATE_USER_WAITLIST] Criando entrada na waitlist:', {
-      userId,
-      notificationPreferences: waitlistData.notificationPreferences,
-    });
+    // Creating waitlist entry
 
     // Check if user exists and get current status
     const user = await prisma.user.findUnique({
@@ -440,11 +405,7 @@ export async function createUserWaitlistEntryAction(
 
     const processingTime = Date.now() - startTime;
 
-    console.log('[CREATE_USER_WAITLIST] Entrada na waitlist criada com sucesso:', {
-      userId,
-      waitlistId: result.id,
-      processingTimeMs: processingTime,
-    });
+    // Waitlist entry created
 
     return {
       success: true,

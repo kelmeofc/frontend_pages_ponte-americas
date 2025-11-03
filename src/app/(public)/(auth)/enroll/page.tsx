@@ -16,7 +16,6 @@ import {
   type UserEnrollmentFormDataSchema 
 } from '@/common/schemas/user.schema';
 import useCreateUser from '@/common/hooks/use-create-user';
-import { useEnrollmentFlow } from '@/common/hooks/use-enrollment-flow';
 import { PaymentStep } from '@/components/enrollment/payment-step';
 import { CreateUserRequest } from '@/types/user';
 import Link from 'next/link';
@@ -51,8 +50,10 @@ const paymentSchema = z.object({
 type IdentificationData = UserEnrollmentFormDataSchema;
 type PaymentData = z.infer<typeof paymentSchema>;
 
+type FlowStep = 'identification' | 'payment';
+
 interface StepIndicatorProps {
-  currentStep: number;
+  currentStep: FlowStep;
 }
 
 const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => {
@@ -61,7 +62,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => {
       {/* Etapa 1 - Identificação */}
       <div className="inline-flex flex-col justify-center items-center">
         <div className="mb-2">
-          {currentStep > 1 ? (
+          {currentStep === 'payment' ? (
             <div className="w-10 h-10 bg-indigo-600 rounded-full p-2 inline-flex justify-center items-center">
               <Check className="size-4 text-white" />
             </div>
@@ -83,15 +84,15 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => {
       <div className="inline-flex flex-col justify-start items-center">
         <div className="mb-2">
           <div className={`w-10 h-10 bg-white rounded-full shadow-[0px_0px_10px_0px_rgba(79,70,229,1.00)] border-[3px] p-2 inline-flex justify-center items-center ${
-            currentStep === 2 ? 'border-indigo-600' : 'border-gray-400'
+            currentStep === 'payment' ? 'border-indigo-600' : 'border-gray-400'
           }`}>
             <div className={`w-full h-full rounded-full ${
-              currentStep === 2 ? 'bg-indigo-600' : 'bg-gray-400'
+              currentStep === 'payment' ? 'bg-indigo-600' : 'bg-gray-400'
             }`} />
           </div>
         </div>
         <div className={`text-center text-[10px] sm:text-xs font-normal leading-3 font-rubik ${
-          currentStep === 2 ? 'text-indigo-600' : 'text-gray-500'
+          currentStep === 'payment' ? 'text-indigo-600' : 'text-gray-500'
         }`}>
           Pagamento
         </div>
@@ -179,64 +180,74 @@ const ProductCard: React.FC<ProductCardProps> = ({
 };
 
 export default function EnrollPage() {
-  // Enhanced step management with useEnrollmentFlow hook
-  const {
-    currentStep: flowStep,
-    nextStep,
-    previousStep,
-    markStepCompleted,
-    canAccessStep,
-    isStepCompleted
-  } = useEnrollmentFlow();
-  
-  // Legacy step management for backward compatibility
-  const [currentStep, setCurrentStep] = useState(1);
+  // Step management (inlined - substituindo useEnrollmentFlow)
+  const STEP_ORDER: FlowStep[] = ['identification', 'payment'];
+
+  const [flowStep, setFlowStep] = useState<FlowStep>('identification');
+  const [completedSteps, setCompletedSteps] = useState<Set<FlowStep>>(new Set());
+
+  const getCurrentStepIndex = useCallback(() => STEP_ORDER.indexOf(flowStep), [flowStep]);
+  const getStepIndex = useCallback((step: FlowStep) => STEP_ORDER.indexOf(step), []);
+
+  const isStepCompleted = useCallback((step: FlowStep) => {
+    return completedSteps.has(step);
+  }, [completedSteps]);
+
+  const canAccessStep = useCallback((step: FlowStep) => {
+    const stepIndex = getStepIndex(step);
+    if (stepIndex === 0) return true;
+    const previousStepIndex = stepIndex - 1;
+    const previousStep = STEP_ORDER[previousStepIndex];
+    return previousStep ? isStepCompleted(previousStep) : false;
+  }, [getStepIndex, isStepCompleted]);
+
+  const goToStep = useCallback((step: FlowStep) => {
+    if (canAccessStep(step)) {
+      setFlowStep(step);
+    }
+  }, [canAccessStep]);
+
+  const nextStep = useCallback(() => {
+    const currentIndex = getCurrentStepIndex();
+    const nextIndex = currentIndex + 1;
+    if (nextIndex < STEP_ORDER.length) {
+      const nextStepName = STEP_ORDER[nextIndex];
+      if (canAccessStep(nextStepName)) {
+        setFlowStep(nextStepName);
+      }
+    }
+  }, [getCurrentStepIndex, canAccessStep]);
+
+  const previousStep = useCallback(() => {
+    const currentIndex = getCurrentStepIndex();
+    const previousIndex = currentIndex - 1;
+    if (previousIndex >= 0) {
+      setFlowStep(STEP_ORDER[previousIndex]);
+    }
+  }, [getCurrentStepIndex]);
+
+  const markStepCompleted = useCallback((step: FlowStep) => {
+    setCompletedSteps(prev => {
+      const next = new Set(prev);
+      next.add(step);
+      return next;
+    });
+
+    // Avança automaticamente se marcamos a etapa atual
+    const nextIndex = STEP_ORDER.indexOf(step) + 1;
+    if (nextIndex < STEP_ORDER.length) {
+      setFlowStep(STEP_ORDER[nextIndex]);
+    }
+  }, []);
   const [identificationData, setIdentificationData] = useState<IdentificationData | null>(null);
   const [showCoupon, setShowCoupon] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
   const [retryCount, setRetryCount] = useState(0);
   const [lastSubmissionData, setLastSubmissionData] = useState<IdentificationData | null>(null);
-  const [waitlistCreated, setWaitlistCreated] = useState(false);
   const { execCreateUser, loading: hookLoading } = useCreateUser();
 
-  // Sync legacy step with new flow step
-  React.useEffect(() => {
-    const stepMapping = {
-      identification: 1,
-      payment: 2
-    };
-    setCurrentStep(stepMapping[flowStep] || 1);
-  }, [flowStep]);
-
-  // Create waitlist entry when payment step is accessed
-  React.useEffect(() => {
-    async function handleWaitlistEntry() {
-      if (flowStep === 'payment' && identificationData && !waitlistCreated) {
-        try {
-          // Assume the identificationData contains the lead ID or we can derive it
-          // For now, we'll use a placeholder logic
-          if (identificationData.email) {
-            // In a real scenario, you'd get the leadId from the database
-            // For this implementation, we'll create the waitlist entry
-            // This would need to be enhanced to get the actual lead ID
-            console.log('User accessed payment step - would create waitlist entry');
-            setWaitlistCreated(true);
-            
-            // TODO: Implement actual leadId retrieval and waitlist creation
-            // const result = await createWaitlistEntry({
-            //   leadId: actualLeadId,
-            //   reason: 'Payment step accessed during enrollment capacity limit'
-            // });
-          }
-        } catch (error) {
-          console.error('Error creating waitlist entry:', error);
-        }
-      }
-    }
-
-    handleWaitlistEntry();
-  }, [flowStep, identificationData, waitlistCreated]);
+  // waitlist handling removed for production; keep flow logic minimal
 
   // Enhanced error handling for the entire enrollment flow
   const handleFlowError = useCallback((error: any, context: string) => {
@@ -272,8 +283,7 @@ export default function EnrollPage() {
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
-      brand: 'ponte-americas',
-      description: 'Enrollment attempt - User registration',
+      
     }
   });
 
@@ -294,12 +304,11 @@ export default function EnrollPage() {
     setFeedbackMessage({ type: null, message: '' });
     
     try {
-      // Adicionar campos obrigatórios para criação de usuário
-      const userData: CreateUserRequest = {
-        ...data,
-        brand: data.brand || 'ponte-americas',
-        description: data.description || 'Enrollment attempt - User registration',
-      };
+      // Adicionar campos obrigatórios para criação de usuário (sanitize campos)
+      const userData = { ...data } as any;
+      // remover campos que não existem no schema Prisma
+      delete userData.brand;
+      delete userData.description;
 
       const result = await execCreateUser({ 
         data: userData,
@@ -308,21 +317,19 @@ export default function EnrollPage() {
       });
       
       if (result.success) {
+        // createdUserId removed — no longer stored
         // Sucesso - limpar estados de erro e retry
         setRetryCount(0);
         setFeedbackMessage({ 
           type: 'success', 
-          message: 'Conta criada com sucesso! Redirecionando para próxima etapa...' 
+          message: 'Conta criada com sucesso! Prosseguindo para pagamento...' 
         });
-        
-        // Aguardar um momento para mostrar o feedback antes de prosseguir
-        setTimeout(() => {
-          setIdentificationData(data);
-          // Mark identification step as completed and move to payment
-          markStepCompleted('identification');
-          nextStep();
-          setFeedbackMessage({ type: null, message: '' });
-        }, 2000);
+
+        // Set identification data and immediately advance the flow
+        setIdentificationData(data);
+        markStepCompleted('identification');
+        // Move to payment immediately
+        nextStep();
       } else {
         // Erro da API - usar sistema de retry
         handleSubmissionError(result.error, data);
@@ -464,8 +471,7 @@ export default function EnrollPage() {
     // Simular processamento de pagamento
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    console.log('Dados de identificação:', identificationData);
-    console.log('Dados de pagamento:', data);
+    // identification and payment data logged during development removed for production
     
     // Redirecionar para página de sucesso ou dashboard
     setIsLoading(false);
@@ -506,7 +512,7 @@ export default function EnrollPage() {
           
           {/* Indicador de etapas */}
           <div className="flex justify-center mb-6 sm:mb-8">
-            <StepIndicator currentStep={currentStep} />
+            <StepIndicator currentStep={flowStep as any} />
           </div>
 
           {/* Título */}
@@ -528,7 +534,7 @@ export default function EnrollPage() {
           )}
 
           {/* Etapa 1 - Identificação */}
-          {currentStep === 1 && (
+          {flowStep === 'identification' && (
             <form 
               onSubmit={identificationForm.handleSubmit(
                 (data) => handleIdentificationSubmit(data),
@@ -558,17 +564,7 @@ export default function EnrollPage() {
               className="space-y-4"
             >
               <div className="space-y-3">
-                {/* Campos hidden obrigatórios */}
-                <input
-                  type="hidden"
-                  {...identificationForm.register('brand')}
-                  value="ponte-americas"
-                />
-                <input
-                  type="hidden"
-                  {...identificationForm.register('description')}
-                  value="Enrollment attempt - User registration"
-                />
+                {/* hidden legacy fields removed */}
                 
                 <FormField
                   name="name"
@@ -720,7 +716,7 @@ export default function EnrollPage() {
           )}
 
           {/* Etapa 2 - Pagamento */}
-          {currentStep === 2 && (
+          {flowStep === 'payment' && (
             <div className="space-y-6">
               {/* Botão de voltar - Enhanced with flow management */}
               <div className="flex justify-start mb-4">

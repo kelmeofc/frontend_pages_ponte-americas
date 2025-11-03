@@ -14,10 +14,10 @@ export const ComparisonSectionLp = () => {
         {/* Section Header */}
         <div className="flex justify-center items-center gap-2 mb-8 lg:mb-16">
           <div className="text-center">
-            <span className="text-gray-800 text-2xl lg:text-4xl font-semibold font-clash-display leading-8 lg:leading-10">
+            <span className="text-gray-800 text-2xl lg:text-4xl font-semibold leading-8 lg:leading-10">
               ESTES SÃO OS DIFERENCIAIS DA{" "}
             </span>
-            <GradientText className="text-2xl lg:text-4xl font-semibold font-clash-display leading-8 lg:leading-10">
+            <GradientText className="text-2xl lg:text-4xl font-semibold leading-8 lg:leading-10">
               PONTE AMÉRICAS
             </GradientText>
           </div>

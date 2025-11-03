@@ -32,9 +32,7 @@ export const userSchema = z.object({
     .min(8, 'Senha deve ter pelo menos 8 caracteres')
     .regex(passwordRegex, 'Senha deve conter pelo menos 1 letra minúscula, 1 maiúscula e 1 número'),
   
-  brand: z.string().min(1, 'Marca é obrigatória'),
-  
-  description: z.string().min(1, 'Descrição é obrigatória'),
+  // brand/description removed
   
   // Optional company fields
   company_size: z.number().optional(),
@@ -159,9 +157,7 @@ export const userEnrollmentFormDataSchema = z.object({
     .min(8, 'Senha deve ter pelo menos 8 caracteres')
     .regex(passwordRegex, 'Senha deve conter pelo menos 1 letra minúscula, 1 maiúscula e 1 número'),
     
-  brand: z.string().min(1, 'Marca é obrigatória'),
-  
-  description: z.string().min(1, 'Descrição é obrigatória'),
+  // brand/description removed
   
   company_size: z.number().optional(),
   company_segment: z.string().optional(),
@@ -175,8 +171,7 @@ export const userResponseSchema = z.object({
   name: z.string(),
   email: z.string(),
   phoneNumber: z.string().optional(),
-  brand: z.string(),
-  description: z.string(),
+  // brand/description removed
   enrollmentStatus: z.nativeEnum(EnrollmentStatus),
   
   // Company information
@@ -311,12 +306,7 @@ export const userValidationMessages = {
     minLength: 'Senha deve ter pelo menos 8 caracteres',
     weak: 'Senha deve conter pelo menos 1 letra minúscula, 1 maiúscula e 1 número',
   },
-  brand: {
-    required: 'Marca é obrigatória',
-  },
-  description: {
-    required: 'Descrição é obrigatória',
-  },
+  // brand/description validation messages removed
   website: {
     invalid: 'Website deve ser uma URL válida',
   },

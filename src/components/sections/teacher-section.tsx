@@ -78,7 +78,7 @@ export function TeacherSection() {
             <div className="flex flex-col gap-5 to-transparent p-6 sm:p-7 w-full">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/70">Mentor</p>
-                <h3 className="mt-1 text-3xl font-semibold uppercase text-white font-clash-display">
+                <h3 className="mt-1 text-3xl font-semibold uppercase text-white">
                   {TEACHER_PROFILE.name}
                 </h3>
                 <p className="text-sm font-medium text-white/80 font-montserrat">
@@ -91,7 +91,7 @@ export function TeacherSection() {
                     <dt className="text-[11px] font-montserrat uppercase tracking-wide">
                       {item.label}
                     </dt>
-                    <dd className="text-lg font-semibold text-white font-clash-display">
+                    <dd className="text-lg font-semibold text-white">
                       {item.value}
                     </dd>
                   </div>
@@ -160,7 +160,7 @@ export function TeacherSection() {
             </div>
 
             <div className="flex justify-center xl:justify-start w-full">
-              <PrimaryButton href="/lp" size="lg" className="uppercase tracking-wide">
+              <PrimaryButton href="/enroll" size="lg" className="uppercase tracking-wide">
                 Quero mudar de vida
               </PrimaryButton>
             </div>

@@ -89,11 +89,7 @@ export async function createLeadAction(leadData: CreateLeadData) {
   const startTime = Date.now();
   
   try {
-    console.log('[CREATE_LEAD] Iniciando criação de lead:', {
-      name: leadData.name,
-      email: leadData.email,
-      type: leadData.type,
-    });
+    // Starting lead creation
 
     // Verifica se já existe um lead com este email
     let existingLead = await prisma.lead.findFirst({
@@ -103,9 +99,8 @@ export async function createLeadAction(leadData: CreateLeadData) {
     let lead;
 
     if (existingLead) {
-      // Atualiza lead existente se necessário
+      // Use existing lead
       lead = existingLead;
-      console.log('[CREATE_LEAD] Lead existente encontrado:', lead.id);
     } else {
       // Cria novo lead
       lead = await prisma.lead.create({
@@ -115,7 +110,7 @@ export async function createLeadAction(leadData: CreateLeadData) {
           phoneNumber: leadData.phoneNumber,
         }
       });
-      console.log('[CREATE_LEAD] Novo lead criado:', lead.id);
+      // New lead created
     }
 
     // Calcula tempo de processamento
@@ -142,7 +137,7 @@ export async function createLeadAction(leadData: CreateLeadData) {
       }
     });
 
-    console.log('[CREATE_LEAD] Submissão criada:', submission.id);
+    // Submission created
 
     return { 
       success: true, 

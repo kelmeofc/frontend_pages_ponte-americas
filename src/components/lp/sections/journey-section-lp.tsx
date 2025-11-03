@@ -154,7 +154,7 @@ export function JourneySectionLp() {
 							<PrimaryButton
 								size="lg"
 								className="uppercase tracking-wide text-base px-8 py-4"
-								href="#cta"
+								href="/enroll"
 							>
 								Quero começar minha jornada
 							</PrimaryButton>
