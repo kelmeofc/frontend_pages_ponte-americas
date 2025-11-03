@@ -14,6 +14,9 @@ import { PrimaryButton } from '@/components/primary-button';
 import { FormField } from '@/components/forms/form-field';
 import { InternationalPhoneField } from '@/components/forms/international-phone-field';
 import { useEbookModal } from '@/common/hooks/use-ebook-modal';
+import useCreateLead from '@/common/hooks/use-create-lead';
+import { captureLeadMetadata } from '@/common/lib/lead-utils';
+import toast from 'react-hot-toast';
 
 interface EbookDownloadModalProps {
   isOpen: boolean;
@@ -27,16 +30,69 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
   console.log('[EBOOK_MODAL] Modal renderizado, isOpen:', isOpen);
   
   const {
-    isLoading,
     register,
     handleSubmit,
     errors,
     isValid,
     setValue,
-    handleFormSubmit,
+    reset,
+    downloadEbook,
     handleClose,
     timer,
   } = useEbookModal(onClose);
+
+  const { execCreateLead, loading: leadLoading } = useCreateLead();
+
+  const onSubmit = handleSubmit(async (data) => {
+    // Bloqueia botão enquanto cria lead
+    try {
+      const metadata = await captureLeadMetadata();
+
+      const payload = {
+        name: data.name,
+        email: data.email,
+        phoneNumber: data.phone,
+        type: 'EBOOK_DOWNLOAD',
+        origin: 6,
+        originFont: data.source || 'ebook-cta-section',
+        formData: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          source: data.source || 'ebook-cta-section',
+          brand: 'Ebook Passaporte Blindado',
+        },
+        metadata: {
+          description: `Lead interessado no ebook. Fonte: ${data.source || 'ebook-cta-section'}`,
+          ...metadata,
+        },
+        city: data.city,
+        country: data.country,
+        userAgent: data.userAgent,
+        route: data.route,
+      } as any;
+
+      const success = await execCreateLead({ data: payload, sucess_message: '', show_modal: false });
+
+      if (success) {
+        // Inicia download com gesto do usuário
+        try {
+          downloadEbook();
+          toast.success('Download iniciado!');
+          reset();
+          onClose();
+        } catch (dlErr) {
+          console.error('[EBOOK_MODAL] Falha no download:', dlErr);
+          toast.error('Erro ao iniciar download.');
+        }
+      } else {
+        toast.error('Erro ao salvar. Tente novamente.');
+      }
+    } catch (err) {
+      console.error('[EBOOK_MODAL] Erro no submit:', err);
+      toast.error('Erro inesperado. Tente novamente.');
+    }
+  });
 
   // O Zod já valida todos os campos obrigatórios através do isValid
 
@@ -72,13 +128,13 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
               </p>
             </div>
 
-            <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-3">
+            <form onSubmit={onSubmit} className="space-y-3">
               <FormField
                 name="name"
                 placeholder="Nome completo"
                 register={register}
                 errors={errors}
-                disabled={isLoading}
+                disabled={leadLoading}
               />
               <FormField
                 name="email"
@@ -86,7 +142,7 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
                 type="email"
                 register={register}
                 errors={errors}
-                disabled={isLoading}
+                disabled={leadLoading}
               />
               <InternationalPhoneField
                 name="phone"
@@ -94,7 +150,7 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
                 register={register}
                 errors={errors}
                 setValue={setValue}
-                disabled={isLoading}
+                disabled={leadLoading}
                 initialCountry="br"
               />
 
@@ -103,11 +159,11 @@ export const EbookDownloadModal: React.FC<EbookDownloadModalProps> = ({
                 type="submit"
                 size="lg"
                 className="w-full h-12 px-8 py-4 bg-linear-to-r from-red-700 to-indigo-600 rounded-lg text-white font-medium uppercase disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={isLoading || !isValid}
+                disabled={leadLoading || !isValid}
                 icon={<ArrowRight className="w-5 h-5" />}
                 iconPosition="right"
               >
-                {isLoading ? 'Enviando...' : 'Baixar agora'}
+                {leadLoading ? 'Enviando...' : 'Baixar agora'}
               </PrimaryButton>
             </form>
 

@@ -54,7 +54,7 @@ const PrimaryButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, PrimaryB
     iconPosition = "right", 
     isShine = true,
     children, 
-    href = "",
+    href,
     ...props 
   }, ref) => {
     // Memoização do ícone para evitar re-renders desnecessários
@@ -74,6 +74,7 @@ const PrimaryButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, PrimaryB
       className
     );
 
+   if (href) {
     return (
 			<Link href={href}>
 				<button className={buttonClasses} {...props}>
@@ -83,8 +84,16 @@ const PrimaryButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, PrimaryB
 				</button>
 			</Link>
 		);
+  } else {
+    return (
+      <button className={buttonClasses} {...props}>
+        {iconPosition === "left" && iconElement}
+        {children}
+        {iconPosition === "right" && iconElement}
+      </button>
+    );
   }
-)
+});
 
 PrimaryButton.displayName = "PrimaryButton"
 

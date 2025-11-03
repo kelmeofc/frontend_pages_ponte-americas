@@ -1,15 +1,15 @@
 import { ICreateLead } from "@/types/lead";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { createLeadAction } from "../actions/create-lead-action";
+import { createLeadRecord, createLeadSubmission } from "../actions/create-lead-action";
 import { captureLeadMetadata, captureBasicMetadata } from "@/common/lib/lead-utils";
-import { useModal } from "@/components/ui/modal/use-modal";
+import { useModal as useModalStore } from "@/components/ui/modal/use-modal";
 
 export default function useCreateLead() {
     const [loading, setLoading] = useState(false);
-    const { openModal } = useModal();
+    const { openModal } = useModalStore();
 
-    const execCreateLead = async ({ data, sucess_message = 'Seu ebook está disponível para download!', show_modal = false }: { data: ICreateLead, sucess_message?: string, show_modal?: boolean, }) => {
+    const execCreateLead = async ({ data, sucess_message = 'Sucecesso! Seu ebook está disponível para download!', show_modal = false }: { data: ICreateLead, sucess_message?: string, show_modal?: boolean, }) => {
         try {
             setLoading(true);
 
@@ -31,25 +31,44 @@ export default function useCreateLead() {
                 ...fullMetadata
             };
 
-            const result = await createLeadAction(enrichedData);
+            // Registra o lead separadamente
+            const leadPayload = {
+                name: (enrichedData as any).name || '',
+                email: (enrichedData as any).email || undefined,
+                phoneNumber: (enrichedData as any).phoneNumber || undefined,
+            };
 
-            if (result.success) {
-                if (show_modal) {
-                    // Show success as modal
-                    openModal({
-                        title: "Enviado com sucesso!",
-                        description: sucess_message,
-                        type: "success"
-                    });
-                } else {
-                    // Show success as toast
+            const lead = await createLeadRecord(leadPayload);
+
+            // Cria submissão separada vinculada ao lead
+            const submissionPayload = {
+                leadId: lead.id,
+                type: (enrichedData as any).type || 'EBOOK_DOWNLOAD',
+                success: true,
+                data: { ...(enrichedData as any) },
+                metadata: (enrichedData as any).metadata || fullMetadata || {},
+                city: (enrichedData as any).city || undefined,
+                country: (enrichedData as any).country || undefined,
+                ipAddress: (enrichedData as any).ipAddress || undefined,
+                route: (enrichedData as any).route || undefined,
+                userAgent: (enrichedData as any).userAgent || undefined,
+                origin: (enrichedData as any).origin ?? 6,
+                originFont: (enrichedData as any).originFont || undefined,
+            };
+
+            await createLeadSubmission(submissionPayload as any);
+
+            // Feedback ao usuário
+            if (show_modal) {
+                openModal({ title: "Enviado com sucesso!", description: sucess_message, type: "success" });
+            } else {
+                // Só mostra toast quando houver mensagem de sucesso definida
+                if (sucess_message && sucess_message.length > 0) {
                     toast.success(sucess_message);
                 }
-                return true;
-            } else {
-                // Erro retornado pela action
-                throw new Error(result.error || "Não foi possível criar registrar o seu contato, tente novamente.");
             }
+
+            return true;
         } catch (error) {
             toast.error("Não foi possível criar registrar o seu contato, tente novamente.");
             return false;

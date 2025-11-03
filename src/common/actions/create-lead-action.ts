@@ -28,6 +28,62 @@ export interface CreateLeadData {
   metadata?: Record<string, any>;
 }
 
+// Cria ou retorna um lead (registro de contato) separadamente
+export async function createLeadRecord(data: { name: string; email?: string; phoneNumber?: string; }) {
+  const { name, email, phoneNumber } = data;
+  // Tenta encontrar lead existente pelo e-mail quando disponível
+  if (email) {
+    const existing = await prisma.lead.findFirst({ where: { email } });
+    if (existing) return existing;
+  }
+
+  // Cria novo lead
+  const lead = await prisma.lead.create({
+    data: {
+      name,
+      email: email || null,
+      phoneNumber: phoneNumber || null,
+    }
+  });
+
+  return lead;
+}
+
+// Cria um registro de submissão vinculado a um lead
+export async function createLeadSubmission(submission: {
+  leadId: number;
+  type: LeadSubmissionType;
+  success: boolean;
+  data?: Record<string, any>;
+  metadata?: Record<string, any>;
+  city?: string;
+  country?: string;
+  ipAddress?: string;
+  route?: string;
+  userAgent?: string;
+  origin?: number;
+  originFont?: string;
+}) {
+  const created = await prisma.leadSubmission.create({
+    data: {
+      leadId: submission.leadId,
+      type: submission.type,
+      success: submission.success,
+      data: submission.data || {},
+      metadata: submission.metadata || {},
+      city: submission.city || null,
+      country: submission.country || null,
+      ipAddress: submission.ipAddress || null,
+      route: submission.route || null,
+      userAgent: submission.userAgent || null,
+      origin: submission.origin ?? 6,
+      originFont: submission.originFont || null,
+    }
+  });
+
+  return created;
+}
+
 // Action principal para criar lead
 export async function createLeadAction(leadData: CreateLeadData) {
   const startTime = Date.now();
