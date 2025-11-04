@@ -5,7 +5,7 @@ import { Menu, X, ArrowRight, Globe } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { HeaderLogo } from "./header-logo";
 import { PrimaryButton } from "@/components/primary-button";
-import type { INavItem } from "@/types/header";
+import type { INavItem, IHeaderProps } from "@/types/header";
 import { useState, useEffect } from "react";
 import {
   DropdownMenu,
@@ -25,7 +25,7 @@ const NAVIGATION_ITEMS: INavItem[] = [
 		href: "/#programs",
 	},
 	{
-		title: "Professores",
+		title: "Mentores",
 		href: "/#team",
 	},
 	{
@@ -65,9 +65,14 @@ const LANGUAGE_OPTIONS = {
 	],
 } as const;
 
-export function Header() {
+export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUTTONS, languageOptions = LANGUAGE_OPTIONS }: IHeaderProps) {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
+
+	// Normalizar valores resolvidos para evitar tipos opcionais durante o render
+	const resolvedNavItems = navItems ?? NAVIGATION_ITEMS;
+	const resolvedActionButtons = actionButtons ?? ACTION_BUTTONS;
+	const resolvedLanguageOptions = languageOptions ?? LANGUAGE_OPTIONS;
 
 	// Controlar efeito de scroll
 	useEffect(() => {
@@ -112,8 +117,8 @@ export function Header() {
 						</div>
 
 						{/* Nav Items - Apenas Desktop */}
-						<nav className="hidden lg:flex items-center justify-center flex-1 gap-5">
-							{NAVIGATION_ITEMS.map((item) => (
+                        <nav className="hidden lg:flex items-center justify-center flex-1 gap-5">
+                            {resolvedNavItems.map((item) => (
 								<Link
 									key={item.title}
 									href={item.href}
@@ -134,33 +139,33 @@ export function Header() {
 										<Globe className="h-4 w-4 mr-1" />
 									</button>
 								</DropdownMenuTrigger>
-								<DropdownMenuContent align="center" className="w-fit text-center">
-									<DropdownMenuItem className="text-center w-fit">
-										{LANGUAGE_OPTIONS.display}
-									</DropdownMenuItem>
-								</DropdownMenuContent>
+                            <DropdownMenuContent align="center" className="w-fit text-center">
+                                    <DropdownMenuItem className="text-center w-fit">
+                                        {resolvedLanguageOptions.display}
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
 							</DropdownMenu>
 
 							{/* Botões de ação - Desktop */}
-							<PrimaryButton
-								href={ACTION_BUTTONS.member.href}
-								icon={ACTION_BUTTONS.member.icon}
-								size="sm"
-								variant={ACTION_BUTTONS.member.variant}
-								className="px-3 whitespace-nowrap"
-							>
-								{ACTION_BUTTONS.member.text}
-							</PrimaryButton>
+                            <PrimaryButton
+                                href={resolvedActionButtons.member.href}
+                                icon={resolvedActionButtons.member.icon}
+                                size="sm"
+                                variant={actionButtons.member.variant}
+                                className="px-3 whitespace-nowrap"
+                            >
+                                {actionButtons.member.text}
+                            </PrimaryButton>
 
-							<PrimaryButton
-								icon={ACTION_BUTTONS.cta.icon}
-								size="sm"
-								href={ACTION_BUTTONS.cta.href}
-								variant={ACTION_BUTTONS.cta.variant}
-								className="px-3 whitespace-nowrap"
-							>
-								{ACTION_BUTTONS.cta.text}
-							</PrimaryButton>
+                            <PrimaryButton
+                                icon={resolvedActionButtons.cta.icon}
+                                size="sm"
+                                href={resolvedActionButtons.cta.href}
+                                variant={resolvedActionButtons.cta.variant}
+                                className="px-3 whitespace-nowrap"
+                            >
+                                {actionButtons.cta.text}
+                            </PrimaryButton>
 						</div>
 
 						{/* Menu Mobile Toggle */}
@@ -185,16 +190,16 @@ export function Header() {
 							<HeaderLogo />
 							<div className="flex items-center border border-gray-700 rounded-md px-3 py-2 bg-gray-900/50">
 								<Globe className="h-5 w-5 mr-3 text-gray-400" />
-								<select
-									className="w-full bg-transparent text-white focus:outline-none"
-									defaultValue={LANGUAGE_OPTIONS.current}
-								>
-									{LANGUAGE_OPTIONS.options.map((option) => (
-										<option key={option.value} value={option.value} className="bg-gray-900">
-											{option.label}
-										</option>
-									))}
-								</select>
+                                <select
+                                    className="w-full bg-transparent text-white focus:outline-none"
+                                    defaultValue={resolvedLanguageOptions.current}
+                                >
+                                    {resolvedLanguageOptions.options.map((option) => (
+                                        <option key={option.value} value={option.value} className="bg-gray-900">
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
 							</div>
 							<button
 								className="p-2 rounded-full hover:bg-gray-800 text-white"
@@ -207,7 +212,7 @@ export function Header() {
 
 						<div className="py-8 overflow-y-auto h-[calc(100vh-80px)]">
 							<nav className="space-y-6 mb-8">
-								{NAVIGATION_ITEMS.map((item) => (
+                                {resolvedNavItems.map((item) => (
 									<div
 										key={item.title}
 										className="border-b border-gray-800 pb-4"
@@ -225,25 +230,25 @@ export function Header() {
 							</nav>
 
 					<div className="flex  flex-col lg:flex-row mt-10 gap-2 h-fit overflow-visible z-3">
-								<PrimaryButton 
-									className="w-full" 
-									variant={ACTION_BUTTONS.member.variant}
-									size="lg"
-									icon={ACTION_BUTTONS.member.mobileIcon}
-									href={ACTION_BUTTONS.member.href}
-								>
-									{ACTION_BUTTONS.member.text}
-								</PrimaryButton>
+                                <PrimaryButton 
+                                    className="w-full" 
+                                    variant={resolvedActionButtons.member.variant}
+                                    size="lg"
+                                    icon={resolvedActionButtons.member.mobileIcon}
+                                    href={resolvedActionButtons.member.href}
+                                >
+                                    {actionButtons.member.text}
+                                </PrimaryButton>
 
-								<PrimaryButton
-									icon={ACTION_BUTTONS.cta.mobileIcon}
-									className="w-full"
-									href={ACTION_BUTTONS.cta.href}
-									size="lg"
-									variant={ACTION_BUTTONS.cta.variant}
-								>
-									{ACTION_BUTTONS.cta.text}
-								</PrimaryButton>
+                                <PrimaryButton
+                                    icon={resolvedActionButtons.cta.mobileIcon}
+                                    className="w-full"
+                                    href={resolvedActionButtons.cta.href}
+                                    size="lg"
+                                    variant={resolvedActionButtons.cta.variant}
+                                >
+                                    {actionButtons.cta.text}
+                                </PrimaryButton>
 							</div>
 						</div>
 					</Container>

@@ -12,7 +12,12 @@ import Image from "next/image";
 import { SOCIAL_LINKS, CONTACT, NAV_LINKS } from "@/common/constants";
 import CurrentYear from "./current-year.client";
 
-export default function Footer() {
+interface FooterProps {
+  navLinks?: { label: string; href: string }[]
+}
+
+export default function Footer({ navLinks }: FooterProps) {
+  const links = navLinks ?? NAV_LINKS
 	return (
 		<footer className="py-16 bg-white border-t border-gray-200">
 			<Container>
@@ -44,13 +49,13 @@ export default function Footer() {
 						Institucional
 					</h3>
 					<ul className="space-y-2 text-sm text-gray-600">
-						{NAV_LINKS.map((link) => (
-							<li key={link.href}>
-								<Link href={link.href} className="hover:text-primary transition-colors">
-									{link.label}
-								</Link>
-							</li>
-						))}
+                        {links.map((link) => (
+                            <li key={link.href}>
+                                <Link href={link.href} className="hover:text-primary transition-colors">
+                                    {link.label}
+                                </Link>
+                            </li>
+                        ))}
 					</ul>
 				</div>
 

@@ -9,18 +9,18 @@ import { cn } from "@/common/lib/utils";
 
 export const ComparisonSectionLp = () => {
   return (
-    <section className="w-full px-4 lg:px-28 pt-20 pb-6 bg-white flex flex-col justify-center items-center gap-16 lg:gap-32 overflow-hidden">
+    <section id="comparison" className="w-full px-4 lg:px-28 pt-20 pb-6 bg-white flex flex-col justify-center items-center gap-16 lg:gap-32 overflow-hidden">
       <Container>
         {/* Section Header */}
         <div className="flex justify-center items-center gap-2 mb-8 lg:mb-16">
-          <div className="text-center">
-            <span className="text-gray-800 text-2xl lg:text-4xl font-semibold leading-8 lg:leading-10">
+          <h2 className="text-center">
+            <span className="text-gray-800 font-semibold leading-8 lg:leading-10">
               ESTES SÃO OS DIFERENCIAIS DA{" "}
             </span>
-            <GradientText className="text-2xl lg:text-4xl font-semibold leading-8 lg:leading-10">
+            <GradientText className="font-semibold leading-8 lg:leading-10">
               PONTE AMÉRICAS
             </GradientText>
-          </div>
+          </h2>
         </div>
 
         {/* Comparison Table */}
@@ -33,7 +33,7 @@ export const ComparisonSectionLp = () => {
 
               {/* Ponte Américas Logo Column */}
               <div className="flex justify-center">
-                <div className="w-20 sm:w-40 lg:w-64 h-196 lg:h-[840px] absolute -top-24 lg:top-[-109px] bg-neutral-900 rounded-[10px] flex justify-center items-start py-6 lg:py-8">
+                <div className="w-20 sm:w-40 lg:w-64 h-196 lg:h-[840px] absolute -top-24 lg:top-[-109px] bg-linear-to-r from-primary to-blue-950  rounded-[10px] flex justify-center items-start py-6 lg:py-8">
                   <ComparisonHeader
                     title={COMPARISON_HEADERS.ponteAmericas}
                     isMain={true}

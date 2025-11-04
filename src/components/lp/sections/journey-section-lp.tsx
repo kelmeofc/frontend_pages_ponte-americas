@@ -105,7 +105,7 @@ function JourneyCard({ step, index }: JourneyCardProps) {
 
 export function JourneySectionLp() {
   return (
-		<section id="journey" className="py-16 md:py-20 lg:py-24 overflow-hidden">
+		<section id="journey" className="py-16 md:py-20 lg:py-24 overflow-hidden bg-white">
 			<Container>
 				<div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-20 items-start">
 					{/* Americas Map - Left Side */}

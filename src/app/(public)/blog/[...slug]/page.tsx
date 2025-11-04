@@ -9,6 +9,7 @@ import { LeadFormBlog } from "@/components/forms/lead-form-blog";
 import { ScrollSyncWrapper } from "@/components/sections/scroll-sync-wrapper";
 import { Scissors, Camera, AppWindow, Users } from "lucide-react";
 import { SlugPageProps } from "@/types/next-page";
+import SiteLayout from "@/components/layouts/site-layout";
 
 // Função auxiliar para extrair o slug final
 function getPostSlug(slug: string | string[]): string {
@@ -91,13 +92,14 @@ export default async function BlogPost({ params }: SlugPageProps) {
 	);
 
 	return (
-		<main>
+
+		<SiteLayout>
 			<Container>
 				<ScrollSyncWrapper
 					article={<ArticleContent postSlug={postSlug} />}
 					sidebar={sidebar}
 				/>
 			</Container>
-		</main>
+		</SiteLayout>
 	);
 }

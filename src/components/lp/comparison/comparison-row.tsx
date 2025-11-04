@@ -13,7 +13,7 @@ export const ComparisonRow = ({ item, className }: ComparisonRowProps) => {
   return (
     <div
       className={cn(
-        "w-full min-h-11 border-b border-neutral-700 grid grid-cols-3 sm:grid-cols-[2fr_1fr_1fr] gap-2 lg:gap-4 items-center py-2",
+        "w-full min-h-11 border-b border-neutral-400 grid grid-cols-3 sm:grid-cols-[2fr_1fr_1fr] gap-2 lg:gap-4 items-center py-2",
         className
       )}
     >

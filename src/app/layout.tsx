@@ -147,9 +147,7 @@ export default function RootLayout({
 					defaultTheme="light"
 					enableSystem
 				>
-					<Header />
 					{children}
-					<Footer />
 					<Modal />
 					<CookiesModal />
 					<WhatsAppWidget />

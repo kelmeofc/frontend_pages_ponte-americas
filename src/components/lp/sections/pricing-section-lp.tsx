@@ -7,6 +7,7 @@ import { GradientText } from "@/components/ui/gradient-text";
 export const PricingSectionLp = () => {
   return (
     <section
+      id="pricing"
       className="w-full px-4 py-16 md:px-8 md:py-28 bg-black"
       style={{
         background: "radial-gradient(74.24% 106.5% at 68.26% 131.44%, #290886 0%, rgba(0, 0, 0, 0.00) 100%), linear-gradient(0deg, #05060B 0%, #05060B 100%), linear-gradient(0deg, #0D0D0D 0%, #0D0D0D 100%), #B4903F"

@@ -24,6 +24,7 @@ import {
 	WebSiteJsonLd,
 } from "@/components/seo/article-json-ld";
 import { FAQ_DATA, SITE_CONFIG, DIDATIC_TOPICS } from "@/common/constants";
+import SiteLayout from "@/components/layouts/site-layout";
 
 // Removidos imports específicos da seção de benefícios (agora componentizada)
 
@@ -47,7 +48,8 @@ export default function Home() {
 			<BreadcrumbJsonLd items={breadcrumbItems} />
 			<ReviewJsonLd />
 
-			<main>
+
+			<SiteLayout className="bg-white">
 				<div
 					className="bg-black"
 					style={{
@@ -76,7 +78,8 @@ export default function Home() {
 				<AboutusSection />
 				<FAQSection faq={FAQ_DATA} />
 				<CtaSection />
-			</main>
+			</SiteLayout>
+
 
 			{/* WhatsApp Widget */}
 			<WhatsAppWidget
