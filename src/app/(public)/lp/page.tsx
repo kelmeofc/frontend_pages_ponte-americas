@@ -5,9 +5,8 @@ import { ComparisonSectionLp } from "@/components/lp/sections/comparison-section
 import { PricingSectionLp } from "@/components/lp/sections/pricing-section-lp";
 
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
-import TeacherSection from "@/components/lp/teacher-section";
-import FAQSection from "@/components/sections/faq-section";
-import { CtaSection } from "@/components/sections/cta-section";
+import TeacherSection from "@/components/lp/sections/teacher-section";
+import  { FAQSection } from "@/components/sections/faq-section";
 import WhatsAppWidget from "@/components/whatsapp-widget";
 
 import {
@@ -68,14 +67,14 @@ export default function Home() {
               "radial-gradient(45.87% 45.13% at 115.62% -4.79%, #B00D23 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(58.16% 77.72% at -29.41% 62.58%, #B00D23 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(17.21% 19.98% at 107.36% 43.68%, #290886 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(46.08% 71.01% at 0% 107.07%, #290886 0%, rgba(0, 0, 0, 0.00) 100%), radial-gradient(35.99% 40.17% at 27.71% -5.08%, #290886 0%, rgba(0, 0, 0, 0.00) 100%), #000",
           }}
         >
-          <TestimonialsSection />
+          <TestimonialsSection ctaHref="/enroll" />
         </div>
         
         <IcebreakerSectionLp />
         <ComparisonSectionLp />
         <PricingSectionLp />
 
-        <FAQSection faq={FAQ_DATA} />
+        <FAQSection faq={FAQ_DATA} ctaHref="/enroll" />
       </main>
 
       {/* WhatsApp Widget */}

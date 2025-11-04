@@ -442,7 +442,7 @@ export default function EnrollPage() {
 
           {/* Título */}
           <h1 className="text-center text-black text-lg sm:text-xl font-semibold uppercase leading-6 mb-6 sm:mb-8 px-2">
-            Criar sua conta para iniciar sua assinatura
+            Criar sua conta para continuar sua matrícula
           </h1>
 
           {/* Indicador de progresso de envio */}

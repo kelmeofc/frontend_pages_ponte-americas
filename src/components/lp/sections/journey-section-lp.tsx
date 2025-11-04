@@ -110,13 +110,13 @@ export function JourneySectionLp() {
 				<div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-20 items-start">
 					{/* Americas Map - Left Side */}
 					<div className="w-full lg:w-96 xl:w-[420px] shrink-0 sticky">
-						<div className="relative w-full aspect-3/4 lg:h-[600px] overflow-hidden">
+						<div className="relative w-full aspect-3/4 lg:h-[500px] overflow-hidden">
 							<Image
 								src="/images/svg/americas-map.svg"
 								alt="Mapa das Américas - Jornada Ponte Américas"
 								fill
 								sizes="(max-width: 1024px) 100vw, 420px"
-								className="object-cover"
+								className="object-fill"
 								priority
 							/>
 						</div>

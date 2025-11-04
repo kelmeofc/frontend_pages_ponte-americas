@@ -146,7 +146,6 @@ export default function RootLayout({
 					attribute="class"
 					defaultTheme="light"
 					enableSystem
-					disableTransitionOnChange
 				>
 					<Header />
 					{children}

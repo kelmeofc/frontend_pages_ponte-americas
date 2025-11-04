@@ -6,7 +6,7 @@ import { CoursesSection } from "@/components/sections/courses-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { PlatformSection } from "@/components/sections/platform-section";
 import TeamSection from "@/components/sections/team-section";
-import FAQSection from "@/components/sections/faq-section";
+import { FAQSection } from "@/components/sections/faq-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import WhatsAppWidget from "@/components/whatsapp-widget";
 import { cn } from "@/common/lib/utils";

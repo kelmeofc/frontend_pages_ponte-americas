@@ -1,62 +1,68 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import Image from "next/image"
-import Autoplay from "embla-carousel-autoplay"
-import { Container } from "@/components/ui/container"
-import { PrimaryButton } from "@/components/primary-button"
+import { useRef } from "react";
+import Image from "next/image";
+import Autoplay from "embla-carousel-autoplay";
+import { Container } from "@/components/ui/container";
+import { PrimaryButton } from "@/components/primary-button";
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const testimonials = [
-  {
-    id: 1,
-    image: "/images/instagram-testimonials/depoimento-1.png",
-    alt: "Depoimento de cliente satisfeito 1",
-  },
-  {
-    id: 2,
-    image: "/images/instagram-testimonials/depoimento-2.png",
-    alt: "Depoimento de cliente satisfeito 2",
-  },
-  {
-    id: 3,
-    image: "/images/instagram-testimonials/depoimento-3.png",
-    alt: "Depoimento de cliente satisfeito 3",
-  },
-  {
-    id: 4,
-    image: "/images/instagram-testimonials/depoimento-4.png",
-    alt: "Depoimento de cliente satisfeito 4",
-  },
-  {
-    id: 5,
-    image: "/images/instagram-testimonials/depoimento-5.png",
-    alt: "Depoimento de cliente satisfeito 5",
-  },
-  {
-    id: 6,
-    image: "/images/instagram-testimonials/depoimento-6.png",
-    alt: "Depoimento de cliente satisfeito 6",
-  },
-  {
-    id: 7,
-    image: "/images/instagram-testimonials/depoimento-7.png",
-    alt: "Depoimento de cliente satisfeito 7",
-  },
-]
+	{
+		id: 1,
+		image: "/images/instagram-testimonials/depoimento-1.png",
+		alt: "Depoimento de cliente satisfeito 1",
+	},
+	{
+		id: 2,
+		image: "/images/instagram-testimonials/depoimento-2.png",
+		alt: "Depoimento de cliente satisfeito 2",
+	},
+	{
+		id: 3,
+		image: "/images/instagram-testimonials/depoimento-3.png",
+		alt: "Depoimento de cliente satisfeito 3",
+	},
+	{
+		id: 4,
+		image: "/images/instagram-testimonials/depoimento-4.png",
+		alt: "Depoimento de cliente satisfeito 4",
+	},
+	{
+		id: 5,
+		image: "/images/instagram-testimonials/depoimento-5.png",
+		alt: "Depoimento de cliente satisfeito 5",
+	},
+	{
+		id: 6,
+		image: "/images/instagram-testimonials/depoimento-6.png",
+		alt: "Depoimento de cliente satisfeito 6",
+	},
+	{
+		id: 7,
+		image: "/images/instagram-testimonials/depoimento-7.png",
+		alt: "Depoimento de cliente satisfeito 7",
+	},
+];
 
-export function TestimonialsSection() {
-  const autoplayRef = useRef(
-    Autoplay({ delay: 5000, stopOnInteraction: true })
-  )
+export interface TestimonialsSectionProps {
+	ctaHref?: string;
+}
 
-  return (
+export const TestimonialsSection = ({
+	ctaHref = "/lp",
+}: TestimonialsSectionProps) => {
+	const autoplayRef = useRef(
+		Autoplay({ delay: 5000, stopOnInteraction: true })
+	);
+
+	return (
 		<section
 			id="testimonials"
 			className="relative w-full py-16 md:py-20 overflow-hidden"
@@ -109,15 +115,10 @@ export function TestimonialsSection() {
 				</div>
 
 				{/* CTA Button */}
-				<PrimaryButton
-					size="lg"
-          href="/lp"
-          className="uppercase"
-				>
+				<PrimaryButton size="lg" href={ctaHref} className="uppercase">
 					Quero mudar de vida
 				</PrimaryButton>
 			</Container>
 		</section>
 	);
-}
-
+};

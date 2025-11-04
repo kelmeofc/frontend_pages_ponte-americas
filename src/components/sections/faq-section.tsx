@@ -1,24 +1,29 @@
 "use client";
 
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
 } from "../ui/accordion";
 import { Container } from "../ui/container";
 import { PrimaryButton } from "../primary-button";
 import Image from "next/image";
 
 export interface FAQ {
-  question: string;
-  answer: string;
+	question: string;
+	answer: string;
 }
 
 export type FAQArray = readonly FAQ[];
 
-export default function FAQSection({ faq }: { faq: FAQArray }) {
-  return (
+export interface FAQSectionProps {
+	faq: FAQArray;
+	ctaHref?: string;
+}
+
+export const FAQSection = ({ faq, ctaHref = "/lp" }: FAQSectionProps) => {
+	return (
 		<section id="faq" className="w-full py-16 md:py-20 bg-gray-50">
 			<Container className="px-4 md:px-6">
 				<div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
@@ -59,7 +64,7 @@ export default function FAQSection({ faq }: { faq: FAQArray }) {
 							/>
 						</div>
 
-						<h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[hsl(var(--primary-gradient-from))] to-[hsl(var(--primary-gradient-to))] bg-clip-text text-transparent uppercase">
+						<h3 className="text-3xl md:text-4xl font-bold bg-linear-to-r from-[hsl(var(--primary-gradient-from))] to-[hsl(var(--primary-gradient-to))] bg-clip-text text-transparent uppercase">
 							7 DIAS DE GARANTIA
 						</h3>
 
@@ -69,7 +74,7 @@ export default function FAQSection({ faq }: { faq: FAQArray }) {
 							devolvemos todo o seu dinheiro de forma simples e segura.
 						</p>
 
-						<PrimaryButton size="lg" className="uppercase" href="/lp">
+						<PrimaryButton size="lg" className="uppercase" href={ctaHref}>
 							QUERO MUDAR DE VIDA
 						</PrimaryButton>
 					</aside>
