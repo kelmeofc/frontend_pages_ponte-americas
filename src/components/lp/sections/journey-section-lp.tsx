@@ -55,7 +55,7 @@ const JOURNEY_STEPS = [
   {
     id: "education",
     title: "EDUCAÇÃO",
-    description: "Conheça o sistema educacional americano, opções para seus filhos ou para você mesmo, desde escolas públicas até universidades e cursos profissionalizantes.",
+    description: "Conheça o sistema educacional americano, opções para seus filhos ou para você mesmo, desde escolas públicas até universidades e programas profissionalizantes.",
     icon: GraduationCap,
   },
   {

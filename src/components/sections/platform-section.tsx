@@ -35,11 +35,11 @@ export const PlatformSection: React.FC = () => {
 
           {/* Content */}
           <div className="w-full md:w-1/2 flex-1">
-            <h2 className="text-gray-800 text-3xl font-semibold uppercase font-['Clash_Display'] leading-10 mb-4">
-              assine UM CURSO DO PONTE AMÉRICAS E TENHA ACESSO A UMA SÉRIE DE <span className="text-indigo-600">BÔNUS</span>
+            <h2 className="text-gray-800  font-semibold uppercase leading-10 mb-4">
+              ASSINE UM PROGRAMA DO PONTE AMÉRICAS E TENHA ACESSO A UMA SÉRIE DE <span className="text-indigo-600">BÔNUS</span>
             </h2>
 
-            <p className="text-gray-800 text-xl font-medium font-['Rubik'] leading-8 mb-6">
+            <p className="text-gray-800 font-medium leading-8 mb-6">
               Em todos os nossos cursos você vai receber:
             </p>
 

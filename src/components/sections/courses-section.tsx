@@ -15,9 +15,9 @@ import { CourseCard } from "./course-card";
 import { COURSES_DATA } from "@/common/constants";
 
 export const CoursesSection = () => {
-	 const autoplayRef = useRef(
-			Autoplay({ delay: 2000, stopOnInteraction: true })
-		);
+	const autoplayRef = useRef(
+		Autoplay({ delay: 2000, stopOnInteraction: true })
+	);
 
 
 	return (

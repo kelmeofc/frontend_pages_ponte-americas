@@ -25,7 +25,7 @@ export const COMPARISON_DATA: ComparisonItem[] = [
     },
   },
   {
-    feature: "Cursos com temas variados",
+    feature: "Programas com temas variados",
     ponteAmericas: {
       value: "",
       hasFeature: true,

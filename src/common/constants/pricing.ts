@@ -66,7 +66,7 @@ export const PRICING_DATA = {
         },
         {
           title: "Certificado de conclusão",
-          description: "(Documento oficial do curso)"
+          description: "(Documento oficial do programa)"
         },
         {
           title: "Acesso vitalício ao conteúdo",

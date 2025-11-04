@@ -28,7 +28,7 @@ export function HeroSection() {
 					<span className="text-white">QUE VOCÊ PRECISA ENTENDER AGORA</span>
 				</h1>
 				<p className="text-gray-300 text-sm sm:text-base max-w-3xl leading-relaxed text-center">
-					Não é um simples curso, somos um time completo para te ajudar a
+					Não é um simples curso, somos um programa completo para te ajudar a
 					entender os Estados Unidos evitando os erros que custam MILHARES de
 					dólares para brasileiros que viajam despreparados.
 				</p>
