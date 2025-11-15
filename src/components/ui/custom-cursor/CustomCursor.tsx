@@ -99,8 +99,8 @@ export function CustomCursor() {
       ref={cursorRef}
       style={{
         position: 'fixed',
-        top: -12,
-        left: -12,
+        top: 0,
+        left: 0,
         width: `${cursorSize}px`,
         height: `${cursorSize}px`,
         pointerEvents: 'none',
