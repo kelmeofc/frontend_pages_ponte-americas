@@ -94,9 +94,15 @@ export function Header({
 		if (typeof window === "undefined") return;
 
 		const sections = resolvedNavItems
-			.map((item) =>
-				item.href.startsWith("/#") ? item.href.substring(2) : null
-			)
+			.map((item) => {
+				// Suporta tanto "/#section" (home) quanto "#section" (LP)
+				if (item.href.startsWith("/#")) {
+					return item.href.substring(2);
+				} else if (item.href.startsWith("#")) {
+					return item.href.substring(1);
+				}
+				return null;
+			})
 			.filter(Boolean) as string[];
 
 		const observer = new IntersectionObserver(
@@ -163,9 +169,10 @@ export function Header({
 						{variant !== "title-only" && (
 							<nav className="hidden lg:flex items-center justify-center flex-1 gap-5">
 								{resolvedNavItems.map((item) => {
-									const isAnchorLink = item.href.startsWith("/#");
+									// Suporta tanto "/#section" (home) quanto "#section" (LP)
+									const isAnchorLink = item.href.startsWith("/#") || item.href.startsWith("#");
 									const isActive = isAnchorLink
-										? activeSection === item.href.substring(1)
+										? activeSection === (item.href.startsWith("/#") ? item.href.substring(1) : item.href)
 										: pathname === item.href;
 									return (
 										<Link
@@ -296,9 +303,10 @@ export function Header({
 						<div className="py-8 overflow-y-auto h-[calc(100vh-80px)]">
 							<nav className="space-y-6 mb-8">
 								{resolvedNavItems.map((item) => {
-									const isAnchorLink = item.href.startsWith("/#");
+									// Suporta tanto "/#section" (home) quanto "#section" (LP)
+									const isAnchorLink = item.href.startsWith("/#") || item.href.startsWith("#");
 									const isActive = isAnchorLink
-										? activeSection === item.href.substring(1)
+										? activeSection === (item.href.startsWith("/#") ? item.href.substring(1) : item.href)
 										: pathname === item.href;
 									return (
 										<div

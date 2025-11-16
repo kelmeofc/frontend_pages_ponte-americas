@@ -57,6 +57,8 @@ body:has(+ [data-snap]) {
   * {
     @apply border-border outline-ring/50;
     }
+  
+  /* Lenis gerencia o scroll suave */
   body {
     @apply bg-background text-foreground;
     }

@@ -11,7 +11,7 @@ import { ArrowRight } from "lucide-react"
 export function HeroSectionLp() {
 	return (
 		<section
-			id="home"
+			id="hero"
 			className="relative min-h-screen overflow-hidden"
 			data-animate-section
 			data-animate-children=".animate-child"
