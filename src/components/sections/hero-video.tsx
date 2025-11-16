@@ -12,19 +12,18 @@ interface HeroVideoProps {
 
 export function HeroVideo({ className, onPlay, onPause, onEnded }: HeroVideoProps) {
   return (
-    <div className="flex flex-col items-center">
-      <PandaVideoPlayer
-        src="/"
-        poster="/images/video-placeholder-2.png"
-        className={cn("max-w-4xl", className)}
-        autoPlay={true}
-        muted={true}
-        controls={true}
-      
-        onPlay={onPlay}
-        onPause={onPause}
-        onEnded={onEnded}
-      />
-    </div>
-  )
+		<div className="flex flex-col items-center">
+			<PandaVideoPlayer
+				src="/"
+				poster="/images/programs-thumbnails/caua-program-cover-como-vir-morar-nos-estados-unidos.png"
+				className={cn("max-w-4xl", className)}
+				autoPlay={true}
+				muted={true}
+				controls={true}
+				onPlay={onPlay}
+				onPause={onPause}
+				onEnded={onEnded}
+			/>
+		</div>
+	);
 }

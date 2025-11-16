@@ -1,13 +1,13 @@
 export interface ICourse {
-  title: string;
-  subtitle: string;
-  price: string;
-  originalPrice?: string;
-  installments?: string;
-  features: string[];
-  ctaText: string;
-  image?: string;
-  name: string; // Nome do professor
+	title: string;
+	subtitle: string;
+	price: string;
+	originalPrice?: string;
+	installments?: string;
+	features: string[];
+	ctaText: string;
+	image?: string;
+	name: string; // Nome do professor
 }
 
 export const COURSES_DATA: readonly ICourse[] = [
@@ -22,10 +22,11 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Documentação necessária",
 			"Processo de imigração passo a passo",
 			"Dicas práticas de adaptação",
-			"Suporte especializado"
+			"Suporte especializado",
 		],
 		ctaText: "COMEÇAR AGORA",
-		image: "/images/video-placeholder-1.png",
+		image:
+			"/images/programs-thumbnails/caua-program-thumb-como-vir-morar-nos-estados-unidos.png",
 		name: "Cauã Cunha",
 	},
 	{
@@ -39,7 +40,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Melhores atrações e parques",
 			"Dicas de hospedagem e alimentação",
 			"Como economizar na viagem",
-			"Planejamento de transporte"
+			"Planejamento de transporte",
 		],
 		ctaText: "PLANEJAR VIAGEM",
 		image: "/images/video-placeholder-1.png",
@@ -56,7 +57,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Testes padronizados (SAT, TOEFL)",
 			"Bolsas de estudo e financiamento",
 			"Escolha da universidade ideal",
-			"Preparação para vida acadêmica"
+			"Preparação para vida acadêmica",
 		],
 		ctaText: "ESTUDAR NOS EUA",
 		image: "/images/video-placeholder-1.png",
@@ -73,7 +74,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Processo de matrícula",
 			"Disciplinas e atividades extracurriculares",
 			"Preparação para college",
-			"Adaptação cultural para estudantes"
+			"Adaptação cultural para estudantes",
 		],
 		ctaText: "ENTENDER SISTEMA",
 		image: "/images/video-placeholder-1.png",
@@ -90,7 +91,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Como precificar serviços em dólar",
 			"Freelancing internacional",
 			"Criação de negócios digitais",
-			"Gestão de pagamentos internacionais"
+			"Gestão de pagamentos internacionais",
 		],
 		ctaText: "GANHAR EM DÓLAR",
 		image: "/images/video-placeholder-1.png",
@@ -107,7 +108,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Documentação necessária",
 			"Preparação para entrevista consular",
 			"Processo passo a passo",
-			"Acompanhamento especializado"
+			"Acompanhamento especializado",
 		],
 		ctaText: "OBTER VISTO",
 		image: "/images/video-placeholder-1.png",
