@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight, Globe } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { HeaderLogo } from "./header-logo";
@@ -8,10 +9,10 @@ import { PrimaryButton } from "@/components/primary-button";
 import type { INavItem, IHeaderProps, HeaderVariant } from "@/types/header";
 import { useState, useEffect } from "react";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 // Constantes compartilhadas entre desktop e mobile
@@ -60,14 +61,19 @@ const ACTION_BUTTONS = {
 const LANGUAGE_OPTIONS = {
 	current: "pt-BR",
 	display: "Português",
-	options: [
-		{ value: "pt-BR", label: "PT" }
-	],
+	options: [{ value: "pt-BR", label: "PT" }],
 } as const;
 
-export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUTTONS, languageOptions = LANGUAGE_OPTIONS, variant = "default" }: IHeaderProps) {
+export function Header({
+	navItems = NAVIGATION_ITEMS,
+	actionButtons = ACTION_BUTTONS,
+	languageOptions = LANGUAGE_OPTIONS,
+	variant = "default",
+}: IHeaderProps) {
+	const pathname = usePathname();
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
+	const [activeSection, setActiveSection] = useState<string>("");
 
 	// Normalizar valores resolvidos para evitar tipos opcionais durante o render
 	const resolvedNavItems = navItems ?? NAVIGATION_ITEMS;
@@ -76,12 +82,44 @@ export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUT
 
 	// Controlar efeito de scroll
 	useEffect(() => {
-		if (typeof window === 'undefined') return;
+		if (typeof window === "undefined") return;
 
 		const handleScroll = () => setIsScrolled(window.scrollY > 10);
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
+
+	// Detectar seção ativa baseado no scroll
+	useEffect(() => {
+		if (typeof window === "undefined") return;
+
+		const sections = resolvedNavItems
+			.map((item) =>
+				item.href.startsWith("/#") ? item.href.substring(2) : null
+			)
+			.filter(Boolean) as string[];
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						setActiveSection(`#${entry.target.id}`);
+					}
+				});
+			},
+			{
+				rootMargin: "-20% 0px -70% 0px",
+				threshold: 0,
+			}
+		);
+
+		sections.forEach((id) => {
+			const element = document.getElementById(id);
+			if (element) observer.observe(element);
+		});
+
+		return () => observer.disconnect();
+	}, [resolvedNavItems]);
 
 	// Controlar o body quando o menu mobile está aberto
 	useEffect(() => {
@@ -104,12 +142,13 @@ export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUT
 		<>
 			{/* Header Principal - Desktop e Mobile */}
 			<header
-				className={`w-screen border-b border-gray-800 py-4 fixed top-0 left-0 right-0 z-50 ${variant === "title-only"
+				className={`w-screen border-b border-gray-800 py-4 fixed top-0 left-0 right-0 z-50 ${
+					variant === "title-only"
 						? "bg-black backdrop-blur-md"
 						: isScrolled
-							? "bg-black/90 backdrop-blur-md"
-							: "bg-black/60 backdrop-blur-xs"
-					}`}
+						? "bg-black/90 backdrop-blur-md"
+						: "bg-black/60 backdrop-blur-xs"
+				}`}
 			>
 				<Container>
 					<div className="flex items-center justify-between w-full">
@@ -119,21 +158,31 @@ export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUT
 						</div>
 
 						{/* Nav Items - Apenas Desktop */}
-                        {variant !== "title-only" && (
-                            <nav className="hidden lg:flex items-center justify-center flex-1 gap-5">
-                                {resolvedNavItems.map((item) => (
-                                    <Link
-                                        key={item.title}
-                                        href={item.href}
-                                        data-testid={`menu-${item.title.toLowerCase()}`}
-                                        className="relative text-base font-normal text-white hover:text-gray-200 transition-colors duration-300 group"
-                                    >
-                                        {item.title}
-                                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-linear-to-r from-red-500 to-indigo-500 transition-all duration-300 ease-out group-hover:w-full" />
-                                    </Link>
-                                ))}
-                            </nav>
-                        )}
+						{variant !== "title-only" && (
+							<nav className="hidden lg:flex items-center justify-center flex-1 gap-5">
+								{resolvedNavItems.map((item) => {
+									const isAnchorLink = item.href.startsWith("/#");
+									const isActive = isAnchorLink
+										? activeSection === item.href.substring(1)
+										: pathname === item.href;
+									return (
+										<Link
+											key={item.title}
+											href={item.href}
+											data-testid={`menu-${item.title.toLowerCase()}`}
+											className="relative text-base font-normal text-white hover:text-gray-200 transition-colors duration-300 group"
+										>
+											{item.title}
+											<span
+												className={`absolute left-0 bottom-0 h-0.5 bg-linear-to-r from-red-500 to-indigo-500 transition-all duration-300 ease-out ${
+													isActive ? "w-full" : "w-0 group-hover:w-full"
+												}`}
+											/>
+										</Link>
+									);
+								})}
+							</nav>
+						)}
 
 						{/* Botões e controles - Desktop */}
 						<div className="hidden lg:flex items-center flex-1 justify-end gap-4">
@@ -146,7 +195,10 @@ export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUT
 												<Globe className="h-4 w-4 mr-1" />
 											</button>
 										</DropdownMenuTrigger>
-										<DropdownMenuContent align="center" className="w-fit text-center">
+										<DropdownMenuContent
+											align="center"
+											className="w-fit text-center"
+										>
 											<DropdownMenuItem className="text-center w-fit">
 												{resolvedLanguageOptions.display}
 											</DropdownMenuItem>
@@ -215,16 +267,20 @@ export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUT
 							<HeaderLogo />
 							<div className="flex items-center border border-gray-700 rounded-md px-3 py-2 bg-gray-900/50">
 								<Globe className="h-5 w-5 mr-3 text-gray-400" />
-                                <select
-                                    className="w-full bg-transparent text-white focus:outline-none"
-                                    defaultValue={resolvedLanguageOptions.current}
-                                >
-                                    {resolvedLanguageOptions.options.map((option) => (
-                                        <option key={option.value} value={option.value} className="bg-gray-900">
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
+								<select
+									className="w-full bg-transparent text-white focus:outline-none"
+									defaultValue={resolvedLanguageOptions.current}
+								>
+									{resolvedLanguageOptions.options.map((option) => (
+										<option
+											key={option.value}
+											value={option.value}
+											className="bg-gray-900"
+										>
+											{option.label}
+										</option>
+									))}
+								</select>
 							</div>
 							<button
 								className="p-2 rounded-full hover:bg-gray-800 text-white"
@@ -237,44 +293,56 @@ export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUT
 
 						<div className="py-8 overflow-y-auto h-[calc(100vh-80px)]">
 							<nav className="space-y-6 mb-8">
-                                {resolvedNavItems.map((item) => (
-									<div
-										key={item.title}
-										className="border-b border-gray-800 pb-4"
-									>
-										<Link
-											href={item.href}
-											className="relative text-xl font-medium text-white hover:text-primary flex items-center group transition-colors duration-300"
-											onClick={handleLinkClick}
+								{resolvedNavItems.map((item) => {
+									const isAnchorLink = item.href.startsWith("/#");
+									const isActive = isAnchorLink
+										? activeSection === item.href.substring(1)
+										: pathname === item.href;
+									return (
+										<div
+											key={item.title}
+											className="border-b border-gray-800 pb-4"
 										>
-											{item.icon && <item.icon className="h-5 w-5 mr-2" />}
-											{item.title}
-											<span className="absolute left-0 bottom-0 w-0 h-0.5 bg-linear-to-r from-red-500 to-indigo-500 transition-all duration-300 ease-out group-hover:w-full" />
-										</Link>
-									</div>
-								))}
+											<Link
+												href={item.href}
+												className="text-xl font-medium text-white hover:text-gray-400 flex items-center group transition-colors duration-300"
+												onClick={handleLinkClick}
+											>
+												{item.icon && <item.icon className="h-5 w-5 mr-2" />}
+												<span className="relative inline-block">
+													{item.title}
+													<span
+														className={`absolute left-0 bottom-0 h-0.5 bg-linear-to-r from-red-500 to-indigo-500 transition-all duration-300 ease-out ${
+															isActive ? "w-full" : "w-0 group-hover:w-full"
+														}`}
+													/>
+												</span>
+											</Link>
+										</div>
+									);
+								})}
 							</nav>
 
-					<div className="flex  flex-col lg:flex-row mt-10 gap-2 h-fit overflow-visible z-3">
-                                <PrimaryButton 
-                                    className="w-full" 
-                                    variant={resolvedActionButtons.member.variant}
-                                    size="lg"
-                                    icon={resolvedActionButtons.member.mobileIcon}
-                                    href={resolvedActionButtons.member.href}
-                                >
-                                    {actionButtons.member.text}
-                                </PrimaryButton>
+							<div className="flex  flex-col lg:flex-row mt-10 gap-2 h-fit overflow-visible z-3">
+								<PrimaryButton
+									className="w-full"
+									variant={resolvedActionButtons.member.variant}
+									size="lg"
+									icon={resolvedActionButtons.member.mobileIcon}
+									href={resolvedActionButtons.member.href}
+								>
+									{actionButtons.member.text}
+								</PrimaryButton>
 
-                                <PrimaryButton
-                                    icon={resolvedActionButtons.cta.mobileIcon}
-                                    className="w-full"
-                                    href={resolvedActionButtons.cta.href}
-                                    size="lg"
-                                    variant={resolvedActionButtons.cta.variant}
-                                >
-                                    {actionButtons.cta.text}
-                                </PrimaryButton>
+								<PrimaryButton
+									icon={resolvedActionButtons.cta.mobileIcon}
+									className="w-full"
+									href={resolvedActionButtons.cta.href}
+									size="lg"
+									variant={resolvedActionButtons.cta.variant}
+								>
+									{actionButtons.cta.text}
+								</PrimaryButton>
 							</div>
 						</div>
 					</Container>
