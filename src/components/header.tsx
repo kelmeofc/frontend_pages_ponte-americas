@@ -5,7 +5,7 @@ import { Menu, X, ArrowRight, Globe } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { HeaderLogo } from "./header-logo";
 import { PrimaryButton } from "@/components/primary-button";
-import type { INavItem, IHeaderProps } from "@/types/header";
+import type { INavItem, IHeaderProps, HeaderVariant } from "@/types/header";
 import { useState, useEffect } from "react";
 import {
   DropdownMenu,
@@ -65,7 +65,7 @@ const LANGUAGE_OPTIONS = {
 	],
 } as const;
 
-export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUTTONS, languageOptions = LANGUAGE_OPTIONS }: IHeaderProps) {
+export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUTTONS, languageOptions = LANGUAGE_OPTIONS, variant = "default" }: IHeaderProps) {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 
@@ -104,9 +104,11 @@ export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUT
 		<>
 			{/* Header Principal - Desktop e Mobile */}
 			<header
-				className={`w-screen border-b border-gray-800 py-4 fixed top-0 left-0 right-0 z-50 ${isScrolled
-						? "bg-black/90 backdrop-blur-md"
-						: "bg-black/60 backdrop-blur-xs"
+				className={`w-screen border-b border-gray-800 py-4 fixed top-0 left-0 right-0 z-50 ${variant === "title-only"
+						? "bg-black backdrop-blur-md"
+						: isScrolled
+							? "bg-black/90 backdrop-blur-md"
+							: "bg-black/60 backdrop-blur-xs"
 					}`}
 			>
 				<Container>
@@ -117,67 +119,89 @@ export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUT
 						</div>
 
 						{/* Nav Items - Apenas Desktop */}
-                        <nav className="hidden lg:flex items-center justify-center flex-1 gap-5">
-                            {resolvedNavItems.map((item) => (
-								<Link
-									key={item.title}
-									href={item.href}
-									data-testid={`menu-${item.title.toLowerCase()}`}
-									className="text-base font-normal text-white hover:text-gray-200"
-								>
-									{item.title}
-								</Link>
-							))}
-						</nav>
+                        {variant !== "title-only" && (
+                            <nav className="hidden lg:flex items-center justify-center flex-1 gap-5">
+                                {resolvedNavItems.map((item) => (
+                                    <Link
+                                        key={item.title}
+                                        href={item.href}
+                                        data-testid={`menu-${item.title.toLowerCase()}`}
+                                        className="text-base font-normal text-white hover:text-gray-200"
+                                    >
+                                        {item.title}
+                                    </Link>
+                                ))}
+                            </nav>
+                        )}
 
 						{/* Botões e controles - Desktop */}
 						<div className="hidden lg:flex items-center flex-1 justify-end gap-4">
-							{/* Dropdown de idioma */}
-							<DropdownMenu>
-								<DropdownMenuTrigger asChild>
-									<button className="flex items-center text-base font-normal text-white hover:text-primary">
-										<Globe className="h-4 w-4 mr-1" />
-									</button>
-								</DropdownMenuTrigger>
-                            <DropdownMenuContent align="center" className="w-fit text-center">
-                                    <DropdownMenuItem className="text-center w-fit">
-                                        {resolvedLanguageOptions.display}
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-							</DropdownMenu>
+							{variant !== "title-only" && (
+								<>
+									{/* Dropdown de idioma */}
+									<DropdownMenu>
+										<DropdownMenuTrigger asChild>
+											<button className="flex items-center text-base font-normal text-white hover:text-primary">
+												<Globe className="h-4 w-4 mr-1" />
+											</button>
+										</DropdownMenuTrigger>
+										<DropdownMenuContent align="center" className="w-fit text-center">
+											<DropdownMenuItem className="text-center w-fit">
+												{resolvedLanguageOptions.display}
+											</DropdownMenuItem>
+										</DropdownMenuContent>
+									</DropdownMenu>
+								</>
+							)}
 
 							{/* Botões de ação - Desktop */}
-                            <PrimaryButton
-                                href={resolvedActionButtons.member.href}
-                                icon={resolvedActionButtons.member.icon}
-                                size="sm"
-                                variant={actionButtons.member.variant}
-                                className="px-3 whitespace-nowrap"
-                            >
-                                {actionButtons.member.text}
-                            </PrimaryButton>
+							<PrimaryButton
+								href={resolvedActionButtons.member.href}
+								icon={resolvedActionButtons.member.icon}
+								size="sm"
+								variant={actionButtons.member.variant}
+								className="px-3 whitespace-nowrap"
+							>
+								{actionButtons.member.text}
+							</PrimaryButton>
 
-                            <PrimaryButton
-                                icon={resolvedActionButtons.cta.icon}
-                                size="sm"
-                                href={resolvedActionButtons.cta.href}
-                                variant={resolvedActionButtons.cta.variant}
-                                className="px-3 whitespace-nowrap"
-                            >
-                                {actionButtons.cta.text}
-                            </PrimaryButton>
+							{variant !== "title-only" && (
+								<PrimaryButton
+									icon={resolvedActionButtons.cta.icon}
+									size="sm"
+									href={resolvedActionButtons.cta.href}
+									variant={resolvedActionButtons.cta.variant}
+									className="px-3 whitespace-nowrap"
+								>
+									{actionButtons.cta.text}
+								</PrimaryButton>
+							)}
 						</div>
 
 						{/* Menu Mobile Toggle */}
-						<div className="lg:hidden flex items-center gap-2">
-							<button
-								className="p-2 rounded-md hover:bg-slate-900 border-2 border-slate-800 text-white"
-								onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-								aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
-							>
-								<Menu className="size-6 text-white" />
-							</button>
-						</div>
+						{variant !== "title-only" ? (
+							<div className="lg:hidden flex items-center gap-2">
+								<button
+									className="p-2 rounded-md hover:bg-slate-900 border-2 border-slate-800 text-white"
+									onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+									aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+								>
+									<Menu className="size-6 text-white" />
+								</button>
+							</div>
+						) : (
+							<div className="lg:hidden flex items-center">
+								<PrimaryButton
+									href={resolvedActionButtons.member.href}
+									icon={resolvedActionButtons.member.mobileIcon}
+									size="sm"
+									variant={actionButtons.member.variant}
+									className="px-3 whitespace-nowrap"
+								>
+									{actionButtons.member.text}
+								</PrimaryButton>
+							</div>
+						)}
 					</div>
 				</Container>
 			</header>

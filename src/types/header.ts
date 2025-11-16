@@ -33,9 +33,13 @@ export interface ILanguageOptions {
   options: readonly ILanguageOption[]
 }
 
+export type HeaderVariant = "default" | "title-only"
+export type FooterVariant = "default" | "simplified"
+
 export interface IHeaderProps {
   navItems?: INavItem[]
   actionButtons?: IActionButtons
   languageOptions?: ILanguageOptions
+  variant?: HeaderVariant
 }
 

@@ -12,13 +12,66 @@ import Image from "next/image";
 import { SOCIAL_LINKS, CONTACT, NAV_LINKS } from "@/common/constants";
 import CurrentYear from "./current-year.client";
 
+export type FooterVariant = "default" | "simplified"
+
 interface FooterProps {
   navLinks?: { label: string; href: string }[]
+  variant?: FooterVariant
 }
 
-export default function Footer({ navLinks }: FooterProps) {
+export default function Footer({ navLinks, variant = "default" }: FooterProps) {
   const links = navLinks ?? NAV_LINKS
-	return (
+  
+  // Simplified variant for enroll page
+  if (variant === "simplified") {
+    return (
+			<footer className="self-stretch px-6 py-8 bg-black border-t border-gray-900">
+				<Container>
+					<div className="flex flex-col items-center justify-center gap-4 text-center">
+						{/* Legal links */}
+						<div className="flex flex-col sm:flex-row gap-3 sm:gap-6 text-sm">
+							<Link
+								href="/politica-de-privacidade"
+								className="text-gray-500 hover:text-gray-300 transition-colors text-center"
+							>
+								Políticas de Privacidade
+							</Link>
+							<Link
+								href="/termos-de-uso"
+								className="text-gray-500 hover:text-gray-300 transition-colors text-center"
+							>
+								Termos de Uso
+							</Link>
+						</div>
+
+						{/* Copyright */}
+						<div className="text-center">
+							<div className="text-gray-400 text-sm font-normal leading-5">
+								Curso por Ponte Américas © 2025 - Todos os direitos reservados.
+							</div>
+						</div>
+
+						{/* Harpia branding */}
+						<Link href="https://kelme.studio/" className="flex items-center gap-4">
+							<span className="text-gray-500 text-sm font-normal leading-5 text-center">
+								Desenvolvido por
+							</span>
+							<Image
+								src="/images/svg/harpia-agency-logo-icon-only.svg"
+								alt="Harpia"
+								width={40}
+								height={24}
+								className="w-10 h-6"
+							/>
+						</Link>
+					</div>
+				</Container>
+			</footer>
+		);
+  }
+  
+  // Default footer
+  return (
 		<footer className="py-16 bg-white border-t border-gray-200">
 			<Container>
 				<div className="flex flex-col md:flex-row justify-between items-center md:items-start">

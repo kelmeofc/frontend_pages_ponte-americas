@@ -4,7 +4,7 @@ import React from "react";
 import { Header } from "@/components/header";
 import Footer from "@/components/footer";
 import { cn } from "@/common/lib/utils";
-import type { INavItem, IActionButtons, ILanguageOptions } from "@/types/header";
+import type { INavItem, IActionButtons, ILanguageOptions, HeaderVariant, FooterVariant } from "@/types/header";
 
 export interface SiteLayoutProps {
   children: React.ReactNode;
@@ -14,6 +14,8 @@ export interface SiteLayoutProps {
   footerNavLinks?: { label: string; href: string }[];
   className?: string;
   style?: React.CSSProperties;
+  variant?: HeaderVariant;
+  footerVariant?: FooterVariant;
 }
 
 export default function SiteLayout({
@@ -24,17 +26,19 @@ export default function SiteLayout({
   footerNavLinks,
   className,
   style,
+  variant,
+  footerVariant,
 }: SiteLayoutProps) {
   return (
-    <div className="min-h-screen">
-      <Header navItems={navItems} actionButtons={actionButtons} languageOptions={languageOptions} />
+    <div className="h-full">
+      <Header navItems={navItems} actionButtons={actionButtons} languageOptions={languageOptions} variant={variant} />
 
       {/* Espaço superior para compensar header fixo */}
       <main className={cn("pt-0", className)} style={style}>
         {children}
       </main>
 
-      <Footer navLinks={footerNavLinks} />
+      <Footer navLinks={footerNavLinks} variant={footerVariant} />
     </div>
   );
 }

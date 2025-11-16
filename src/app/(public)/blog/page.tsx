@@ -1,7 +1,6 @@
 import defaultSeo from "@/common/config/default-seo";
 import SiteLayout from "@/components/layouts/site-layout";
 import BlogGrid from "@/components/sections/blog-grid";
-import { Container } from "@/components/ui/container";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

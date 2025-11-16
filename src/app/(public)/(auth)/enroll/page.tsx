@@ -1,828 +1,260 @@
-'use client';
+"use client";
 
-import React, { useState, useCallback } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { ArrowRight, Check, CircleCheck, Shield, Loader2 } from 'lucide-react';
+import React, { useState, useCallback } from "react";
+import { Loader2 } from "lucide-react";
 
-import { FormField } from '@/components/forms/form-field';
-import { PasswordField } from '@/components/forms/password-field';
-import { InternationalPhoneField } from '@/components/forms/international-phone-field';
-import { PrimaryButton } from '@/components/primary-button';
-import { 
-  userEnrollmentFormDataSchema, 
-  type UserEnrollmentFormDataSchema 
-} from '@/common/schemas/user.schema';
-import useCreateUser from '@/common/hooks/use-create-user';
-import { PaymentStep } from '@/components/enrollment/payment-step';
-import Link from 'next/link';
-
-
-// Schema de validação para a etapa de pagamento
-const paymentSchema = z.object({
-  cardholderName: z.string()
-    .min(3, 'Nome do titular é obrigatório')
-    .max(100, 'Nome deve ter no máximo 100 caracteres')
-    .trim(),
-  cpf: z.string()
-    .min(11, 'CPF deve ter 11 dígitos')
-    .max(14, 'CPF inválido')
-    .refine((cpf) => {
-      const numbers = cpf.replace(/\D/g, '');
-      return numbers.length === 11;
-    }, 'CPF deve ter 11 dígitos'),
-  cardNumber: z.string()
-    .min(16, 'Número do cartão deve ter 16 dígitos')
-    .max(19, 'Número do cartão inválido'),
-  expiryDate: z.string()
-    .regex(/^\d{2}\/\d{4}$/, 'Validade deve estar no formato MM/AAAA'),
-  cvv: z.string()
-    .min(3, 'CVV deve ter 3 dígitos')
-    .max(4, 'CVV deve ter no máximo 4 dígitos'),
-  installments: z.string()
-    .min(1, 'Selecione o número de parcelas'),
-  coupon: z.string().optional(),
-});
+import { StepIndicator } from "@/components/enrollment/step-indicator";
+import { IdentificationForm } from "@/components/enrollment/identification-form";
+import { PaymentForm } from "@/components/enrollment/payment-form";
+import { PaymentStep } from "@/components/enrollment/payment-step";
+import { useEnrollmentFlow } from "@/common/hooks/use-enrollment-flow";
+import useCreateUser from "@/common/hooks/use-create-user";
+import { type UserEnrollmentFormDataSchema } from "@/common/schemas/user.schema";
+import { type PaymentData } from "@/common/schemas/payment.schema";
+import {
+	ERROR_MESSAGES,
+	getErrorMessage,
+	getErrorType,
+	isRetryableError,
+} from "@/common/utils/error-handlers";
+import { Container } from "@/components/ui/container";
 
 type IdentificationData = UserEnrollmentFormDataSchema;
-type PaymentData = z.infer<typeof paymentSchema>;
 
-type FlowStep = 'identification' | 'payment';
+const AUTO_HIDE_TIMEOUT = 6000;
 
-interface StepIndicatorProps {
-  currentStep: FlowStep;
-}
-
-const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => (
-  <div className="w-full max-w-56 inline-flex justify-center items-center gap-2">
-    <div className="flex items-center gap-3">
-      <div className="flex flex-col items-center">
-        <div className={`w-10 h-10 rounded-full p-2 flex items-center justify-center ${currentStep === 'payment' ? 'bg-indigo-600 text-white' : 'bg-white shadow border-2 border-indigo-600'}`}>
-          {currentStep === 'payment' ? <Check className="w-4 h-4" /> : <div className="w-full h-full bg-indigo-600 rounded-full" />}
-        </div>
-        <div className="text-indigo-600 text-xs mt-1">Identificação</div>
-      </div>
-
-      <div className="w-12 h-px bg-stone-300" />
-
-      <div className="flex flex-col items-center">
-        <div className={`w-10 h-10 rounded-full p-2 flex items-center justify-center ${currentStep === 'payment' ? 'bg-indigo-600 text-white' : 'bg-white shadow border-2 border-gray-300'}`}>
-          <div className={`w-full h-full rounded-full ${currentStep === 'payment' ? 'bg-indigo-600' : 'bg-gray-400'}`} />
-        </div>
-        <div className={`text-xs mt-1 ${currentStep === 'payment' ? 'text-indigo-600' : 'text-gray-500'}`}>Pagamento</div>
-      </div>
-    </div>
-  </div>
-);
-
-interface ProductCardProps {
-  title: string;
-  description?: string;
-  originalPrice: string;
-  currentPrice: string;
-  discount: string;
-}
-
-const ProductCard: React.FC<ProductCardProps> = ({ title, description, originalPrice, currentPrice, discount }) => (
-  <div className="w-full p-4 bg-white/0 rounded-lg shadow-sm outline-2 outline-blue-500 flex flex-col gap-3">
-    <label className="flex items-start gap-3">
-      <input type="checkbox" defaultChecked className="size-4 mt-1" />
-      <div className="flex-1">
-        <div className="text-gray-800 text-sm font-medium">{title}</div>
-        {description && <div className="text-zinc-600 text-xs italic mt-1">"{description}"</div>}
-      </div>
-    </label>
-
-    <div className="p-3 bg-zinc-200 rounded-md border-l-4 border-emerald-700 flex items-center justify-between">
-      <div>
-        <div className="text-neutral-400 text-xs line-through">{originalPrice}</div>
-        <div className="text-zinc-600 text-sm">{currentPrice}</div>
-      </div>
-      <div className="bg-emerald-700 text-white text-xs px-2 py-1 rounded-full">{discount}</div>
-    </div>
-  </div>
+const LoadingIndicator: React.FC = () => (
+	<div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+		<div className="flex items-center gap-3">
+			<Loader2 className="w-5 h-5 animate-spin text-blue-600" />
+			<div>
+				<p className="text-blue-800 font-medium text-sm">
+					Processando seus dados...
+				</p>
+				<p className="text-blue-600 text-xs">
+					Aguarde enquanto criamos sua conta de forma segura.
+				</p>
+			</div>
+		</div>
+	</div>
 );
 
 export default function EnrollPage() {
-  // Step management (inlined - substituindo useEnrollmentFlow)
-  const STEP_ORDER: FlowStep[] = ['identification', 'payment'];
+	const { flowStep, nextStep, previousStep, markStepCompleted } =
+		useEnrollmentFlow();
 
-  const [flowStep, setFlowStep] = useState<FlowStep>('identification');
-  const [completedSteps, setCompletedSteps] = useState<Set<FlowStep>>(new Set());
+	const [identificationData, setIdentificationData] =
+		useState<IdentificationData | null>(null);
+	const [isLoading, setIsLoading] = useState(false);
+	const [feedbackMessage, setFeedbackMessage] = useState<{
+		type: "success" | "error" | null;
+		message: string;
+	}>({ type: null, message: "" });
+	const [retryCount, setRetryCount] = useState(0);
+	const [lastSubmissionData, setLastSubmissionData] =
+		useState<IdentificationData | null>(null);
+	const { execCreateUser, loading: hookLoading } = useCreateUser();
 
-  const getCurrentStepIndex = useCallback(() => STEP_ORDER.indexOf(flowStep), [flowStep]);
-  const getStepIndex = useCallback((step: FlowStep) => STEP_ORDER.indexOf(step), []);
+	const handleFlowError = useCallback((error: unknown, context: string) => {
+		if (process.env.NODE_ENV === "development") {
+			console.error(`Enrollment flow error in ${context}:`, error);
+		}
 
-  const isStepCompleted = useCallback((step: FlowStep) => {
-    return completedSteps.has(step);
-  }, [completedSteps]);
+		setFeedbackMessage({
+			type: "error",
+			message: getErrorMessage(error),
+		});
 
-  const canAccessStep = useCallback((step: FlowStep) => {
-    const stepIndex = getStepIndex(step);
-    if (stepIndex === 0) return true;
-    const previousStepIndex = stepIndex - 1;
-    const previousStep = STEP_ORDER[previousStepIndex];
-    return previousStep ? isStepCompleted(previousStep) : false;
-  }, [getStepIndex, isStepCompleted]);
+		setIsLoading(false);
+	}, []);
 
-  const goToStep = useCallback((step: FlowStep) => {
-    if (canAccessStep(step)) {
-      setFlowStep(step);
-    }
-  }, [canAccessStep]);
+	const sanitizeUserData = useCallback((data: IdentificationData) => {
+		const { brand, description, ...userData } = data as any;
+		return userData;
+	}, []);
 
-  const nextStep = useCallback(() => {
-    const currentIndex = getCurrentStepIndex();
-    const nextIndex = currentIndex + 1;
-    if (nextIndex < STEP_ORDER.length) {
-      const nextStepName = STEP_ORDER[nextIndex];
-      if (canAccessStep(nextStepName)) {
-        setFlowStep(nextStepName);
-      }
-    }
-  }, [getCurrentStepIndex, canAccessStep]);
+	const handleSuccess = useCallback(
+		(data: IdentificationData) => {
+			setRetryCount(0);
+			setFeedbackMessage({
+				type: "success",
+				message: "Conta criada com sucesso! Prosseguindo para pagamento...",
+			});
 
-  const previousStep = useCallback(() => {
-    const currentIndex = getCurrentStepIndex();
-    const previousIndex = currentIndex - 1;
-    if (previousIndex >= 0) {
-      setFlowStep(STEP_ORDER[previousIndex]);
-    }
-  }, [getCurrentStepIndex]);
+			setIdentificationData(data);
+			markStepCompleted("identification");
+			nextStep();
+		},
+		[markStepCompleted, nextStep]
+	);
 
-  const markStepCompleted = useCallback((step: FlowStep) => {
-    setCompletedSteps(prev => {
-      const next = new Set(prev);
-      next.add(step);
-      return next;
-    });
+	const handleSubmissionError = useCallback(
+		(error?: string, data?: IdentificationData) => {
+			if (process.env.NODE_ENV === "development") {
+				console.error("Submission error:", error);
+			}
 
-    // Avança automaticamente se marcamos a etapa atual
-    const nextIndex = STEP_ORDER.indexOf(step) + 1;
-    if (nextIndex < STEP_ORDER.length) {
-      setFlowStep(STEP_ORDER[nextIndex]);
-    }
-  }, []);
-  const [identificationData, setIdentificationData] = useState<IdentificationData | null>(null);
-  const [showCoupon, setShowCoupon] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [feedbackMessage, setFeedbackMessage] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
-  const [retryCount, setRetryCount] = useState(0);
-  const [lastSubmissionData, setLastSubmissionData] = useState<IdentificationData | null>(null);
-  const { execCreateUser, loading: hookLoading } = useCreateUser();
+			const errorMessage =
+				typeof error === "string"
+					? ERROR_MESSAGES[error as keyof typeof ERROR_MESSAGES] ||
+					  ERROR_MESSAGES.default
+					: ERROR_MESSAGES.default;
 
-  // waitlist handling removed for production; keep flow logic minimal
+			setFeedbackMessage({ type: "error", message: errorMessage });
 
-  // Enhanced error handling for the entire enrollment flow
-  const handleFlowError = useCallback((error: any, context: string) => {
-    console.error(`Enrollment flow error in ${context}:`, error);
-    
-    let errorMessage = 'Ocorreu um erro inesperado. Tente novamente.';
-    
-    if (error instanceof Error) {
-      if (error.message.includes('network') || error.message.includes('fetch')) {
-        errorMessage = 'Erro de conexão. Verifique sua internet e tente novamente.';
-      } else if (error.message.includes('timeout')) {
-        errorMessage = 'A requisição demorou muito para responder. Tente novamente.';
-      } else if (error.message.includes('validation')) {
-        errorMessage = 'Dados inválidos. Verifique as informações e tente novamente.';
-      }
-    }
-    
-    setFeedbackMessage({
-      type: 'error',
-      message: errorMessage
-    });
-    
-    // Reset loading states
-    setIsLoading(false);
-  }, []);
+			if (!isRetryableError(error)) {
+				setRetryCount(0);
+			}
 
-  // Não precisamos mais do useEffect para sincronizar feedback
-  // pois o novo hook já gerencia o feedback internamente
+			const timeoutId = setTimeout(() => {
+				setFeedbackMessage((prev) =>
+					prev.type === "error" ? { type: null, message: "" } : prev
+				);
+			}, AUTO_HIDE_TIMEOUT);
 
-  // Form para identificação
-  const identificationForm = useForm<IdentificationData>({
-    resolver: zodResolver(userEnrollmentFormDataSchema),
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-    defaultValues: {
-      
-    }
-  });
+			return () => clearTimeout(timeoutId);
+		},
+		[]
+	);
 
-  // Form para pagamento
-  const paymentForm = useForm<PaymentData>({
-    resolver: zodResolver(paymentSchema),
-    mode: 'onChange',
-  });
+	const handleIdentificationSubmit = useCallback(
+		async (data: IdentificationData) => {
+			setRetryCount(0);
+			setLastSubmissionData(data);
 
-  const handleIdentificationSubmit = async (data: IdentificationData, isRetry = false) => {
-    if (!isRetry) {
-      // Limpar retry count em nova submissão
-      setRetryCount(0);
-      setLastSubmissionData(data);
-    }
-    
-    setIsLoading(true);
-    setFeedbackMessage({ type: null, message: '' });
-    
-    try {
-      // Adicionar campos obrigatórios para criação de usuário (sanitize campos)
-      const userData = { ...data } as any;
-      // remover campos que não existem no schema Prisma
-      delete userData.brand;
-      delete userData.description;
+			setIsLoading(true);
+			setFeedbackMessage({ type: null, message: "" });
 
-      const result = await execCreateUser({ 
-        data: userData,
-        successMessage: 'Conta criada com sucesso! Redirecionando para próxima etapa...',
-        showModal: false
-      });
-      
-      if (result.success) {
-        // createdUserId removed — no longer stored
-        // Sucesso - limpar estados de erro e retry
-        setRetryCount(0);
-        setFeedbackMessage({ 
-          type: 'success', 
-          message: 'Conta criada com sucesso! Prosseguindo para pagamento...' 
-        });
+			try {
+				const userData = sanitizeUserData(data);
 
-        // Set identification data and immediately advance the flow
-        setIdentificationData(data);
-        markStepCompleted('identification');
-        // Move to payment immediately
-        nextStep();
-      } else {
-        // Erro da API - usar sistema de retry
-        handleSubmissionError(result.error, data);
-      }
-    } catch (error) {
-      console.error('Erro na criação do lead:', error);
-      
-      // Mapear diferentes tipos de erro para strings padronizadas
-      let errorType = 'unknown_error';
-      
-      if (error instanceof TypeError && error.message.includes('fetch')) {
-        errorType = 'network_error';
-      } else if (error instanceof Error) {
-        if (error.message.includes('timeout')) {
-          errorType = 'timeout_error';
-        } else if (error.message.includes('network')) {
-          errorType = 'network_error';
-        } else if (error.message.includes('validation')) {
-          errorType = 'validation_error';
-        } else if (error.message.includes('server') || error.name === 'InternalServerError') {
-          errorType = 'server_error';
-        }
-      }
-      
-      // Usar sistema de tratamento de erros com retry
-      handleSubmissionError(errorType, data);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+				const result = await execCreateUser({
+					data: userData,
+					successMessage:
+						"Conta criada com sucesso! Redirecionando para próxima etapa...",
+					showModal: false,
+				});
 
-  // Função auxiliar para tratamento de mensagens de erro
-  const getErrorMessage = (error: string | undefined): string => {
-    if (!error) return 'Erro ao criar conta. Verifique os dados e tente novamente.';
-    
-    // Mapeamento de erros específicos para mensagens amigáveis
-    const errorMap: Record<string, string> = {
-      'email_already_exists': 'Este e-mail já está cadastrado. Tente fazer login ou use outro e-mail.',
-      'invalid_phone': 'Número de telefone inválido. Verifique o formato e tente novamente.',
-      'weak_password': 'Senha muito fraca. Use pelo menos 8 caracteres com letras maiúsculas, minúsculas e números.',
-      'invalid_email': 'E-mail inválido. Verifique o formato e tente novamente.',
-      'database_error': 'Erro temporário no sistema. Tente novamente em alguns minutos.',
-      'rate_limit': 'Muitas tentativas. Aguarde alguns minutos antes de tentar novamente.',
-      'network_error': 'Problema de conexão. Verifique sua internet e tente novamente.',
-      'timeout_error': 'A operação demorou muito para ser concluída. Tente novamente.',
-      'server_error': 'Erro interno do servidor. Tente novamente em alguns minutos.',
-    };
-    
-    // Busca por chaves conhecidas na mensagem de erro
-    for (const [key, message] of Object.entries(errorMap)) {
-      if (error.toLowerCase().includes(key)) {
-        return message;
-      }
-    }
-    
-    // Retorna mensagem genérica amigável se não encontrou mapeamento específico
-    return 'Não foi possível criar sua conta. Verifique os dados e tente novamente.';
-  };
+				if (result.success) {
+					handleSuccess(data);
+				} else {
+					handleSubmissionError(result.error, data);
+				}
+			} catch (error) {
+				if (process.env.NODE_ENV === "development") {
+					console.error("Erro na criação do usuário:", error);
+				}
+				const errorType = getErrorType(error);
+				handleSubmissionError(errorType, data);
+			} finally {
+				setIsLoading(false);
+			}
+		},
+		[sanitizeUserData, execCreateUser, handleSuccess, handleSubmissionError]
+	);
 
-  // Verifica se um erro é recuperável e permite retry automático
-  const isRetryableError = (error: string | undefined): boolean => {
-    if (!error) return false;
-    
-    const retryableErrors = [
-      'network_error',
-      'timeout_error', 
-      'server_error',
-      'database_error',
-      'connection_failed',
-      'internal_server_error'
-    ];
-    
-    return retryableErrors.some(errType => 
-      error.toLowerCase().includes(errType.toLowerCase())
-    );
-  };
+	const handleRetry = useCallback(
+		async (data: IdentificationData) => {
+			setIsLoading(true);
+			setFeedbackMessage({ type: null, message: "" });
 
-  // Sistema de retry automático para erros recuperáveis
-  const attemptRetry = useCallback(async (data: IdentificationData) => {
-    if (retryCount >= 3) {
-      setFeedbackMessage({ 
-        type: 'error', 
-        message: 'Tentativas esgotadas. Verifique sua conexão e tente novamente mais tarde.' 
-      });
-      setRetryCount(0);
-      return;
-    }
+			try {
+				const userData = sanitizeUserData(data);
 
-    const nextRetry = retryCount + 1;
-    setRetryCount(nextRetry);
-    
-    setFeedbackMessage({ 
-      type: 'error', 
-      message: `Reconectando... (${nextRetry}/3)` 
-    });
+				const result = await execCreateUser({
+					data: userData,
+					successMessage:
+						"Conta criada com sucesso! Redirecionando para próxima etapa...",
+					showModal: false,
+				});
 
-    // Delay progressivo: 2s, 4s, 8s
-    const delay = 2000 * Math.pow(2, retryCount);
-    
-    setTimeout(async () => {
-      try {
-        await handleIdentificationSubmit(data, true);
-      } catch (retryError) {
-        console.error('Retry failed:', retryError);
-      }
-    }, delay);
-  }, [retryCount]);
+				if (result.success) {
+					handleSuccess(data);
+				} else {
+					handleSubmissionError(result.error, data);
+				}
+			} catch (error) {
+				if (process.env.NODE_ENV === "development") {
+					console.error("Erro na criação do usuário:", error);
+				}
+				const errorType = getErrorType(error);
+				handleSubmissionError(errorType, data);
+			} finally {
+				setIsLoading(false);
+			}
+		},
+		[sanitizeUserData, execCreateUser, handleSuccess, handleSubmissionError]
+	);
 
-  // Tratamento robusto de erros com retry automático
-  const handleSubmissionError = useCallback((error: string | undefined, data?: IdentificationData) => {
-    console.error('Submission error:', error);
-    
-    // Tenta retry automático para erros recuperáveis
-    if (data && isRetryableError(error) && retryCount < 3) {
-      attemptRetry(data);
-      return;
-    }
-    
-    // Tratamento final do erro
-    const errorMessage = getErrorMessage(error);
-    setFeedbackMessage({ type: 'error', message: errorMessage });
-    
-    // Reset contador em erros não recuperáveis
-    if (!isRetryableError(error)) {
-      setRetryCount(0);
-    }
-    
-    // Auto-hide da mensagem após 6 segundos
-    setTimeout(() => {
-      if (feedbackMessage.type === 'error') {
-        setFeedbackMessage({ type: null, message: '' });
-      }
-    }, 6000);
-  }, [retryCount, attemptRetry, feedbackMessage.type]);
+	const clearFeedback = useCallback(() => {
+		setFeedbackMessage({ type: null, message: "" });
+	}, []);
 
-  const handlePaymentSubmit = async (data: PaymentData) => {
-    setIsLoading(true);
-    
-    // Simular processamento de pagamento
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // identification and payment data logged during development removed for production
-    
-    // Redirecionar para página de sucesso ou dashboard
-    setIsLoading(false);
-  };
+	const handlePaymentSubmit = useCallback(
+		async (data: PaymentData) => {
+			setIsLoading(true);
 
-  const formatCardNumber = (value: string) => {
-    const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-    const matches = v.match(/\d{4,16}/g);
-    const match = matches && matches[0] || '';
-    const parts = [];
-    for (let i = 0, len = match.length; i < len; i += 4) {
-      parts.push(match.substring(i, i + 4));
-    }
-    if (parts.length) {
-      return parts.join(' ');
-    } else {
-      return v;
-    }
-  };
+			try {
+				// TODO: Implementar integração com gateway de pagamento
+				await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  const formatCPF = (value: string) => {
-    const v = value.replace(/\D/g, '');
-    return v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-  };
+				// TODO: Redirecionar para página de sucesso
+				if (process.env.NODE_ENV === "development") {
+					console.log("Payment processed successfully");
+				}
+			} catch (error) {
+				if (process.env.NODE_ENV === "development") {
+					console.error("Payment error:", error);
+				}
+				handleFlowError(error, "payment");
+			} finally {
+				setIsLoading(false);
+			}
+		},
+		[handleFlowError]
+	);
 
-  const formatExpiryDate = (value: string) => {
-    const v = value.replace(/\D/g, '');
-    if (v.length >= 2) {
-      return v.substring(0, 2) + '/' + v.substring(2, 6);
-    }
-    return v;
-  };
+	return (
+		<div className="sm:py-8 px-4 sm:px-6 lg:px-8 w-full flex items-center justify-center min-h-screen">
+			<Container className="max-w-lg">
+				<div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8 w-full">
+					<div className="flex justify-center mb-6 sm:mb-8">
+						<StepIndicator currentStep={flowStep} />
+					</div>
 
-  return (
-    <div className="min-h-screen bg-gray-50 my-20 sm:py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-lg mx-auto w-full">
-        <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8">
-          
-          {/* Indicador de etapas */}
-          <div className="flex justify-center mb-6 sm:mb-8">
-            <StepIndicator currentStep={flowStep as any} />
-          </div>
+					<h1 className="text-center text-black text-lg sm:text-xl font-semibold uppercase leading-6 mb-6 sm:mb-8 px-2">
+						Criar sua conta para continuar sua matrícula
+					</h1>
 
-          {/* Título */}
-          <h1 className="text-center text-black text-lg sm:text-xl font-semibold uppercase leading-6 mb-6 sm:mb-8 px-2">
-            Criar sua conta para continuar sua matrícula
-          </h1>
+					{(isLoading || hookLoading) && <LoadingIndicator />}
 
-          {/* Indicador de progresso de envio */}
-          {(isLoading || hookLoading) && (
-            <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-              <div className="flex items-center gap-3">
-                <Loader2 className="w-5 h-5 animate-spin text-blue-600" />
-                <div>
-                  <p className="text-blue-800 font-medium text-sm">Processando seus dados...</p>
-                  <p className="text-blue-600 text-xs">Aguarde enquanto criamos sua conta de forma segura.</p>
-                </div>
-              </div>
-            </div>
-          )}
+					{flowStep === "identification" && (
+						<IdentificationForm
+							isLoading={isLoading}
+							hookLoading={hookLoading}
+							feedbackMessage={feedbackMessage}
+							retryCount={retryCount}
+							lastSubmissionData={lastSubmissionData}
+							onSubmit={handleIdentificationSubmit}
+							onRetry={handleRetry}
+							clearFeedback={clearFeedback}
+						/>
+					)}
 
-          {/* Etapa 1 - Identificação */}
-          {flowStep === 'identification' && (
-            <form 
-              onSubmit={identificationForm.handleSubmit(
-                (data) => handleIdentificationSubmit(data),
-                (errors) => {
-                  // Tratamento de erros de validação
-                  console.error('Erros de validação:', errors);
-                  const fieldNames: Record<string, string> = {
-                    name: 'nome',
-                    email: 'e-mail', 
-                    phoneNumber: 'telefone',
-                    password: 'senha'
-                  };
-                  
-                  const firstError = Object.entries(errors)[0];
-                  if (firstError) {
-                    const [fieldName, error] = firstError;
-                    const friendlyFieldName = fieldNames[fieldName] || fieldName;
-                    const errorMessage = (error as any)?.message || 'Campo inválido';
-                    
-                    setFeedbackMessage({
-                      type: 'error',
-                      message: `Erro no campo ${friendlyFieldName}: ${errorMessage}`
-                    });
-                  }
-                }
-              )} 
-              className="space-y-4"
-            >
-              <div className="space-y-3">
-                {/* hidden legacy fields removed */}
-                
-                <FormField
-                  name="name"
-                  placeholder="Nome completo"
-                  register={identificationForm.register}
-                  errors={identificationForm.formState.errors}
-                  disabled={isLoading || hookLoading}
-                  watch={identificationForm.watch}
-                  trigger={identificationForm.trigger}
-                />
-                <FormField
-                  name="email"
-                  placeholder="E-mail"
-                  type="email"
-                  register={identificationForm.register}
-                  errors={identificationForm.formState.errors}
-                  disabled={isLoading || hookLoading}
-                  watch={identificationForm.watch}
-                  trigger={identificationForm.trigger}
-                />
-                <InternationalPhoneField
-                  name="phoneNumber"
-                  placeholder="Telefone"
-                  register={identificationForm.register}
-                  errors={identificationForm.formState.errors}
-                  setValue={identificationForm.setValue}
-                  disabled={isLoading || hookLoading}
-                  initialCountry="br"
-                />
-                <PasswordField
-                  name="password"
-                  placeholder="Crie uma senha segura"
-                  register={identificationForm.register}
-                  errors={identificationForm.formState.errors}
-                  disabled={isLoading || hookLoading}
-                  watch={identificationForm.watch}
-                  trigger={identificationForm.trigger}
-                />
-              </div>
+					{flowStep === "payment" && (
+						<div className="space-y-6">
+							<div className="mb-6">
+								<PaymentStep onBack={previousStep} isLoading={isLoading} />
+							</div>
 
-              <PrimaryButton
-                type="submit"
-                size="lg"
-                className={`w-full h-12 px-8 py-4 rounded-lg text-white font-medium uppercase transition-all duration-200 ${
-                  isLoading || hookLoading 
-                    ? 'bg-gray-400 cursor-not-allowed' 
-                    : !identificationForm.formState.isValid 
-                      ? 'bg-gray-300 cursor-not-allowed opacity-50'
-                      : 'bg-linear-to-r from-red-700 to-indigo-600 hover:from-red-800 hover:to-indigo-700 transform active:scale-95'
-                }`}
-                disabled={isLoading || hookLoading || !identificationForm.formState.isValid}
-                icon={isLoading || hookLoading ? undefined : <ArrowRight className="w-5 h-5" />}
-                iconPosition="right"
-              >
-                <div className="flex items-center justify-center gap-2">
-                  {isLoading || hookLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span className="animate-pulse">Criando conta...</span>
-                    </>
-                  ) : !identificationForm.formState.isValid ? (
-                    'Preencha todos os campos'
-                  ) : (
-                    <>
-                      <span>Criar conta</span>
-                    </>
-                  )}
-                </div>
-              </PrimaryButton>
-
-              {/* Feedback Visual */}
-              {feedbackMessage.type && (
-                <div className={`mt-4 p-4 rounded-lg border transition-all duration-300 ${
-                  feedbackMessage.type === 'success' 
-                    ? 'bg-green-50 border-green-200 text-green-800' 
-                    : 'bg-red-50 border-red-200 text-red-800'
-                }`}>
-                  <div className="flex items-center gap-3">
-                    {feedbackMessage.type === 'success' ? (
-                      <CircleCheck className="w-5 h-5 text-green-600 shrink-0" />
-                    ) : (
-                      <Shield className="w-5 h-5 text-red-600 shrink-0" />
-                    )}
-                    <div>
-                      <p className={`font-medium text-sm ${
-                        feedbackMessage.type === 'success' ? 'text-green-800' : 'text-red-800'
-                      }`}>
-                        {feedbackMessage.type === 'success' ? 'Sucesso!' : 'Ops! Algo deu errado'}
-                      </p>
-                      <p className={`text-sm ${
-                        feedbackMessage.type === 'success' ? 'text-green-700' : 'text-red-700'
-                      }`}>
-                        {feedbackMessage.message}
-                      </p>
-                      
-                      {/* Indicador de retry */}
-                      {retryCount > 0 && feedbackMessage.type === 'error' && (
-                        <div className="mt-2 flex items-center gap-2">
-                          <div className="flex gap-1">
-                            {[1, 2, 3].map((attempt) => (
-                              <div
-                                key={attempt}
-                                className={`w-2 h-2 rounded-full ${
-                                  attempt <= retryCount 
-                                    ? 'bg-orange-500' 
-                                    : 'bg-gray-300'
-                                }`}
-                              />
-                            ))}
-                          </div>
-                          <span className="text-xs text-orange-600">
-                            Tentativa {retryCount}/3
-                          </span>
-                        </div>
-                      )}
-                      
-                      {feedbackMessage.type === 'error' && retryCount === 0 && (
-                        <button
-                          onClick={() => {
-                            if (lastSubmissionData) {
-                              handleIdentificationSubmit(lastSubmissionData);
-                            }
-                            setFeedbackMessage({ type: null, message: '' });
-                          }}
-                          className="mt-2 text-xs text-red-600 hover:text-red-800 underline"
-                          disabled={isLoading || hookLoading}
-                        >
-                          Tentar novamente
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              <div className="text-center px-2">
-                <p className="text-neutral-600 text-sm sm:text-base font-medium leading-5 mt-4">
-                  Ao clicar em "CRIAR CONTA" você concorda com a nossa{' '}
-                  <span className="text-blue-700 cursor-pointer hover:underline">
-                    <Link href="/privacy-policy">
-                      política de privacidade
-                    </Link>
-                  
-                  </span>
-                  .
-                </p>
-              </div>
-            </form>
-          )}
-
-          {/* Etapa 2 - Pagamento */}
-          {flowStep === 'payment' && (
-            <div className="space-y-6">
-              {/* Botão de voltar - Enhanced with flow management */}
-            
-              {/* New PaymentStep Component - Simplified version */}
-              <div className="mb-6">
-                <PaymentStep
-                  onBack={previousStep}
-                  isLoading={isLoading}
-                />
-              </div>
-
-              <form onSubmit={paymentForm.handleSubmit(handlePaymentSubmit)} className="space-y-4">
-                <div className="space-y-3">
-                  <FormField
-                    name="cardholderName"
-                    placeholder="Nome do titular"
-                    register={paymentForm.register}
-                    errors={paymentForm.formState.errors}
-                    disabled={isLoading}
-                  />
-                  
-                  <div className="relative">
-                    <input
-                      {...paymentForm.register('cpf')}
-                      type="text"
-                      placeholder="CPF"
-                      className="w-full h-12 px-3 py-2 bg-[#F5F5F5] rounded-lg border border-transparent focus:ring-2 focus:ring-[#0047FF] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                      onChange={(e) => {
-                        const formatted = formatCPF(e.target.value);
-                        e.target.value = formatted;
-                        paymentForm.setValue('cpf', formatted);
-                      }}
-                      maxLength={14}
-                      disabled={isLoading}
-                    />
-                  </div>
-
-                  <div className="relative">
-                    <input
-                      {...paymentForm.register('cardNumber')}
-                      type="text"
-                      placeholder="Número do cartão"
-                      className="w-full h-12 px-3 py-2 bg-[#F5F5F5] rounded-lg border border-transparent focus:ring-2 focus:ring-[#0047FF] focus:outline-none pr-16 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                      onChange={(e) => {
-                        const formatted = formatCardNumber(e.target.value);
-                        e.target.value = formatted;
-                        paymentForm.setValue('cardNumber', formatted);
-                      }}
-                      maxLength={19}
-                      disabled={isLoading}
-                    />
-                    {/* Bandeira do cartão */}
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-5 bg-blue-900 rounded-sm flex items-center justify-center">
-                      <div className="text-white text-[10px] font-bold">💳</div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3">
-                    <div className="flex-1">
-                      <input
-                        {...paymentForm.register('expiryDate')}
-                        type="text"
-                        placeholder="MM/AAAA"
-                        className="w-full h-12 px-3 py-2 bg-[#F5F5F5] rounded-lg border border-transparent focus:ring-2 focus:ring-[#0047FF] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        onChange={(e) => {
-                          const formatted = formatExpiryDate(e.target.value);
-                          e.target.value = formatted;
-                          paymentForm.setValue('expiryDate', formatted);
-                        }}
-                        maxLength={7}
-                        disabled={isLoading}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <input
-                        {...paymentForm.register('cvv')}
-                        type="text"
-                        placeholder="CVV"
-                        className="w-full h-12 px-3 py-2 bg-[#F5F5F5] rounded-lg border border-transparent focus:ring-2 focus:ring-[#0047FF] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        maxLength={4}
-                        disabled={isLoading}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="relative">
-                    <select
-                      {...paymentForm.register('installments')}
-                      className="w-full h-12 px-3 py-2 bg-[#F5F5F5] rounded-lg border border-transparent focus:ring-2 focus:ring-[#0047FF] focus:outline-none appearance-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                      disabled={isLoading}
-                    >
-                      <option value="">Número de parcelas</option>
-                      <option value="1x">1x R$ 478,80 à vista</option>
-                      <option value="12x">12x R$ 39,90 sem juros</option>
-                    </select>
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div className="text-center">
-                    <button
-                      type="button"
-                      onClick={() => setShowCoupon(!showCoupon)}
-                      className="text-zinc-600 text-xs font-normal font-rubik underline"
-                    >
-                      Possui cupom?
-                    </button>
-                  </div>
-
-                  {showCoupon && (
-                    <FormField
-                      name="coupon"
-                      placeholder="Digite seu cupom"
-                      register={paymentForm.register}
-                      errors={paymentForm.formState.errors}
-                      disabled={isLoading}
-                    />
-                  )}
-                </div>
-
-                {/* Cards de produtos */}
-                <div className="space-y-4">
-                  {[
-                    {
-                      title: 'Garantir acesso à Imersão em Empresa Digital nos EUA',
-                      description: 'O passo a passo para analisar um FII e montar sua estratégia.',
-                      originalPrice: 'De 12x R$ 29,90',
-                      currentPrice: 'R$ 9,90',
-                      discount: '67% OFF',
-                    },
-                    {
-                      title: 'Garantir acesso à Imersão em Vestibulares e Faculdades nos EUA',
-                      description: '',
-                      originalPrice: 'De 12x R$ 29,90',
-                      currentPrice: 'R$ 9,90',
-                      discount: '67% OFF',
-                    }
-                  ].map((p, idx) => (
-                    <ProductCard key={idx} title={p.title} description={p.description} originalPrice={p.originalPrice} currentPrice={p.currentPrice} discount={p.discount} />
-                  ))}
-                </div>
-
-                {/* Informação de segurança */}
-                <div className="flex justify-center items-center gap-2.5 py-4">
-                  <Shield className="size-4 text-zinc-500" />
-                  <span className="text-center text-zinc-500 text-xs font-normal font-rubik leading-4">
-                    Suas informações estão protegidas.
-                  </span>
-                </div>
-
-                <PrimaryButton
-                  type="submit"
-                  size="lg"
-                  className="w-full h-12 px-8 py-4 bg-linear-to-r from-red-700 to-indigo-600 rounded-lg text-white font-medium uppercase disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={isLoading || !paymentForm.formState.isValid}
-                  icon={<ArrowRight className="w-5 h-5" />}
-                  iconPosition="right"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                      Processando...
-                    </>
-                  ) : (
-                    'Finalizar compra'
-                  )}
-                </PrimaryButton>
-
-                <div className="text-center px-2">
-                  <p className="text-zinc-500 text-[10px] sm:text-xs font-normal leading-relaxed">
-                    Ao adquirir um curso no Ponte Américas, você concorda que sua assinatura se renovará automaticamente a cada ano para garantir acesso contínuo sem interrupções. Caso decida não renovar, você poderá cancelar a renovação automática a qualquer momento antes da data de renovação.
-                  </p>
-                </div>
-              </form>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+							<PaymentForm
+								isLoading={isLoading}
+								onSubmit={handlePaymentSubmit}
+							/>
+						</div>
+					)}
+				</div>
+			</Container>
+		</div>
+	);
 }
