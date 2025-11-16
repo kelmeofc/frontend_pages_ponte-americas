@@ -222,7 +222,7 @@ const TeamCard = memo(({ member }: { member: TeamMember }) => {
   return (
     <div
       ref={containerRef}
-      className="flex-1 min-h-[420px] h-[420px] md:h-[550px] perspective-1000 cursor-pointer"
+      className="w-full lg:flex-1 aspect-6/11 md:aspect-auto md:min-h-[550px] lg:min-h-[600px] perspective-1000 cursor-pointer"
       style={{ perspective: "1000px" }}
       role="button"
       tabIndex={0}
@@ -307,7 +307,7 @@ const TeamCard = memo(({ member }: { member: TeamMember }) => {
                     onClick={(e) => e.stopPropagation()}
                     aria-label={`Ver programa: ${program.title}`}
                   >
-                    <div className="relative w-full aspect-video bg-gray-800">
+                    <div className="relative w-full aspect-9/16 bg-gray-800">
                       <Image
                         src={program.thumbnail}
                         alt={`Thumbnail do programa ${program.title}`}
