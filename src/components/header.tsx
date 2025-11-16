@@ -126,9 +126,10 @@ export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUT
                                         key={item.title}
                                         href={item.href}
                                         data-testid={`menu-${item.title.toLowerCase()}`}
-                                        className="text-base font-normal text-white hover:text-gray-200"
+                                        className="relative text-base font-normal text-white hover:text-gray-200 transition-colors duration-300 group"
                                     >
                                         {item.title}
+                                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-linear-to-r from-red-500 to-indigo-500 transition-all duration-300 ease-out group-hover:w-full" />
                                     </Link>
                                 ))}
                             </nav>
@@ -243,11 +244,12 @@ export function Header({ navItems = NAVIGATION_ITEMS, actionButtons = ACTION_BUT
 									>
 										<Link
 											href={item.href}
-											className="text-xl font-medium text-white hover:text-primary flex items-center"
+											className="relative text-xl font-medium text-white hover:text-primary flex items-center group transition-colors duration-300"
 											onClick={handleLinkClick}
 										>
 											{item.icon && <item.icon className="h-5 w-5 mr-2" />}
 											{item.title}
+											<span className="absolute left-0 bottom-0 w-0 h-0.5 bg-linear-to-r from-red-500 to-indigo-500 transition-all duration-300 ease-out group-hover:w-full" />
 										</Link>
 									</div>
 								))}
