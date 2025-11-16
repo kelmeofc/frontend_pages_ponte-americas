@@ -237,7 +237,7 @@ export const IdentificationForm: React.FC<IdentificationFormProps> = ({
         <p className="text-neutral-600 text-sm sm:text-base font-medium leading-5 mt-4">
           Ao clicar em "CRIAR CONTA" você concorda com a nossa{' '}
           <span className="text-blue-700 cursor-pointer hover:underline">
-            <Link href="/privacy-policy">
+            <Link href="/politica-de-privacidade">
               política de privacidade
             </Link>
           </span>
