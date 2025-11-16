@@ -166,7 +166,7 @@ export function JourneySectionLp() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="journey" className="py-16 md:py-20 lg:py-24 bg-white">
+    <section ref={sectionRef} id="journey" className="py-16 md:py-20 lg:py-24 bg-white" data-animate-section data-animate-children=".animate-child">
       <Container>
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-20 items-start">
           {/* Americas Map - Left Side */}

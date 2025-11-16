@@ -4,18 +4,18 @@ import { GradientText } from '@/components/ui/gradient-text';
 
 export function AboutusSection() {
   return (
-		<section id="about-us" className="w-full bg-white py-16 lg:py-28">
+		<section id="about-us" className="w-full bg-white py-16 lg:py-28" data-animate-section data-animate-children=".animate-child">
 			<div className="container mx-auto px-4 lg:px-28">
 				<div className="flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-16 ">
 					{/* Left Column - Text Content */}
 					<div className="w-full lg:w-[750px] flex flex-col justify-start items-start gap-6">
 						<div className="w-full flex flex-col justify-start items-start gap-4">
-							<h2 className="w-full font-semibold uppercase">
+							<h2 className="w-full font-semibold uppercase animate-child">
 						
 									Para quem é o <GradientText>Ponte Américas?</GradientText>
 								
 							</h2>
-							<div className="w-full text-gray-800 text-lg lg:text-xl font-normal font-sans leading-relaxed">
+							<div className="w-full text-gray-800 text-lg lg:text-xl font-normal font-sans leading-relaxed animate-child">
 								<p className="mb-4">
 									O sonho americano vira um pesadelo que custa milhares de
 									dólares quando você vem na raça e na coragem. Nossa família
@@ -40,7 +40,7 @@ export function AboutusSection() {
 						<PrimaryButton
 							variant="default"
 							size="lg"
-							className="uppercase"
+							className="uppercase animate-child"
 							href="/lp"
 						>
 							quero mudar de vida

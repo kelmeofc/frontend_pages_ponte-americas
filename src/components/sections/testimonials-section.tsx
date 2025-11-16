@@ -66,13 +66,15 @@ export const TestimonialsSection = ({
 		<section
 			id="testimonials"
 			className="relative w-full py-16 md:py-20 overflow-hidden flex flex-col justify-center items-center gap-8"
+			data-animate-section
+			data-animate-children=".animate-child"
 		>
 			{/* Header */}
 			<div className="flex flex-col items-center gap-2 text-center max-w-6xl px-4">
-				<h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-semibold font-clash-display uppercase leading-tight ">
+				<h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-semibold font-clash-display uppercase leading-tight animate-child">
 					Relatos de quem já mudou a vida
 				</h2>
-				<p className="text-white text-lg md:text-xl font-normal leading-relaxed">
+				<p className="text-white text-lg md:text-xl font-normal leading-relaxed animate-child">
 					Esses e outros + 150 alunos já vivem o sonho americano
 				</p>
 			</div>
@@ -124,7 +126,7 @@ export const TestimonialsSection = ({
 			</div>
 
 			{/* CTA Button */}
-			<PrimaryButton size="lg" href={ctaHref} className="uppercase">
+			<PrimaryButton size="lg" href={ctaHref} className="uppercase animate-child">
 				Quero mudar de vida
 			</PrimaryButton>
 

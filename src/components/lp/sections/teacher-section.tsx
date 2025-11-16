@@ -59,7 +59,7 @@ const LESSON_PREVIEWS = [
 
 export function TeacherSection() {
   return (
-    <section id="teacher" className="bg-white py-20 overflow-hidden">
+    <section id="teacher" className="bg-white py-20 overflow-hidden" data-animate-section data-animate-children=".animate-child">
       <Container>
         <div className="flex flex-col xl:flex-row gap-8 lg:gap-12 justify-between items-center ">
           {/* Professor Card */}

@@ -13,6 +13,8 @@ export function HeroSectionLp() {
 		<section
 			id="home"
 			className="relative min-h-screen overflow-hidden"
+			data-animate-section
+			data-animate-children=".animate-child"
 		>
 			<Container className="flex flex-col items-center justify-center min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 gap-2">
 

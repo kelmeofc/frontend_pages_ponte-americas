@@ -18,7 +18,7 @@ export const CtaSection: React.FC = () => {
 	};
 
 	return (
-		<section id="cta" className="py-20 bg-[#f5f6f8]">
+		<section id="cta" className="py-20 bg-[#f5f6f8]" data-animate-section>
 			<div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-30">
 				<div className="relative flex flex-col lg:flex-row items-end lg:items-center  justify-between gap-8 lg:gap-12">
 					{/* Card principal com gradiente */}

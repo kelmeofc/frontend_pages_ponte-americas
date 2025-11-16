@@ -24,7 +24,7 @@ export interface FAQSectionProps {
 
 export const FAQSection = ({ faq, ctaHref = "/lp" }: FAQSectionProps) => {
 	return (
-		<section id="faq" className="w-full py-16 md:py-20 bg-gray-50">
+		<section id="faq" className="w-full py-16 md:py-20 bg-gray-50" data-animate-section>
 			<Container className="px-4 md:px-6">
 				<div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
 					{/* FAQ Section */}

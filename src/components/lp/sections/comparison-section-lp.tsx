@@ -9,7 +9,7 @@ import { cn } from "@/common/lib/utils";
 
 export const ComparisonSectionLp = () => {
   return (
-    <section id="comparison" className="w-full px-4 lg:px-28 pt-20 pb-6 bg-white flex flex-col justify-center items-center gap-16 lg:gap-32 overflow-hidden">
+    <section id="comparison" className="w-full px-4 lg:px-28 pt-20 pb-6 bg-white flex flex-col justify-center items-center gap-16 lg:gap-32 overflow-hidden" data-animate-section data-animate-children=".animate-child">
       <Container>
         {/* Section Header */}
         <div className="flex justify-center items-center gap-2 mb-8 lg:mb-16">

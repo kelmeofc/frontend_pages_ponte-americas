@@ -18,7 +18,7 @@ const features: { iconName: string; icon: React.ReactElement; label: string }[] 
 export const PlatformSection: React.FC = () => {
   const router = useRouter();
   return (
-    <section id="platform" className="bg-white">
+    <section id="platform" className="bg-white" data-animate-section>
       <Container>
         <div className="flex flex-col md:flex-row items-center gap-8 py-20">
           {/* Image */}

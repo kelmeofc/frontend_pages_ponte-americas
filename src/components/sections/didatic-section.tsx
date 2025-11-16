@@ -107,14 +107,14 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 	}, [activeTopic, centerActiveTab]);
 
 	return (
-		<section id="didatic" className="w-full py-20">
+		<section id="didatic" className="w-full py-20" data-animate-section data-animate-children=".animate-child">
 			<div className="flex flex-col items-center gap-8">
 				{/* Header */}
 				<div className="text-center space-y-4 px-2">
-					<h2 className="text-white font-semibold font-clash-display leading-tight">
+					<h2 className="text-white font-semibold font-clash-display leading-tight animate-child">
 						NOSSA DIDÁTICA DESCOMPLICADA
 					</h2>
-					<p className="text-gray-300 text-lg md:text-xl font-normal font-sans leading-relaxed">
+					<p className="text-gray-300 text-lg md:text-xl font-normal font-sans leading-relaxed animate-child">
 						Selecione um tópico e conheça algumas das nossas aulas:
 					</p>
 				</div>

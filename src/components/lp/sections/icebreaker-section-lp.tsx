@@ -66,7 +66,7 @@ function IcebreakerCard({ text, emoji, svgPath, className }: IcebreakerCardProps
 
 export function IcebreakerSectionLp() {
   return (
-    <section className="bg-white py-16 md:py-20 overflow-hidden">
+    <section className="bg-white py-16 md:py-20 overflow-hidden" data-animate-section data-animate-children=".animate-child">
       <Container className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 flexz">
         {/* Left Content */}
         <div className="flex flex-col  justify-center items-center md:justify-start md:items-start gap-4 max-w-lg">

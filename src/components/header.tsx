@@ -104,6 +104,8 @@ export function Header({
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						setActiveSection(`#${entry.target.id}`);
+					} else if (activeSection === `#${entry.target.id}`) {
+						setActiveSection("");
 					}
 				});
 			},
@@ -119,7 +121,7 @@ export function Header({
 		});
 
 		return () => observer.disconnect();
-	}, [resolvedNavItems]);
+	}, [resolvedNavItems, activeSection]);
 
 	// Controlar o body quando o menu mobile está aberto
 	useEffect(() => {

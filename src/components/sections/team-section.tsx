@@ -38,7 +38,7 @@ const TEAM_MEMBERS: TeamMember[] = [
 
 export const TeamSection = () => {
   return (
-    <section id="team" className="w-full py-20">
+    <section id="team" className="w-full py-20" data-animate-section>
       <div className="flex flex-col items-center gap-8 px-4">
         <div className="text-center">
           <h2 className="text-white font-semibold font-clash-display uppercase leading-tight">

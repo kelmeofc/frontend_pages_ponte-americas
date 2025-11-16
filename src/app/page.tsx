@@ -1,3 +1,5 @@
+'use client';
+
 import { HeroSection } from "@/components/sections/hero-section";
 import { AboutusSection } from "@/components/sections/aboutus-section";
 import { BenefitsSection } from "@/components/sections/benefits-section";
@@ -10,6 +12,7 @@ import { FAQSection } from "@/components/sections/faq-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import WhatsAppWidget from "@/components/whatsapp-widget";
 import { cn } from "@/common/lib/utils";
+import { useGsapSectionAnimation } from "@/common/hooks/use-gsap-section-animation";
 
 import {
 	FAQJsonLd,
@@ -29,6 +32,9 @@ import SiteLayout from "@/components/layouts/site-layout";
 // Removidos imports específicos da seção de benefícios (agora componentizada)
 
 export default function Home() {
+	// Initialize GSAP section animations
+	useGsapSectionAnimation();
+
 	const breadcrumbItems = [
 		{ name: "Início", url: SITE_CONFIG.url },
 		{ name: "Programa Ponte Américas", url: `${SITE_CONFIG.url}/#programa` },
