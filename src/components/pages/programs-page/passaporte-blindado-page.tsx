@@ -5,13 +5,11 @@ import { JourneySectionLp } from "@/components/lp/sections/journey-section-lp";
 import { IcebreakerSectionLp } from "@/components/lp/sections/icebreaker-section-lp";
 import { ComparisonSectionLp } from "@/components/lp/sections/comparison-section-lp";
 import { PricingSectionLp } from "@/components/lp/sections/pricing-section-lp";
-
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import TeacherSection from "@/components/lp/sections/teacher-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import WhatsAppWidget from "@/components/whatsapp-widget";
 import { useGsapSectionAnimation } from "@/common/hooks/use-gsap-section-animation";
-
 import {
 	FAQJsonLd,
 	OrganizationJsonLd,
@@ -29,7 +27,6 @@ import SiteLayout from "@/components/layouts/site-layout";
 import type {
 	INavItem,
 	IActionButtons,
-	ILanguageOptions,
 } from "@/types/header";
 
 // Constantes de navegação específicas para a Landing Page
@@ -74,7 +71,7 @@ const LP_ACTION_BUTTONS: IActionButtons = {
 	},
 };
 
-export default function Home() {
+export function ProgramPage() {
 	// Initialize GSAP section animations
 	useGsapSectionAnimation();
 
@@ -82,8 +79,6 @@ export default function Home() {
 		{ name: "Início", url: SITE_CONFIG.url },
 		{ name: "Programa Ponte Américas", url: `${SITE_CONFIG.url}/#programa` },
 	];
-
-	// Dados dos tópicos didáticos importados das constantes
 
 	return (
 		<>
