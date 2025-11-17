@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRef, useEffect, memo } from "react";
 import gsap from "gsap";
 import { Instagram } from "lucide-react";
+import { PROGRAMS_DATA } from "@/common/constants/programs";
 
 // Animation constants
 const TILT_INTENSITY = 10;
@@ -17,19 +18,13 @@ interface InstagramProfile {
   followers: string;
 }
 
-interface Program {
-  title: string;
-  thumbnail: string;
-  url: string;
-}
-
 interface TeamMember {
   id: string;
   name: string;
   role: string;
   poster?: string;
   instagram: InstagramProfile;
-  programs: Program[];
+  programIds: string[]; // IDs dos programas em PROGRAMS_DATA
 }
 
 const TEAM_MEMBERS: TeamMember[] = [
@@ -42,18 +37,7 @@ const TEAM_MEMBERS: TeamMember[] = [
 			handle: "@ponteamericas",
 			followers: "3K",
 		},
-		programs: [
-			{
-				title: "Como vir morar nos Estados Unidos",
-				thumbnail: "/images/programs-thumbnails/caua-program-thumb-como-vir-morar-nos-estados-unidos.png",
-				url: "/lp",
-			},
-			{
-				title: "Como tirar seus vistos para morar nos EUA",
-				thumbnail: "/images/video-placeholder-1.png",
-				url: "/lp",
-			},
-		],
+		programIds: ["passaporte-blindado", "tipos-visto"],
 	},
 
 	{
@@ -65,13 +49,7 @@ const TEAM_MEMBERS: TeamMember[] = [
 			handle: "@lucaszoltan",
 			followers: "1.2M",
 		},
-		programs: [
-			{
-				title: "Ganhar dinheiro em dólar de forma online",
-				thumbnail: "/images/video-placeholder-1.png",
-				url: "/programas/ganhar-dinheiro-dolar-online",
-			},
-		],
+		programIds: ["mercado-digital-americano"],
 	},
 	{
 		id: "turistorlando",
@@ -82,13 +60,7 @@ const TEAM_MEMBERS: TeamMember[] = [
 			handle: "@turistorlando",
 			followers: "490K",
 		},
-		programs: [
-			{
-				title: "Tudo que você precisa saber antes de visitar Orlando",
-				thumbnail: "/images/video-placeholder-1.png",
-				url: "/programas/visitar-orlando",
-			},
-		],
+		programIds: ["turismo-orlando"],
 	},
 	{
 		id: "irmoes-eua",
@@ -99,18 +71,7 @@ const TEAM_MEMBERS: TeamMember[] = [
 			handle: "@irmoeseua",
 			followers: "21K",
 		},
-		programs: [
-			{
-				title: "Como funciona o ensino médio nos Estados Unidos",
-				thumbnail: "/images/video-placeholder-1.png",
-				url: "/programas/ensino-medio-eua",
-			},
-			{
-				title: "Tudo que é preciso para fazer faculdade nos EUA",
-				thumbnail: "/images/video-placeholder-1.png",
-				url: "/programas/faculdade-eua",
-			},
-		],
+		programIds: ["faculdade-americana"],
 	},
 ];
 
@@ -119,6 +80,11 @@ const TeamCard = memo(({ member }: { member: TeamMember }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isFlipped = useRef(false);
   const isFlipping = useRef(false);
+
+  // Buscar programas do membro usando os IDs
+  const memberPrograms = member.programIds
+    .map(id => PROGRAMS_DATA.find(program => program.id === id))
+    .filter(Boolean);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -299,25 +265,25 @@ const TeamCard = memo(({ member }: { member: TeamMember }) => {
                 Programas
               </h4>
               <div className="space-y-3">
-                {member.programs.map((program, idx) => (
+                {memberPrograms.map((program) => (
                   <Link
-                    key={`${member.id}-program-${idx}`}
-                    href={program.url}
+                    key={program!.id}
+                    href={program!.url || "/lp"}
                     className="block bg-white/5 rounded-md border border-white/10 overflow-hidden hover:bg-white/10 hover:border-white/20 transition-colors"
                     onClick={(e) => e.stopPropagation()}
-                    aria-label={`Ver programa: ${program.title}`}
+                    aria-label={`Ver programa: ${program!.title}`}
                   >
                     <div className="relative w-full aspect-video bg-gray-800">
                       <Image
-                        src={program.thumbnail}
-                        alt={`Thumbnail do programa ${program.title}`}
+                        src={program!.image || "/images/video-placeholder-1.png"}
+                        alt={`Thumbnail do programa ${program!.title}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                         className="object-cover"
                       />
                     </div>
                     <p className="text-gray-300 text-xs p-2">
-                      {program.title}
+                      {program!.title}
                     </p>
                   </Link>
                 ))}

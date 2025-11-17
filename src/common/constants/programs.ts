@@ -1,4 +1,5 @@
 export interface IProgram {
+	id: string;
 	title: string;
 	subtitle: string;
 	price: string;
@@ -8,10 +9,12 @@ export interface IProgram {
 	ctaText: string;
 	image?: string;
 	name: string; // Nome do professor
+	url?: string; // URL do programa
 }
 
 export const PROGRAMS_DATA: readonly IProgram[] = [
 	{
+		id: "passaporte-blindado",
 		title: "Método Passaporte Blindado para morar legalmente nos EUA",
 		subtitle: "Programa Completo de Imigração",
 		price: "12x R$ 39,90",
@@ -28,8 +31,10 @@ export const PROGRAMS_DATA: readonly IProgram[] = [
 		image:
 			"/images/programs-thumbnails/caua-program-cover-como-vir-morar-nos-estados-unidos.png",
 		name: "Cauã Cunha",
+		url: "/lp",
 	},
 	{
+		id: "turismo-orlando",
 		title: "Guia turístico: tudo que você precisa saber antes de viajar para Orlando",
 		subtitle: "Turismo Seguro em Orlando",
 		price: "12x R$ 29,90",
@@ -45,8 +50,10 @@ export const PROGRAMS_DATA: readonly IProgram[] = [
 		ctaText: "PLANEJAR VIAGEM",
 		image: "/images/programs-thumbnails/program-thumb-turismo-orlando.png",
 		name: "Gabriela",
+		url: "/programas/visitar-orlando",
 	},
 	{
+		id: "faculdade-americana",
 		title: "Conquiste sua vaga em faculdade americana (mesmo sem inglês) ",
 		subtitle: "Educação Superior Americana",
 		price: "12x R$ 39,90",
@@ -62,8 +69,10 @@ export const PROGRAMS_DATA: readonly IProgram[] = [
 		ctaText: "ESTUDAR NOS EUA",
 		image: "/images/programs-thumbnails/program-thumb-faculdade-amercana.png",
 		name: "Os Irmões EUA",
+		url: "/programas/faculdade-eua",
 	},
 	{
+		id: "mercado-digital-americano",
 		title: "Do zero à 1ª Lamborghini faturando em dólar no digital",
 		subtitle: "Mercado Digital Americano",
 		price: "12x R$ 44,90",
@@ -79,8 +88,10 @@ export const PROGRAMS_DATA: readonly IProgram[] = [
 		ctaText: "GANHAR EM DÓLAR",
 		image: "/images/programs-thumbnails/program-thumb-mercado-digital-americano.png",
 		name: "Lucas Zoltan",
+		url: "/programas/ganhar-dinheiro-dolar-online",
 	},
 	{
+		id: "tipos-visto",
 		title: "Como escolher o visto certo para residir legalmente nos EUA",
 		subtitle: "Tipos de Visto e Processos",
 		price: "12x R$ 49,90",
@@ -96,5 +107,6 @@ export const PROGRAMS_DATA: readonly IProgram[] = [
 		ctaText: "OBTER VISTO",
 		image: "/images/programs-thumbnails/program-thumb-tipos-de-visto-e-processos.png",
 		name: "Advogado de Imigração",
+		url: "/lp",
 	},
 ];
