@@ -12,6 +12,7 @@ interface IProgramCard {
   ctaText: string;
   image?: string;
   name: string; // Nome do professor
+  url?: string; // URL do programa
   className?: string;
 }
 
@@ -25,6 +26,7 @@ export const ProgramCard = ({
   ctaText,
   image = "/placeholder.svg",
   name,
+  url = "/enroll",
   className = ""
 }: IProgramCard) => {
   return (
@@ -85,7 +87,7 @@ export const ProgramCard = ({
           icon={<ArrowRight className="size-4" />}
           size="lg"
           className="w-full text-white font-medium"
-          href="/enroll"
+          href={url}
         >
           {ctaText}
         </PrimaryButton>

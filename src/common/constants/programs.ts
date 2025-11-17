@@ -50,7 +50,7 @@ export const PROGRAMS_DATA: readonly IProgram[] = [
 		ctaText: "PLANEJAR VIAGEM",
 		image: "/images/programs-thumbnails/program-thumb-turismo-orlando.png",
 		name: "Gabriela",
-		url: "/programas/visitar-orlando",
+		url: "/programas/turista-orlando",
 	},
 	{
 		id: "faculdade-americana",
