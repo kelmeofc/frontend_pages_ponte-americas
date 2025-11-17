@@ -11,10 +11,10 @@ import {
 } from "@/components/ui/carousel";
 
 import Autoplay from "embla-carousel-autoplay";
-import { CourseCard } from "./course-card";
-import { COURSES_DATA } from "@/common/constants";
+import { ProgramCard } from "./program-card";
+import { PROGRAMS_DATA } from "@/common/constants";
 
-export const CoursesSection = () => {
+export const ProgramsSection = () => {
 	const autoplayRef = useRef(
 		Autoplay({ delay: 2000, stopOnInteraction: true })
 	);
@@ -45,12 +45,12 @@ export const CoursesSection = () => {
 						onMouseLeave={() => autoplayRef.current.play()}
 					>
 						<CarouselContent className="mx-10">
-							{COURSES_DATA.map((course, index) => (
+							{PROGRAMS_DATA.map((program, index) => (
 								<CarouselItem
 									key={index}
 									className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
 								>
-									<CourseCard {...course} />
+									<ProgramCard {...program} />
 								</CarouselItem>
 							))}
 						</CarouselContent>

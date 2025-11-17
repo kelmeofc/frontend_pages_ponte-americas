@@ -4,7 +4,7 @@ import { HeroSection } from "@/components/sections/hero-section";
 import { AboutusSection } from "@/components/sections/aboutus-section";
 import { BenefitsSection } from "@/components/sections/benefits-section";
 import { DidaticSection } from "@/components/sections/didatic-section";
-import { CoursesSection } from "@/components/sections/courses-section";
+import { ProgramsSection } from "@/components/sections/programs-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { PlatformSection } from "@/components/sections/platform-section";
 import TeamSection from "@/components/sections/team-section";
@@ -64,7 +64,7 @@ export default function Home() {
 					}}
 				>
 					<HeroSection />
-					<CoursesSection />
+					<ProgramsSection />
 				</div>
 				<PlatformSection />
 

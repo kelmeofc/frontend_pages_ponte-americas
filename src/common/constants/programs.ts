@@ -1,4 +1,4 @@
-export interface ICourse {
+export interface IProgram {
 	title: string;
 	subtitle: string;
 	price: string;
@@ -10,10 +10,10 @@ export interface ICourse {
 	name: string; // Nome do professor
 }
 
-export const COURSES_DATA: readonly ICourse[] = [
+export const PROGRAMS_DATA: readonly IProgram[] = [
 	{
-		title: "Como vir morar nos Estados Unidos",
-		subtitle: "Guia Completo de Imigração",
+		title: "Método Passaporte Blindado para morar legalmente nos EUA",
+		subtitle: "Programa Completo de Imigração",
 		price: "12x R$ 39,90",
 		originalPrice: "De R$ 478,80",
 		installments: "com 10% de desconto no PIX",
@@ -26,12 +26,12 @@ export const COURSES_DATA: readonly ICourse[] = [
 		],
 		ctaText: "COMEÇAR AGORA",
 		image:
-			"/images/programs-thumbnails/caua-program-thumb-como-vir-morar-nos-estados-unidos.png",
+			"/images/programs-thumbnails/caua-program-cover-como-vir-morar-nos-estados-unidos.png",
 		name: "Cauã Cunha",
 	},
 	{
-		title: "Tudo que você precisa saber antes de visitar Orlando",
-		subtitle: "Guia de Turismo Eficiente",
+		title: "Guia turístico: tudo que você precisa saber antes de viajar para Orlando",
+		subtitle: "Turismo Seguro em Orlando",
 		price: "12x R$ 29,90",
 		originalPrice: "De R$ 358,80",
 		installments: "com 10% de desconto no PIX",
@@ -43,11 +43,11 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Planejamento de transporte",
 		],
 		ctaText: "PLANEJAR VIAGEM",
-		image: "/images/video-placeholder-1.png",
+		image: "/images/programs-thumbnails/program-thumb-turismo-orlando.png",
 		name: "Gabriela",
 	},
 	{
-		title: "Tudo que é preciso para fazer faculdade nos EUA",
+		title: "Conquiste sua vaga em faculdade americana (mesmo sem inglês) ",
 		subtitle: "Educação Superior Americana",
 		price: "12x R$ 39,90",
 		originalPrice: "De R$ 478,80",
@@ -57,32 +57,15 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Testes padronizados (SAT, TOEFL)",
 			"Bolsas de estudo e financiamento",
 			"Escolha da universidade ideal",
-			"Preparação para vida acadêmica",
+			"Preparação para visto estudantil",
 		],
 		ctaText: "ESTUDAR NOS EUA",
-		image: "/images/video-placeholder-1.png",
+		image: "/images/programs-thumbnails/program-thumb-faculdade-amercana.png",
 		name: "Os Irmões EUA",
 	},
 	{
-		title: "Como funciona o ensino médio nos Estados Unidos",
-		subtitle: "Sistema Educacional Americano",
-		price: "12x R$ 34,90",
-		originalPrice: "De R$ 418,80",
-		installments: "com 10% de desconto no PIX",
-		features: [
-			"Estrutura do sistema escolar",
-			"Processo de matrícula",
-			"Disciplinas e atividades extracurriculares",
-			"Preparação para college",
-			"Adaptação cultural para estudantes",
-		],
-		ctaText: "ENTENDER SISTEMA",
-		image: "/images/video-placeholder-1.png",
-		name: "Os Irmões EUA",
-	},
-	{
-		title: "Ganhar dinheiro em dólar de forma online",
-		subtitle: "Trabalho Remoto Internacional",
+		title: "Do zero à 1ª Lamborghini faturando em dólar no digital",
+		subtitle: "Mercado Digital Americano",
 		price: "12x R$ 44,90",
 		originalPrice: "De R$ 538,80",
 		installments: "com 10% de desconto no PIX",
@@ -94,11 +77,11 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Gestão de pagamentos internacionais",
 		],
 		ctaText: "GANHAR EM DÓLAR",
-		image: "/images/video-placeholder-1.png",
-		name: "Especialista em Trabalho Remoto",
+		image: "/images/programs-thumbnails/program-thumb-mercado-digital-americano.png",
+		name: "Lucas Zoltan",
 	},
 	{
-		title: "Como tirar seus vistos para morar nos EUA",
+		title: "Como escolher o visto certo para residir legalmente nos EUA",
 		subtitle: "Tipos de Visto e Processos",
 		price: "12x R$ 49,90",
 		originalPrice: "De R$ 598,80",
@@ -111,7 +94,7 @@ export const COURSES_DATA: readonly ICourse[] = [
 			"Acompanhamento especializado",
 		],
 		ctaText: "OBTER VISTO",
-		image: "/images/video-placeholder-1.png",
+		image: "/images/programs-thumbnails/program-thumb-tipos-de-visto-e-processos.png",
 		name: "Advogado de Imigração",
 	},
 ];

@@ -28,7 +28,7 @@ const LESSON_PREVIEWS = [
     title: "Como funciona o sistema americano",
     description: "Entenda desde o básico até as nuances culturais, legais e financeiras para se estabelecer com sucesso nos EUA.",
     audience: "Mentoria Ponte Américas",
-    image: "/images/video-placeholder-2.png",
+    image: "/images/programs-modules-covers/program-morar-nos-eua-module-cover-sistema-americano.png",
     tag: "Módulo 1",
   },
   {
@@ -36,7 +36,7 @@ const LESSON_PREVIEWS = [
     title: "Documentação e processos legais",
     description: "Passo a passo completo sobre vistos, green card, cidadania e todos os documentos necessários para viver legalmente nos EUA.",
     audience: "Aula prática",
-    image: "/images/video-placeholder-2.png",
+    image: "/images/programs-modules-covers/program-morar-nos-eua-module-cover-documentacao-legal.png",
     tag: "Módulo 2",
   },
   {
@@ -44,7 +44,7 @@ const LESSON_PREVIEWS = [
     title: "Mercado de trabalho americano",
     description: "Como encontrar oportunidades, criar networking efetivo e se posicionar no mercado de trabalho dos EUA.",
     audience: "Playbook exclusivo",
-    image: "/images/video-placeholder-2.png",
+    image: "/images/programs-modules-covers/program-morar-nos-eua-module-cover-mercado-trabalho.png",
     tag: "Módulo 3",
   },
   {
@@ -52,7 +52,7 @@ const LESSON_PREVIEWS = [
     title: "Vida prática nos Estados Unidos",
     description: "Moradia, sistema de saúde, educação, impostos e tudo que você precisa saber para o dia a dia americano.",
     audience: "Material bônus",
-    image: "/images/video-placeholder-2.png",
+    image: "/images/programs-modules-covers/program-morar-nos-eua-module-cover-vida-pratica.png",
     tag: "Módulo 4",
   },
 ] as const
@@ -75,7 +75,7 @@ export function TeacherSection() {
                 priority
               />
             </div>
-            <div className="flex flex-col gap-5 to-transparent p-6 sm:p-7 w-full">
+            <div className="mt-8 flex flex-col gap-5 to-transparent p-6 sm:p-7 w-full">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/70">Mentor</p>
                 <h3 className="mt-1 text-3xl font-semibold uppercase text-white">

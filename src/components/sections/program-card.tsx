@@ -2,7 +2,7 @@ import Image from "next/image";
 import { PrimaryButton } from "@/components/primary-button";
 import { ArrowRight, User } from "lucide-react";
 
-interface ICourseCard {
+interface IProgramCard {
   title: string;
   subtitle: string;
   price: string;
@@ -15,7 +15,7 @@ interface ICourseCard {
   className?: string;
 }
 
-export const CourseCard = ({
+export const ProgramCard = ({
   title,
   subtitle,
   price,
@@ -26,9 +26,9 @@ export const CourseCard = ({
   image = "/placeholder.svg",
   name,
   className = ""
-}: ICourseCard) => {
+}: IProgramCard) => {
   return (
-    <div className={`w-full h-full relative rounded-lg border bg-gradient-to-br from-gray-900 to-black border-gray-800 overflow-hidden flex flex-col ${className}`}>
+    <div className={`w-full h-full relative rounded-lg border bg-linear-to-br from-gray-900 to-black border-gray-800 overflow-hidden flex flex-col ${className}`}>
       {/* Image Section - Top Half */}
       <div className="relative h-48 w-full min-h-48">
         <Image
@@ -40,7 +40,7 @@ export const CourseCard = ({
         />
         <div className="absolute inset-0 bg-black/20" />
         
-        {/* Course Badge */}
+        {/* Program Badge */}
         <div className="absolute top-4 left-4">
           <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-2 py-1 rounded-full">
             {subtitle}
@@ -63,7 +63,7 @@ export const CourseCard = ({
         <div className="space-y-2 mb-4">
           {features.map((feature, index) => (
             <div key={index} className="flex items-center gap-2 text-sm text-white/80">
-              <div className="w-1.5 h-1.5 bg-teal-400 rounded-full flex-shrink-0" />
+              <div className="w-1.5 h-1.5 bg-teal-400 rounded-full shrink-0" />
               {feature}
             </div>
           ))}
