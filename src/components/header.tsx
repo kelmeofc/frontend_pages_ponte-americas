@@ -49,7 +49,7 @@ const ACTION_BUTTONS = {
 		mobileIcon: <ArrowRight className="h-5 w-5" />,
 	},
 	cta: {
-		href: "/lp",
+		href: "/#programs",
 		text: "COMEÇAR AGORA",
 		variant: "default" as const,
 		icon: <ArrowRight className="h-4 w-4" />,

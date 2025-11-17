@@ -107,7 +107,12 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 	}, [activeTopic, centerActiveTab]);
 
 	return (
-		<section id="didatic" className="w-full py-20" data-animate-section data-animate-children=".animate-child">
+		<section
+			id="didatic"
+			className="w-full py-20"
+			data-animate-section
+			data-animate-children=".animate-child"
+		>
 			<div className="flex flex-col items-center gap-8">
 				{/* Header */}
 				<div className="text-center space-y-4 px-2">
@@ -173,28 +178,26 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 						{/* Video Content */}
 						<div className="mt-8 space-y-8">
 							<div className="flex flex-col justify-center items-center px-4">
-								
-									{activeTopicData?.videoUrl ? (
-										<PandaVideoPlayer
-											key={activeTopicData.id}
-											src={activeTopicData.videoUrl}
-											poster={activeTopicData.placeholder}
-											className="max-w-[600px]"
-											autoPlay={false}
-											muted={true}
-											controls={true}
-											onPlay={handleVideoInteraction}
-											onPause={handleVideoInteraction}
-											onEnded={handleVideoInteraction}
-										/>
-									) : (
-										<div className="w-full aspect-video rounded-2xl bg-black flex items-center justify-center">
-											<div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-												<Play className="w-6 h-6 text-white" />
-											</div>
+								{activeTopicData?.videoUrl ? (
+									<PandaVideoPlayer
+										key={activeTopicData.id}
+										src={activeTopicData.videoUrl}
+										poster={activeTopicData.placeholder}
+										className="max-w-[600px]"
+										autoPlay={false}
+										muted={true}
+										controls={true}
+										onPlay={handleVideoInteraction}
+										onPause={handleVideoInteraction}
+										onEnded={handleVideoInteraction}
+									/>
+								) : (
+									<div className="w-full aspect-video rounded-2xl bg-black flex items-center justify-center">
+										<div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+											<Play className="w-6 h-6 text-white" />
 										</div>
-									)}
-							
+									</div>
+								)}
 
 								<p className="text-white text-xl font-normal font-sans leading-relaxed mt-8">
 									E muito mais...
@@ -205,9 +208,14 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 				</div>
 
 				{/* CTA Button */}
-		
-					<PrimaryButton size="lg" href="/lp" className="uppercase">QUERO MUDAR DE VIDA</PrimaryButton>
-		
+
+				<PrimaryButton
+					size="lg"
+					href="/programas/passaporte-blindado-morar-nos-eua"
+					className="uppercase"
+				>
+					QUERO MUDAR DE VIDA
+				</PrimaryButton>
 			</div>
 		</section>
 	);

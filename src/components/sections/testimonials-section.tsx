@@ -56,7 +56,7 @@ export interface TestimonialsSectionProps {
 }
 
 export const TestimonialsSection = ({
-	ctaHref = "/lp",
+	ctaHref = "/programas/passaporte-blindado-morar-nos-eua",
 }: TestimonialsSectionProps) => {
 	const autoplayRef = useRef(
 		Autoplay({ delay: 5000, stopOnInteraction: true })
@@ -126,10 +126,13 @@ export const TestimonialsSection = ({
 			</div>
 
 			{/* CTA Button */}
-			<PrimaryButton size="lg" href={ctaHref} className="uppercase animate-child">
+			<PrimaryButton
+				size="lg"
+				href={ctaHref}
+				className="uppercase animate-child"
+			>
 				Quero mudar de vida
 			</PrimaryButton>
-
 		</section>
 	);
 };

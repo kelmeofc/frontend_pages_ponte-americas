@@ -24,54 +24,14 @@ import {
 } from "@/components/seo/article-json-ld";
 import { FAQ_DATA, SITE_CONFIG } from "@/common/constants";
 import SiteLayout from "@/components/layouts/site-layout";
-import type {
-	INavItem,
-	IActionButtons,
-} from "@/types/header";
+import type { INavItem, IActionButtons } from "@/types/header";
 
-// Constantes de navegação específicas para a Landing Page
-const LP_NAVIGATION_ITEMS: INavItem[] = [
-	{
-		title: "Início",
-		href: "#hero",
-	},
-	{
-		title: "Mentor",
-		href: "#teacher",
-	},
-	{
-		title: "Jornada",
-		href: "#journey",
-	},
-	{
-		title: "Depoimentos",
-		href: "#testimonials",
-	},
-	{
-		title: "Vantagens",
-		href: "#comparison",
-	},
-];
+interface ProgramPageProps {
+	navItems: INavItem[];
+	actionButtons: IActionButtons;
+}
 
-// Botões de ação específicos para a LP
-const LP_ACTION_BUTTONS: IActionButtons = {
-	member: {
-		href: "/members",
-		text: "JÁ SOU ALUNO",
-		variant: "outline",
-		icon: <></>,
-		mobileIcon: <></>,
-	},
-	cta: {
-		href: "#pricing",
-		text: "COMEÇAR AGORA",
-		variant: "default",
-		icon: <></>,
-		mobileIcon: <></>,
-	},
-};
-
-export function ProgramPage() {
+export function ProgramPage({ navItems, actionButtons }: ProgramPageProps) {
 	// Initialize GSAP section animations
 	useGsapSectionAnimation();
 
@@ -82,19 +42,13 @@ export function ProgramPage() {
 
 	return (
 		<>
-			{/* JSON-LD Structured Data */}
-			<WebSiteJsonLd />
-			<OrganizationJsonLd />
-			<LocalBusinessJsonLd />
-			<ProductJsonLd />
-			<ArticleJsonLd />
+
 			<FAQJsonLd faq={FAQ_DATA} />
-			<BreadcrumbJsonLd items={breadcrumbItems} />
-			<ReviewJsonLd />
+
 			<SiteLayout
 				className="bg-white"
-				navItems={LP_NAVIGATION_ITEMS}
-				actionButtons={LP_ACTION_BUTTONS}
+				navItems={navItems}
+				actionButtons={actionButtons}
 			>
 				<div
 					className="bg-black"

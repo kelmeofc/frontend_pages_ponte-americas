@@ -186,118 +186,131 @@ const TeamCard = memo(({ member }: { member: TeamMember }) => {
   const instagramUrl = `https://instagram.com/${member.instagram.handle.replace('@', '')}`;
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full lg:flex-1 aspect-6/11 md:aspect-auto md:min-h-[550px] lg:min-h-[600px] perspective-1000 cursor-pointer"
-      style={{ perspective: "1000px" }}
-      role="button"
-      tabIndex={0}
-      aria-label={`Clique para ver mais sobre ${member.name}`}
-    >
-      <div
-        ref={cardRef}
-        className="relative w-full h-full"
-        style={{
-          transformStyle: "preserve-3d",
-          transition: "transform 0.6s",
-        }}
-      >
-        {/* Front Side */}
-        <article
-          className="absolute inset-0 rounded-lg overflow-hidden outline outline-gray-600 backface-hidden"
-          style={{ backfaceVisibility: "hidden" }}
-          role="group"
-          aria-label={`Card do membro ${member.name}`}
-        >
-          <Image src={posterSrc} alt={member.name} fill className="object-cover" />
+		<div
+			ref={containerRef}
+			className="w-full lg:flex-1 aspect-6/11 md:aspect-auto md:min-h-[550px] lg:min-h-[600px] perspective-1000 cursor-pointer"
+			style={{ perspective: "1000px" }}
+			role="button"
+			tabIndex={0}
+			aria-label={`Clique para ver mais sobre ${member.name}`}
+		>
+			<div
+				ref={cardRef}
+				className="relative w-full h-full"
+				style={{
+					transformStyle: "preserve-3d",
+					transition: "transform 0.6s",
+				}}
+			>
+				{/* Front Side */}
+				<article
+					className="absolute inset-0 rounded-lg overflow-hidden outline outline-gray-600 backface-hidden"
+					style={{ backfaceVisibility: "hidden" }}
+					role="group"
+					aria-label={`Card do membro ${member.name}`}
+				>
+					<Image
+						src={posterSrc}
+						alt={member.name}
+						fill
+						className="object-cover"
+					/>
 
-          <div className="absolute inset-0 bg-linear-to-b from-black/0 via-black/0 to-black/80" />
+					<div className="absolute inset-0 bg-linear-to-b from-black/0 via-black/0 to-black/80" />
 
-          <div className="absolute left-0 right-0 bottom-6 px-4 text-center">
-            <h3 className="text-white text-2xl font-semibold font-clash-display leading-8 drop-shadow-md">
-              {member.name}
-            </h3>
-            <p className="text-gray-400 text-base font-medium font-sans mt-1">
-              {member.role}
-            </p>
-            <p className="text-gray-500 text-xs mt-3 uppercase tracking-wide">
-              Clique para girar
-            </p>
-          </div>
-        </article>
+					<div className="absolute left-0 right-0 bottom-6 px-4 text-center">
+						<h3 className="text-white text-2xl font-semibold font-clash-display leading-8 drop-shadow-md">
+							{member.name}
+						</h3>
+						<p className="text-gray-400 text-base font-medium font-sans mt-1">
+							{member.role}
+						</p>
+						<p className="text-gray-500 text-xs mt-3 uppercase tracking-wide">
+							Clique para girar
+						</p>
+					</div>
+				</article>
 
-        {/* Back Side */}
-        <article
-          className="absolute inset-0 rounded-lg overflow-hidden outline outline-gray-600 bg-linear-to-br from-gray-900 via-gray-800 to-black p-6 flex flex-col backface-hidden"
-          style={{
-            backfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
-          }}
-        >
-          <div className="flex-1 overflow-y-auto scrollbar-thin pr-2">
-            <h3 className="text-white text-xl font-semibold font-clash-display mb-4">
-              {member.name}
-            </h3>
+				{/* Back Side */}
+				<article
+					className="absolute inset-0 rounded-lg overflow-hidden outline outline-gray-600 bg-linear-to-br from-gray-900 via-gray-800 to-black p-6 flex flex-col backface-hidden"
+					style={{
+						backfaceVisibility: "hidden",
+						transform: "rotateY(180deg)",
+					}}
+				>
+					<div className="flex-1 overflow-y-auto scrollbar-thin pr-2">
+						<h3 className="text-white text-xl font-semibold font-clash-display mb-4">
+							{member.name}
+						</h3>
 
-            {/* Instagram Profile Link */}
-            <Link
-              href={instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block mb-6 p-4 bg-linear-to-r from-purple-600/20 to-pink-600/20 rounded-lg border border-purple-500/30 hover:from-purple-600/30 hover:to-pink-600/30 transition-colors"
-              onClick={(e) => e.stopPropagation()}
-              aria-label={`Visitar perfil do Instagram de ${member.name}`}
-            >
-              <div className="flex items-center gap-2 mb-2">
-                <Instagram className="w-5 h-5 text-pink-500" />
-                <span className="text-white font-semibold">{member.instagram.handle}</span>
-              </div>
-              <p className="text-gray-300 text-sm">
-                <span className="text-2xl font-bold text-white">{member.instagram.followers}</span>
-                {" "}
-                <span className="text-gray-400">seguidores</span>
-              </p>
-            </Link>
+						{/* Instagram Profile Link */}
+						<Link
+							href={instagramUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="block mb-6 p-4 bg-linear-to-r from-purple-600/20 to-pink-600/20 rounded-lg border border-purple-500/30 hover:from-purple-600/30 hover:to-pink-600/30 transition-colors"
+							onClick={(e) => e.stopPropagation()}
+							aria-label={`Visitar perfil do Instagram de ${member.name}`}
+						>
+							<div className="flex items-center gap-2 mb-2">
+								<Instagram className="w-5 h-5 text-pink-500" />
+								<span className="text-white font-semibold">
+									{member.instagram.handle}
+								</span>
+							</div>
+							<p className="text-gray-300 text-sm">
+								<span className="text-2xl font-bold text-white">
+									{member.instagram.followers}
+								</span>{" "}
+								<span className="text-gray-400">seguidores</span>
+							</p>
+						</Link>
 
-            {/* Programs List */}
-            <div>
-              <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wide">
-                Programas
-              </h4>
-              <div className="space-y-3">
-                {memberPrograms.map((program) => (
-                  <Link
-                    key={program!.id}
-                    href={program!.url || "/lp"}
-                    className="block bg-white/5 rounded-md border border-white/10 overflow-hidden hover:bg-white/10 hover:border-white/20 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                    aria-label={`Ver programa: ${program!.title}`}
-                  >
-                    <div className="relative w-full aspect-video bg-gray-800">
-                      <Image
-                        src={program!.image || "/images/video-placeholder-1.png"}
-                        alt={`Thumbnail do programa ${program!.title}`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                        className="object-cover"
-                      />
-                    </div>
-                    <p className="text-gray-300 text-xs p-2">
-                      {program!.title}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
+						{/* Programs List */}
+						<div>
+							<h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wide">
+								Programas
+							</h4>
+							<div className="space-y-3">
+								{memberPrograms.map((program) => (
+									<Link
+										key={program!.id}
+										href={
+											program!.url ||
+											"/programas/passaporte-blindado-morar-nos-eua"
+										}
+										className="block bg-white/5 rounded-md border border-white/10 overflow-hidden hover:bg-white/10 hover:border-white/20 transition-colors"
+										onClick={(e) => e.stopPropagation()}
+										aria-label={`Ver programa: ${program!.title}`}
+									>
+										<div className="relative w-full aspect-video bg-gray-800">
+											<Image
+												src={
+													program!.image || "/images/video-placeholder-1.png"
+												}
+												alt={`Thumbnail do programa ${program!.title}`}
+												fill
+												sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+												className="object-cover"
+											/>
+										</div>
+										<p className="text-gray-300 text-xs p-2">
+											{program!.title}
+										</p>
+									</Link>
+								))}
+							</div>
+						</div>
+					</div>
 
-          <div className="text-center text-xs text-gray-500 mt-4 pt-4 border-t border-white/10">
-            Clique novamente para voltar
-          </div>
-        </article>
-      </div>
-    </div>
-  );
+					<div className="text-center text-xs text-gray-500 mt-4 pt-4 border-t border-white/10">
+						Clique novamente para voltar
+					</div>
+				</article>
+			</div>
+		</div>
+	);
 });
 
 TeamCard.displayName = "TeamCard";

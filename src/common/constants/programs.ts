@@ -31,11 +31,12 @@ export const PROGRAMS_DATA: readonly IProgram[] = [
 		image:
 			"/images/programs-thumbnails/caua-program-cover-como-vir-morar-nos-estados-unidos.png",
 		name: "Cauã Cunha",
-		url: "/lp",
+		url: "/programas/passaporte-blindado-morar-nos-eua",
 	},
 	{
 		id: "turismo-orlando",
-		title: "Guia turístico: tudo que você precisa saber antes de viajar para Orlando",
+		title:
+			"Guia turístico: tudo que você precisa saber antes de viajar para Orlando",
 		subtitle: "Turismo Seguro em Orlando",
 		price: "12x R$ 29,90",
 		originalPrice: "De R$ 358,80",
@@ -86,7 +87,8 @@ export const PROGRAMS_DATA: readonly IProgram[] = [
 			"Gestão de pagamentos internacionais",
 		],
 		ctaText: "GANHAR EM DÓLAR",
-		image: "/images/programs-thumbnails/program-thumb-mercado-digital-americano.png",
+		image:
+			"/images/programs-thumbnails/program-thumb-mercado-digital-americano.png",
 		name: "Lucas Zoltan",
 		url: "/programas/ganhar-dinheiro-dolar-online",
 	},
@@ -105,8 +107,9 @@ export const PROGRAMS_DATA: readonly IProgram[] = [
 			"Acompanhamento especializado",
 		],
 		ctaText: "OBTER VISTO",
-		image: "/images/programs-thumbnails/program-thumb-tipos-de-visto-e-processos.png",
+		image:
+			"/images/programs-thumbnails/program-thumb-tipos-de-visto-e-processos.png",
 		name: "Advogado de Imigração",
-		url: "/lp",
+		url: "/programas/tipos-de-visto-e-processos",
 	},
 ];

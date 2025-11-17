@@ -35,7 +35,12 @@ const benefitsData = [
 
 export function BenefitsSection() {
 	return (
-		<section id="benefits" className="bg-gray-50 py-16 md:py-20" data-animate-section data-animate-children=".animate-child">
+		<section
+			id="benefits"
+			className="bg-gray-50 py-16 md:py-20"
+			data-animate-section
+			data-animate-children=".animate-child"
+		>
 			<Container className="flex flex-col items-center gap-8">
 				{/* Header */}
 				<div className="flex flex-col items-center gap-4 text-center max-w-4xl">
@@ -67,7 +72,7 @@ export function BenefitsSection() {
 				<PrimaryButton
 					size="lg"
 					className="uppercase animate-child"
-					href="/lp"
+					href="/programas/passaporte-blindado-morar-nos-eua"
 				>
 					quero mudar de vida
 				</PrimaryButton>

@@ -45,7 +45,7 @@ export function HeroSection() {
 				{/* CTA Button */}
 				<PrimaryButton
 					icon={<ArrowRight className="size-4" />}
-					href="/lp"
+					href="/programas/passaporte-blindado-morar-nos-eua"
 					size="lg"
 					className="bg-linear-to-r from-[#bb0711] to-[#3f4adf] text-white font-medium px-8 py-4 rounded-lg"
 				>

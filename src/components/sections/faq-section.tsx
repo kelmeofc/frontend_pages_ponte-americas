@@ -22,7 +22,7 @@ export interface FAQSectionProps {
 	ctaHref?: string;
 }
 
-export const FAQSection = ({ faq, ctaHref = "/lp" }: FAQSectionProps) => {
+export const FAQSection = ({ faq, ctaHref = "/#programs" }: FAQSectionProps) => {
 	return (
 		<section id="faq" className="w-full py-16 md:py-20 bg-gray-50" data-animate-section>
 			<Container className="px-4 md:px-6">
