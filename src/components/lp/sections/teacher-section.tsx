@@ -10,10 +10,10 @@ const TEACHER_PROFILE = {
   name: "Cauã Cunha",
   role: "Fundador do Ponte Américas",
   image: {
-    src: "/images/video-placeholder-2.png",
+    src: "/images/programs-thumbnails/caua-program-cover-2-como-vir-morar-nos-estados-unidos.png",
     alt: "Cauã Cunha, professor do Programa Ponte Américas",
-    width: 384,
-    height: 512,
+    width: 1280,
+    height: 720,
   },
   highlights: [
     { label: "Sonhos realizados", value: "+150" },

@@ -96,7 +96,7 @@ const TEAM_MEMBERS: TeamMember[] = [
 		role: "High School",
 		poster: "/images/team-members-cards/irmoes-card-cover.png",
 		instagram: {
-			handle: "@irmaoseua",
+			handle: "@irmoeseua",
 			followers: "21K",
 		},
 		programs: [
