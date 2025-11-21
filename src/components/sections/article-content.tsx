@@ -66,7 +66,7 @@ export default async function ArticleContent({
 			>
 				<header className="mb-6 md:mb-8 article-header pb-4 w-full">
 					<h1
-						className="font-bold text-gray-900 mb-4 break-words"
+						className="font-bold text-gray-900 mb-4 wrap-break-words"
 						itemProp="headline"
 					>
 						{post.title.rendered}
@@ -76,7 +76,7 @@ export default async function ArticleContent({
 						content={post.excerpt.rendered.replace(/<\/?[^>]+(>|$)/g, "")}
 					/>
 					<div className="description-snippet mb-4 w-full" data-snippet="true">
-						<p className="text-gray-700 break-words" itemProp="description">
+						<p className="text-gray-700 wrap-break-words" itemProp="description">
 							{post.excerpt.rendered.replace(/<\/?[^>]+(>|$)/g, "")}
 						</p>
 					</div>

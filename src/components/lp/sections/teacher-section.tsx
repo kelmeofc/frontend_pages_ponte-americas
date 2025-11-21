@@ -51,7 +51,7 @@ export function TeacherSection({ mentor, modules, ctaText, ctaHref }: MentorSect
           </div>
 
           {/* Content */}
-          <div className="flex flex-col gap-2 max-w-xs md:max-w-2xl lg:max-w-[44rem] text-center xl:text-left items-center xl:items-start">
+          <div className="flex flex-col gap-2 max-w-xs md:max-w-2xl lg:max-w-176 text-center xl:text-left items-center xl:items-start">
 
             <span className="flex w-fit items-center rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-700">
               Método exclusivo Ponte Américas

@@ -26,7 +26,7 @@ export function CookiesModal() {
       aria-modal="true"
       aria-labelledby="cookies-title"
       className={cn(
-        "fixed left-4 bottom-4 z-[60] w-[min(92vw,520px)]",
+        "fixed left-4 bottom-4 z-60 w-[min(92vw,520px)]",
         "rounded-xl border border-neutral-200 bg-white shadow-lg dark:bg-neutral-900 dark:border-neutral-800",
         "p-4 md:p-5"
       )}
