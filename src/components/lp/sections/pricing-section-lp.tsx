@@ -1,6 +1,6 @@
 "use client";
 
-import { PricingCard } from "../pricing-card";
+import { PricingCard } from "@/components/lp/pricing-card";
 import { GradientText } from "@/components/ui/gradient-text";
 import type { PricingSectionProps } from "@/types";
 

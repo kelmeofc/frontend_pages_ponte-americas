@@ -189,9 +189,6 @@ importers:
       '@types/xml2js':
         specifier: ^0.4.14
         version: 0.4.14
-      cypress:
-        specifier: ^14.2.0
-        version: 14.5.4
       eslint-config-next:
         specifier: 15.5.3
         version: 15.5.3(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)

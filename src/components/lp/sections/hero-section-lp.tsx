@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/container"
 import { PrimaryButton } from "@/components/primary-button"
 import { GradientText } from "@/components/ui/gradient-text"
 import { HeroVideo } from "@/components/sections/hero-video"
-import { HeroBenefitsList } from "../hero-benefits-list"
+import { HeroBenefitsList } from "@/components/lp/hero-benefits-list"
 import { ArrowRight } from "lucide-react"
 import type { HeroSectionProps } from "@/types"
 

@@ -1,7 +1,7 @@
 import { ICreateLead } from "@/types/lead";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { createLeadRecord, createLeadSubmission } from "../actions/create-lead-action";
+import { createLeadRecord, createLeadSubmission } from "@/server/actions/create-lead-action";
 import { captureLeadMetadata, captureBasicMetadata } from "@/common/lib/lead-utils";
 import { useModal as useModalStore } from "@/components/ui/modal/use-modal";
 

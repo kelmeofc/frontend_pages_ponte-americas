@@ -1,8 +1,8 @@
 import { getPosts } from "@/server/services/blog-posts/get-posts";
 import { IPagination, IPost } from "@/types/post";
-import ClientPagination from "../ui/client-pagination";
-import BlogCard from "../ui/blog-card";
-import { Container } from "../ui/container";
+import ClientPagination from "@/components/ui/client-pagination";
+import BlogCard from "@/components/ui/blog-card";
+import { Container } from "@/components/ui/container";
 
 export default async function BlogGrid({ searchParams }: { searchParams?: any }) {
   const sp = typeof searchParams?.then === 'function' ? await searchParams : searchParams;

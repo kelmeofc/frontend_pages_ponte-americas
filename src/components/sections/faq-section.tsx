@@ -5,9 +5,9 @@ import {
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
-} from "../ui/accordion";
-import { Container } from "../ui/container";
-import { PrimaryButton } from "../primary-button";
+} from "@/components/ui/accordion";
+import { Container } from "@/components/ui/container";
+import { PrimaryButton } from "@/components/primary-button";
 import Image from "next/image";
 
 export interface FAQ {

@@ -1,6 +1,6 @@
 {
 	"name": "frontend_pages_ponte-americas",
-	"version": "0.1.0",
+	"version": "1.1.0",
 	"private": true,
 	"scripts": {
 		"dev": "npx prisma generate && next dev --turbopack",
@@ -81,7 +81,6 @@
 		"@types/sanitize-html": "^2.13.0",
 		"@types/ws": "^8.18.1",
 		"@types/xml2js": "^0.4.14",
-		"cypress": "^14.2.0",
 		"eslint-config-next": "15.5.3",
 		"postcss": "^8",
 		"prisma": "^6.18.0",

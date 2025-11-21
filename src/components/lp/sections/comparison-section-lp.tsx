@@ -2,8 +2,8 @@
 
 import { Container } from "@/components/ui/container";
 import { GradientText } from "@/components/ui/gradient-text";
-import { ComparisonHeader } from "../comparison/comparison-header";
-import { ComparisonRow } from "../comparison/comparison-row";
+import { ComparisonHeader } from "@/components/lp/comparison/comparison-header";
+import { ComparisonRow } from "@/components/lp/comparison/comparison-row";
 import type { ComparisonSectionProps } from "@/types";
 
 export const ComparisonSectionLp = ({ title, highlightedTitle, ponteAmericasHeader, othersHeader, rows }: ComparisonSectionProps) => {

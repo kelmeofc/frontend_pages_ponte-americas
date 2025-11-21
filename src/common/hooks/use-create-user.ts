@@ -1,7 +1,7 @@
 import { CreateUserRequest } from "@/types/user";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { createUserAction } from "../actions/create-user-action";
+import { createUserAction } from "@/server/actions/create-user-action";
 import { captureLeadMetadata, captureBasicMetadata } from "@/common/lib/lead-utils";
 import { useModal } from "@/components/ui/modal/use-modal";
 
