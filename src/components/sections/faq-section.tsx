@@ -60,6 +60,7 @@ export const FAQSection = ({ faq, ctaHref = "/#programs" }: FAQSectionProps) => 
 								src="/images/warranty-badge.png"
 								alt="7 Dias de Garantia"
 								fill
+								sizes="(max-width: 768px) 192px, 192px"
 								className="object-contain"
 							/>
 						</div>

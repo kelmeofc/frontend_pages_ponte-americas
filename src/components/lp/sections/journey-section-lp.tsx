@@ -113,14 +113,6 @@ export function JourneySectionLp({ eyebrow, title, highlightedWord, description,
         scale: 1,
         ease: "power2.out",
       });
-
-      // Fade out when scrolling past
-      timeline.to(card, {
-        opacity: 0,
-        y: -30,
-        scale: 0.4,
-        ease: "power2.in",
-      }, "+=0.3");
     });
 
     return () => {
@@ -129,63 +121,62 @@ export function JourneySectionLp({ eyebrow, title, highlightedWord, description,
   }, []);
 
   return (
-    <section ref={sectionRef} id="journey" className="py-16 md:py-20 lg:py-24 bg-white" data-animate-section data-animate-children=".animate-child">
-      <Container>
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-20 items-start">
-          {/* Americas Map - Left Side */}
-          <div className="w-full lg:w-96 xl:w-[420px] shrink-0 lg:sticky lg:top-24 lg:self-start">
-            <div className="relative w-full aspect-3/4 lg:h-[500px] overflow-hidden">
-              <Image
-                src="/images/svg/americas-map.svg"
-                alt="Mapa das Américas - Jornada Ponte Américas"
-                fill
-                sizes="(max-width: 1024px) 100vw, 420px"
-                className="object-fill"
-                priority
-              />
-            </div>
-          </div>
+		<section
+			ref={sectionRef}
+			id="journey"
+			className="py-16 md:py-20 lg:py-24 bg-white"
+			data-animate-section
+			data-animate-children=".animate-child"
+		>
+			<Container>
+				<div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-20 items-start">
+					{/* Americas Map - Left Side */}
+					<div className="w-full lg:w-96 xl:w-[420px] shrink-0 lg:sticky lg:top-24 lg:self-start hidden lg:block">
+						<div className="lg:relative w-full aspect-3/4 lg:h-[500px] overflow-hidden">
+					
+							<div className="text-center bg-white/90 p-4 border-gray-50 border rounded-xl lg:text-left space-y-4 lg:sticky lg:top-24 z-10  lg:py-4 lg:-mt-4">
+								<span className="inline-block px-4 py-2 bg-red-100 text-red-700 text-sm font-semibold uppercase tracking-wide rounded-full">
+									{eyebrow}
+								</span>
+								<h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 font-clash-display leading-tight">
+									{title}{" "}
+									<GradientText className=" bg-clip-text text-transparent">
+										{highlightedWord}
+									</GradientText>
+								</h2>
+								<p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl lg:max-w-none">
+									{description}
+								</p>
+							</div>
+						</div>
+					</div>
 
-          {/* Journey Steps - Right Side */}
-          <div className="flex-1 space-y-8 lg:space-y-10">
-            {/* Section Header */}
-            <div className="text-center bg-white/90 p-4 border-gray-50 border rounded-xl lg:text-left space-y-4 lg:sticky lg:top-24 z-10  lg:py-4 lg:-mt-4">
-              <span className="inline-block px-4 py-2 bg-red-100 text-red-700 text-sm font-semibold uppercase tracking-wide rounded-full">
-                {eyebrow}
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 font-clash-display leading-tight">
-                {title}{" "}
-                <GradientText className=" bg-clip-text text-transparent">
-                  {highlightedWord}
-                </GradientText>
-              </h2>
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl lg:max-w-none">
-                {description}
-              </p>
-            </div>
+					{/* Journey Steps - Right Side */}
+					<div className="flex-1 space-y-8 lg:space-y-10">
+						{/* Section Header */}
 
-            {/* Journey Cards */}
-            <div ref={cardsRef} className="relative space-y-8 md:space-y-12">
-              {steps.map((step, index) => (
-                <JourneyCard key={step.id} step={step} index={index} />
-              ))}
-            </div>
+						{/* Journey Cards */}
+						<div ref={cardsRef} className="relative space-y-8 md:space-y-12">
+							{steps.map((step, index) => (
+								<JourneyCard key={step.id} step={step} index={index} />
+							))}
+						</div>
 
-            {/* CTA Button */}
-            <div className="flex justify-center lg:justify-start pt-8">
-              <PrimaryButton
-                size="lg"
-                className="uppercase tracking-wide text-base px-8 py-4"
-                href={ctaHref}
-              >
-                {ctaText}
-              </PrimaryButton>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
+						{/* CTA Button */}
+						<div className="flex justify-center lg:justify-start pt-8">
+							<PrimaryButton
+								size="lg"
+								className="uppercase tracking-wide text-base px-8 py-4"
+								href={ctaHref}
+							>
+								{ctaText}
+							</PrimaryButton>
+						</div>
+					</div>
+				</div>
+			</Container>
+		</section>
+	);
 }
 
 export default JourneySectionLp;

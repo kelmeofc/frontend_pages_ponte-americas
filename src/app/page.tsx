@@ -11,7 +11,6 @@ import TeamSection from "@/components/sections/team-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import WhatsAppWidget from "@/components/whatsapp-widget";
-import { cn } from "@/common/lib/utils";
 import { useGsapSectionAnimation } from "@/common/hooks/use-gsap-section-animation";
 
 import {
@@ -54,7 +53,6 @@ export default function Home() {
 			<BreadcrumbJsonLd items={breadcrumbItems} />
 			<ReviewJsonLd />
 
-
 			<SiteLayout className="bg-white">
 				<div
 					className="bg-black"
@@ -64,7 +62,6 @@ export default function Home() {
 					}}
 				>
 					<HeroSection />
-					<ProgramsSection />
 				</div>
 				<PlatformSection />
 
@@ -77,6 +74,7 @@ export default function Home() {
 				>
 					<TeamSection />
 					<DidaticSection topics={DIDATIC_TOPICS} />
+					<ProgramsSection />
 					<TestimonialsSection />
 				</div>
 
@@ -85,7 +83,6 @@ export default function Home() {
 				<FAQSection faq={FAQ_DATA} />
 				<CtaSection />
 			</SiteLayout>
-
 
 			{/* WhatsApp Widget */}
 			<WhatsAppWidget

@@ -19,7 +19,6 @@ export function TeacherSection({ mentor, modules, ctaText, ctaHref }: MentorSect
                 alt={mentor.image.alt}
                 width={mentor.image.width}
                 height={mentor.image.height}
-                quality={85}
                 className="w-full h-full object-cover"
                 priority
               />

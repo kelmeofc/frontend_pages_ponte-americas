@@ -43,9 +43,9 @@ export const CtaSection: React.FC = () => {
 						<Image
 							src="/images/passaporte-blindado-ebook.png"
 							alt="Ebook Passaporte Blindado - Seus primeiros 7 dias nos EUA"
-							width={476}
-							height={580}
-							className="w-full h-full object-contain"
+							fill
+							sizes="(max-width: 640px) 100vw, (max-width: 1024px) 400px, 476px"
+							className="object-contain"
 							priority
 						/>
 					</div>

@@ -44,43 +44,47 @@ function IcebreakerCard({ text, emoji, svgPath, className }: IcebreakerCardProps
 
 export function IcebreakerSectionLp({ title, icon, items }: IcebreakerSectionProps) {
   return (
-    <section className="bg-white py-16 md:py-20 overflow-hidden" data-animate-section data-animate-children=".animate-child">
-      <Container className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 flexz">
-        {/* Left Content */}
-        <div className="flex flex-col  justify-center items-center md:justify-start md:items-start gap-4 max-w-lg">
-          {/* Icon Container */}
-          <Image
-            src={icon.src}
-            alt={icon.alt}
-            width={icon.width}
-            height={icon.height}
-            className="size-20"
-          />
+		<section
+			className="bg-white py-16 md:py-20 overflow-hidden"
+			data-animate-section
+			data-animate-children=".animate-child"
+		>
+			<Container className="flex flex-col lg:flex-row justify-between items-center lg:items-center gap-12">
+				{/* Left Content */}
+				<div className="flex flex-col  justify-center items-center lg:justify-start lg:items-start gap-4 max-w-lg text-center lg:text-left">
+					{/* Icon Container */}
+					<Image
+						src={icon.src}
+						alt={icon.alt}
+						width={icon.width}
+						height={icon.height}
+						className="size-20"
+					/>
 
-          {/* Title */}
-          <div className="pb-2">
-            <h2 className="text-gray-800 text-center md:text-left leading-tight whitespace-pre-line">
-              {title}
-            </h2>
-          </div>
-        </div>
+					{/* Title */}
+					<div className="pb-2">
+						<h2 className="text-gray-800 leading-tight whitespace-pre-line">
+							{title}
+						</h2>
+					</div>
+				</div>
 
-        {/* Right Content - Cards */}
-        <div className="w-full lg:w-[700px] flex flex-col gap-2.5">
-          {items.map((item) => (
-            <IcebreakerCard
-              key={item.id}
-              text={item.text}
-              emoji={item.emoji}
-              svgPath={item.svgPath}
-              className={cn(
-                "transform transition-all duration-300 hover:scale-[1.02]",
-                "hover:shadow-lg hover:border-red-600"
-              )}
-            />
-          ))}
-        </div>
-      </Container>
-    </section>
-  )
+				{/* Right Content - Cards */}
+				<div className="w-full lg:w-[700px] flex flex-col gap-2.5">
+					{items.map((item) => (
+						<IcebreakerCard
+							key={item.id}
+							text={item.text}
+							emoji={item.emoji}
+							svgPath={item.svgPath}
+							className={cn(
+								"transform transition-all duration-300 hover:scale-[1.02]",
+								"hover:shadow-lg hover:border-red-600"
+							)}
+						/>
+					))}
+				</div>
+			</Container>
+		</section>
+	);
 }

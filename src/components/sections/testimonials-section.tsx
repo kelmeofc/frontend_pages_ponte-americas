@@ -51,6 +51,8 @@ const testimonials = [
 	},
 ];
 
+const ALL_TESTIMONIALS = [...testimonials, ...testimonials];
+
 export interface TestimonialsSectionProps {
 	ctaHref?: string;
 }
@@ -86,27 +88,26 @@ export const TestimonialsSection = ({
 						align: "center",
 						loop: true,
 						slidesToScroll: 1,
-						containScroll: "trimSnaps",
 					}}
 					plugins={[autoplayRef.current]}
 					className="w-full"
 					onMouseEnter={() => autoplayRef.current.stop()}
 					onMouseLeave={() => autoplayRef.current.play()}
 				>
-					<CarouselContent className="mx-10">
-						{testimonials.map((testimonial) => (
+					<CarouselContent className="-ml-2 md:-ml-4">
+						{ALL_TESTIMONIALS.map((testimonial, index) => (
 							<CarouselItem
-								key={testimonial.id}
-								className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5"
+								key={`${testimonial.id}-${index}`}
+								className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5 flex flex-row items-center justify-center"
 							>
-								<div className="relative w-full aspect-9/21 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl hover:scale-[0.98] transition-all duration-300">
+								<div className="relative w-[90%] lg:w-full aspect-9/21 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl hover:scale-[0.98] transition-all duration-300">
 									<Image
 										src={testimonial.image}
 										alt={testimonial.alt}
 										fill
 										sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
 										className="object-cover"
-										priority={testimonial.id <= 4}
+										priority={index <= 4}
 									/>
 								</div>
 							</CarouselItem>
@@ -114,11 +115,11 @@ export const TestimonialsSection = ({
 					</CarouselContent>
 					<div className="absolute top-1/2 -translate-y-1/2 left-4 right-4">
 						{/* Custom Navigation Buttons */}
-						<CarouselPrevious className=" flex absolute left-4 md:left-50 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20 opacity-50 hover:opacity-80 cursor-pointer">
+						<CarouselPrevious className=" flex absolute left-1 md:left-50 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20 opacity-50 hover:opacity-80 cursor-pointer">
 							<ArrowLeft className="size-4" />
 						</CarouselPrevious>
 
-						<CarouselNext className="flex absolute right-4 md:right-50 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20 opacity-50 hover:opacity-80 cursor-pointer">
+						<CarouselNext className="flex absolute right-1 md:right-50 top-1/2 -translate-y-1/2 w-10 h-10 bg-indigo-600 hover:bg-indigo-400 border-indigo-400 text-white hover:text-white z-20 opacity-50 hover:opacity-80 cursor-pointer">
 							<ArrowRight className="size-4" />
 						</CarouselNext>
 					</div>

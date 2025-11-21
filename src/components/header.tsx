@@ -45,8 +45,6 @@ const ACTION_BUTTONS = {
 		href: "/members",
 		text: "JÁ SOU ALUNO",
 		variant: "outline" as const,
-		icon: <ArrowRight className="h-4 w-4" />,
-		mobileIcon: <ArrowRight className="h-5 w-5" />,
 	},
 	cta: {
 		href: "/#programs",

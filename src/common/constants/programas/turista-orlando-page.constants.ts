@@ -28,7 +28,7 @@ export const LP_NAVIGATION_ITEMS: INavItem[] = [
 export const LP_ACTION_BUTTONS: IActionButtons = {
 	member: {
 		href: "/members",
-		text: "JÁ SOU ALUNO",
+		text: "PÁGINA INICIAL",
 		variant: "outline",
 	},
 	cta: {

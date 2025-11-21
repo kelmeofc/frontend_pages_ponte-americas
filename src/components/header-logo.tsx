@@ -25,7 +25,7 @@ export function HeaderLogo({
         alt="Ponte Américas Logo"
         width={width}
         height={height}
-        className="h-6 lg:h-8 w-auto"
+        className="h-5 lg:h-7 w-auto"
         priority
       />
     </Link>

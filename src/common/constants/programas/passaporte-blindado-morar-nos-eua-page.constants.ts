@@ -143,8 +143,8 @@ export const LP_NAVIGATION_ITEMS: INavItem[] = [
 // Botões de ação específicos para a LP
 export const LP_ACTION_BUTTONS: IActionButtons = {
 	member: {
-		href: "/members",
-		text: "JÁ SOU ALUNO",
+		href: "/",
+		text: "PÁGINA INICIAL",
 		variant: "outline",
 	},
 	cta: {
@@ -160,7 +160,7 @@ export const journeySectionProps: JourneySectionProps = {
 	highlightedWord: "JORNADA",
 	description:
 		"Desde o planejamento até sua completa adaptação nos Estados Unidos, cada módulo foi pensado para acelerar seu processo de imigração.",
-	ctaText: "Quero começar minha jornada",
+	ctaText: "QUERO MUDAR DE VIDA",
 	ctaHref: "/enroll",
 	steps: [
 		{
