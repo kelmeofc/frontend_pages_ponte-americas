@@ -27,7 +27,7 @@ export const PROGRAMS_DATA: readonly IProgram[] = [
 			"Dicas práticas de adaptação",
 			"Suporte especializado",
 		],
-		ctaText: "COMEÇAR AGORA",
+		ctaText: "MORAR NOS EUA",
 		image:
 			"/images/programs-thumbnails/caua-program-cover-como-vir-morar-nos-estados-unidos.png",
 		name: "Cauã Cunha",

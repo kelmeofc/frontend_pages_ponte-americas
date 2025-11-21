@@ -1,10 +1,14 @@
 "use client";
 
-import { PRICING_DATA } from "@/common/constants";
 import { PricingCard } from "../pricing-card";
 import { GradientText } from "@/components/ui/gradient-text";
+import type { PricingSectionProps } from "@/types";
 
-export const PricingSectionLp = () => {
+interface PricingSectionLpProps extends PricingSectionProps {
+  programId: string;
+}
+
+export const PricingSectionLp = ({ programId, title, plans }: PricingSectionLpProps) => {
   return (
     <section
       id="pricing"
@@ -21,7 +25,7 @@ export const PricingSectionLp = () => {
           <div className="text-center">
 
             <h3 className="font-semibold uppercase leading-tight text-white">
-              {PRICING_DATA.title.main}
+              {title.main}
             </h3>
 
 
@@ -30,7 +34,7 @@ export const PricingSectionLp = () => {
 
             <h2 className="text-center  font-semibold uppercase leading-tight  ">
               <GradientText>
-                {PRICING_DATA.title.highlight}
+                {title.highlight}
               </GradientText>
             </h2>
 
@@ -38,15 +42,15 @@ export const PricingSectionLp = () => {
 
 
             <h3 className="text-center font-semibold uppercase leading-tight text-white  ">
-              {PRICING_DATA.title.subtitle}
+              {title.subtitle}
             </h3>
           </div>
         </div>
 
         {/* Pricing Cards */}
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
-          {PRICING_DATA.plans.map((plan) => (
-            <PricingCard key={plan.id} plan={plan} />
+          {plans.map((plan) => (
+            <PricingCard key={plan.id} plan={plan} programId={programId} />
           ))}
         </div>
       </div>

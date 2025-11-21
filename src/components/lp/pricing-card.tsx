@@ -31,10 +31,11 @@ interface PricingCardProps {
     buttonText: string;
     subtitle?: string;
   };
+  programId: string;
   className?: string;
 }
 
-export const PricingCard = ({ plan, className }: PricingCardProps) => {
+export const PricingCard = ({ plan, programId, className }: PricingCardProps) => {
   const isPersonalized = plan.id === "personalizado";
 
   return (
@@ -100,7 +101,7 @@ export const PricingCard = ({ plan, className }: PricingCardProps) => {
 
               {/* CTA Button */}
               <PrimaryButton 
-                href={`/enroll?planId=${plan.id}`}
+                href={`/enroll?planId=${plan.id}&programId=${programId}`}
                 variant="default"
                 size="lg"
                 className="h-12 w-full bg-linear-to-r from-red-700 to-indigo-600 px-8 py-4 font-rubik text-base font-medium uppercase text-white"
@@ -120,7 +121,7 @@ export const PricingCard = ({ plan, className }: PricingCardProps) => {
 
             <div className="flex w-full flex-col items-center justify-center gap-6">
               <PrimaryButton 
-                href="/enroll?planId=personalizado"
+                href={`/enroll?planId=personalizado&programId=${programId}`}
                 variant="default"
                 size="lg"
                 className="h-12 w-full uppercase text-white"

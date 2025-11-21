@@ -25,7 +25,7 @@ export const ProgramsSection = () => {
 			<div className="flex flex-col justify-center items-center gap-8">
 				{/* Header */}
 				<div className="px-4 flex justify-center items-center">
-					<h2 className="text-center text-white text-3xl md:text-4xl font-semibold font-clash-display leading-9 animate-child">
+					<h2 className="text-center text-white text-3xl md:text-4xl leading-9 animate-child">
 						CONHEÇA NOSSOS PROGRAMAS
 					</h2>
 				</div>

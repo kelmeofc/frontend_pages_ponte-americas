@@ -3,7 +3,7 @@
 import { useEffect, useState, memo } from "react";
 import Script from "next/script";
 import { useConsent } from "@/common/hooks/use-consent";
-import { ConsentChoice } from "@/common/types/consent";
+import { ConsentChoice } from "@/types/consent";
 
 const ConsentScripts = memo(() => {
   const { choice } = useConsent();

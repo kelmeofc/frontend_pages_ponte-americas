@@ -44,7 +44,7 @@ export function BenefitsSection() {
 			<Container className="flex flex-col items-center gap-8">
 				{/* Header */}
 				<div className="flex flex-col items-center gap-4 text-center max-w-4xl">
-					<h2 className="font-clash-display text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-800 leading-tight animate-child">
+					<h2 className="text-gray-800 leading-tight animate-child">
 						<GradientText>TUDO QUE VOCÊ PRECISA APRENDER PARA </GradientText>{" "}
 						<GradientText>INICIAR SUA VIDA NOS ESTADOS UNIDOS</GradientText>
 					</h2>

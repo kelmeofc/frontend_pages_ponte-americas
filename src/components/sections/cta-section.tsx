@@ -22,8 +22,8 @@ export const CtaSection: React.FC = () => {
 			<div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-30">
 				<div className="relative flex flex-col lg:flex-row items-end lg:items-center  justify-between gap-8 lg:gap-12">
 					{/* Card principal com gradiente */}
-					<div className="relative w-full h-auto rounded-[20px] border border-[#898989] overflow-hidden bg-gradient-to-br from-[hsl(var(--primary-gradient-from))] via-[#050505] to-[hsl(var(--primary-gradient-to))] flex flex-col justify-center px-8 sm:px-12 lg:px-16 pb-12 sm:pb-16 lg:pb-20 gap-6 lg:gap-8 pt-30 lg:py-20">
-						<h2 className="text-white text-2xl sm:text-3xl lg:text-[40px] font-semibold leading-[1.2] font-clash-display max-w-[712px]">
+					<div className="relative w-full h-auto rounded-[20px] border border-[#898989] overflow-hidden bg-linear-to-br from-[hsl(var(--primary-gradient-from))] via-[#050505] to-[hsl(var(--primary-gradient-to))] flex flex-col justify-center px-8 sm:px-12 lg:px-16 pb-12 sm:pb-16 lg:pb-20 gap-6 lg:gap-8 pt-30 lg:py-20">
+						<h2 className="text-white text-2xl sm:text-3xl lg:text-[40px] font-semibold leading-[1.2] max-w-[712px]">
 							Baixe agora Ebook completo passo a passo para obter o Visto
 							Americano e trabalhar legalmente nos EUA
 						</h2>

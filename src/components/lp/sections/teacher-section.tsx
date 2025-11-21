@@ -1,63 +1,12 @@
 "use client"
 
 import Image from "next/image"
-
 import { PrimaryButton } from "@/components/primary-button"
 import { Container } from "@/components/ui/container"
 import { Marquee } from "@/components/ui/marquee"
+import type { MentorSectionProps } from "@/types"
 
-const TEACHER_PROFILE = {
-  name: "Cauã Cunha",
-  role: "Fundador do Ponte Américas",
-  image: {
-    src: "/images/programs-thumbnails/caua-program-cover-2-como-vir-morar-nos-estados-unidos.png",
-    alt: "Cauã Cunha, professor do Programa Ponte Américas",
-    width: 1280,
-    height: 720,
-  },
-  highlights: [
-    { label: "Sonhos realizados", value: "+150" },
-    { label: "Países atendidos", value: "08" },
-    { label: "Horas de conteúdo", value: "+40" },
-  ],
-}
-
-const LESSON_PREVIEWS = [
-  {
-    id: "sistema-americano",
-    title: "Como funciona o sistema americano",
-    description: "Entenda desde o básico até as nuances culturais, legais e financeiras para se estabelecer com sucesso nos EUA.",
-    audience: "Mentoria Ponte Américas",
-    image: "/images/programs-modules-covers/program-morar-nos-eua-module-cover-sistema-americano.png",
-    tag: "Módulo 1",
-  },
-  {
-    id: "documentacao-legal",
-    title: "Documentação e processos legais",
-    description: "Passo a passo completo sobre vistos, green card, cidadania e todos os documentos necessários para viver legalmente nos EUA.",
-    audience: "Aula prática",
-    image: "/images/programs-modules-covers/program-morar-nos-eua-module-cover-documentacao-legal.png",
-    tag: "Módulo 2",
-  },
-  {
-    id: "mercado-trabalho",
-    title: "Mercado de trabalho americano",
-    description: "Como encontrar oportunidades, criar networking efetivo e se posicionar no mercado de trabalho dos EUA.",
-    audience: "Playbook exclusivo",
-    image: "/images/programs-modules-covers/program-morar-nos-eua-module-cover-mercado-trabalho.png",
-    tag: "Módulo 3",
-  },
-  {
-    id: "vida-pratica",
-    title: "Vida prática nos Estados Unidos",
-    description: "Moradia, sistema de saúde, educação, impostos e tudo que você precisa saber para o dia a dia americano.",
-    audience: "Material bônus",
-    image: "/images/programs-modules-covers/program-morar-nos-eua-module-cover-vida-pratica.png",
-    tag: "Módulo 4",
-  },
-] as const
-
-export function TeacherSection() {
+export function TeacherSection({ mentor, modules, ctaText, ctaHref }: MentorSectionProps) {
   return (
     <section id="teacher" className="bg-white py-20 overflow-hidden" data-animate-section data-animate-children=".animate-child">
       <Container>
@@ -66,10 +15,10 @@ export function TeacherSection() {
           <div className="flex flex-col w-full h-auto xl:h-[600px] max-w-[420px] xl:w-[420px] bg-zinc-900 shadow-xl rounded-3xl overflow-hidden">
             <div className="flex-1 relative">
               <Image
-                src={TEACHER_PROFILE.image.src}
-                alt={TEACHER_PROFILE.image.alt}
-                width={TEACHER_PROFILE.image.width}
-                height={TEACHER_PROFILE.image.height}
+                src={mentor.image.src}
+                alt={mentor.image.alt}
+                width={mentor.image.width}
+                height={mentor.image.height}
                 quality={85}
                 className="w-full h-full object-cover"
                 priority
@@ -79,14 +28,14 @@ export function TeacherSection() {
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/70">Mentor</p>
                 <h3 className="mt-1 text-3xl font-semibold uppercase text-white">
-                  {TEACHER_PROFILE.name}
+                  {mentor.name}
                 </h3>
                 <p className="text-sm font-medium text-white/80 font-montserrat">
-                  {TEACHER_PROFILE.role}
+                  {mentor.role}
                 </p>
               </div>
               <dl className="grid grid-cols-3 gap-3 text-xs text-white/70">
-                {TEACHER_PROFILE.highlights.map((item) => (
+                {mentor.highlights.map((item) => (
                   <div key={item.label} className="flex flex-col rounded-xl border border-white/10 bg-white/5 px-3 py-2">
                     <dt className="text-[11px] font-montserrat uppercase tracking-wide">
                       {item.label}
@@ -126,7 +75,7 @@ export function TeacherSection() {
               />
 
               <Marquee pauseOnHover className="flex py-2 sm:py-4 [--gap:1.5rem]" repeat={2}>
-                {LESSON_PREVIEWS.map((lesson) => (
+                {modules.map((lesson) => (
                   <article
                     key={lesson.id}
                     className="flex flex-col w-64 sm:w-72 shrink-0 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-md"
@@ -160,8 +109,8 @@ export function TeacherSection() {
             </div>
 
             <div className="flex justify-center xl:justify-start w-full">
-              <PrimaryButton href="/enroll" size="lg" className="uppercase tracking-wide">
-                Quero mudar de vida
+              <PrimaryButton href={ctaHref} size="lg" className="uppercase tracking-wide">
+                {ctaText}
               </PrimaryButton>
             </div>
           </div>

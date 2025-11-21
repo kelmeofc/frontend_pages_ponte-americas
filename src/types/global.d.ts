@@ -1,4 +1,4 @@
-import { WindowWithGtag } from "@/common/types/consent";
+import { WindowWithGtag } from "@/types/consent";
 
 declare global {
   // Estende o tipo Window com as definições de WindowWithGtag
@@ -8,4 +8,3 @@ declare global {
 }
 
 export {};
-

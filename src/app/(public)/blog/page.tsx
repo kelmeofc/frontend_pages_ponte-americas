@@ -1,4 +1,4 @@
-import defaultSeo from "@/common/config/default-seo";
+import defaultSeo from "@/server/config/default-seo";
 import SiteLayout from "@/components/layouts/site-layout";
 import BlogGrid from "@/components/sections/blog-grid";
 import { Metadata } from "next";

@@ -116,7 +116,7 @@ export const DidaticSection = ({ topics }: IDidaticSectionProps) => {
 			<div className="flex flex-col items-center gap-8">
 				{/* Header */}
 				<div className="text-center space-y-4 px-2">
-					<h2 className="text-white font-semibold font-clash-display leading-tight animate-child">
+					<h2 className="text-white leading-tight animate-child">
 						NOSSA DIDÁTICA DESCOMPLICADA
 					</h2>
 					<p className="text-gray-300 text-lg md:text-xl font-normal font-sans leading-relaxed animate-child">

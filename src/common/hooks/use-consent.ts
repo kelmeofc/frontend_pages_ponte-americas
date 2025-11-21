@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { CONSENT_STORAGE_KEY } from "@/common/constants";
-import { ConsentChoice } from "@/common/types/consent";
+import { ConsentChoice } from "@/types/consent";
 
 interface ConsentState {
   choice: ConsentChoice | null;

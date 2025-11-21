@@ -1,5 +1,5 @@
 import { IMetadataPost, IPost } from "@/types/post";
-import api from "@/common/config/api";
+import api from "@/server/config/api";
 
 export async function getMetadataPostBySlug(slug: string) {
     try {

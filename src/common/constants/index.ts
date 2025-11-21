@@ -31,6 +31,7 @@ export const NAV_LINKS = [
 	{ label: "Início", href: "/#home" },
 	{ label: "Nosso time", href: "/#about-us" },
 	{ label: "Programas", href: "/#programs" },
+	{ label: "Mentores", href: "/#team"},
 	{ label: "Depoimentos", href: "/#testimonials" },
 	{ label: "Começar Agora", href: "/enroll" },
 	{ label: "Blog", href: "/blog" },
@@ -127,20 +128,20 @@ export const ANIMATION_CONFIG = {
 } as const;
 
 // Export didatic topics
-export { DIDATIC_TOPICS } from "./didatic-topics";
+export { DIDATIC_TOPICS } from "@/common/constants/didatic-topics";
 
 // Export programs data
-export { PROGRAMS_DATA, type IProgram } from "./programs";
+export { PROGRAMS_DATA, type IProgram } from "@/common/constants/programs";
 
 // Export pricing data
-export { PRICING_DATA } from "./pricing";
+export { PRICING_DATA } from "@/common/constants/pricing";
 
 // Export hero benefits
-export { HERO_BENEFITS } from "./hero-benefits";
+export { HERO_BENEFITS } from "@/common/constants/hero-benefits";
 
 // Export comparison data
 export {
 	COMPARISON_DATA,
 	COMPARISON_HEADERS,
 	type ComparisonItem,
-} from "./comparison";
+} from "@/common/constants/comparison";

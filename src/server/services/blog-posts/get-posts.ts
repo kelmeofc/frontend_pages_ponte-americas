@@ -1,5 +1,5 @@
 import { IPagination, IPost } from "@/types/post"
-import api from "@/common/config/api"
+import api from "@/server/config/api"
 
 export async function getPosts(page: number = 1, limit: number = 9) {
     try {

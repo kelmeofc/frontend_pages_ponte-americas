@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import { ConsentChoice, WindowWithGtag } from "@/common/types/consent";
+import { ConsentChoice, WindowWithGtag } from "@/types/consent";
 
 export const useConsentAnalytics = () => {
   const applyConsent = useCallback((choice: ConsentChoice) => {

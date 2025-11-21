@@ -71,7 +71,7 @@ export const TestimonialsSection = ({
 		>
 			{/* Header */}
 			<div className="flex flex-col items-center gap-2 text-center max-w-6xl px-4">
-				<h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-semibold font-clash-display uppercase leading-tight animate-child">
+				<h2 className="font-semibold text-white uppercase leading-tight animate-child">
 					Relatos de quem já mudou a vida
 				</h2>
 				<p className="text-white text-lg md:text-xl font-normal leading-relaxed animate-child">

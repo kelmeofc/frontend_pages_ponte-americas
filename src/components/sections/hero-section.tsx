@@ -24,7 +24,7 @@ export function HeroSection() {
 				{/* Description */}
 
 				{/* Main Heading */}
-				<h1 className="font-clash-display  font-semibold leading-tight text-center animate-child">
+				<h1 className="font-semibold leading-tight text-center animate-child">
 					<GradientText>A VIRADA DE CHAVE</GradientText>
 					<br className="sm:hidden" />
 					<span className="text-white ml-3">PARA MORAR NOS EUA</span>

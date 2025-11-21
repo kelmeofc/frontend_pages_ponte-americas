@@ -1,6 +1,6 @@
 import LegalLayout from "@/components/layouts/legal-layout"
 import { useLegalMetadata } from "@/common/hooks/use-legal-metadata";
-import { legalPagesConfig } from "@/common/config/legal-pages";
+import { legalPagesConfig } from "@/server/config/legal-pages";
 
 export const metadata = useLegalMetadata(legalPagesConfig["politica-de-privacidade"].metadata);
 

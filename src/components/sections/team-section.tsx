@@ -219,7 +219,7 @@ const TeamCard = memo(({ member }: { member: TeamMember }) => {
 					<div className="absolute inset-0 bg-linear-to-b from-black/0 via-black/0 to-black/80" />
 
 					<div className="absolute left-0 right-0 bottom-6 px-4 text-center">
-						<h3 className="text-white text-2xl font-semibold font-clash-display leading-8 drop-shadow-md">
+						<h3 className="text-white text-2xl drop-shadow-md">
 							{member.name}
 						</h3>
 						<p className="text-gray-400 text-base font-medium font-sans mt-1">
@@ -240,7 +240,7 @@ const TeamCard = memo(({ member }: { member: TeamMember }) => {
 					}}
 				>
 					<div className="flex-1 overflow-y-auto scrollbar-thin pr-2">
-						<h3 className="text-white text-xl font-semibold font-clash-display mb-4">
+						<h3 className="text-white mb-4">
 							{member.name}
 						</h3>
 
@@ -327,7 +327,7 @@ const TeamSectionComponent = () => {
         <div className="text-center">
           <h2 
             id="team-heading"
-            className="text-white font-semibold font-clash-display uppercase leading-tight"
+            className="text-white uppercase leading-tight"
           >
             o time que vai te guiar durante toda a sua jornada
           </h2>

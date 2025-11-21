@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 import { Container } from "@/components/ui/container";
 import { Metadata } from "next";
-import { getMetadataPostBySlug } from "@/common/services/blog-posts/get-metadata-post-by-slug";
+import { getMetadataPostBySlug } from "@/server/services/blog-posts/get-metadata-post-by-slug";
 import ArticleContent from "@/components/sections/article-content";
 import Link from "next/link";
 import { LeadFormBlog } from "@/components/forms/lead-form-blog";

@@ -4,82 +4,44 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { PrimaryButton } from "@/components/primary-button";
-import {
-  Clock,
-  IdCard,
-  Plane,
-  Home,
-  Car,
-  Heart,
-  GraduationCap,
-  CreditCard
-} from "lucide-react";
 import { GradientText } from "@/components/ui/gradient-text";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Car,
+  Clock,
+  CreditCard,
+  GraduationCap,
+  Heart,
+  Home,
+  IdCard,
+  Plane,
+  type LucideIcon,
+} from "lucide-react";
+import type { JourneyIcon, JourneySectionProps, JourneyStep } from "@/types";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const JOURNEY_STEPS = [
-  {
-    id: "planning",
-    title: "PLANEJAMENTO",
-    description: "Assim como em uma corrida, as aulas do Ponte Américas vão direcionar seu foco a cada etapa específica para melhorar sua adaptação a cada aula assistida.",
-    icon: Clock,
-  },
-  {
-    id: "visa-documentation",
-    title: "VISTO E DOCUMENTAÇÃO",
-    description: "Passo a passo completo sobre vistos, green card, cidadania e todos os documentos necessários para viver legalmente nos EUA.",
-    icon: IdCard,
-  },
-  {
-    id: "first-day",
-    title: "DIA 01 NOS EUA",
-    description: "Assim como em uma corrida, as aulas do Ponte Américas vão direcionar seu foco a cada etapa específica para melhorar sua adaptação a cada aula assistida.",
-    icon: Plane,
-  },
-  {
-    id: "real-estate",
-    title: "IMÓVEIS E ALUGUÉIS",
-    description: "Aprenda todo o processo de locação nos EUA, desde a busca pelo imóvel ideal até a negociação e assinatura do contrato, evitando as armadilhas comuns para estrangeiros.",
-    icon: Home,
-  },
-  {
-    id: "transportation",
-    title: "VEÍCULOS E TRANSPORTE",
-    description: "Descubra como funciona o sistema de transporte americano, como comprar ou alugar um carro, obter uma carteira de motorista e entender as regras de trânsito locais.",
-    icon: Car,
-  },
-  {
-    id: "healthcare",
-    title: "SAÚDE",
-    description: "Entenda o complexo sistema de saúde americano, os diferentes tipos de seguros disponíveis e como acessar serviços médicos quando necessário sem gastar fortunas.",
-    icon: Heart,
-  },
-  {
-    id: "education",
-    title: "EDUCAÇÃO",
-    description: "Conheça o sistema educacional americano, opções para seus filhos ou para você mesmo, desde escolas públicas até universidades e programas profissionalizantes.",
-    icon: GraduationCap,
-  },
-  {
-    id: "finance",
-    title: "FINANÇAS E BANCOS",
-    description: "Aprenda como abrir contas bancárias nos EUA, construir histórico de crédito, gerenciar finanças pessoais e entender impostos no contexto americano.",
-    icon: CreditCard,
-  },
-] as const;
+const journeyIconMap: Record<JourneyIcon, LucideIcon> = {
+  clock: Clock,
+  idCard: IdCard,
+  plane: Plane,
+  home: Home,
+  car: Car,
+  heart: Heart,
+  graduationCap: GraduationCap,
+  creditCard: CreditCard,
+};
 
 interface JourneyCardProps {
-  step: (typeof JOURNEY_STEPS)[number];
+  step: JourneyStep;
   index: number;
 }
 
 function JourneyCard({ step, index }: JourneyCardProps) {
-  const IconComponent = step.icon;
+  const IconComponent = journeyIconMap[step.icon];
 
   return (
     <article 
@@ -113,7 +75,8 @@ function JourneyCard({ step, index }: JourneyCardProps) {
   );
 }
 
-export function JourneySectionLp() {
+export function JourneySectionLp({ eyebrow, title, highlightedWord, description, ctaText, ctaHref, steps }: JourneySectionProps) {
+
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
@@ -188,24 +151,22 @@ export function JourneySectionLp() {
             {/* Section Header */}
             <div className="text-center bg-white/90 p-4 border-gray-50 border rounded-xl lg:text-left space-y-4 lg:sticky lg:top-24 z-10  lg:py-4 lg:-mt-4">
               <span className="inline-block px-4 py-2 bg-red-100 text-red-700 text-sm font-semibold uppercase tracking-wide rounded-full">
-                Roadmap completo
+                {eyebrow}
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 font-clash-display leading-tight">
-                CADA PASSO DA SUA{" "}
+                {title}{" "}
                 <GradientText className=" bg-clip-text text-transparent">
-                  JORNADA
+                  {highlightedWord}
                 </GradientText>
               </h2>
               <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl lg:max-w-none">
-                Desde o planejamento até sua completa adaptação nos Estados
-                Unidos, cada módulo foi pensado para acelerar seu processo de
-                imigração.
+                {description}
               </p>
             </div>
 
             {/* Journey Cards */}
             <div ref={cardsRef} className="relative space-y-8 md:space-y-12">
-              {JOURNEY_STEPS.map((step, index) => (
+              {steps.map((step, index) => (
                 <JourneyCard key={step.id} step={step} index={index} />
               ))}
             </div>
@@ -215,9 +176,9 @@ export function JourneySectionLp() {
               <PrimaryButton
                 size="lg"
                 className="uppercase tracking-wide text-base px-8 py-4"
-                href="/enroll"
+                href={ctaHref}
               >
-                Quero começar minha jornada
+                {ctaText}
               </PrimaryButton>
             </div>
           </div>

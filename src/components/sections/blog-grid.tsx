@@ -1,4 +1,4 @@
-import { getPosts } from "@/common/services/blog-posts/get-posts";
+import { getPosts } from "@/server/services/blog-posts/get-posts";
 import { IPagination, IPost } from "@/types/post";
 import ClientPagination from "../ui/client-pagination";
 import BlogCard from "../ui/blog-card";

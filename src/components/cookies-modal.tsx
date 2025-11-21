@@ -5,7 +5,7 @@ import { cn } from "@/common/lib/utils";
 import { PrimaryButton } from "@/components/primary-button";
 import { useConsent } from "@/common/hooks/use-consent";
 import { useConsentAnalytics } from "@/common/hooks/use-consent-analytics";
-import { ConsentChoice } from "@/common/types/consent";
+import { ConsentChoice } from "@/types/consent";
 import Link from "next/link";
 
 export function CookiesModal() {
