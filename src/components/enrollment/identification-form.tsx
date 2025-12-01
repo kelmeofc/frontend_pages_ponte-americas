@@ -44,7 +44,7 @@ const getButtonContent = (isLoading: boolean, hookLoading: boolean, isValid: boo
   }
   
   if (!isValid) {
-    return 'Preencha todos os campos';
+    return 'Preencha os campos';
   }
   
   return <span>Criar conta</span>;

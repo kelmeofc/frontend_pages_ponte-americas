@@ -136,7 +136,7 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);} 
               gtag('js', new Date());
-              gtag('config', 'G-TGLSCTDKDL');
+              gtag('config', 'G-');
             `}
 				</Script>
 				{/* Scripts dependentes de consentimento */}
