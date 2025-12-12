@@ -1,5 +1,5 @@
 import { IPost } from "@/types/post";
-import getLatestPostsAction from "@/server/actions/get-latest-posts-action";
+import getLatestPostsAction from "@/server/actions/get-latest-posts.action";
 
 export default function useGetLatestPosts() {
     const execGetLatestPosts = async () => {

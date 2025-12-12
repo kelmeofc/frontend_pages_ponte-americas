@@ -1,7 +1,7 @@
 import { ICreateLead } from "@/types/lead";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { createLeadRecord, createLeadSubmission } from "@/server/actions/create-lead-action";
+import { createLeadRecord, createLeadSubmission } from "@/server/actions/create-lead.action";
 import { captureLeadMetadata, captureBasicMetadata } from "@/common/lib/lead-utils";
 import { useModal as useModalStore } from "@/components/ui/modal/use-modal";
 
@@ -39,21 +39,27 @@ export default function useCreateLead() {
             };
 
             const lead = await createLeadRecord(leadPayload);
+            if (!lead) {
+                throw new Error('Falha ao criar lead');
+            }
 
             // Cria submissão separada vinculada ao lead
+            // Extrai apenas dados extras que não têm coluna própria
+            const { name, email, phoneNumber, type, city, country, ipAddress, route, userAgent, origin, originFont, metadata, ...extraFormData } = enrichedData as any;
+
             const submissionPayload = {
                 leadId: lead.id,
-                type: (enrichedData as any).type || 'EBOOK_DOWNLOAD',
+                type: type || 'EBOOK_DOWNLOAD',
                 success: true,
-                data: { ...(enrichedData as any) },
-                metadata: (enrichedData as any).metadata || fullMetadata || {},
-                city: (enrichedData as any).city || undefined,
-                country: (enrichedData as any).country || undefined,
-                ipAddress: (enrichedData as any).ipAddress || undefined,
-                route: (enrichedData as any).route || undefined,
-                userAgent: (enrichedData as any).userAgent || undefined,
-                origin: (enrichedData as any).origin ?? 6,
-                originFont: (enrichedData as any).originFont || undefined,
+                data: Object.keys(extraFormData).length > 0 ? extraFormData : {},
+                metadata: metadata || {},
+                city,
+                country,
+                ipAddress,
+                route,
+                userAgent,
+                origin: origin ?? 6,
+                originFont,
             };
 
             await createLeadSubmission(submissionPayload as any);

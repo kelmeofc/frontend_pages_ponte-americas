@@ -1,4 +1,4 @@
-import getLatestPostsAction from "@/server/actions/get-latest-posts-action"
+import getLatestPostsAction from "@/server/actions/get-latest-posts.action"
 import useGetLatestPosts from "@/common/hooks/use-get-latest-posts"
 import { removeHtmlTags } from "@/common/lib/utils"
 import { Container } from "@/components/ui/container"

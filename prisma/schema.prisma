@@ -95,8 +95,7 @@ model User {
   enrolledAt DateTime? @map("enrolled_at")
 
   // Relationships
-  userSubmissions          UserSubmission[]
-  userRegistrationProgress UserRegistrationProgress[]
+  userSubmissions UserSubmission[]
 
   @@index([email])
   @@index([enrollmentStatus])
@@ -123,24 +122,6 @@ model UserSubmission {
   @@map("user_submissions")
 }
 
-model UserRegistrationProgress {
-  id               Int       @id @default(autoincrement())
-  userId           Int       @map("user_id")
-  registrationStep Int       @map("registration_step")
-  stepName         String    @db.VarChar(100) @map("step_name")
-  completed        Boolean   @default(false)
-  completedAt      DateTime? @map("completed_at")
-  validationData   Json?     @map("validation_data")
-  createdAt        DateTime  @default(now()) @map("created_at")
-  updatedAt        DateTime  @updatedAt @map("updated_at")
-
-  // Relationships
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, registrationStep], name: "unique_user_registration_step")
-  @@index([userId, completed])
-  @@map("user_registration_progress")
-}
 
 enum UserSubmissionType {
   ENROLLMENT_ATTEMPT
